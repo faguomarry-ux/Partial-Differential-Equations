@@ -29,6 +29,7 @@
 - [x] 编译生成 41 页目录骨架，核对 138 个书签与 138 个目录链接，检查版面。
 - [x] 整理 Git 忽略规则与 PDF 二进制属性，保留两本参考书和发布预览。
 - [x] 调整为 Part 整页居中、固定右侧 38 mm 边注栏和 12pt 正文。
+- [x] 页码按整页底部居中；目录使用整页宽度、分层标题、`§` 节号与浅色点状引导线。
 
 ## 待办
 
@@ -53,6 +54,7 @@
 | 2026-11-09 | 建立 12 章、5 个附录及 111 节目录骨架；加入来源对照、边注与证明接口；生成并检查 40 页预览 | 从第 1 章和附录 A 开始正文整理 |
 | 2026-11-09 | 完善 `.gitignore`、增加 `.gitattributes`，整理 README 的文件入口、完成清单与待办；将两本 PDF 与项目源码一同纳入版本管理 | 随正文进展持续更新文档与发布预览 |
 | 2026-11-09 | Part 页取消边注栏并整页居中；边注固定右侧、栏宽从 48 mm 收窄至 38 mm；正文字号从 11pt 调整至 12pt，更新为 41 页 A4 预览 | 按新版式整理第 1 章 |
+| 2026-11-09 | 统一正文、前置页与 Part 页的底部居中页码；美化整页目录，111 个节条目加入 `§` 符号与点状引导线 | 按新版式整理第 1 章 |
 
 ## 编译与预览
 
@@ -74,6 +76,7 @@ xelatex -no-shell-escape -interaction=nonstopmode -halt-on-error -output-directo
 默认 A4 单面阅读版式，英文正文字号为 **12pt**，所有边注固定在**右侧**。
 边注栏宽 **38 mm**，与正文间隔 **6 mm**；正文宽度为 **132 mm**。
 Part 分隔页临时取消边注栏，保留标准书籍样式并以整页居中；进入章节后恢复正文与边注布局。
+页码位于整张页面底部正中。目录临时采用整页宽度，分部标题突出、章标题加粗，节编号以 `§ 1.1` 的形式显示，并用浅色点线连接页码。
 项目版式集中在 `config/pde-layout.tex`，字号与单面选项位于 `main.tex`。
 当前沿用模板自带的 TeX Gyre / Fandol 字体；类与样式文件保持原样。
 
@@ -91,7 +94,7 @@ Copy-Item -LiteralPath build/main.pdf -Destination output/pdf/pde-annotated-outl
 main.tex                         整书入口
 book-info.tex                    封面与 PDF 元数据
 config/pde-macros.tex             边注、来源、证明展开接口
-config/pde-layout.tex             右侧窄边注与 Part 整页居中布局
+config/pde-layout.tex             右侧窄边注、居中页码、Part 与目录布局
 frontmatter/                     阅读说明、两篇序言的整理入口
 parts/                           三个主体部分
 chapters/01-introduction/        第 1 章入口与各节文件

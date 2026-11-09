@@ -1,0 +1,17 @@
+% Project layout: wider main text, narrower notes, and full-width part pages.
+% With margin=right in main.tex, all margin notes stay on the right.
+% Explicit A4 avoids geometry's unrelated, global "screen" paper-size option.
+\geometry{a4paper,top=24mm,bottom=24mm,left=22mm,right=56mm,
+  marginparwidth=38mm,marginparsep=6mm,bindingoffset=0mm}
+\normalmarginpar
+
+% Keep book's standard part typography, numbering, and bookmark handling.
+% Temporarily remove the annotation column so titles are centered on the page.
+% Starred and optional short titles remain supported.
+\NewCommandCopy{\PDEOriginalPart}{\part}
+\RenewDocumentCommand{\part}{s o m}{%
+  \newgeometry{top=24mm,bottom=24mm,left=22mm,right=22mm,
+    marginparwidth=0pt,marginparsep=0pt,bindingoffset=0mm}%
+  \IfBooleanTF{#1}{\PDEOriginalPart*{#3}}{%
+    \IfNoValueTF{#2}{\PDEOriginalPart{#3}}{\PDEOriginalPart[#2]{#3}}}%
+  \restoregeometry}

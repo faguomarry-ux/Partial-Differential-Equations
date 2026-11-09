@@ -1,8 +1,9 @@
 % Compile from the project root: latexmk -xelatex main.tex
-% For a fixed right margin on screen, replace print,bindingoffset=4mm with screen.
-\documentclass[cover=pde,print,bindingoffset=4mm,fonts=tex,fontset=fandol,language=english]{lumenbook}
+% Default: 12pt text and a fixed right-hand annotation column.
+\documentclass[cover=pde,margin=right,12pt,fonts=tex,fontset=fandol,language=english]{lumenbook}
 \input{book-info}
 \input{config/pde-macros}
+\input{config/pde-layout}
 % The original table of contents lists chapters and sections.
 \setcounter{tocdepth}{1}
 

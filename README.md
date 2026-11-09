@@ -13,7 +13,7 @@
 | --- | --- |
 | [Partial Differential Equations.pdf](./Partial%20Differential%20Equations.pdf) | 英文原书，作为章节结构、定理、公式与证明的主要来源 |
 | [偏微分方程.pdf](./偏微分方程.pdf) | 第二版中译本扫描件，用于核对术语和辅助理解 |
-| [目录骨架预览](./output/pdf/pde-annotated-outline.pdf) | 当前 40 页的札记骨架，含目录链接和边注示例 |
+| [目录骨架预览](./output/pdf/pde-annotated-outline.pdf) | 当前 41 页的札记骨架，含目录链接和边注示例 |
 
 两本参考书 PDF、LaTeX 源码与发布预览一同纳入版本管理。
 原书页码、PDF 物理页码与札记页码分别记录；详细对照见 [全书目录](./docs/CONTENTS.md)。
@@ -26,8 +26,9 @@
 - [x] 记录英文各节起始页、中译本各章起始页及机器可读来源对照。
 - [x] 配置词句释义、中文提示、数学难点三类边注，并提供版面示例。
 - [x] 配置正文中的详细证明与长推导说明环境。
-- [x] 编译生成 40 页目录骨架，核对 138 个书签与 138 个目录链接，检查版面。
+- [x] 编译生成 41 页目录骨架，核对 138 个书签与 138 个目录链接，检查版面。
 - [x] 整理 Git 忽略规则与 PDF 二进制属性，保留两本参考书和发布预览。
+- [x] 调整为 Part 整页居中、固定右侧 38 mm 边注栏和 12pt 正文。
 
 ## 待办
 
@@ -51,6 +52,7 @@
 | --- | --- | --- |
 | 2026-11-09 | 建立 12 章、5 个附录及 111 节目录骨架；加入来源对照、边注与证明接口；生成并检查 40 页预览 | 从第 1 章和附录 A 开始正文整理 |
 | 2026-11-09 | 完善 `.gitignore`、增加 `.gitattributes`，整理 README 的文件入口、完成清单与待办；将两本 PDF 与项目源码一同纳入版本管理 | 随正文进展持续更新文档与发布预览 |
+| 2026-11-09 | Part 页取消边注栏并整页居中；边注固定右侧、栏宽从 48 mm 收窄至 38 mm；正文字号从 11pt 调整至 12pt，更新为 41 页 A4 预览 | 按新版式整理第 1 章 |
 
 ## 编译与预览
 
@@ -69,7 +71,10 @@ xelatex -no-shell-escape -interaction=nonstopmode -halt-on-error -output-directo
 xelatex -no-shell-escape -interaction=nonstopmode -halt-on-error -output-directory=build main.tex
 ```
 
-默认 A4 双面、外侧边注。屏幕单页阅读可将 `main.tex` 中的 `print,bindingoffset=4mm` 改成 `screen`。
+默认 A4 单面阅读版式，英文正文字号为 **12pt**，所有边注固定在**右侧**。
+边注栏宽 **38 mm**，与正文间隔 **6 mm**；正文宽度为 **132 mm**。
+Part 分隔页临时取消边注栏，保留标准书籍样式并以整页居中；进入章节后恢复正文与边注布局。
+项目版式集中在 `config/pde-layout.tex`，字号与单面选项位于 `main.tex`。
 当前沿用模板自带的 TeX Gyre / Fandol 字体；类与样式文件保持原样。
 
 更新发布预览时，在完整编译和版面检查通过后运行：
@@ -86,6 +91,7 @@ Copy-Item -LiteralPath build/main.pdf -Destination output/pdf/pde-annotated-outl
 main.tex                         整书入口
 book-info.tex                    封面与 PDF 元数据
 config/pde-macros.tex             边注、来源、证明展开接口
+config/pde-layout.tex             右侧窄边注与 Part 整页居中布局
 frontmatter/                     阅读说明、两篇序言的整理入口
 parts/                           三个主体部分
 chapters/01-introduction/        第 1 章入口与各节文件

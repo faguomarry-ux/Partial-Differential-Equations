@@ -1,0 +1,85 @@
+%% LPPL 1.3c or later; part of lumenbook. Font files keep their own licenses.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lumen-fonts}[2026/11/09 v1.1 Local fonts and CJK coverage]
+\RequirePackage{fontspec,etoolbox,iftex}
+\newif\iflumen@localfonts
+\ifdefstring{\lumen@fonts}{local}{\lumen@localfontstrue}{%
+  \ifdefstring{\lumen@fonts}{tex}{}{%
+    \PackageError{lumen-fonts}{Invalid fonts option}{Use fonts=local or fonts=tex.}}}
+\edef\lumen@ctexfontset{\lumen@fontset}
+\ifdefstring{\lumen@fontset}{auto}{\def\lumen@ctexfontset{fandol}}{}
+\edef\lumen@ctexoptions{UTF8,scheme=plain,fontset=\lumen@ctexfontset}
+\expandafter\PassOptionsToPackage\expandafter{\lumen@ctexoptions}{ctex}
+\RequirePackage{ctex}
+
+% Set complete, portable defaults first. Local files take priority by slot.
+\setmainfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmonofont{Latin Modern Mono}[Scale=MatchLowercase]
+\iflumen@localfonts
+  \IfFileExists{\lumen@fontpath times.ttf}{%
+    \setmainfont{times.ttf}[Path=\lumen@fontpath,
+      BoldFont=timesbd.ttf,ItalicFont=timesi.ttf,BoldItalicFont=timesbi.ttf]
+    \PackageInfo{lumen-fonts}{Body: local Times New Roman family}%
+  }{\PackageInfo{lumen-fonts}{Local Times unavailable; using TeX Gyre Termes}}
+  \IfFileExists{\lumen@fontpath 0xProtoNerdFontMono-Bold.ttf}{%
+    \setmonofont{0xProtoNerdFontMono-Bold.ttf}[Path=\lumen@fontpath,
+      Scale=MatchLowercase,
+      BoldFont=0xProtoNerdFontMono-Bold.ttf,
+      ItalicFont=0xProtoNerdFontMono-Bold.ttf,
+      BoldItalicFont=0xProtoNerdFontMono-Bold.ttf]
+    \PackageInfo{lumen-fonts}{Code: local 0xProto Nerd Font Mono Bold}%
+  }{}
+\fi
+
+% The supplied simsunb.ttf is EXTENSION B, not SimSun Bold. Neither it
+% nor SimsunExtG.ttf contains the common U+4E00--U+9FFF Han characters.
+% Use an ordinary Song face for common Chinese, then local extension fonts.
+\ifdefstring{\lumen@fontset}{auto}{%
+  \def\lumen@hanmain{FandolSong-Regular}
+  \iflumen@localfonts
+    \IfFileExists{\lumen@fontpath simsun.ttc}{%
+      \edef\lumen@hanmain{[\lumen@fontpath simsun.ttc]}}{%
+      \IfFontExistsTF{SimSun}{\def\lumen@hanmain{SimSun}}{}}
+  \fi
+  \setCJKmainfont{\lumen@hanmain}[BoldFont=FandolSong-Bold,
+    ItalicFont=FandolKai-Regular,BoldItalicFont=FandolKai-Regular]
+  \setCJKsansfont{FandolHei-Regular}[BoldFont=FandolHei-Bold]
+  \setCJKmonofont{FandolFang-Regular}
+}{}
+\ifLuaTeX
+  \iflumen@localfonts
+    % CTeX CharRange registers alternate CJK fonts with the proper JFM.
+    \newcommand{\lumen@luarange}[2]{%
+      \setCJKmainfont[CharRange={#1},Path=\lumen@fontpath,
+        BoldFont={#2},ItalicFont={#2},BoldItalicFont={#2}]{#2}%
+      \setCJKsansfont[CharRange={#1},Path=\lumen@fontpath,
+        BoldFont={#2},ItalicFont={#2},BoldItalicFont={#2}]{#2}%
+      \setCJKmonofont[CharRange={#1},Path=\lumen@fontpath,
+        BoldFont={#2},ItalicFont={#2},BoldItalicFont={#2}]{#2}}
+    \IfFileExists{\lumen@fontpath simsunb.ttf}{%
+      \lumen@luarange{"20000->"2FFFF}{simsunb.ttf}}{}
+    \IfFileExists{\lumen@fontpath SimsunExtG.ttf}{%
+      \lumen@luarange{"30000->"3134F}{SimsunExtG.ttf}}{}
+  \fi
+\fi
+\ifXeTeX
+  \iflumen@localfonts
+    \def\lumen@fallbacklist{}
+    \IfFileExists{\lumen@fontpath simsunb.ttf}{%
+      \appto\lumen@fallbacklist{simsunb.ttf,}}{}
+    \IfFileExists{\lumen@fontpath SimsunExtG.ttf}{%
+      \appto\lumen@fallbacklist{SimsunExtG.ttf,}}{}
+    \ifdefempty{\lumen@fallbacklist}{}{%
+      \xeCJKsetup{AutoFallBack=true}
+      \edef\lumen@setupfallback{%
+        \noexpand\setCJKfallbackfamilyfont{\noexpand\CJKrmdefault}
+          [Path=\lumen@fontpath]{\lumen@fallbacklist}%
+        \noexpand\setCJKfallbackfamilyfont{\noexpand\CJKsfdefault}
+          [Path=\lumen@fontpath]{\lumen@fallbacklist}%
+        \noexpand\setCJKfallbackfamilyfont{\noexpand\CJKttdefault}
+          [Path=\lumen@fontpath]{\lumen@fallbacklist}}
+      \lumen@setupfallback}
+  \fi
+\fi
+\endinput

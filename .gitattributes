@@ -1,0 +1,12 @@
+# Keep text files portable; never apply text conversion to the source books.
+* text=auto
+*.tex text eol=lf
+*.cls text eol=lf
+*.sty text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+latexmkrc text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+LICENSE text eol=lf
+*.pdf binary

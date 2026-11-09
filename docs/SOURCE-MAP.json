@@ -1,0 +1,1121 @@
+{
+  "source_english": "Partial Differential Equations.pdf",
+  "source_chinese": "偏微分方程.pdf",
+  "edition": "Evans, second edition",
+  "english_pages": 730,
+  "chinese_pages": 524,
+  "page_convention": "All PDF pages are 1-based physical pages. Printed pages are separate.",
+  "evidence": "English PDF bookmarks checked against printed Contents (PDF 8-11). Chinese chapter starts read from scanned Contents (PDF 13-18). Chinese section correspondence remains pending.",
+  "english_printed_to_pdf_offset": 17,
+  "units": [
+    {
+      "number": "1",
+      "title": "Introduction",
+      "directory": "chapters/01-introduction",
+      "entry": "chapters/01-introduction/chapter.tex",
+      "english_printed_start": 1,
+      "english_pdf_start": 18,
+      "chinese_printed_start": 1,
+      "chinese_title": "引言",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "1.1",
+          "title": "Partial Differential Equations",
+          "file": "chapters/01-introduction/01-partial-differential-equations.tex",
+          "english_printed_start": 1,
+          "english_pdf_start": 18,
+          "status": "outline-only"
+        },
+        {
+          "number": "1.2",
+          "title": "Examples",
+          "file": "chapters/01-introduction/02-examples.tex",
+          "english_printed_start": 3,
+          "english_pdf_start": 20,
+          "status": "outline-only"
+        },
+        {
+          "number": "1.3",
+          "title": "Strategies for Studying PDE",
+          "file": "chapters/01-introduction/03-strategies-for-studying-pde.tex",
+          "english_printed_start": 6,
+          "english_pdf_start": 23,
+          "status": "outline-only"
+        },
+        {
+          "number": "1.4",
+          "title": "Overview",
+          "file": "chapters/01-introduction/04-overview.tex",
+          "english_printed_start": 8,
+          "english_pdf_start": 25,
+          "status": "outline-only"
+        },
+        {
+          "number": "1.5",
+          "title": "Problems",
+          "file": "chapters/01-introduction/05-problems.tex",
+          "english_printed_start": 11,
+          "english_pdf_start": 28,
+          "status": "outline-only"
+        },
+        {
+          "number": "1.6",
+          "title": "References",
+          "file": "chapters/01-introduction/06-references.tex",
+          "english_printed_start": 12,
+          "english_pdf_start": 29,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "2",
+      "title": "Four Important Linear Partial Differential Equations",
+      "directory": "chapters/02-four-important-linear-partial-differential-equations",
+      "entry": "chapters/02-four-important-linear-partial-differential-equations/chapter.tex",
+      "english_printed_start": 17,
+      "english_pdf_start": 34,
+      "chinese_printed_start": 13,
+      "chinese_title": "四个重要的线性偏微分方程",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "2.1",
+          "title": "Transport Equation",
+          "file": "chapters/02-four-important-linear-partial-differential-equations/01-transport-equation.tex",
+          "english_printed_start": 17,
+          "english_pdf_start": 34,
+          "status": "outline-only"
+        },
+        {
+          "number": "2.2",
+          "title": "Laplace’s Equation",
+          "file": "chapters/02-four-important-linear-partial-differential-equations/02-laplaces-equation.tex",
+          "english_printed_start": 19,
+          "english_pdf_start": 36,
+          "status": "outline-only"
+        },
+        {
+          "number": "2.3",
+          "title": "Heat Equation",
+          "file": "chapters/02-four-important-linear-partial-differential-equations/03-heat-equation.tex",
+          "english_printed_start": 42,
+          "english_pdf_start": 59,
+          "status": "outline-only"
+        },
+        {
+          "number": "2.4",
+          "title": "Wave Equation",
+          "file": "chapters/02-four-important-linear-partial-differential-equations/04-wave-equation.tex",
+          "english_printed_start": 63,
+          "english_pdf_start": 80,
+          "status": "outline-only"
+        },
+        {
+          "number": "2.5",
+          "title": "Problems",
+          "file": "chapters/02-four-important-linear-partial-differential-equations/05-problems.tex",
+          "english_printed_start": 81,
+          "english_pdf_start": 98,
+          "status": "outline-only"
+        },
+        {
+          "number": "2.6",
+          "title": "References",
+          "file": "chapters/02-four-important-linear-partial-differential-equations/06-references.tex",
+          "english_printed_start": 86,
+          "english_pdf_start": 103,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "3",
+      "title": "Nonlinear First-Order PDE",
+      "directory": "chapters/03-nonlinear-first-order-pde",
+      "entry": "chapters/03-nonlinear-first-order-pde/chapter.tex",
+      "english_printed_start": 89,
+      "english_pdf_start": 106,
+      "chinese_printed_start": 61,
+      "chinese_title": "非线性一阶偏微分方程",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "3.1",
+          "title": "Complete Integrals, Envelopes",
+          "file": "chapters/03-nonlinear-first-order-pde/01-complete-integrals-envelopes.tex",
+          "english_printed_start": 90,
+          "english_pdf_start": 107,
+          "status": "outline-only"
+        },
+        {
+          "number": "3.2",
+          "title": "Characteristics",
+          "file": "chapters/03-nonlinear-first-order-pde/02-characteristics.tex",
+          "english_printed_start": 94,
+          "english_pdf_start": 111,
+          "status": "outline-only"
+        },
+        {
+          "number": "3.3",
+          "title": "Introduction to Hamilton–Jacobi Equations",
+          "file": "chapters/03-nonlinear-first-order-pde/03-introduction-to-hamilton-jacobi-equations.tex",
+          "english_printed_start": 110,
+          "english_pdf_start": 127,
+          "status": "outline-only"
+        },
+        {
+          "number": "3.4",
+          "title": "Introduction to Conservation Laws",
+          "file": "chapters/03-nonlinear-first-order-pde/04-introduction-to-conservation-laws.tex",
+          "english_printed_start": 130,
+          "english_pdf_start": 147,
+          "status": "outline-only"
+        },
+        {
+          "number": "3.5",
+          "title": "Problems",
+          "file": "chapters/03-nonlinear-first-order-pde/05-problems.tex",
+          "english_printed_start": 154,
+          "english_pdf_start": 171,
+          "status": "outline-only"
+        },
+        {
+          "number": "3.6",
+          "title": "References",
+          "file": "chapters/03-nonlinear-first-order-pde/06-references.tex",
+          "english_printed_start": 158,
+          "english_pdf_start": 175,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "4",
+      "title": "Other Ways to Represent Solutions",
+      "directory": "chapters/04-other-ways-to-represent-solutions",
+      "entry": "chapters/04-other-ways-to-represent-solutions/chapter.tex",
+      "english_printed_start": 159,
+      "english_pdf_start": 176,
+      "chinese_printed_start": 111,
+      "chinese_title": "解的其他表示方法",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "4.1",
+          "title": "Separation of Variables",
+          "file": "chapters/04-other-ways-to-represent-solutions/01-separation-of-variables.tex",
+          "english_printed_start": 159,
+          "english_pdf_start": 176,
+          "status": "outline-only"
+        },
+        {
+          "number": "4.2",
+          "title": "Similarity Solutions",
+          "file": "chapters/04-other-ways-to-represent-solutions/02-similarity-solutions.tex",
+          "english_printed_start": 167,
+          "english_pdf_start": 184,
+          "status": "outline-only"
+        },
+        {
+          "number": "4.3",
+          "title": "Transform Methods",
+          "file": "chapters/04-other-ways-to-represent-solutions/03-transform-methods.tex",
+          "english_printed_start": 177,
+          "english_pdf_start": 194,
+          "status": "outline-only"
+        },
+        {
+          "number": "4.4",
+          "title": "Converting Nonlinear into Linear PDE",
+          "file": "chapters/04-other-ways-to-represent-solutions/04-converting-nonlinear-into-linear-pde.tex",
+          "english_printed_start": 195,
+          "english_pdf_start": 212,
+          "status": "outline-only"
+        },
+        {
+          "number": "4.5",
+          "title": "Asymptotics",
+          "file": "chapters/04-other-ways-to-represent-solutions/05-asymptotics.tex",
+          "english_printed_start": 200,
+          "english_pdf_start": 217,
+          "status": "outline-only"
+        },
+        {
+          "number": "4.6",
+          "title": "Power Series",
+          "file": "chapters/04-other-ways-to-represent-solutions/06-power-series.tex",
+          "english_printed_start": 220,
+          "english_pdf_start": 237,
+          "status": "outline-only"
+        },
+        {
+          "number": "4.7",
+          "title": "Problems",
+          "file": "chapters/04-other-ways-to-represent-solutions/07-problems.tex",
+          "english_printed_start": 231,
+          "english_pdf_start": 248,
+          "status": "outline-only"
+        },
+        {
+          "number": "4.8",
+          "title": "References",
+          "file": "chapters/04-other-ways-to-represent-solutions/08-references.tex",
+          "english_printed_start": 236,
+          "english_pdf_start": 253,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "5",
+      "title": "Sobolev Spaces",
+      "directory": "chapters/05-sobolev-spaces",
+      "entry": "chapters/05-sobolev-spaces/chapter.tex",
+      "english_printed_start": 239,
+      "english_pdf_start": 256,
+      "chinese_printed_start": 169,
+      "chinese_title": "Sobolev 空间",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "5.1",
+          "title": "Hölder Spaces",
+          "file": "chapters/05-sobolev-spaces/01-holder-spaces.tex",
+          "english_printed_start": 240,
+          "english_pdf_start": 257,
+          "status": "outline-only"
+        },
+        {
+          "number": "5.2",
+          "title": "Sobolev Spaces",
+          "file": "chapters/05-sobolev-spaces/02-sobolev-spaces.tex",
+          "english_printed_start": 241,
+          "english_pdf_start": 258,
+          "status": "outline-only"
+        },
+        {
+          "number": "5.3",
+          "title": "Approximation",
+          "file": "chapters/05-sobolev-spaces/03-approximation.tex",
+          "english_printed_start": 249,
+          "english_pdf_start": 266,
+          "status": "outline-only"
+        },
+        {
+          "number": "5.4",
+          "title": "Extensions",
+          "file": "chapters/05-sobolev-spaces/04-extensions.tex",
+          "english_printed_start": 253,
+          "english_pdf_start": 270,
+          "status": "outline-only"
+        },
+        {
+          "number": "5.5",
+          "title": "Traces",
+          "file": "chapters/05-sobolev-spaces/05-traces.tex",
+          "english_printed_start": 256,
+          "english_pdf_start": 273,
+          "status": "outline-only"
+        },
+        {
+          "number": "5.6",
+          "title": "Sobolev Inequalities",
+          "file": "chapters/05-sobolev-spaces/06-sobolev-inequalities.tex",
+          "english_printed_start": 260,
+          "english_pdf_start": 277,
+          "status": "outline-only"
+        },
+        {
+          "number": "5.7",
+          "title": "Compactness",
+          "file": "chapters/05-sobolev-spaces/07-compactness.tex",
+          "english_printed_start": 270,
+          "english_pdf_start": 287,
+          "status": "outline-only"
+        },
+        {
+          "number": "5.8",
+          "title": "Additional Topics",
+          "file": "chapters/05-sobolev-spaces/08-additional-topics.tex",
+          "english_printed_start": 273,
+          "english_pdf_start": 290,
+          "status": "outline-only"
+        },
+        {
+          "number": "5.9",
+          "title": "Other Spaces of Functions",
+          "file": "chapters/05-sobolev-spaces/09-other-spaces-of-functions.tex",
+          "english_printed_start": 282,
+          "english_pdf_start": 299,
+          "status": "outline-only"
+        },
+        {
+          "number": "5.10",
+          "title": "Problems",
+          "file": "chapters/05-sobolev-spaces/10-problems.tex",
+          "english_printed_start": 289,
+          "english_pdf_start": 306,
+          "status": "outline-only"
+        },
+        {
+          "number": "5.11",
+          "title": "References",
+          "file": "chapters/05-sobolev-spaces/11-references.tex",
+          "english_printed_start": 292,
+          "english_pdf_start": 309,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "6",
+      "title": "Second-Order Elliptic Equations",
+      "directory": "chapters/06-second-order-elliptic-equations",
+      "entry": "chapters/06-second-order-elliptic-equations/chapter.tex",
+      "english_printed_start": 293,
+      "english_pdf_start": 310,
+      "chinese_printed_start": 208,
+      "chinese_title": "二阶椭圆型方程",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "6.1",
+          "title": "Definitions",
+          "file": "chapters/06-second-order-elliptic-equations/01-definitions.tex",
+          "english_printed_start": 293,
+          "english_pdf_start": 310,
+          "status": "outline-only"
+        },
+        {
+          "number": "6.2",
+          "title": "Existence of Weak Solutions",
+          "file": "chapters/06-second-order-elliptic-equations/02-existence-of-weak-solutions.tex",
+          "english_printed_start": 297,
+          "english_pdf_start": 314,
+          "status": "outline-only"
+        },
+        {
+          "number": "6.3",
+          "title": "Regularity",
+          "file": "chapters/06-second-order-elliptic-equations/03-regularity.tex",
+          "english_printed_start": 307,
+          "english_pdf_start": 324,
+          "status": "outline-only"
+        },
+        {
+          "number": "6.4",
+          "title": "Maximum Principles",
+          "file": "chapters/06-second-order-elliptic-equations/04-maximum-principles.tex",
+          "english_printed_start": 323,
+          "english_pdf_start": 340,
+          "status": "outline-only"
+        },
+        {
+          "number": "6.5",
+          "title": "Eigenvalues and Eigenfunctions",
+          "file": "chapters/06-second-order-elliptic-equations/05-eigenvalues-and-eigenfunctions.tex",
+          "english_printed_start": 333,
+          "english_pdf_start": 350,
+          "status": "outline-only"
+        },
+        {
+          "number": "6.6",
+          "title": "Problems",
+          "file": "chapters/06-second-order-elliptic-equations/06-problems.tex",
+          "english_printed_start": 343,
+          "english_pdf_start": 360,
+          "status": "outline-only"
+        },
+        {
+          "number": "6.7",
+          "title": "References",
+          "file": "chapters/06-second-order-elliptic-equations/07-references.tex",
+          "english_printed_start": 348,
+          "english_pdf_start": 365,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "7",
+      "title": "Linear Evolution Equations",
+      "directory": "chapters/07-linear-evolution-equations",
+      "entry": "chapters/07-linear-evolution-equations/chapter.tex",
+      "english_printed_start": 349,
+      "english_pdf_start": 366,
+      "chinese_printed_start": 248,
+      "chinese_title": "线性发展方程",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "7.1",
+          "title": "Second-Order Parabolic Equations",
+          "file": "chapters/07-linear-evolution-equations/01-second-order-parabolic-equations.tex",
+          "english_printed_start": 349,
+          "english_pdf_start": 366,
+          "status": "outline-only"
+        },
+        {
+          "number": "7.2",
+          "title": "Second-Order Hyperbolic Equations",
+          "file": "chapters/07-linear-evolution-equations/02-second-order-hyperbolic-equations.tex",
+          "english_printed_start": 375,
+          "english_pdf_start": 392,
+          "status": "outline-only"
+        },
+        {
+          "number": "7.3",
+          "title": "Systems of Hyperbolic First-Order Equations",
+          "file": "chapters/07-linear-evolution-equations/03-systems-of-hyperbolic-first-order-equations.tex",
+          "english_printed_start": 396,
+          "english_pdf_start": 413,
+          "status": "outline-only"
+        },
+        {
+          "number": "7.4",
+          "title": "Semigroup Theory",
+          "file": "chapters/07-linear-evolution-equations/04-semigroup-theory.tex",
+          "english_printed_start": 409,
+          "english_pdf_start": 426,
+          "status": "outline-only"
+        },
+        {
+          "number": "7.5",
+          "title": "Problems",
+          "file": "chapters/07-linear-evolution-equations/05-problems.tex",
+          "english_printed_start": 420,
+          "english_pdf_start": 437,
+          "status": "outline-only"
+        },
+        {
+          "number": "7.6",
+          "title": "References",
+          "file": "chapters/07-linear-evolution-equations/06-references.tex",
+          "english_printed_start": 423,
+          "english_pdf_start": 440,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "8",
+      "title": "The Calculus of Variations",
+      "directory": "chapters/08-the-calculus-of-variations",
+      "entry": "chapters/08-the-calculus-of-variations/chapter.tex",
+      "english_printed_start": 427,
+      "english_pdf_start": 444,
+      "chinese_printed_start": 303,
+      "chinese_title": "变分法",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "8.1",
+          "title": "Introduction",
+          "file": "chapters/08-the-calculus-of-variations/01-introduction.tex",
+          "english_printed_start": 427,
+          "english_pdf_start": 444,
+          "status": "outline-only"
+        },
+        {
+          "number": "8.2",
+          "title": "Existence of Minimizers",
+          "file": "chapters/08-the-calculus-of-variations/02-existence-of-minimizers.tex",
+          "english_printed_start": 437,
+          "english_pdf_start": 454,
+          "status": "outline-only"
+        },
+        {
+          "number": "8.3",
+          "title": "Regularity",
+          "file": "chapters/08-the-calculus-of-variations/03-regularity.tex",
+          "english_printed_start": 454,
+          "english_pdf_start": 471,
+          "status": "outline-only"
+        },
+        {
+          "number": "8.4",
+          "title": "Constraints",
+          "file": "chapters/08-the-calculus-of-variations/04-constraints.tex",
+          "english_printed_start": 458,
+          "english_pdf_start": 475,
+          "status": "outline-only"
+        },
+        {
+          "number": "8.5",
+          "title": "Critical Points",
+          "file": "chapters/08-the-calculus-of-variations/05-critical-points.tex",
+          "english_printed_start": 471,
+          "english_pdf_start": 488,
+          "status": "outline-only"
+        },
+        {
+          "number": "8.6",
+          "title": "Invariance, Noether’s Theorem",
+          "file": "chapters/08-the-calculus-of-variations/06-invariance-noethers-theorem.tex",
+          "english_printed_start": 481,
+          "english_pdf_start": 498,
+          "status": "outline-only"
+        },
+        {
+          "number": "8.7",
+          "title": "Problems",
+          "file": "chapters/08-the-calculus-of-variations/07-problems.tex",
+          "english_printed_start": 489,
+          "english_pdf_start": 506,
+          "status": "outline-only"
+        },
+        {
+          "number": "8.8",
+          "title": "References",
+          "file": "chapters/08-the-calculus-of-variations/08-references.tex",
+          "english_printed_start": 494,
+          "english_pdf_start": 511,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "9",
+      "title": "Nonvariational Techniques",
+      "directory": "chapters/09-nonvariational-techniques",
+      "entry": "chapters/09-nonvariational-techniques/chapter.tex",
+      "english_printed_start": 495,
+      "english_pdf_start": 512,
+      "chinese_printed_start": 350,
+      "chinese_title": "非变分技术",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "9.1",
+          "title": "Monotonicity Methods",
+          "file": "chapters/09-nonvariational-techniques/01-monotonicity-methods.tex",
+          "english_printed_start": 495,
+          "english_pdf_start": 512,
+          "status": "outline-only"
+        },
+        {
+          "number": "9.2",
+          "title": "Fixed Point Methods",
+          "file": "chapters/09-nonvariational-techniques/02-fixed-point-methods.tex",
+          "english_printed_start": 501,
+          "english_pdf_start": 518,
+          "status": "outline-only"
+        },
+        {
+          "number": "9.3",
+          "title": "Method of Subsolutions and Supersolutions",
+          "file": "chapters/09-nonvariational-techniques/03-method-of-subsolutions-and-supersolutions.tex",
+          "english_printed_start": 510,
+          "english_pdf_start": 527,
+          "status": "outline-only"
+        },
+        {
+          "number": "9.4",
+          "title": "Nonexistence of Solutions",
+          "file": "chapters/09-nonvariational-techniques/04-nonexistence-of-solutions.tex",
+          "english_printed_start": 514,
+          "english_pdf_start": 531,
+          "status": "outline-only"
+        },
+        {
+          "number": "9.5",
+          "title": "Geometric Properties of Solutions",
+          "file": "chapters/09-nonvariational-techniques/05-geometric-properties-of-solutions.tex",
+          "english_printed_start": 521,
+          "english_pdf_start": 538,
+          "status": "outline-only"
+        },
+        {
+          "number": "9.6",
+          "title": "Gradient Flows",
+          "file": "chapters/09-nonvariational-techniques/06-gradient-flows.tex",
+          "english_printed_start": 526,
+          "english_pdf_start": 543,
+          "status": "outline-only"
+        },
+        {
+          "number": "9.7",
+          "title": "Problems",
+          "file": "chapters/09-nonvariational-techniques/07-problems.tex",
+          "english_printed_start": 538,
+          "english_pdf_start": 555,
+          "status": "outline-only"
+        },
+        {
+          "number": "9.8",
+          "title": "References",
+          "file": "chapters/09-nonvariational-techniques/08-references.tex",
+          "english_printed_start": 541,
+          "english_pdf_start": 558,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "10",
+      "title": "Hamilton–Jacobi Equations",
+      "directory": "chapters/10-hamilton-jacobi-equations",
+      "entry": "chapters/10-hamilton-jacobi-equations/chapter.tex",
+      "english_printed_start": 543,
+      "english_pdf_start": 560,
+      "chinese_printed_start": 384,
+      "chinese_title": "Hamilton--Jacobi 方程",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "10.1",
+          "title": "Introduction, Viscosity Solutions",
+          "file": "chapters/10-hamilton-jacobi-equations/01-introduction-viscosity-solutions.tex",
+          "english_printed_start": 543,
+          "english_pdf_start": 560,
+          "status": "outline-only"
+        },
+        {
+          "number": "10.2",
+          "title": "Uniqueness",
+          "file": "chapters/10-hamilton-jacobi-equations/02-uniqueness.tex",
+          "english_printed_start": 550,
+          "english_pdf_start": 567,
+          "status": "outline-only"
+        },
+        {
+          "number": "10.3",
+          "title": "Control Theory, Dynamic Programming",
+          "file": "chapters/10-hamilton-jacobi-equations/03-control-theory-dynamic-programming.tex",
+          "english_printed_start": 554,
+          "english_pdf_start": 571,
+          "status": "outline-only"
+        },
+        {
+          "number": "10.4",
+          "title": "Problems",
+          "file": "chapters/10-hamilton-jacobi-equations/04-problems.tex",
+          "english_printed_start": 566,
+          "english_pdf_start": 583,
+          "status": "outline-only"
+        },
+        {
+          "number": "10.5",
+          "title": "References",
+          "file": "chapters/10-hamilton-jacobi-equations/05-references.tex",
+          "english_printed_start": 569,
+          "english_pdf_start": 586,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "11",
+      "title": "Systems of Conservation Laws",
+      "directory": "chapters/11-systems-of-conservation-laws",
+      "entry": "chapters/11-systems-of-conservation-laws/chapter.tex",
+      "english_printed_start": 571,
+      "english_pdf_start": 588,
+      "chinese_printed_start": 404,
+      "chinese_title": "守恒律组",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "11.1",
+          "title": "Introduction",
+          "file": "chapters/11-systems-of-conservation-laws/01-introduction.tex",
+          "english_printed_start": 571,
+          "english_pdf_start": 588,
+          "status": "outline-only"
+        },
+        {
+          "number": "11.2",
+          "title": "Riemann’s Problem",
+          "file": "chapters/11-systems-of-conservation-laws/02-riemanns-problem.tex",
+          "english_printed_start": 582,
+          "english_pdf_start": 599,
+          "status": "outline-only"
+        },
+        {
+          "number": "11.3",
+          "title": "Systems of Two Conservation Laws",
+          "file": "chapters/11-systems-of-conservation-laws/03-systems-of-two-conservation-laws.tex",
+          "english_printed_start": 595,
+          "english_pdf_start": 612,
+          "status": "outline-only"
+        },
+        {
+          "number": "11.4",
+          "title": "Entropy Criteria",
+          "file": "chapters/11-systems-of-conservation-laws/04-entropy-criteria.tex",
+          "english_printed_start": 601,
+          "english_pdf_start": 618,
+          "status": "outline-only"
+        },
+        {
+          "number": "11.5",
+          "title": "Problems",
+          "file": "chapters/11-systems-of-conservation-laws/05-problems.tex",
+          "english_printed_start": 613,
+          "english_pdf_start": 630,
+          "status": "outline-only"
+        },
+        {
+          "number": "11.6",
+          "title": "References",
+          "file": "chapters/11-systems-of-conservation-laws/06-references.tex",
+          "english_printed_start": 616,
+          "english_pdf_start": 633,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "12",
+      "title": "Nonlinear Wave Equations",
+      "directory": "chapters/12-nonlinear-wave-equations",
+      "entry": "chapters/12-nonlinear-wave-equations/chapter.tex",
+      "english_printed_start": 617,
+      "english_pdf_start": 634,
+      "chinese_printed_start": 437,
+      "chinese_title": "非线性波动方程",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "12.1",
+          "title": "Introduction",
+          "file": "chapters/12-nonlinear-wave-equations/01-introduction.tex",
+          "english_printed_start": 617,
+          "english_pdf_start": 634,
+          "status": "outline-only"
+        },
+        {
+          "number": "12.2",
+          "title": "Existence of Solutions",
+          "file": "chapters/12-nonlinear-wave-equations/02-existence-of-solutions.tex",
+          "english_printed_start": 620,
+          "english_pdf_start": 637,
+          "status": "outline-only"
+        },
+        {
+          "number": "12.3",
+          "title": "Semilinear Wave Equations",
+          "file": "chapters/12-nonlinear-wave-equations/03-semilinear-wave-equations.tex",
+          "english_printed_start": 627,
+          "english_pdf_start": 644,
+          "status": "outline-only"
+        },
+        {
+          "number": "12.4",
+          "title": "Critical Power Nonlinearity",
+          "file": "chapters/12-nonlinear-wave-equations/04-critical-power-nonlinearity.tex",
+          "english_printed_start": 636,
+          "english_pdf_start": 653,
+          "status": "outline-only"
+        },
+        {
+          "number": "12.5",
+          "title": "Nonexistence of Solutions",
+          "file": "chapters/12-nonlinear-wave-equations/05-nonexistence-of-solutions.tex",
+          "english_printed_start": 642,
+          "english_pdf_start": 659,
+          "status": "outline-only"
+        },
+        {
+          "number": "12.6",
+          "title": "Problems",
+          "file": "chapters/12-nonlinear-wave-equations/06-problems.tex",
+          "english_printed_start": 647,
+          "english_pdf_start": 664,
+          "status": "outline-only"
+        },
+        {
+          "number": "12.7",
+          "title": "References",
+          "file": "chapters/12-nonlinear-wave-equations/07-references.tex",
+          "english_printed_start": 651,
+          "english_pdf_start": 668,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "A",
+      "title": "Notation",
+      "directory": "appendices/a-notation",
+      "entry": "appendices/a-notation/appendix.tex",
+      "english_printed_start": 653,
+      "english_pdf_start": 670,
+      "chinese_printed_start": 463,
+      "chinese_title": "记号",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "A.1",
+          "title": "Notation for matrices",
+          "file": "appendices/a-notation/01-notation-for-matrices.tex",
+          "english_printed_start": 653,
+          "english_pdf_start": 670,
+          "status": "outline-only"
+        },
+        {
+          "number": "A.2",
+          "title": "Geometric notation",
+          "file": "appendices/a-notation/02-geometric-notation.tex",
+          "english_printed_start": 654,
+          "english_pdf_start": 671,
+          "status": "outline-only"
+        },
+        {
+          "number": "A.3",
+          "title": "Notation for functions",
+          "file": "appendices/a-notation/03-notation-for-functions.tex",
+          "english_printed_start": 655,
+          "english_pdf_start": 672,
+          "status": "outline-only"
+        },
+        {
+          "number": "A.4",
+          "title": "Vector-valued functions",
+          "file": "appendices/a-notation/04-vector-valued-functions.tex",
+          "english_printed_start": 659,
+          "english_pdf_start": 676,
+          "status": "outline-only"
+        },
+        {
+          "number": "A.5",
+          "title": "Notation for estimates",
+          "file": "appendices/a-notation/05-notation-for-estimates.tex",
+          "english_printed_start": 659,
+          "english_pdf_start": 676,
+          "status": "outline-only"
+        },
+        {
+          "number": "A.6",
+          "title": "Some comments about notation",
+          "file": "appendices/a-notation/06-some-comments-about-notation.tex",
+          "english_printed_start": 660,
+          "english_pdf_start": 677,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "B",
+      "title": "Inequalities",
+      "directory": "appendices/b-inequalities",
+      "entry": "appendices/b-inequalities/appendix.tex",
+      "english_printed_start": 661,
+      "english_pdf_start": 678,
+      "chinese_printed_start": 471,
+      "chinese_title": "不等式",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "B.1",
+          "title": "Convex functions",
+          "file": "appendices/b-inequalities/01-convex-functions.tex",
+          "english_printed_start": 661,
+          "english_pdf_start": 678,
+          "status": "outline-only"
+        },
+        {
+          "number": "B.2",
+          "title": "Useful inequalities",
+          "file": "appendices/b-inequalities/02-useful-inequalities.tex",
+          "english_printed_start": 661,
+          "english_pdf_start": 678,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "C",
+      "title": "Calculus",
+      "directory": "appendices/c-calculus",
+      "entry": "appendices/c-calculus/appendix.tex",
+      "english_printed_start": 665,
+      "english_pdf_start": 682,
+      "chinese_printed_start": 475,
+      "chinese_title": "微积分",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "C.1",
+          "title": "Boundaries",
+          "file": "appendices/c-calculus/01-boundaries.tex",
+          "english_printed_start": 665,
+          "english_pdf_start": 682,
+          "status": "outline-only"
+        },
+        {
+          "number": "C.2",
+          "title": "Gauss–Green Theorem",
+          "file": "appendices/c-calculus/02-gauss-green-theorem.tex",
+          "english_printed_start": 667,
+          "english_pdf_start": 684,
+          "status": "outline-only"
+        },
+        {
+          "number": "C.3",
+          "title": "Polar coordinates, coarea formula",
+          "file": "appendices/c-calculus/03-polar-coordinates-coarea-formula.tex",
+          "english_printed_start": 668,
+          "english_pdf_start": 685,
+          "status": "outline-only"
+        },
+        {
+          "number": "C.4",
+          "title": "Moving regions",
+          "file": "appendices/c-calculus/04-moving-regions.tex",
+          "english_printed_start": 668,
+          "english_pdf_start": 685,
+          "status": "outline-only"
+        },
+        {
+          "number": "C.5",
+          "title": "Convolution and smoothing",
+          "file": "appendices/c-calculus/05-convolution-and-smoothing.tex",
+          "english_printed_start": 669,
+          "english_pdf_start": 686,
+          "status": "outline-only"
+        },
+        {
+          "number": "C.6",
+          "title": "Inverse Function Theorem",
+          "file": "appendices/c-calculus/06-inverse-function-theorem.tex",
+          "english_printed_start": 671,
+          "english_pdf_start": 688,
+          "status": "outline-only"
+        },
+        {
+          "number": "C.7",
+          "title": "Implicit Function Theorem",
+          "file": "appendices/c-calculus/07-implicit-function-theorem.tex",
+          "english_printed_start": 672,
+          "english_pdf_start": 689,
+          "status": "outline-only"
+        },
+        {
+          "number": "C.8",
+          "title": "Uniform convergence",
+          "file": "appendices/c-calculus/08-uniform-convergence.tex",
+          "english_printed_start": 673,
+          "english_pdf_start": 690,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "D",
+      "title": "Functional Analysis",
+      "directory": "appendices/d-functional-analysis",
+      "entry": "appendices/d-functional-analysis/appendix.tex",
+      "english_printed_start": 674,
+      "english_pdf_start": 691,
+      "chinese_printed_start": 482,
+      "chinese_title": "泛函分析",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "D.1",
+          "title": "Banach spaces",
+          "file": "appendices/d-functional-analysis/01-banach-spaces.tex",
+          "english_printed_start": 674,
+          "english_pdf_start": 691,
+          "status": "outline-only"
+        },
+        {
+          "number": "D.2",
+          "title": "Hilbert spaces",
+          "file": "appendices/d-functional-analysis/02-hilbert-spaces.tex",
+          "english_printed_start": 675,
+          "english_pdf_start": 692,
+          "status": "outline-only"
+        },
+        {
+          "number": "D.3",
+          "title": "Bounded linear operators",
+          "file": "appendices/d-functional-analysis/03-bounded-linear-operators.tex",
+          "english_printed_start": 676,
+          "english_pdf_start": 693,
+          "status": "outline-only"
+        },
+        {
+          "number": "D.4",
+          "title": "Weak convergence",
+          "file": "appendices/d-functional-analysis/04-weak-convergence.tex",
+          "english_printed_start": 678,
+          "english_pdf_start": 695,
+          "status": "outline-only"
+        },
+        {
+          "number": "D.5",
+          "title": "Compact operators, Fredholm theory",
+          "file": "appendices/d-functional-analysis/05-compact-operators-fredholm-theory.tex",
+          "english_printed_start": 679,
+          "english_pdf_start": 696,
+          "status": "outline-only"
+        },
+        {
+          "number": "D.6",
+          "title": "Symmetric operators",
+          "file": "appendices/d-functional-analysis/06-symmetric-operators.tex",
+          "english_printed_start": 683,
+          "english_pdf_start": 700,
+          "status": "outline-only"
+        }
+      ]
+    },
+    {
+      "number": "E",
+      "title": "Measure Theory",
+      "directory": "appendices/e-measure-theory",
+      "entry": "appendices/e-measure-theory/appendix.tex",
+      "english_printed_start": 684,
+      "english_pdf_start": 701,
+      "chinese_printed_start": 490,
+      "chinese_title": "测度论",
+      "status": "outline-only",
+      "sections": [
+        {
+          "number": "E.1",
+          "title": "Lebesgue measure",
+          "file": "appendices/e-measure-theory/01-lebesgue-measure.tex",
+          "english_printed_start": 684,
+          "english_pdf_start": 701,
+          "status": "outline-only"
+        },
+        {
+          "number": "E.2",
+          "title": "Measurable functions and integration",
+          "file": "appendices/e-measure-theory/02-measurable-functions-and-integration.tex",
+          "english_printed_start": 685,
+          "english_pdf_start": 702,
+          "status": "outline-only"
+        },
+        {
+          "number": "E.3",
+          "title": "Convergence theorems for integrals",
+          "file": "appendices/e-measure-theory/03-convergence-theorems-for-integrals.tex",
+          "english_printed_start": 686,
+          "english_pdf_start": 703,
+          "status": "outline-only"
+        },
+        {
+          "number": "E.4",
+          "title": "Differentiation",
+          "file": "appendices/e-measure-theory/04-differentiation.tex",
+          "english_printed_start": 687,
+          "english_pdf_start": 704,
+          "status": "outline-only"
+        },
+        {
+          "number": "E.5",
+          "title": "Banach space-valued functions",
+          "file": "appendices/e-measure-theory/05-banach-space-valued-functions.tex",
+          "english_printed_start": 687,
+          "english_pdf_start": 704,
+          "status": "outline-only"
+        }
+      ]
+    }
+  ]
+}

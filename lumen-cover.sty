@@ -1,0 +1,92 @@
+%% LPPL 1.3c or later; part of lumenbook. See SOURCES.md.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lumen-cover}[2026/11/09 v1.1 Refined PDE reading companion cover]
+\RequirePackage{tikz}
+\providecommand{\lumen@cover}{editorial}
+\definecolor{LumenCoverBlue}{HTML}{06485C}
+\definecolor{LumenCoverGold}{HTML}{EDBF46}
+\definecolor{LumenCoverMist}{HTML}{91B4BF}
+\definecolor{LumenCoverLight}{HTML}{E0EBED}
+% Theme=mono also applies to the cover's independent palette.
+\ifdefstring{\lumen@theme}{mono}{%
+  \colorlet{LumenCoverBlue}{black!85}%
+  \colorlet{LumenCoverGold}{black!12}%
+  \colorlet{LumenCoverMist}{black!35}%
+  \colorlet{LumenCoverLight}{black!8}%
+}{}
+\newcommand{\lumen@covertitle}{\@title}
+\newcommand{\covertitle}[1]{\gdef\lumen@covertitle{#1}}
+\newcommand{\lumen@coverreference}{}
+\newcommand{\coverreference}[1]{\gdef\lumen@coverreference{#1}}
+\newcommand{\lumen@covermark}{PDE}
+\newcommand{\covermark}[1]{\gdef\lumen@covermark{#1}}
+\newcommand{\lumen@coverequation}{\partial_t u-\Delta u=0}
+% Mathematical content only; an empty argument omits the equation.
+\newcommand{\coverequation}[1]{\gdef\lumen@coverequation{#1}}
+\newcommand{\lumen@pdetitle}{%
+  \begin{titlepage}
+    \thispagestyle{empty}%
+    % Fractions of the physical page keep cover placement independent of
+    % the margin-note block, print binding offset and recto/verso layout.
+    \begin{tikzpicture}[remember picture,overlay]
+      \begin{scope}[shift={(current page.north west)},
+        x=\paperwidth,y=-\paperheight]
+        \clip (0,0) rectangle (1,1);
+        \fill[LumenCoverMist] (0,0) rectangle (1,1);
+        \fill[LumenCoverGold] (0,.207) -- (1,.136) --
+          (1,.790) -- (0,.860) -- cycle;
+        \fill[LumenCoverBlue] (.095,0) rectangle (.795,.737);
+        \node[anchor=north west,inner sep=0pt,align=left,
+          text=LumenCoverLight,text width=.52\paperwidth,
+          font=\sffamily\fontsize{9}{13}\selectfont]
+          at (.155,.058) {\linespread{1}\selectfont
+            \addfontfeatures{LetterSpace=5}\lumen@series};
+        \node[anchor=north east,inner sep=0pt,text=LumenCoverBlue,
+          font=\sffamily\fontsize{17}{19}\selectfont]
+          at (.925,.057) {\lumen@covermark};
+        \draw[LumenCoverBlue,line width=.5pt]
+          (.870,.095) -- (.925,.095);
+        \node[anchor=north west,inner sep=0pt,align=left,
+          text width=.589\paperwidth,text=LumenCoverGold,
+          font=\sffamily\bfseries\fontsize{48}{49}\selectfont]
+          at (.155,.247) {\linespread{1}\selectfont
+            \baselineskip=49pt\relax\lumen@covertitle};
+        \node[anchor=north west,inner sep=0pt,align=left,
+          text width=.55\paperwidth,text=LumenCoverLight,
+          font=\sffamily\fontsize{12}{18}\selectfont]
+          at (.155,.462) {\lumen@subtitle};
+        \draw[LumenCoverLight!40!LumenCoverBlue,line width=.4pt]
+          (.155,.537) -- (.735,.537);
+        \node[anchor=north west,inner sep=0pt,align=left,
+          text width=.55\paperwidth,text=LumenCoverLight,
+          font=\sffamily\fontsize{9.5}{14}\selectfont]
+          at (.155,.563) {\linespread{1}\selectfont\lumen@coverreference};
+        \node[anchor=south west,inner sep=0pt,align=left,
+          text width=.55\paperwidth,text=LumenCoverLight,
+          font=\sffamily\fontsize{13}{18}\selectfont]
+          at (.155,.695) {\@author};
+        \ifdefempty{\lumen@coverequation}{}{%
+          \node[anchor=north west,inner sep=0pt,text=LumenCoverBlue,
+            font=\fontsize{20}{24}\selectfont]
+            at (.155,.783) {$\lumen@coverequation$};}
+        \node[anchor=north west,inner sep=0pt,text=LumenCoverBlue,
+          font=\sffamily\bfseries\fontsize{11}{14}\selectfont]
+          at (.155,.920) {\addfontfeatures{LetterSpace=9}LUMENBOOK};
+        \node[anchor=north west,inner sep=0pt,text=LumenCoverBlue,
+          font=\sffamily\fontsize{8}{11}\selectfont]
+          at (.155,.947) {澄明讲义\enspace /\enspace 数学阅读札记};
+        \node[anchor=north east,inner sep=0pt,align=right,
+          text width=.38\paperwidth,text=LumenCoverBlue,
+          font=\sffamily\fontsize{9}{13}\selectfont]
+          at (.925,.921) {\@date};
+      \end{scope}
+    \end{tikzpicture}%
+    \null\par\vfill
+  \end{titlepage}% Match the class's existing frontmatter numbering.
+  \if@twoside\else\stepcounter{page}\fi}
+\ifdefstring{\lumen@cover}{pde}{%
+  \renewcommand{\maketitle}{\lumen@pdetitle}%
+}{\ifdefstring{\lumen@cover}{editorial}{}{%
+  \PackageError{lumen-cover}{Unknown cover: \lumen@cover}
+    {Choose cover=editorial (default) or cover=pde.}}}
+\endinput

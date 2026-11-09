@@ -1,0 +1,41 @@
+% Compile from the project root: latexmk -xelatex main.tex
+% For a fixed right margin on screen, replace print,bindingoffset=4mm with screen.
+\documentclass[cover=pde,print,bindingoffset=4mm,fonts=tex,fontset=fandol,language=english]{lumenbook}
+\input{book-info}
+\input{config/pde-macros}
+% The original table of contents lists chapters and sections.
+\setcounter{tocdepth}{1}
+
+\begin{document}
+\frontmatter
+\maketitle
+\input{frontmatter/reading-guide}
+\tableofcontents
+\input{frontmatter/preface-second-edition}
+\input{frontmatter/preface-first-edition}
+
+\mainmatter
+\input{chapters/01-introduction/chapter}
+\input{parts/01-representation-formulas}
+\input{parts/02-linear-theory}
+\input{parts/03-nonlinear-theory}
+
+\appendix
+% The original groups A--E under Appendices. Individual appendix chapters
+% here keep A.1, ..., E.5 numbering and provide usable cross-references.
+\part*{Appendices}
+\addcontentsline{toc}{part}{Appendices}
+\input{appendices/a-notation/appendix}
+\input{appendices/b-inequalities/appendix}
+\input{appendices/c-calculus/appendix}
+\input{appendices/d-functional-analysis/appendix}
+\input{appendices/e-measure-theory/appendix}
+
+\backmatter
+\bookmarksetup{startatroot}
+\input{backmatter/bibliography}
+\bookmarksetup{startatroot}
+\input{backmatter/index}
+\bookmarksetup{startatroot}
+\input{backmatter/bilingual-glossary}
+\end{document}

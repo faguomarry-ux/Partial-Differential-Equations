@@ -1,0 +1,20 @@
+% Project-specific interfaces. Keep the supplied lumen*.sty files unchanged.
+\RequirePackage{emptypage}
+% Ordinary notes float to avoid collisions; use optional offsets only after visual QA.
+\NewDocumentCommand{\PDEVocab}{m +m}{%
+  \mn{\marginheading{Language / 词句}\textbf{#1}\par #2}}
+\NewDocumentCommand{\PDEIdea}{+m}{%
+  \mn{\marginheading{Idea / 难点}#1}}
+\NewDocumentCommand{\PDEChinese}{+m}{%
+  \mn{\marginheading{中文提示}#1}}
+\NewDocumentCommand{\PDESource}{m m}{%
+  \readingsource{Evans, \emph{Partial Differential Equations}, second edition}%
+  {English source: #1.\newline Chinese reference: #2}}
+\NewDocumentCommand{\PDEPending}{}{%
+  \par\noindent{\small\color{LumenMuted}%
+    Outline only. Text, annotations, and proof details are pending.}\par}
+\NewDocumentEnvironment{expandedproof}{O{}}{%
+  \begin{proof}[Expanded proof\ifstrempty{#1}{}{ (#1)}]}{\end{proof}}
+% Put long explanations and derivations in the main text, not in a margin box.
+\NewDocumentEnvironment{proofdetails}{O{Proof details / 证明展开}}{%
+  \begin{notebox}{#1}}{\end{notebox}}

@@ -1,0 +1,51 @@
+%% LPPL 1.3c or later; part of lumenbook.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lumen-math}[2026/11/09 v1.0 Mathematics and tinted theorems]
+\RequirePackage{mathtools,amsthm}
+\RequirePackage{etoolbox}
+\newcommand{\lumen@name}[2]{\ifdefstring{\lumen@language}{chinese}{#2}{#1}}
+\newtheoremstyle{lumenplain}{7pt}{7pt}{\itshape}{}%
+  {\sffamily\small\bfseries\color{LumenAccent}}{}{\newline}{}
+\newtheoremstyle{lumendefinition}{7pt}{7pt}{\normalfont}{}%
+  {\sffamily\small\bfseries\color{LumenAccent}}{}{\newline}{}
+\theoremstyle{lumenplain}
+\newtheorem{theorem}{\lumen@name{Theorem}{定理}}[chapter]
+% Keep one real counter so chapter resets and reference sorting agree.
+% lumen-study assigns the semantic type locally via public environment hooks.
+\newcommand{\lumen@newtheorem}[3]{%
+  \newtheorem{#1}[theorem]{\lumen@name{#2}{#3}}}
+\lumen@newtheorem{lemma}{Lemma}{引理}
+\lumen@newtheorem{proposition}{Proposition}{命题}
+\lumen@newtheorem{corollary}{Corollary}{推论}
+\theoremstyle{lumendefinition}
+\lumen@newtheorem{definition}{Definition}{定义}
+\lumen@newtheorem{assumption}{Assumption}{假设}
+\lumen@newtheorem{example}{Example}{例}
+\lumen@newtheorem{exercise}{Exercise}{练习}
+\lumen@newtheorem{remark}{Remark}{注}
+\newtheorem*{remark*}{\lumen@name{Remark}{注}}
+\renewcommand{\proofname}{\lumen@name{Proof}{证明}}
+\numberwithin{equation}{chapter}
+\iflumen@boxes
+  \tcolorboxenvironment{theorem}{lumen panel,colback=LumenWarm!7!white,
+    borderline west={1.4pt}{0pt}{LumenWarm}}
+  \tcolorboxenvironment{lemma}{lumen panel,colback=LumenViolet!6!white,
+    borderline west={1.4pt}{0pt}{LumenViolet}}
+  \tcolorboxenvironment{proposition}{lumen panel}
+  \tcolorboxenvironment{corollary}{lumen panel}
+  \tcolorboxenvironment{definition}{lumen panel}
+  \tcolorboxenvironment{assumption}{lumen panel}
+  \tcolorboxenvironment{example}{lumen panel,colback=LumenBlue!6!white,
+    borderline west={1.4pt}{0pt}{LumenBlue}}
+  \tcolorboxenvironment{exercise}{lumen panel,colback=black!3,
+    borderline west={1.4pt}{0pt}{LumenMuted}}
+\fi
+% Small, broadly useful notation; textbook-specific shortcuts stay in user TeX.
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\N}{\mathbb{N}}
+\providecommand{\dd}{\mathop{}\!\mathrm{d}}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\esssup}{ess\,sup}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\endinput

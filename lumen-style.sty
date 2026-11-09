@@ -1,0 +1,138 @@
+%% LPPL 1.3c or later; part of lumenbook. See SOURCES.md.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lumen-style}[2026/11/09 v1.1 Editorial page and panel design]
+\RequirePackage{xcolor}
+\RequirePackage{etoolbox}
+\providecommand{\lumen@theme}{jade}
+\definecolor{LumenInk}{HTML}{233B3A}
+\definecolor{LumenMuted}{HTML}{526461}
+\definecolor{LumenAccent}{HTML}{17675C}
+\definecolor{LumenWarm}{HTML}{A26B28}
+\definecolor{LumenBlue}{HTML}{356B97}
+\definecolor{LumenViolet}{HTML}{735B91}
+\definecolor{LumenCream}{HTML}{F8F5ED}
+\ifdefstring{\lumen@theme}{jade}{}{%
+  \ifdefstring{\lumen@theme}{indigo}{%
+    \definecolor{LumenAccent}{HTML}{435C91}%
+  }{\ifdefstring{\lumen@theme}{mono}{%
+    \colorlet{LumenAccent}{black!78}\colorlet{LumenWarm}{black!65}
+    \colorlet{LumenBlue}{black!65}\colorlet{LumenViolet}{black!65}
+    \colorlet{LumenInk}{black}\colorlet{LumenMuted}{black!65}%
+    \colorlet{LumenCream}{black!3}%
+  }{\PackageError{lumen-style}{Unknown theme: \lumen@theme}
+      {Choose jade, indigo, or mono.}}}}
+\colorlet{LumenPaper}{LumenAccent!5!white}
+\colorlet{LumenRule}{LumenAccent!22!white}
+\RequirePackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+% A consistent hierarchy: colored spine, quiet wash and a distinct title band.
+\tcbset{lumen panel/.style={enhanced,breakable,arc=0.8mm,outer arc=0.8mm,
+  boxrule=0pt,frame hidden,borderline west={1.8pt}{0pt}{LumenAccent},
+  colback=LumenPaper,coltitle=LumenAccent,colbacktitle=LumenPaper,
+  fonttitle=\sffamily\bfseries\small,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,boxsep=0pt,
+  toptitle=6pt,bottomtitle=3pt,
+  before skip=11pt,after skip=11pt},
+  lumen code/.style={lumen panel,colback=black!3,
+    borderline west={1.8pt}{0pt}{LumenBlue},coltitle=LumenInk,
+    left=9pt,right=9pt,top=7pt,bottom=7pt}}
+\newtcolorbox{readingbox}[2][]{lumen panel,
+  colbacktitle=LumenAccent!9!white,title={#2},#1}
+\newtcolorbox{translationbox}[1][]{lumen panel,
+  colbacktitle=LumenAccent!9!white,
+  title={\lumen@translationname},#1}
+\newtcolorbox{notebox}[2][]{lumen panel,
+  colback=LumenWarm!7!white,coltitle=LumenWarm,
+  colbacktitle=LumenWarm!12!white,
+  borderline west={1.8pt}{0pt}{LumenWarm},title={#2},#1}
+\providecommand{\lumen@translationname}{Reading note / 中文理解}
+
+\RequirePackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\rmfamily\bfseries\color{LumenInk}}
+  {\makebox[\linewidth][l]{%
+    {\sffamily\small\color{LumenAccent}\chaptertitlename}%
+    \hfill{\fontsize{44}{44}\selectfont\color{LumenAccent!35!white}\thechapter}}}
+  {8pt}{\fontsize{27}{31}\selectfont}
+  [\vspace{9pt}{\color{LumenAccent}\titlerule[1pt]}]
+\titlespacing*{\chapter}{0pt}{-9pt}{23pt}
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\rmfamily\bfseries\color{LumenInk}}{}{0pt}
+  {\fontsize{27}{31}\selectfont}
+  [\vspace{9pt}{\color{LumenAccent}\titlerule[1pt]}]
+\titleformat{\section}{\Large\rmfamily\bfseries\color{LumenInk}}
+  {\setlength{\fboxsep}{4pt}\colorbox{LumenAccent}{%
+    \makebox[2.1em][c]{\sffamily\small\bfseries\color{white}\thesection}}}{0.65em}{}
+\titleformat{\subsection}{\normalsize\sffamily\bfseries\color{LumenAccent}}
+  {\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}{\normalsize\sffamily\bfseries\color{LumenAccent}}
+  {\thesubsubsection}{0.7em}{}
+\titlespacing*{\section}{0pt}{18pt plus 3pt}{7pt}
+\titlespacing*{\subsection}{0pt}{12pt plus 2pt}{5pt}
+
+\RequirePackage{titletoc}
+\titlecontents{chapter}[1.8em]{\addvspace{10pt}\bfseries\color{LumenInk}}
+  {\contentslabel{1.8em}}{}{\hfill\textcolor{LumenAccent}{\contentspage}}
+\titlecontents{section}[3.4em]{\addvspace{3pt}\small\color{LumenMuted}}
+  {\contentslabel{2.4em}}{}{\hfill\contentspage}
+\titlecontents{subsection}[5em]{\addvspace{2pt}\footnotesize\color{LumenMuted}}
+  {\contentslabel{3em}}{}{\hfill\contentspage}
+
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter\enspace #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\enspace #1}}
+\newcommand{\lumen@runningfont}{\normalfont\sffamily\fontsize{8}{10}\selectfont\color{LumenMuted}}
+\newcommand{\lumen@folio}{{\setlength{\fboxsep}{4pt}%
+  \colorbox{LumenPaper}{\makebox[1.4em][c]{\sffamily\small\bfseries\color{LumenAccent}\thepage}}}}
+\iflumen@outer
+  \fancyhead[LE]{\lumen@runningfont\nouppercase{\leftmark}}
+  \fancyhead[RO]{\lumen@runningfont\nouppercase{\rightmark}}
+  \fancyfoot[LE,RO]{\lumen@folio}
+\else
+  \fancyhead[L]{\lumen@runningfont\nouppercase{\leftmark}}
+  \fancyfoot[R]{\lumen@folio}
+\fi
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}%
+  \iflumen@outer
+    \fancyfoot[LE,RO]{\lumen@folio}%
+  \else\fancyfoot[R]{\lumen@folio}\fi}
+
+\newcommand{\lumen@subtitle}{}
+\newcommand{\subtitle}[1]{\gdef\lumen@subtitle{#1}}
+\newcommand{\lumen@series}{MATHEMATICS / READING NOTES}
+\newcommand{\notebookseries}[1]{\gdef\lumen@series{#1}}
+\renewcommand{\maketitle}{%
+  \begin{titlepage}
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[LumenCream] (current page.north west) rectangle (current page.south east);
+      \fill[LumenAccent!7!LumenCream]
+        ([xshift=-61mm]current page.north east) rectangle (current page.south east);
+      \fill[LumenAccent] ([xshift=22mm,yshift=-26mm]current page.north west)
+        rectangle ++(15mm,-2mm);
+      \begin{scope}[shift={(current page.south east)},x=1mm,y=1mm]
+        \clip (-61,20) rectangle (-5,175);
+        \foreach \k in {0,...,8}{
+          \draw[LumenAccent!23!white,line width=0.55pt]
+            (-65,{35+\k*11}) .. controls (-35,{100+\k*5}) and
+            (-20,{35+\k*6}) .. (5,{115+\k*7});}
+      \end{scope}
+      \node[anchor=north east,font=\sffamily\bfseries\small,text=LumenAccent]
+        at ([xshift=-15mm,yshift=-27mm]current page.north east) {LUMEN / 01};
+    \end{tikzpicture}\par
+    \color{LumenInk}\vspace*{25mm}
+    {\sffamily\fontsize{8}{11}\selectfont\color{LumenAccent}\lumen@series\par}
+    \vspace{13mm}
+    \noindent\parbox{\linewidth}{\rmfamily\fontsize{34}{38}\selectfont
+      \bfseries\raggedright\@title\par}\par
+    \vspace{9mm}
+    {\large\color{LumenMuted}\lumen@subtitle\par}
+    \vspace{12mm}{\color{LumenRule}\hrule height 0.6pt}
+    \vfill
+    {\large\@author\par}\vspace{5mm}
+    {\sffamily\small\color{LumenMuted}\@date\par}\vspace*{12mm}
+  \end{titlepage}% Standard book resets one-sided titlepage numbering.
+  \if@twoside\else\stepcounter{page}\fi}
+\endinput

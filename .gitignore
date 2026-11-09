@@ -1,0 +1,60 @@
+# Local build and PDF inspection files
+/build/
+/tmp/
+/_minted*/
+/main.pdf
+
+# LaTeX auxiliary files (also when compiling outside build/)
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex
+*.synctex.gz
+*.synctex(busy)
+*.xdv
+*.dvi
+*.bcf
+*.bbl
+*.blg
+*.run.xml
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.lol
+*.loe
+*.loa
+*.nav
+*.snm
+*.vrb
+*.ptc
+*.tdo
+
+# Editor backups and operating-system metadata
+*~
+*.bak
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+Desktop.ini
+/.idea/
+
+# Local scripts' environments and caches
+__pycache__/
+*.py[cod]
+/.venv/
+/venv/
+/node_modules/
+.env
+.env.*
+!.env.example
+
+# Deliberately tracked: both source books at the repository root and
+# the published reading-notes preview under output/pdf/.
+# Do not add a blanket *.pdf or /output/ ignore rule.

@@ -1,0 +1,67 @@
+%% LPPL 1.3c or later; part of lumenbook. No marginnote internals patched.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lumen-margins}[2026/11/09 v1.0 Text and rich margin material]
+\RequirePackage{marginnote}
+\RequirePackage{ragged2e}
+\RequirePackage{caption}
+\RequirePackage{adjustbox}
+\RequirePackage{changepage}
+\captionsetup{font=small,labelfont={bf,color=LumenAccent},
+  labelsep=period,skip=5pt}
+\newcommand{\lumenmarginfont}{\normalfont\footnotesize\color{LumenMuted}%
+  \setlength{\parindent}{0pt}\setlength{\parskip}{4pt}%
+  \RaggedRight}
+\newcommand{\marginheading}[1]{\par\noindent
+  {\color{LumenAccent}\rule{8mm}{0.7pt}}\par\vspace{2pt}
+  {\sffamily\bfseries\footnotesize\color{LumenAccent}#1\par}\vspace{2pt}}
+\renewcommand{\marginfont}{\lumenmarginfont}
+\renewcommand{\raggedrightmarginnote}{\RaggedRight}
+\renewcommand{\raggedleftmarginnote}{\RaggedRight}
+\newcommand{\lumen@notetext}[1]{{\lumenmarginfont #1\par}}
+% Without offset: standard LaTeX marginpar, which separates adjacent notes.
+% Explicit offset: non-floating marginnote, usable beside a boxed paragraph.
+\NewDocumentCommand{\mn}{o +m}{%
+  \IfNoValueTF{#1}{\marginpar{\lumen@notetext{#2}}}%
+    {\marginnote{\lumen@notetext{#2}}[#1]}}
+\newcounter{sidenote}[chapter]
+\renewcommand{\thesidenote}{\thechapter.\arabic{sidenote}}
+\NewDocumentCommand{\sn}{o +m}{%
+  \refstepcounter{sidenote}\textsuperscript{\color{LumenAccent}\thesidenote}%
+  \IfNoValueTF{#1}{\mn{\textsuperscript{\thesidenote}\,#2}}%
+    {\mn[#1]{\textsuperscript{\thesidenote}\,#2}}}
+\NewDocumentCommand{\sidenote}{o +m}{%
+  \IfNoValueTF{#1}{\sn{#2}}{\sn[#1]{#2}}}
+
+% Capture with lrbox, not an argument: verbatim and Chinese code survive.
+% Each environment has a local group, so the box can be reused safely.
+\newsavebox{\lumen@marginbox}
+\newcommand{\lumen@marginbegin}[1]{%
+  \edef\lumen@offset{#1}%
+  \begin{lrbox}{\lumen@marginbox}%
+  \begin{minipage}[t]{\marginparwidth}\vspace{0pt}\lumenmarginfont}
+\newcommand{\lumen@marginend}{%
+  \par\end{minipage}\end{lrbox}%
+  \ifdim\dimexpr\ht\lumen@marginbox+\dp\lumen@marginbox\relax>\textheight
+    \PackageWarning{lumen-margins}{Margin block is taller than the text area}%
+  \fi
+  \ifdefempty{\lumen@offset}{\marginpar{\usebox{\lumen@marginbox}}}%
+    {\marginnote{\usebox{\lumen@marginbox}}[\lumen@offset]}}
+\newenvironment{marginblock}[1][]{\lumen@marginbegin{#1}}{\lumen@marginend}
+\newenvironment{marginfigure}[1][]{\lumen@marginbegin{#1}%
+  \captionsetup{type=figure,font=footnotesize,justification=raggedright,
+    singlelinecheck=false}\centering}{\lumen@marginend}
+\newenvironment{margintable}[1][]{\lumen@marginbegin{#1}%
+  \captionsetup{type=table,font=footnotesize,justification=raggedright,
+    singlelinecheck=false}\centering}{\lumen@marginend}
+% Shrink only when needed; leave small tables at their natural size.
+\newenvironment{smalltable}{\begin{adjustbox}{max width=\linewidth}}
+  {\end{adjustbox}}
+
+% A full page width, with page breaks at both ends; parity never changes
+% halfway through the wide block. No margin material inside this environment.
+\newenvironment{widepage}{\clearpage
+  \newgeometry{left=22mm,right=22mm,top=24mm,bottom=24mm,
+    marginparwidth=0pt,marginparsep=0pt,
+    bindingoffset=\lumen@bindingoffset}}
+  {\clearpage\restoregeometry}
+\endinput

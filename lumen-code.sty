@@ -1,0 +1,78 @@
+%% LPPL 1.3c or later; part of lumenbook.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lumen-code}[2026/11/09 v1.1 Numbered Unicode code with language labels]
+\RequirePackage{fvextra,pgfkeys}
+\pgfkeys{/lumen/code/.is family,/lumen/code,
+  language/.store in=\lumen@codelanguage,
+  title/.store in=\lumen@codetitle,
+  numbers/.store in=\lumen@codenumbers,
+  firstnumber/.store in=\lumen@codefirst,
+  offset/.store in=\lumen@codeoffset}
+\newcommand{\lumen@codeinit}[2]{%
+  \pgfkeys{/lumen/code,language={#1},title={},numbers=left,firstnumber=1,offset={},#2}}
+\newcommand{\lumen@codeheading}{%
+  \lumen@codelanguage
+  \ifdefempty{\lumen@codetitle}{}{\enspace/\enspace\lumen@codetitle}}
+\tcbset{lumen listing/.style={lumen code,
+  title={\lumen@codeheading},colback=black!2,
+  colbacktitle=LumenBlue!10!white,coltitle=LumenBlue,
+  fonttitle=\sffamily\bfseries\scriptsize,
+  toptitle=5pt,bottomtitle=4pt}}
+\renewcommand{\theFancyVerbLine}{\sffamily\tiny\color{LumenMuted!75!white}\arabic{FancyVerbLine}}
+% Make the newline visible during optional-argument look-ahead. Otherwise
+% LaTeX skips it and tokenizes the first source line before verbatim starts.
+\newcommand{\lumen@readcode}[1]{\begingroup\catcode`\^^M=\active
+  \@ifnextchar[{\endgroup #1}{\endgroup #1[]}}
+\newenvironment{codeblock}{\VerbatimEnvironment\lumen@readcode\lumen@codebegin}
+  {\end{Verbatim}\end{tcolorbox}}
+\def\lumen@codebegin[#1]{%
+  \lumen@codeinit{Text}{#1}%
+  \begin{tcolorbox}[lumen listing]
+  \begin{Verbatim}[fontsize=\small,breaklines=true,breakanywhere=true,
+    numbers=\lumen@codenumbers,firstnumber=\lumen@codefirst,
+    numbersep=7pt,xleftmargin=16pt,numberblanklines=true,
+    tabsize=4,showspaces=false,showtabs=false]}
+\newenvironment{margincode}{\VerbatimEnvironment\lumen@readcode\lumen@margincodebegin}
+  {\end{Verbatim}\end{tcolorbox}\end{marginblock}}
+\def\lumen@margincodebegin[#1]{%
+  \lumen@codeinit{Text}{#1}%
+  \begin{marginblock}[\lumen@codeoffset]
+  \begin{tcolorbox}[lumen listing,breakable=false,left=5pt,right=5pt,
+    top=5pt,bottom=5pt,before skip=0pt,after skip=0pt]
+  \begin{Verbatim}[fontsize=\scriptsize,breaklines=true,
+    breakanywhere=true,tabsize=4,numbers=\lumen@codenumbers,
+    firstnumber=\lumen@codefirst,numbersep=5pt,xleftmargin=11pt,
+    numberblanklines=true]}
+\newcommand{\lumen@filelanguage}[1]{%
+  \filename@parse{#1}\def\lumen@autolanguage{Text}%
+  \ifdefstring{\filename@ext}{py}{\def\lumen@autolanguage{Python}}{}%
+  \ifdefstring{\filename@ext}{tex}{\def\lumen@autolanguage{LaTeX}}{}%
+  \ifdefstring{\filename@ext}{sty}{\def\lumen@autolanguage{LaTeX}}{}%
+  \ifdefstring{\filename@ext}{cls}{\def\lumen@autolanguage{LaTeX}}{}%
+  \ifdefstring{\filename@ext}{js}{\def\lumen@autolanguage{JavaScript}}{}%
+  \ifdefstring{\filename@ext}{ts}{\def\lumen@autolanguage{TypeScript}}{}%
+  \ifdefstring{\filename@ext}{c}{\def\lumen@autolanguage{C}}{}%
+  \ifdefstring{\filename@ext}{cpp}{\def\lumen@autolanguage{C++}}{}%
+  \ifdefstring{\filename@ext}{sh}{\def\lumen@autolanguage{Shell}}{}%
+  \ifdefstring{\filename@ext}{ps1}{\def\lumen@autolanguage{PowerShell}}{}%
+  \ifdefstring{\filename@ext}{json}{\def\lumen@autolanguage{JSON}}{}%
+  \ifdefstring{\filename@ext}{yaml}{\def\lumen@autolanguage{YAML}}{}%
+  \ifdefstring{\filename@ext}{yml}{\def\lumen@autolanguage{YAML}}{}%
+  \ifdefstring{\filename@ext}{m}{\def\lumen@autolanguage{MATLAB}}{}%
+}
+\NewDocumentCommand{\inputcode}{O{} m}{\begingroup
+  \lumen@filelanguage{#2}\lumen@codeinit{\lumen@autolanguage}{#1}%
+  \begin{tcolorbox}[lumen listing]
+    \VerbatimInput[fontsize=\small,breaklines=true,breakanywhere=true,
+      numbers=\lumen@codenumbers,firstnumber=\lumen@codefirst,
+      numbersep=7pt,xleftmargin=16pt,numberblanklines=true]{#2}
+  \end{tcolorbox}\endgroup}
+\NewDocumentCommand{\margininputcode}{O{} O{} m}{\begingroup
+  \lumen@filelanguage{#3}\lumen@codeinit{\lumen@autolanguage}{offset={#1},#2}%
+  \begin{marginblock}[\lumen@codeoffset]
+  \begin{tcolorbox}[lumen listing,breakable=false,left=5pt,right=5pt]
+    \VerbatimInput[fontsize=\scriptsize,breaklines=true,breakanywhere=true,
+      numbers=\lumen@codenumbers,firstnumber=\lumen@codefirst,
+      numbersep=5pt,xleftmargin=11pt,numberblanklines=true]{#3}
+  \end{tcolorbox}\end{marginblock}\endgroup}
+\endinput

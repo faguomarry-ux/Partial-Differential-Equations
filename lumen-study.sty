@@ -1,0 +1,132 @@
+%% LPPL 1.3c or later; part of lumenbook.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lumen-study}[2026/11/09 v1.3 References and study workflow]
+\RequirePackage[nameinlink,noabbrev,sort&compress]{cleveref}
+% cleveref 0.21.4 predates the kernel's 2026 native counter aliases. Resolve
+% only the reset-parent lookup through the real counter; keep the semantic
+% label type unchanged. Without this bridge, cross-chapter lists sort by
+% their local numbers and can compress unrelated references together.
+\ifdefined\@kernel@get@ctr@root
+  \@ifpackagelater{cleveref}{2026/06/01}{}{%
+    \let\lumen@crefresetby\cref@resetby
+    \def\cref@resetby#1#2{%
+      \edef\lumen@resetroot{\@kernel@get@ctr@root{#1}}%
+      \expandafter\lumen@crefresetby\expandafter{\lumen@resetroot}{#2}}}
+\fi
+\newcommand{\lumen@refnames}[5]{%
+  \ifdefstring{\lumen@language}{chinese}{%
+    \crefname{#1}{#4}{#4}\Crefname{#1}{#4}{#4}}{%
+    \crefname{#1}{#2}{#3}\Crefname{#1}{#5}{\MakeUppercase #3}}}
+\lumen@refnames{theorem}{theorem}{theorems}{定理}{Theorem}
+\lumen@refnames{definition}{definition}{definitions}{定义}{Definition}
+\lumen@refnames{lemma}{lemma}{lemmas}{引理}{Lemma}
+\lumen@refnames{proposition}{proposition}{propositions}{命题}{Proposition}
+\lumen@refnames{corollary}{corollary}{corollaries}{推论}{Corollary}
+\lumen@refnames{assumption}{assumption}{assumptions}{假设}{Assumption}
+\lumen@refnames{example}{example}{examples}{例}{Example}
+\lumen@refnames{exercise}{exercise}{exercises}{练习}{Exercise}
+\lumen@refnames{remark}{remark}{remarks}{注}{Remark}
+\lumen@refnames{sidenote}{sidenote}{sidenotes}{边注}{Sidenote}
+\lumen@refnames{equation}{equation}{equations}{公式}{Equation}
+\lumen@refnames{figure}{figure}{figures}{图}{Figure}
+\lumen@refnames{table}{table}{tables}{表}{Table}
+\lumen@refnames{chapter}{chapter}{chapters}{章}{Chapter}
+\lumen@refnames{section}{section}{sections}{节}{Section}
+\lumen@refnames{subsection}{section}{sections}{小节}{Section}
+\@for\lumen@reftype:=theorem,lemma,proposition,corollary,definition,assumption,example,exercise,remark\do{%
+  \edef\lumen@refhook{\noexpand\AddToHook{env/\lumen@reftype/begin}{%
+    \noexpand\crefalias{theorem}{\lumen@reftype}}}%
+  \lumen@refhook}
+\AtBeginDocument{\ifdefstring{\lumen@language}{chinese}{%
+  \renewcommand{\crefpairconjunction}{与}%
+  \renewcommand{\crefmiddleconjunction}{、}%
+  \renewcommand{\creflastconjunction}{与}%
+  \renewcommand{\crefrangeconjunction}{至}}{}}
+
+\NewDocumentEnvironment{learningobjectives}{O{\lumen@name{Learning objectives}{学习目标}}}{%
+  \begin{tcolorbox}[lumen panel,title={#1},colback=LumenMarkBlue,
+    colbacktitle=LumenMarkBlue,coltitle=LumenBlue,
+    borderline west={1.8pt}{0pt}{LumenBlue}]
+  \begin{itemize}[label={\textcolor{LumenBlue}{$\triangleright$}},itemsep=3pt]}
+  {\end{itemize}\end{tcolorbox}}
+\NewDocumentEnvironment{chaptersummary}{O{\lumen@name{Key takeaways}{本章小结}}}{%
+  \begin{tcolorbox}[lumen panel,title={#1},colback=LumenMarkGreen,
+    colbacktitle=LumenMarkGreen]
+  \begin{itemize}[itemsep=3pt]}
+  {\end{itemize}\end{tcolorbox}}
+\NewDocumentEnvironment{pitfall}{O{\lumen@name{Common pitfall}{易错点}}}{%
+  \begin{tcolorbox}[lumen panel,title={#1},colback=LumenMarkRose,
+    colbacktitle=LumenMarkRose,coltitle=LumenInk]}
+  {\end{tcolorbox}}
+\NewDocumentCommand{\readingsource}{m m}{%
+  \begin{tcolorbox}[lumen panel,colback=black!3,
+    borderline west={1pt}{0pt}{LumenMuted!50!white},
+    top=5pt,bottom=5pt,before skip=7pt,after skip=7pt]
+  {\sffamily\small\color{LumenMuted}\lumen@name{Reading source}{阅读来源}\par}
+  \textbf{#1}\par{\small\color{LumenMuted}#2}
+  \end{tcolorbox}}
+\NewDocumentCommand{\term}{m m}{\textbf{#1}\,\textcolor{LumenAccent}{（#2）}}
+
+% Solution bodies are never captured as macro arguments: codeblock remains
+% usable, and the hidden edition skips all TeX execution inside the body.
+\NewDocumentEnvironment{solution}{O{}}{%
+  \begin{tcolorbox}[lumen panel,colback=LumenMarkGreen,
+    colbacktitle=LumenMarkGreen,
+    title={\lumen@name{Solution}{解答}%
+      \ifstrempty{#1}{}{\enspace/\enspace\cref{#1}}}]}
+  {\end{tcolorbox}}
+\NewDocumentEnvironment{hint}{O{}}{%
+  \begin{tcolorbox}[lumen panel,colback=LumenMarkYellow,
+    colbacktitle=LumenMarkYellow,coltitle=LumenWarm,
+    borderline west={1.5pt}{0pt}{LumenWarm},
+    title={\lumen@name{Hint}{提示}%
+      \ifstrempty{#1}{}{\enspace/\enspace\cref{#1}}}]}
+  {\end{tcolorbox}}
+\iflumen@solutions\else
+  \RequirePackage{comment}\excludecomment{solution}
+\fi
+\iflumen@hints\else
+  \RequirePackage{comment}\excludecomment{hint}
+\fi
+
+\newcommand{\lumen@checksymbol}[1]{%
+  \begin{tikzpicture}[x=1em,y=1em,baseline=-.2em]
+    \draw[LumenMuted!65!white,line width=.45pt,rounded corners=.5pt]
+      (0,0) rectangle (.72,.72);
+    \ifstrequal{#1}{done}{%
+      \fill[LumenAccent,rounded corners=.5pt] (0,0) rectangle (.72,.72);
+      \draw[white,line width=.8pt] (.14,.36)--(.3,.2)--(.59,.54);}{%
+      \ifstrequal{#1}{question}{%
+        \node[inner sep=0pt,text=LumenWarm,font=\bfseries\scriptsize] at (.36,.36) {?};}{%
+        \ifstrequal{#1}{open}{}{\PackageError{lumen-study}{Unknown checklist status: #1}
+          {Use open, done, or question.}}}}
+  \end{tikzpicture}}
+\NewDocumentEnvironment{reviewchecklist}{O{\lumen@name{Review checklist}{复习清单}}}{%
+  \begin{tcolorbox}[lumen panel,colback=black!2,colbacktitle=black!3,title={#1}]
+  \begin{itemize}[leftmargin=1.6em,label={\lumen@checksymbol{open}},itemsep=4pt]}
+  {\end{itemize}\end{tcolorbox}}
+\NewDocumentCommand{\checkitem}{O{open} m}{\item[\lumen@checksymbol{#1}]#2}
+
+% Progress is explicitly supplied by the author; it is not inferred from
+% chapter counters or represented as an automatic measure of understanding.
+\NewDocumentCommand{\readingprogress}{m m}{\begingroup
+  \ifnum#2<1\relax
+    \PackageError{lumen-study}{Progress total must be positive}{Use integers 0 <= completed <= total.}%
+  \else\ifnum#1<0\relax
+    \PackageError{lumen-study}{Progress cannot be negative}{Use integers 0 <= completed <= total.}%
+  \else\ifnum#1>#2\relax
+    \PackageError{lumen-study}{Progress exceeds total}{Use integers 0 <= completed <= total.}%
+  \else
+    \par\noindent{\sffamily\footnotesize\color{LumenMuted}%
+      \lumen@name{Reading progress}{阅读进度}\hfill #1/#2\par}\nobreak\vspace{3pt}
+    \pgfmathsetlengthmacro{\lumen@filled}{(#1/#2)*\linewidth}%
+    \noindent\begin{tikzpicture}
+      \fill[LumenAccent!12!white,rounded corners=1.5pt]
+        (0,0) rectangle (\linewidth,3pt);
+      \ifnum#1>0\relax
+        \fill[LumenAccent,rounded corners=1.5pt] (0,0) rectangle (\lumen@filled,3pt);
+      \fi
+    \end{tikzpicture}\par
+  \fi\fi\fi\endgroup}
+\NewDocumentCommand{\marginprogress}{m m}{\mn{\readingprogress{#1}{#2}}}
+\endinput

@@ -5,7 +5,7 @@
   "english_pages": 730,
   "chinese_pages": 524,
   "page_convention": "All PDF pages are 1-based physical pages. Printed pages are separate.",
-  "evidence": "English PDF bookmarks checked against printed Contents (PDF 8-11). Chinese chapter starts read from scanned Contents (PDF 13-18). Chinese section correspondence remains pending.",
+  "evidence": "English PDF bookmarks checked against printed Contents (PDF 8-11). Chinese chapter starts read from scanned Contents (PDF 13-18). Chinese section correspondence remains pending outside the completed chapter logs. Chapter 1 English text/formulas checked against PDF 18-30; Chinese section starts and terminology checked against scanned PDF 19-27 on 2026-11-09. Chapter 5: English PDF 256-309 consulted; Chinese PDF 187-188 visually checked, section starts from chapter-opening list; full Chinese proof comparison remains pending (2026-11-09). Chapter 2: English PDF 34-104 consulted; Chinese PDF 31, 36-37, 53-55 visually checked; section starts from chapter-opening list (2026-11-09). Chapter 3: English PDF 106-175 consulted; Chinese PDF 79, 88-90, 99-101, 110-112 visually checked, section starts from the chapter-opening list; full Chinese line-by-line comparison remains pending (2026-11-09). Chapter 4: English PDF 176-253 consulted; Chinese PDF 129, 154-155, 168-171, 176-179 visually checked; section starts from chapter opening. Full line-by-line Chinese comparison remains pending (2026-11-09). Chapter 6: English PDF 310-365 consulted; Chinese PDF 226,237,239,242,245,249,251,252,258,260 visually checked, with section starts from chapter opening. No full Chinese line-by-line review (2026-11-10).",
   "english_printed_to_pdf_offset": 17,
   "units": [
     {
@@ -17,7 +17,7 @@
       "english_pdf_start": 18,
       "chinese_printed_start": 1,
       "chinese_title": "引言",
-      "status": "outline-only",
+      "status": "annotated-draft",
       "sections": [
         {
           "number": "1.1",
@@ -25,7 +25,13 @@
           "file": "chapters/01-introduction/01-partial-differential-equations.tex",
           "english_printed_start": 1,
           "english_pdf_start": 18,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 1,
+          "chinese_pdf_start": 19,
+          "chinese_printed_end": 2,
+          "chinese_pdf_end": 20,
+          "english_printed_end": 2,
+          "english_pdf_end": 19
         },
         {
           "number": "1.2",
@@ -33,7 +39,13 @@
           "file": "chapters/01-introduction/02-examples.tex",
           "english_printed_start": 3,
           "english_pdf_start": 20,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 2,
+          "chinese_pdf_start": 20,
+          "chinese_printed_end": 5,
+          "chinese_pdf_end": 23,
+          "english_printed_end": 6,
+          "english_pdf_end": 23
         },
         {
           "number": "1.3",
@@ -41,7 +53,13 @@
           "file": "chapters/01-introduction/03-strategies-for-studying-pde.tex",
           "english_printed_start": 6,
           "english_pdf_start": 23,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 5,
+          "chinese_pdf_start": 23,
+          "chinese_printed_end": 7,
+          "chinese_pdf_end": 25,
+          "english_printed_end": 8,
+          "english_pdf_end": 25
         },
         {
           "number": "1.4",
@@ -49,7 +67,13 @@
           "file": "chapters/01-introduction/04-overview.tex",
           "english_printed_start": 8,
           "english_pdf_start": 25,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 7,
+          "chinese_pdf_start": 25,
+          "chinese_printed_end": 8,
+          "chinese_pdf_end": 26,
+          "english_printed_end": 11,
+          "english_pdf_end": 28
         },
         {
           "number": "1.5",
@@ -57,7 +81,13 @@
           "file": "chapters/01-introduction/05-problems.tex",
           "english_printed_start": 11,
           "english_pdf_start": 28,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 8,
+          "chinese_pdf_start": 26,
+          "chinese_printed_end": 9,
+          "chinese_pdf_end": 27,
+          "english_printed_end": 12,
+          "english_pdf_end": 29
         },
         {
           "number": "1.6",
@@ -65,8 +95,53 @@
           "file": "chapters/01-introduction/06-references.tex",
           "english_printed_start": 12,
           "english_pdf_start": 29,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 9,
+          "chinese_pdf_start": 27,
+          "chinese_printed_end": 9,
+          "chinese_pdf_end": 27,
+          "english_printed_end": 13,
+          "english_pdf_end": 30
         }
+      ],
+      "chinese_pdf_start": 19,
+      "english_printed_end": 13,
+      "english_pdf_end": 30,
+      "chinese_printed_end": 9,
+      "chinese_pdf_end": 27,
+      "independent_math_review": "not-performed",
+      "native_tikz_diagram_count": 5,
+      "tikz_diagrams": [
+        {
+          "id": "T1.1",
+          "file": "figures/tikz/ch01-linearity.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T1.2",
+          "file": "figures/tikz/ch01-models.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T1.3",
+          "file": "figures/tikz/ch01-heat-stability.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T1.4",
+          "file": "figures/tikz/ch01-burgers-focus.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T1.M",
+          "file": "figures/tikz/ch01-data-map-margin.tex",
+          "placement": "margin"
+        }
+      ],
+      "current_standalone_pages": 22,
+      "current_book_physical_range": [
+        13,
+        34
       ]
     },
     {
@@ -78,7 +153,7 @@
       "english_pdf_start": 34,
       "chinese_printed_start": 13,
       "chinese_title": "四个重要的线性偏微分方程",
-      "status": "outline-only",
+      "status": "editorial-study-draft",
       "sections": [
         {
           "number": "2.1",
@@ -86,7 +161,9 @@
           "file": "chapters/02-four-important-linear-partial-differential-equations/01-transport-equation.tex",
           "english_printed_start": 17,
           "english_pdf_start": 34,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 13,
+          "chinese_pdf_start": 31
         },
         {
           "number": "2.2",
@@ -94,7 +171,9 @@
           "file": "chapters/02-four-important-linear-partial-differential-equations/02-laplaces-equation.tex",
           "english_printed_start": 19,
           "english_pdf_start": 36,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 14,
+          "chinese_pdf_start": 32
         },
         {
           "number": "2.3",
@@ -102,7 +181,9 @@
           "file": "chapters/02-four-important-linear-partial-differential-equations/03-heat-equation.tex",
           "english_printed_start": 42,
           "english_pdf_start": 59,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 30,
+          "chinese_pdf_start": 48
         },
         {
           "number": "2.4",
@@ -110,7 +191,9 @@
           "file": "chapters/02-four-important-linear-partial-differential-equations/04-wave-equation.tex",
           "english_printed_start": 63,
           "english_pdf_start": 80,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 43,
+          "chinese_pdf_start": 61
         },
         {
           "number": "2.5",
@@ -118,7 +201,9 @@
           "file": "chapters/02-four-important-linear-partial-differential-equations/05-problems.tex",
           "english_printed_start": 81,
           "english_pdf_start": 98,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 56,
+          "chinese_pdf_start": 74
         },
         {
           "number": "2.6",
@@ -126,8 +211,56 @@
           "file": "chapters/02-four-important-linear-partial-differential-equations/06-references.tex",
           "english_printed_start": 86,
           "english_pdf_start": 103,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 60,
+          "chinese_pdf_start": 78
         }
+      ],
+      "english_printed_end": 87,
+      "english_pdf_end": 104,
+      "chinese_pdf_start": 31,
+      "annotation_count": 33,
+      "expanded_proof_count": 13,
+      "source_problem_solutions": 24,
+      "independent_math_review": false,
+      "chinese_evidence": "Chapter opening PDF 31; harmonic means PDF 36-37; heat-ball means PDF 53-55 visually checked. Full chapter not compared line by line.",
+      "source_comparison": "English PDF 34-104 consulted; exposition reconstructed rather than transcribed.",
+      "supplements": [
+        "02a-laplace-mean-value.tex",
+        "03a-heatball-mean-value.tex"
+      ],
+      "native_tikz_diagram_count": 5,
+      "tikz_diagrams": [
+        {
+          "id": "T2.1",
+          "file": "figures/tikz/ch02-transport-foot.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T2.2",
+          "file": "figures/tikz/ch02-image-source.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T2.3",
+          "file": "figures/tikz/ch02-heatball-weight.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T2.4",
+          "file": "figures/tikz/ch02-wave-cone.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T2.M",
+          "file": "figures/tikz/ch02-shell-margin.tex",
+          "placement": "margin"
+        }
+      ],
+      "current_standalone_pages": 32,
+      "current_book_physical_range": [
+        36,
+        67
       ]
     },
     {
@@ -139,7 +272,7 @@
       "english_pdf_start": 106,
       "chinese_printed_start": 61,
       "chinese_title": "非线性一阶偏微分方程",
-      "status": "outline-only",
+      "status": "editorial-study-draft",
       "sections": [
         {
           "number": "3.1",
@@ -147,7 +280,11 @@
           "file": "chapters/03-nonlinear-first-order-pde/01-complete-integrals-envelopes.tex",
           "english_printed_start": 90,
           "english_pdf_start": 107,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 61,
+          "chinese_pdf_start": 79,
+          "english_printed_end": 94,
+          "english_pdf_end": 111
         },
         {
           "number": "3.2",
@@ -155,7 +292,11 @@
           "file": "chapters/03-nonlinear-first-order-pde/02-characteristics.tex",
           "english_printed_start": 94,
           "english_pdf_start": 111,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 64,
+          "chinese_pdf_start": 82,
+          "english_printed_end": 110,
+          "english_pdf_end": 127
         },
         {
           "number": "3.3",
@@ -163,7 +304,11 @@
           "file": "chapters/03-nonlinear-first-order-pde/03-introduction-to-hamilton-jacobi-equations.tex",
           "english_printed_start": 110,
           "english_pdf_start": 127,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 76,
+          "chinese_pdf_start": 94,
+          "english_printed_end": 130,
+          "english_pdf_end": 147
         },
         {
           "number": "3.4",
@@ -171,7 +316,11 @@
           "file": "chapters/03-nonlinear-first-order-pde/04-introduction-to-conservation-laws.tex",
           "english_printed_start": 130,
           "english_pdf_start": 147,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 90,
+          "chinese_pdf_start": 108,
+          "english_printed_end": 154,
+          "english_pdf_end": 171
         },
         {
           "number": "3.5",
@@ -179,7 +328,11 @@
           "file": "chapters/03-nonlinear-first-order-pde/05-problems.tex",
           "english_printed_start": 154,
           "english_pdf_start": 171,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 107,
+          "chinese_pdf_start": 125,
+          "english_printed_end": 158,
+          "english_pdf_end": 175
         },
         {
           "number": "3.6",
@@ -187,8 +340,60 @@
           "file": "chapters/03-nonlinear-first-order-pde/06-references.tex",
           "english_printed_start": 158,
           "english_pdf_start": 175,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 110,
+          "chinese_pdf_start": 128,
+          "english_printed_end": 158,
+          "english_pdf_end": 175
         }
+      ],
+      "chinese_pdf_start": 79,
+      "editorial_details": "Six sections, 36 Chinese mathematical notes, 15 expanded-proof environments, all 20 source exercises solved, three editorial figures. Author-side checks only; no independent mathematical review.",
+      "english_printed_end": 158,
+      "english_pdf_end": 175,
+      "annotation_count": 36,
+      "expanded_proof_count": 15,
+      "source_problem_solutions": 20,
+      "independent_math_review": false,
+      "chinese_evidence": "Chapter opening PDF 79; local characteristics PDF 88-90, convex duality / Hopf-Lax PDF 99-101, shocks / entropy PDF 110-112 visually checked. Full chapter not compared line by line.",
+      "source_comparison": "English PDF 106-175 consulted; exposition reconstructed rather than transcribed.",
+      "supplements": [
+        "03a-semiconcavity-uniqueness.tex",
+        "04a-entropy-uniqueness.tex",
+        "04b-long-time-behavior.tex"
+      ],
+      "native_tikz_diagram_count": 5,
+      "tikz_diagrams": [
+        {
+          "id": "T3.1",
+          "file": "figures/tikz/ch03-transverse.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T3.2",
+          "file": "figures/tikz/ch03-legendre-support.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T3.3",
+          "file": "figures/tikz/ch03-hopflax-tie.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T3.4",
+          "file": "figures/tikz/ch03-flux-chord.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T3.M",
+          "file": "figures/tikz/ch03-path-split-margin.tex",
+          "placement": "margin"
+        }
+      ],
+      "current_standalone_pages": 32,
+      "current_book_physical_range": [
+        68,
+        99
       ]
     },
     {
@@ -200,7 +405,7 @@
       "english_pdf_start": 176,
       "chinese_printed_start": 111,
       "chinese_title": "解的其他表示方法",
-      "status": "outline-only",
+      "status": "editorial-study-draft",
       "sections": [
         {
           "number": "4.1",
@@ -208,7 +413,9 @@
           "file": "chapters/04-other-ways-to-represent-solutions/01-separation-of-variables.tex",
           "english_printed_start": 159,
           "english_pdf_start": 176,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 111,
+          "chinese_pdf_start": 129
         },
         {
           "number": "4.2",
@@ -216,7 +423,9 @@
           "file": "chapters/04-other-ways-to-represent-solutions/02-similarity-solutions.tex",
           "english_printed_start": 167,
           "english_pdf_start": 184,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 116,
+          "chinese_pdf_start": 134
         },
         {
           "number": "4.3",
@@ -224,7 +433,9 @@
           "file": "chapters/04-other-ways-to-represent-solutions/03-transform-methods.tex",
           "english_printed_start": 177,
           "english_pdf_start": 194,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 124,
+          "chinese_pdf_start": 142
         },
         {
           "number": "4.4",
@@ -232,7 +443,9 @@
           "file": "chapters/04-other-ways-to-represent-solutions/04-converting-nonlinear-into-linear-pde.tex",
           "english_printed_start": 195,
           "english_pdf_start": 212,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 136,
+          "chinese_pdf_start": 154
         },
         {
           "number": "4.5",
@@ -240,7 +453,9 @@
           "file": "chapters/04-other-ways-to-represent-solutions/05-asymptotics.tex",
           "english_printed_start": 200,
           "english_pdf_start": 217,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 140,
+          "chinese_pdf_start": 158
         },
         {
           "number": "4.6",
@@ -248,7 +463,9 @@
           "file": "chapters/04-other-ways-to-represent-solutions/06-power-series.tex",
           "english_printed_start": 220,
           "english_pdf_start": 237,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 154,
+          "chinese_pdf_start": 172
         },
         {
           "number": "4.7",
@@ -256,7 +473,9 @@
           "file": "chapters/04-other-ways-to-represent-solutions/07-problems.tex",
           "english_printed_start": 231,
           "english_pdf_start": 248,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 162,
+          "chinese_pdf_start": 180
         },
         {
           "number": "4.8",
@@ -264,8 +483,57 @@
           "file": "chapters/04-other-ways-to-represent-solutions/08-references.tex",
           "english_printed_start": 236,
           "english_pdf_start": 253,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 165,
+          "chinese_pdf_start": 183
         }
+      ],
+      "english_printed_end": 236,
+      "english_pdf_end": 253,
+      "chinese_pdf_start": 129,
+      "annotation_count": 38,
+      "expanded_proof_count": 21,
+      "source_problem_solutions": 19,
+      "independent_math_review": false,
+      "chinese_evidence": "Chapter opening PDF 129; Cole-Hopf / Burgers PDF 154-155; stationary phase / homogenization PDF 168-171; CK PDF 176-179 visually checked. Full chapter not compared line by line.",
+      "source_comparison": "English PDF 176-253 consulted; exposition reconstructed rather than transcribed.",
+      "supplements": [
+        "03a-radon-laplace.tex",
+        "05a-stationary-phase.tex",
+        "05b-homogenization.tex"
+      ],
+      "native_tikz_diagram_count": 5,
+      "tikz_diagrams": [
+        {
+          "id": "T4.1",
+          "file": "figures/tikz/ch04-product-mode.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T4.2",
+          "file": "figures/tikz/ch04-fourier-square.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T4.3",
+          "file": "figures/tikz/ch04-radon-lines.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T4.4",
+          "file": "figures/tikz/ch04-stationary-window.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T4.M",
+          "file": "figures/tikz/ch04-cell-margin.tex",
+          "placement": "margin"
+        }
+      ],
+      "current_standalone_pages": 39,
+      "current_book_physical_range": [
+        100,
+        138
       ]
     },
     {
@@ -277,7 +545,7 @@
       "english_pdf_start": 256,
       "chinese_printed_start": 169,
       "chinese_title": "Sobolev 空间",
-      "status": "outline-only",
+      "status": "editorial-study-draft",
       "sections": [
         {
           "number": "5.1",
@@ -285,7 +553,9 @@
           "file": "chapters/05-sobolev-spaces/01-holder-spaces.tex",
           "english_printed_start": 240,
           "english_pdf_start": 257,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 169,
+          "chinese_pdf_start": 187
         },
         {
           "number": "5.2",
@@ -293,7 +563,9 @@
           "file": "chapters/05-sobolev-spaces/02-sobolev-spaces.tex",
           "english_printed_start": 241,
           "english_pdf_start": 258,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 170,
+          "chinese_pdf_start": 188
         },
         {
           "number": "5.3",
@@ -301,7 +573,9 @@
           "file": "chapters/05-sobolev-spaces/03-approximation.tex",
           "english_printed_start": 249,
           "english_pdf_start": 266,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 176,
+          "chinese_pdf_start": 194
         },
         {
           "number": "5.4",
@@ -309,7 +583,9 @@
           "file": "chapters/05-sobolev-spaces/04-extensions.tex",
           "english_printed_start": 253,
           "english_pdf_start": 270,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 178,
+          "chinese_pdf_start": 196
         },
         {
           "number": "5.5",
@@ -317,7 +593,9 @@
           "file": "chapters/05-sobolev-spaces/05-traces.tex",
           "english_printed_start": 256,
           "english_pdf_start": 273,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 181,
+          "chinese_pdf_start": 199
         },
         {
           "number": "5.6",
@@ -325,7 +603,9 @@
           "file": "chapters/05-sobolev-spaces/06-sobolev-inequalities.tex",
           "english_printed_start": 260,
           "english_pdf_start": 277,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 184,
+          "chinese_pdf_start": 202
         },
         {
           "number": "5.7",
@@ -333,7 +613,9 @@
           "file": "chapters/05-sobolev-spaces/07-compactness.tex",
           "english_printed_start": 270,
           "english_pdf_start": 287,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 191,
+          "chinese_pdf_start": 209
         },
         {
           "number": "5.8",
@@ -341,7 +623,9 @@
           "file": "chapters/05-sobolev-spaces/08-additional-topics.tex",
           "english_printed_start": 273,
           "english_pdf_start": 290,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 193,
+          "chinese_pdf_start": 211
         },
         {
           "number": "5.9",
@@ -349,7 +633,9 @@
           "file": "chapters/05-sobolev-spaces/09-other-spaces-of-functions.tex",
           "english_printed_start": 282,
           "english_pdf_start": 299,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 200,
+          "chinese_pdf_start": 218
         },
         {
           "number": "5.10",
@@ -357,7 +643,9 @@
           "file": "chapters/05-sobolev-spaces/10-problems.tex",
           "english_printed_start": 289,
           "english_pdf_start": 306,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 205,
+          "chinese_pdf_start": 223
         },
         {
           "number": "5.11",
@@ -365,8 +653,54 @@
           "file": "chapters/05-sobolev-spaces/11-references.tex",
           "english_printed_start": 292,
           "english_pdf_start": 309,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 207,
+          "chinese_pdf_start": 225
         }
+      ],
+      "english_printed_end": 292,
+      "english_pdf_end": 309,
+      "chinese_pdf_start": 187,
+      "chinese_printed_end": 207,
+      "chinese_pdf_end": 225,
+      "annotation_count": 47,
+      "expanded_proof_count": 26,
+      "source_problem_solutions": 21,
+      "source_comparison": "English chapter extracted and consulted; exposition and proofs reconstructed, not verbatim.",
+      "chinese_evidence": "Chapter opening and next page visually checked (PDF 187-188); section starts read from chapter-opening list. Full Chinese chapter not reviewed.",
+      "independent_math_review": false,
+      "native_tikz_diagram_count": 5,
+      "tikz_diagrams": [
+        {
+          "id": "T5.1",
+          "file": "figures/tikz/ch05-weak-cusp-jump.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T5.2",
+          "file": "figures/tikz/ch05-reflection-zero.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T5.3",
+          "file": "figures/tikz/ch05-embedding-regimes.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T5.4",
+          "file": "figures/tikz/ch05-loss-of-compactness.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T5.M",
+          "file": "figures/tikz/ch05-trace-strip-margin.tex",
+          "placement": "margin"
+        }
+      ],
+      "current_standalone_pages": 34,
+      "current_book_physical_range": [
+        140,
+        173
       ]
     },
     {
@@ -378,7 +712,7 @@
       "english_pdf_start": 310,
       "chinese_printed_start": 208,
       "chinese_title": "二阶椭圆型方程",
-      "status": "outline-only",
+      "status": "editorial-study-draft",
       "sections": [
         {
           "number": "6.1",
@@ -386,7 +720,9 @@
           "file": "chapters/06-second-order-elliptic-equations/01-definitions.tex",
           "english_printed_start": 293,
           "english_pdf_start": 310,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 208,
+          "chinese_pdf_start": 226
         },
         {
           "number": "6.2",
@@ -394,7 +730,9 @@
           "file": "chapters/06-second-order-elliptic-equations/02-existence-of-weak-solutions.tex",
           "english_printed_start": 297,
           "english_pdf_start": 314,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 210,
+          "chinese_pdf_start": 228
         },
         {
           "number": "6.3",
@@ -402,7 +740,9 @@
           "file": "chapters/06-second-order-elliptic-equations/03-regularity.tex",
           "english_printed_start": 307,
           "english_pdf_start": 324,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 218,
+          "chinese_pdf_start": 236
         },
         {
           "number": "6.4",
@@ -410,7 +750,9 @@
           "file": "chapters/06-second-order-elliptic-equations/04-maximum-principles.tex",
           "english_printed_start": 323,
           "english_pdf_start": 340,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 229,
+          "chinese_pdf_start": 247
         },
         {
           "number": "6.5",
@@ -418,7 +760,9 @@
           "file": "chapters/06-second-order-elliptic-equations/05-eigenvalues-and-eigenfunctions.tex",
           "english_printed_start": 333,
           "english_pdf_start": 350,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 236,
+          "chinese_pdf_start": 254
         },
         {
           "number": "6.6",
@@ -426,7 +770,9 @@
           "file": "chapters/06-second-order-elliptic-equations/06-problems.tex",
           "english_printed_start": 343,
           "english_pdf_start": 360,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 243,
+          "chinese_pdf_start": 261
         },
         {
           "number": "6.7",
@@ -434,8 +780,59 @@
           "file": "chapters/06-second-order-elliptic-equations/07-references.tex",
           "english_printed_start": 348,
           "english_pdf_start": 365,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 246,
+          "chinese_pdf_start": 264
         }
+      ],
+      "english_printed_end": 348,
+      "english_pdf_end": 365,
+      "chinese_pdf_start": 226,
+      "chinese_printed_end": 246,
+      "chinese_pdf_end": 264,
+      "annotation_count": 43,
+      "expanded_proof_count": 18,
+      "source_problem_solutions": 17,
+      "source_comparison": "English PDF 310-365 extracted and consulted; original exposition and proofs reconstructed, not verbatim.",
+      "chinese_evidence": "PDF 226 chapter opening and selected proof pages 237,239,242,245,249,251,252,258,260 visually checked. Section starts from chapter-opening list. No full line-by-line Chinese review.",
+      "independent_math_review": false,
+      "editorial_supplements": [
+        "chapters/06-second-order-elliptic-equations/03-boundary-regularity.tex",
+        "chapters/06-second-order-elliptic-equations/04-harnack.tex",
+        "chapters/06-second-order-elliptic-equations/05-nonsymmetric-spectrum.tex"
+      ],
+      "native_tikz_diagram_count": 5,
+      "tikz_diagrams": [
+        {
+          "id": "T6.1",
+          "file": "figures/tikz/ch06-ellipticity.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T6.2",
+          "file": "figures/tikz/ch06-fredholm-plane.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T6.3",
+          "file": "figures/tikz/ch06-cutoff-translates.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T6.4",
+          "file": "figures/tikz/ch06-harnack-chain.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T6.M",
+          "file": "figures/tikz/ch06-boundary-ratio-margin.tex",
+          "placement": "margin"
+        }
+      ],
+      "current_standalone_pages": 30,
+      "current_book_physical_range": [
+        174,
+        203
       ]
     },
     {
@@ -1158,5 +1555,14 @@
       "annotation_count": 8,
       "review": "Source text checked; no independent review."
     }
-  ]
+  ],
+  "native_tikz_diagrams": {
+    "date": "2026-11-10",
+    "total": 30,
+    "body": 24,
+    "margin": 6,
+    "manifest": "figures/tikz/manifest.json",
+    "reading_index": "docs/TIKZ-DIAGRAMS.md"
+  },
+  "compiled_book_pages": 226
 }

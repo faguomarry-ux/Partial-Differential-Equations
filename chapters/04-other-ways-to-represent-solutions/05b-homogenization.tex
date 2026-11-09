@@ -1,0 +1,139 @@
+% Supplement to Evans 4.5.4, printed pp. 217--220.
+\Needspace{35mm}
+\subsection{Periodic homogenization: expansion, cell problem, and a proof}
+\label{sec:4-homogenization}
+We use the symmetric uniformly elliptic case, sufficient also for
+Problem 18: $A(y)=A(y)^T$ is smooth, $Q$-periodic,
+$Q=(0,1)^n$, and $\theta I\leq A\leq\Theta I$.
+Consider $-\operatorname{div}(A(x/\varepsilon)Du^\varepsilon)=f$
+on a bounded Lipschitz domain with zero trace and $f\in L^2$.
+The source uses a formal expansion; we first derive it, then give
+a weak-convergence proof under these stated hypotheses.
+
+\paragraph{Two-scale bookkeeping.}
+Write $u^\varepsilon=u_0(x,y)+\varepsilon u_1(x,y)+\cdots$,
+$y=x/\varepsilon$, with all $u_j$ periodic in $y$.
+Every spatial derivative becomes $D_x+\varepsilon^{-1}D_y$.
+Thus the three operator pieces are
+\[
+ L_1=-D_y\cdot AD_y,\quad
+ L_2=-D_y\cdot AD_x-D_x\cdot AD_y,\quad
+ L_3=-D_x\cdot AD_x .
+\]
+The coefficients of $\varepsilon^{-2},\varepsilon^{-1},1$ give
+\[
+ L_1u_0=0,\quad L_1u_1+L_2u_0=0,\quad
+ L_1u_2+L_2u_1+L_3u_0=f .
+\]
+Testing the first identity by $u_0$ and integrating over $Q$ gives
+$D_yu_0=0$; opposite periodic faces cancel.
+For zero-mean correctors $\chi_i$, define
+\[
+ \operatorname{div}_y\{A(y)(e_i-D_y\chi_i)\}=0,\qquad
+ \int_Q\chi_i=0 .
+ \tag{CELL4}
+\]
+Then $u_1=-\sum_i\chi_i(y)u_{x_i}$ solves the next equation.
+Averaging the order-one equation kills $L_1u_2$ and yields
+\[
+ -\operatorname{div}(\overline A Du)=f,\qquad
+ \overline A e_i=\int_Q A(y)(e_i-D\chi_i)\,dy .
+ \tag{HOM4}
+\]
+The minus sign in $u_1$ matches the source's corrector convention.
+Many other texts use $\varphi_i=-\chi_i$ and a plus sign instead.
+
+\Needspace{45mm}
+\PDEAnnotation{平均的是修正后的通量}{有效系数通常不是直接对 $A$ 求平均。微观梯度要先调整成 $e_i-D\chi_i$，使通量在单元中无散，再取平均；一维时结果是调和平均而非算术平均。}
+
+\PDEMarginDiagram{4.M}{一维有效系数}
+{两个半格串联时通量相同，梯度与系数成反比。平均的是阻力 $1/a$，再取倒数。分段常系数可按弱形式理解。}
+{ch04-cell-margin}
+
+\begin{lemma}[Cell solvability and effective ellipticity]
+(CELL4) has a unique zero-mean periodic weak solution.
+The matrix $\overline A$ is symmetric and satisfies
+$\theta I\leq\overline A\leq\Theta I$.
+\end{lemma}
+\begin{expandedproof}
+On the zero-mean periodic $H^1$ space minimize
+$\int_Q(e_i-Dv)\cdot A(e_i-Dv)$.
+Periodic Poincar\'e and ellipticity bound every minimizing sequence
+in $H^1$; weak compactness and weak lower semicontinuity give a minimizer.
+The first variation is
+$\int_Q A(D\chi_i-e_i)\cdot D\psi=0$.
+Strict convexity in the gradient makes the difference of two
+minimizers constant, hence zero after normalization.
+These are standard Hilbert-space compactness and periodic Poincar\'e
+facts; the cell equation is not solved merely by asserting zero mean.
+
+For $\xi\in\R^n$, let $\chi_\xi=\sum_i\xi_i\chi_i$.
+The cell identity allows any gradient $D\chi_\eta$ to be subtracted
+from the other factor, so
+\[
+ \eta\cdot\overline A\xi
+ =\int_Q(\eta-D\chi_\eta)\cdot A(\xi-D\chi_\xi).
+\]
+This proves symmetry.
+The minimum over all periodic $v$ equals
+$\xi\cdot\overline A\xi$ by orthogonality.
+Its lower bound is
+$\theta\int_Q|\xi-Dv|^2\geq\theta|\xi|^2$,
+since $\int_QDv=0$ and $|Q|=1$.
+The competitor $v=0$ gives the upper bound.
+\end{expandedproof}
+
+\begin{theorem}[An editorial rigorous homogenization statement]
+Under the symmetric hypotheses above,
+$u^\varepsilon\rightharpoonup u$ in $H_0^1$ and
+$u^\varepsilon\to u$ in $L^2$, where $u$ is the unique weak solution of (HOM4).
+\end{theorem}
+\begin{expandedproof}[oscillating tests replace an unproved expansion]
+Testing the original PDE by $u^\varepsilon$ gives a uniform $H_0^1$
+bound by ellipticity and Poincar\'e.
+Take a weakly convergent subsequence and use Rellich for strong $L^2$
+convergence. The fluxes
+$\eta^\varepsilon=A(x/\varepsilon)Du^\varepsilon$
+are bounded in $L^2$; take a weak limit $\eta$.
+The PDE gives $-\operatorname{div}\eta=f$.
+
+For each $i$ put
+\[
+ w_i^\varepsilon=x_i-\varepsilon\chi_i(x/\varepsilon),\qquad
+ q_i^\varepsilon=A(x/\varepsilon)Dw_i^\varepsilon .
+\]
+Periodic averaging implies $w_i^\varepsilon\to x_i$ in $L^2_{\rm loc}$
+and $q_i^\varepsilon\rightharpoonup\overline A e_i$ in $L^2_{\rm loc}$;
+also $\operatorname{div}q_i^\varepsilon=0$.
+The averaging fact follows first by summing integrals on full
+$\varepsilon$-cells for continuous periodic functions and compact tests,
+then by $L^2(Q)$ approximation and uniform local cell bounds.
+
+For $\phi\in C_c^\infty(U)$ symmetry gives
+$\eta^\varepsilon\cdot Dw_i^\varepsilon
+=Du^\varepsilon\cdot q_i^\varepsilon$.
+Integrate the two sides by parts in different ways:
+\[
+ \int\phi\,\eta^\varepsilon\cdot Dw_i^\varepsilon
+ =\int f\phi w_i^\varepsilon-\int w_i^\varepsilon\eta^\varepsilon\cdot D\phi,
+\]
+\[
+ \int\phi\,Du^\varepsilon\cdot q_i^\varepsilon
+ =-\int u^\varepsilon q_i^\varepsilon\cdot D\phi .
+\]
+Every product in these two right sides has a strong $L^2$ factor
+and a weak $L^2$ factor.
+The limits give $\eta_i=Du\cdot\overline A e_i$.
+By symmetry this says $\eta=\overline A Du$, proving (HOM4).
+Effective ellipticity gives uniqueness, so every subsequence has the
+same limit; the entire family converges.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{两个弱收敛量不能直接相乘}{$A(x/\varepsilon)$ 与 $Du^\varepsilon$ 都会振荡，不能分别取弱极限再相乘。振荡测试把乘积改写为一个强收敛因子和一个弱收敛因子的配对，才识别出有效通量。}
+The expansion need not satisfy the original boundary condition termwise;
+boundary layers may be necessary for a quantitative error estimate.
+We have proved weak $H^1$ convergence, not strong convergence of
+the gradients or an $O(\varepsilon)$ global error.
+For nonsymmetric coefficients the source's formal cell calculation
+still applies with consistent index orientation; the rigorous testing
+argument uses adjoint correctors. That extension is not asserted here.

@@ -1,0 +1,175 @@
+% Supplement to Evans 4.3: Radon and Laplace transforms, printed pp. 186--195.
+\Needspace{35mm}
+\subsection{Radon transform and plane-wave decomposition}\label{sec:4-radon}
+For $f\in C_c^\infty(\R^n)$, set
+\[
+ Rf(s,\omega)=\int_{x\cdot\omega=s}f(x)\,dS_x,\qquad \omega\in S^{n-1}.
+\]
+Coordinates $x=s\omega+\sum y_jb_j$, where $b_j$ are an orthonormal
+basis of $\omega^\perp$, make the surface measure $dy$.
+They immediately give
+\[
+ Rf(-s,-\omega)=Rf(s,\omega),\quad
+ R(\partial_jf)=\omega_j\partial_sRf,\quad R(\Delta f)=\partial_s^2Rf .
+\]
+For the middle identity decompose $\partial_j$ into a normal and
+tangential derivative. Tangential integrals vanish by compact support.
+Induction gives $R(D^\gamma f)=\omega^\gamma\partial_s^{|\gamma|}Rf$.
+If $\operatorname{supp}f\subset B_R$, then $Rf=0$ for $|s|\geq R$.
+
+
+\PDEBodyDiagram{4.3}{Radon data integrate along level hyperplanes.}
+{In dimension two the integration sets are lines perpendicular to $\omega$. The scalar $s$ is signed distance in the normal direction, not distance traveled along a line. The blue line is one member of the family; higher dimensions replace it by an $(n-1)$-plane.}
+{ch04-radon-lines}
+
+\begin{theorem}[Slice theorem and inversion; source Theorems 4--5]
+With the unnormalized one-dimensional transform
+$B(r,\omega)=\int_{\R} e^{-irs}Rf(s,\omega)\,ds$,
+\[
+ B(r,\omega)=(2\pi)^{n/2}\widehat f(r\omega).
+\]
+For every dimension,
+\[
+ f(x)=\frac1{2(2\pi)^n}
+ \int_{S^{n-1}}\int_{\R} B(r,\omega)|r|^{n-1}e^{irx\cdot\omega}\,dr\,dS_\omega .
+\]
+If $n=2k+1$ is odd, this becomes the local formula
+\[
+ f(x)=C_n\int_{S^{n-1}}
+       \partial_s^{2k}Rf(x\cdot\omega,\omega)\,dS_\omega,\qquad
+ C_n=\frac{(-1)^k}{2(2\pi)^{2k}} .
+ \tag{RI4}
+\]
+\end{theorem}
+\begin{expandedproof}
+Fubini in the orthonormal coordinates gives
+\[
+ B(r,\omega)=\int f(x)e^{-ir\omega\cdot x}\,dx .
+\]
+In Fourier inversion, polar coordinates with signed $r$ double-count
+each nonzero frequency, giving the factor $1/2$ and $|r|^{n-1}$.
+All integrals converge since $\widehat f$ is rapidly decreasing.
+For $n-1=2k$, one-dimensional inversion gives
+\[
+ \partial_s^{2k}Rf(s,\omega)
+ =\frac{(-1)^k}{2\pi}\int_{\R} r^{2k}B(r,\omega)e^{irs}\,dr .
+\]
+Substituting this in the general inversion formula proves (RI4).
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{奇偶维差别藏在绝对值里}{带符号的极径在一般维数必须用 $|r|^{n-1}$；只有奇维时才等于多项式 $r^{2k}$，从而变成有限阶局部导数。偶维的反演通常带非局部算子。}
+
+For odd $n$, define $\rho_f=C_n\partial_s^{n-1}Rf$.
+Then the plane-wave integral
+\[
+ u(x,t)=\int_{S^{n-1}}\rho_g(x\cdot\omega-t,\omega)\,dS_\omega
+\]
+solves $u_{tt}-\Delta u=0$, $u(0)=g$, $u_t(0)=0$.
+The PDE holds because $|\omega|=1$; the first initial condition is
+(RI4). The integrand for $u_t(0)$ is odd under $\omega\mapsto-\omega$,
+since an odd $s$ derivative reverses the symmetry of $Rg$.
+
+For the constant-coefficient system
+$\mathbf u_t+\sum B_j\mathbf u_{x_j}=0$,
+suppose $B(\omega)=\sum\omega_jB_j$ is diagonalizable with real
+eigenvalues $\lambda_l(\omega)$.
+In Radon coordinates the diagonal components satisfy one-dimensional
+transport and equal
+\[
+ v_l(s,\omega,t)=h_l(s-\lambda_l(\omega)t,\omega).
+\]
+After applying (RI4), use
+$\rho_l(s,\omega)=C_n\partial_s^{n-1}h_l(s,\omega)$ exactly once:
+\[
+ \mathbf u(x,t)=\int_{S^{n-1}}\sum_l
+ a_l(\omega)\rho_l(x\cdot\omega-\lambda_l(\omega)t,\omega)\,dS_\omega .
+\]
+Here $a_l$ are the diagonalizing columns; the shift is not inserted
+again in the definition of $\rho_l$.
+For compact data in $B_R$, if
+$\min_{\omega,l}|\lambda_l(\omega)|=\sigma>0$,
+then $\mathbf u=0$ for $|x|<\sigma t-R$.
+Indeed each shifted argument has magnitude at least $\sigma t-|x|>R$.
+This is a conditional odd-dimensional Huygens statement; the
+diagonalization and nonzero-speed hypotheses cannot be removed.
+\Needspace{45mm}
+\PDEAnnotation{平面支集条件怎样变成内部空区}{若 $|x|<\sigma t-R$，所有方向的平面参数都移出初始支集区间，整个反演积分为零。零特征速度会留下不移动的分量，因此必须单独排除。}
+
+\Needspace{35mm}
+\subsection{Laplace transform, resolvents and the heat--wave link}
+If $v$ and $v_t$ have suitable exponential bounds, integration by parts gives
+\[
+ \mathcal L(v_t)(s)=s\mathcal Lv(s)-v(0),\qquad
+ \mathcal Lv(s)=\int_0^\infty e^{-st}v(t)\,dt .
+\]
+Thus for $v_t-\Delta v=0$, $v(0)=f$,
+\[
+ (s-\Delta)\mathcal Lv=f .
+\]
+Use the same spatial boundary condition before and after transformation;
+for example a zero Dirichlet condition stays zero.
+In the whole space this recovers
+$(s-\Delta)^{-1}f=\int_0^\infty e^{-st}(G_t*f)\,dt$.
+For $L^2$ data the Bochner integral is justified by
+$\|G_t*f\|_2\leq\|f\|_2$.
+\Needspace{45mm}
+\PDEAnnotation{初值正是 Laplace 分部积分的边界项}{时间导数并非只替换成乘以 $s$。零时刻留下 $-v(0)$，它成为椭圆 resolvent 方程的右端；漏掉这一项就把非零初值问题变成了齐次问题。}
+
+\begin{theorem}[Gaussian averaging of the wave group; source Example 9]
+Let $g$ be smooth compactly supported, and let $U(x,s)$ be the wave
+solution with displacement $g$ and zero initial velocity, extended evenly
+in $s$. Then
+\[
+ V(x,t)=\frac1{\sqrt{4\pi t}}\int_{\R} e^{-s^2/(4t)}U(x,s)\,ds
+\]
+is the heat solution with datum $g$.
+\end{theorem}
+\begin{expandedproof}
+For smooth data the derivatives of $U$ grow at most polynomially,
+as can also be checked from its Fourier representation.
+Gaussian weights justify differentiation and kill the boundary terms.
+Writing $q_t(s)=(4\pi t)^{-1/2}e^{-s^2/(4t)}$, observe
+$\partial_tq_t=\partial_{ss}q_t$. Hence
+\[
+ V_t=\int q_{ss}U=\int qU_{ss}=\int q\Delta U=\Delta V.
+\]
+The Gaussian approximate identity in $s$ gives $V(0)=g$.
+Alternatively the frequency multiplier is
+$\int q_t(s)\cos(s|\xi|)\,ds=e^{-t|\xi|^2}$,
+which proves the same statement in $L^2$.
+\end{expandedproof}
+
+For $n=2k+1\geq3$, let $M_g(x,r)$ be the spherical average of $g$.
+Equating the two Gaussian representations gives, with
+$\lambda=1/(4t)$,
+\[
+ \int_0^\infty e^{-\lambda s^2}U(x,s)\,ds
+ =\frac{|S^{n-1}|}{2\pi^k}\lambda^k
+       \int_0^\infty e^{-\lambda r^2}r^{2k}M_g(x,r)\,dr .
+\]
+Use $\lambda e^{-\lambda r^2}=-(2r)^{-1}\partial_re^{-\lambda r^2}$
+and integrate by parts $k$ times. The result is
+\[
+ \lambda^k\int_0^\infty e^{-\lambda r^2}r^{2k}M_g\,dr
+ =2^{-k}\int_0^\infty e^{-\lambda r^2}
+       r(r^{-1}\partial_r)^k(r^{2k-1}M_g)\,dr .
+\]
+There are no boundary terms at infinity by compact support in $r$.
+At zero, $M_g$ is smooth and even; before the last differentiation
+the relevant odd power has not fallen below one, so the boundary
+terms are zero.
+After $s^2=\tau$, uniqueness of the Laplace transform implies
+\[
+ U(x,t)=\frac1{(n-2)!!}\,
+ \partial_t(t^{-1}\partial_t)^{(n-3)/2}
+                  (t^{n-2}M_g(x,t)).
+\]
+Here $|S^{n-1}|/(2^{k+1}\pi^k)=1/(n-2)!!$ follows from the
+Gaussian sphere area formula.
+The one-dimensional case is $U=(g(x+t)+g(x-t))/2$.
+One can justify Laplace uniqueness without a new PDE theorem:
+after multiplying by $e^{-a\tau}$, substitute $z=e^{-\tau}$;
+vanishing at all $s=a+j$ gives zero moments on $[0,1]$.
+Polynomial density in continuous functions makes the finite signed
+measure zero. This applies to the continuous, exponentially integrable
+functions above.

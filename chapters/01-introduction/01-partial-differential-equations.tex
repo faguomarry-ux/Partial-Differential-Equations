@@ -1,13 +1,124 @@
-% Evans second edition, section 1.1.
-% English source: printed p. 1; PDF page 18 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans second edition, section 1.1, printed pp. 1--2; PDF pages 18--19.
+% Chinese: printed pp. 1--2; PDF pages 19--20.
 \section{Partial Differential Equations}
 \label{sec:1-1}
 
-\PDEPending
+A \emph{partial differential equation} (PDE) is an equation involving an unknown
+function of two or more variables and certain of its partial derivatives.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+Using the notation explained in Appendix A, we can write out symbolically
+a typical PDE, as follows. Fix an integer $k\geq1$ and let $U$ denote an open
+subset of $\R^n$.
+\par\Needspace{65mm}
+\PDEAnnotation{导数数组与对称性}{原书把 $D^ku$ 写成含 $n^k$ 个分量的数组。
+若 $u\in C^k$，混合偏导可交换，独立分量只有
+$\binom{n+k-1}{k}$ 个。前者按求导次序储存，后者按多重指标计数；两种记号并不矛盾。}
+
+\noindent\textbf{Definition (source, \S1.1).}
+An expression of the form
+\begingroup
+\renewcommand{\theequation}{\arabic{equation}}
+\begin{equation}
+ F(D^ku(x),D^{k-1}u(x),\ldots,Du(x),u(x),x)=0
+ \quad (x\in U)
+ \label{eq:source-1-1}
+\end{equation}
+\endgroup
+is called a \emph{$k$th-order partial differential equation}, where
+\[
+ F:\R^{n^k}\times\R^{n^{k-1}}\times\cdots\times\R^n\times\R\times U\to\R
+\]
+is given and $u:U\to\R$ is the unknown.
+
+We solve the PDE if we find all $u$ verifying \eqref{eq:source-1-1}, possibly
+only among those functions satisfying certain auxiliary boundary conditions
+on some part $\Gamma$ of $\partial U$. By finding the solutions we mean,
+ideally, obtaining simple, explicit solutions, or, failing that, deducing the
+existence and other properties of solutions.
+
+\noindent\textbf{Definitions (source, \S1.1).}
+\begin{enumerate}[label=(\roman*)]
+\item The partial differential equation \eqref{eq:source-1-1} is called
+\emph{linear} if it has the form
+\[
+ \sum_{|\alpha|\leq k}a_\alpha(x)D^\alpha u=f(x)
+\]
+for given functions $a_\alpha$ $(|\alpha|\leq k)$, $f$. This linear PDE is
+\emph{homogeneous} if $f\equiv0$.
+\item The PDE \eqref{eq:source-1-1} is \emph{semilinear} if it has the form
+\[
+ \sum_{|\alpha|=k}a_\alpha(x)D^\alpha u
+ +a_0(D^{k-1}u,\ldots,Du,u,x)=0.
+\]
+\item The PDE \eqref{eq:source-1-1} is \emph{quasilinear} if it has the form
+\begin{align*}
+ &\sum_{|\alpha|=k}a_\alpha(D^{k-1}u,\ldots,Du,u,x)D^\alpha u\\
+ &\hspace{24mm}+a_0(D^{k-1}u,\ldots,Du,u,x)=0.
+\end{align*}
+\item The PDE \eqref{eq:source-1-1} is \emph{fully nonlinear} if it depends
+nonlinearly upon the highest order derivatives.
+\end{enumerate}
+\par\Needspace{65mm}
+\PDEAnnotation{分类看最高阶导数}{先找阶数 $k$，再看 $D^ku$ 如何出现。
+半线性：最高阶系数只依赖 $x$；拟线性：系数可依赖低阶导数。
+例如 $u_t+uu_x=0$ 是一阶拟线性，而 $u_t+uu_x+u_{xxx}=0$ 是三阶半线性。}
+
+
+\PDEBodyDiagram{1.1}{Classify by the highest derivatives.}
+{The first three classes allow successively more dependence on lower-order variables. In the last example the highest derivatives themselves enter nonlinearly. All displayed examples are second order.}
+{ch01-linearity}
+
+A \emph{system of partial differential equations} is, informally speaking,
+a collection of several PDE for several unknown functions.
+
+\noindent\textbf{Definition (source, \S1.1).}
+Let $k$ be a positive integer. An expression of the form
+\begingroup
+\renewcommand{\theequation}{\arabic{equation}}
+\begin{equation}
+ \mathbf F(D^k\mathbf u(x),\ldots,D\mathbf u(x),\mathbf u(x),x)=\mathbf0
+ \quad(x\in U)
+ \label{eq:source-1-2}
+\end{equation}
+\endgroup
+is called a \emph{$k$th-order system of partial differential equations}, where
+\[
+ \mathbf F:\R^{mn^k}\times\R^{mn^{k-1}}\times\cdots
+ \times\R^{mn}\times\R^m\times U\to\R^m
+\]
+is given and
+\[
+ \mathbf u:U\to\R^m,\qquad \mathbf u=(u^1,\ldots,u^m)
+\]
+is the unknown.
+
+Here we are supposing that the system comprises the same number $m$ of
+scalar equations as unknowns $(u^1,\ldots,u^m)$. This is the most common
+circumstance, although other systems may have fewer or more equations than
+unknowns. Systems are classified in the obvious way as being linear,
+semilinear, etc.
+
+\noindent\textbf{Notation.}
+We write ``PDE'' as an abbreviation for both the singular ``partial
+differential equation'' and the plural ``partial differential equations''.
+
+\subsection*{Editorial supplement: the multiindex convention}
+For $\alpha=(\alpha_1,\ldots,\alpha_n)\in\{0,1,2,\ldots\}^n$, set
+\[
+ |\alpha|=\sum_{i=1}^n\alpha_i,\qquad
+ D^\alpha u=\partial_{x_1}^{\alpha_1}\cdots\partial_{x_n}^{\alpha_n}u.
+\]
+The \emph{principal part} of a linear operator of order $k$ is
+$\sum_{|\alpha|=k}a_\alpha(x)D^\alpha$; the terms of smaller order are its
+lower-order terms. Here $D^0u=u$. For example, when $n=2$,
+$D^{(2,1)}u=u_{x_1x_1x_2}$ and $|(2,1)|=3$.
+
+The words linear, semilinear and quasilinear describe nested forms.
+When a single classification is requested, we report the most restrictive
+applicable form: linear first, then semilinear, then quasilinear.
+These definitions concern the displayed differential operator. An algebraic
+rewriting that changes its form need not preserve its classification.
+\par\Needspace{65mm}
+\PDEAnnotation{等价零点不保结构}{把 $Lu=0$ 改写成 $(Lu)^3=0$，经典解集不变，
+但新表达式对最高阶导数非线性，且在线性化时可能退化。
+因此分类必须说明采用哪个算子表达式，不能只看方程的解集。}

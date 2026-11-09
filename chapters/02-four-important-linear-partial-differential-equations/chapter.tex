@@ -3,11 +3,43 @@
 \label{chap:four-important-linear-partial-differential-equations}
 
 \PDESource
-  {Chapter 2; printed p.~17; PDF page~34}
-  {中译本对应章：四个重要的线性偏微分方程，书内第 13 页起。}
+  {Chapter 2; printed pp.~17--87; PDF pages~34--104}
+  {中译本：书内第 13 页起；球均值见第 18--19 页，热球均值见第 35--37 页。}
 
-\noindent\textbf{Status: outline only / 目录骨架。}
-English exposition, Chinese margin notes, and expanded proofs will be added section by section.
+\noindent\textit{Editorial study edition.}
+The exposition and proofs are reconstructed in the order of Evans,
+Chapter 2; they are not a verbatim transcription. Source theorem numbers
+are identified separately from our chapter-wide numbering. Chinese
+mathematical notes, worked examples, figures, and exercise solutions are
+editorial additions.
+
+\Needspace{45mm}
+\PDEAnnotation{四个模型四种机制}{传输沿特征线搬运；Laplace 方程描述静态平衡；热方程耗散并向未来扩散；波动方程保存能量并有限速传播。相同的“平均”符号背后可能是完全不同的测度。}
+Our main route is
+\[
+ \begin{gathered}
+ \text{fundamental solutions}\ \longrightarrow\
+ \text{representation formulas}\\
+ \longrightarrow\ \text{estimates and uniqueness}.
+ \end{gathered}
+\]
+The central comparison is between harmonic means
+(\S\ref{sec:2-elliptic-mean}) and the heat-ball mean
+(\S\ref{sec:2-heatball}). The latter is a positive weighted average over
+past space-time, not a uniform average over an ordinary ball.
+
+\paragraph{Conventions and prerequisites.}
+$\omega_n=|B_1|$ and $|\partial B_1|=n\omega_n$.
+The elliptic operator is $-\Delta$; the heat operator is
+$L=\partial_t-\Delta_x$; the wave speed is one unless stated otherwise.
+$C^{2,1}$ means two continuous spatial derivatives and one continuous
+time derivative. Basic multivariable calculus, Green's identities,
+polar integration, dominated convergence, convolution, and smooth
+cutoffs are prerequisites. Boundary correctors on general domains are
+explicitly conditional on their existence; ball and half-space kernels
+are constructed here.
+
+\clearpage
 
 \input{chapters/02-four-important-linear-partial-differential-equations/01-transport-equation}
 \input{chapters/02-four-important-linear-partial-differential-equations/02-laplaces-equation}

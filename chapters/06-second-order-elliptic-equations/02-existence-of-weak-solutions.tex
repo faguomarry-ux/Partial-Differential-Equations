@@ -1,13 +1,199 @@
-% Evans second edition, section 6.2.
-% English source: printed p. 297; PDF page 314 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 6.2: English printed p.297 / PDF p.314; Chinese printed p.210 / PDF p.228.
+\Needspace{65mm}
 \section{Existence of Weak Solutions}
 \label{sec:6-2}
+\subsection{Lax--Milgram (Evans \S6.2.1, Theorem 1)}
+\begin{theorem}\label{thm:6-lax-milgram}
+Let $H$ be a real Hilbert space. Suppose a bilinear form $B$ satisfies
+\[
+ |B[u,v]|\leq M\|u\|_H\|v\|_H,\qquad
+ B[u,u]\geq\beta\|u\|_H^2,\quad\beta>0.
+\]
+For each bounded linear functional $\ell$ on $H$ there is a unique $u\in H$
+with $B[u,v]=\ell(v)$ for all $v\in H$. Moreover,
+$\|u\|_H\leq\beta^{-1}\|\ell\|_{H^*}$.
+\end{theorem}
+\Needspace{45mm}
+\PDEAnnotation{强制性排除失控方向}{有界性保证双线性型连续；强制性则使 $B[u,u]$ 控制整个空间范数。这里不要求 $B$ 对称，所以不能一律把证明改写成能量最小化。}
+\begin{expandedproof}
+By Riesz representation there is a bounded linear operator $T:H\to H$
+such that $B[u,v]=(Tu,v)_H$. Coercivity and Cauchy--Schwarz give
+\[
+ \beta\|u\|_H^2\leq(Tu,u)_H\leq\|Tu\|_H\|u\|_H,
+ \qquad \|Tu\|_H\geq\beta\|u\|_H.
+\]
+Thus $T$ is injective. Its range is closed: if $Tu_j$ converges, the
+last inequality applied to $u_j-u_k$ makes $(u_j)$ Cauchy, and its limit
+maps to the given range limit.
 
-\PDEPending
+The range is also dense. If $w$ is orthogonal to it, then
+$0=(Tw,w)_H=B[w,w]\geq\beta\|w\|_H^2$, so $w=0$.
+A closed dense subspace is all of $H$. Represent $\ell(v)=(g,v)_H$
+and solve $Tu=g$. Uniqueness follows from injectivity; testing with
+$v=u$ gives the asserted bound.
+\end{expandedproof}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{35mm}
+\subsection{Energy estimates and a shifted inverse (Evans \S6.2.2)}
+\begin{theorem}[Boundedness and G{\aa}rding inequality]\label{thm:6-garding}
+Under the hypotheses of \S\ref{sec:6-1}, there are constants $M,C_0$
+such that
+\[
+ |B[u,v]|\leq M\|u\|_{H^1}\|v\|_{H^1},\qquad
+ B[u,u]\geq\tfrac{\theta}{2}\|Du\|_2^2-C_0\|u\|_2^2.
+\]
+Consequently, for sufficiently large $\kappa>0$,
+$B_\kappa[u,v]=B[u,v]+\kappa(u,v)_{L^2}$ is coercive on $H^1_0(U)$.
+For every $f\in H^{-1}(U)$, $(L+\kappa)u=f$ has a unique weak solution,
+with $\|u\|_{H^1}\leq C\|f\|_{H^{-1}}$.
+\end{theorem}
+\begin{expandedproof}
+H\"older bounds each integral defining $B$. For the diagonal,
+\[
+ \left|\int_U b\cdot Du\,u\right|
+ \leq\|b\|_\infty\|Du\|_2\|u\|_2
+ \leq\tfrac{\theta}{2}\|Du\|_2^2+
+       \tfrac{\|b\|_\infty^2}{2\theta}\|u\|_2^2 .
+\]
+The potential contributes at worst $-\|c_-\|_\infty\|u\|_2^2$.
+Choose $C_0=\|b\|_\infty^2/(2\theta)+\|c_-\|_\infty$ and
+$\kappa\geq C_0+1$. Then
+\[
+ B_\kappa[u,u]\geq
+ \min(\theta/2,1)\|u\|_{H^1}^2.
+\]
+Apply Theorem~\ref{thm:6-lax-milgram}. All constants are independent of $f$.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{平移算子而非平移解}{加上 $\kappa u$ 是把算子换成 $L+\kappa I$，从而恢复强制性。原问题仍需另行研究；这个可逆的平移算子将成为 Fredholm 方法的起点。}
+If $b=0$ and $c\geq0$, Poincar\'e gives coercivity without a shift.
+For general drift, $c\geq0$ alone does not make this particular energy
+estimate coercive. Uniqueness may nevertheless follow from a maximum
+principle once the needed regularity is established.
+
+\Needspace{35mm}
+\subsection{The compact Fredholm mechanism (Evans \S6.2.3)}
+Write $R=(L+\kappa)^{-1}$. As a map $L^2(U)\to H^1_0(U)$ it is bounded.
+The inclusion $H^1_0(U)\Subset L^2(U)$ is compact, so $R$ is a compact
+operator on $L^2(U)$. For arbitrary bounded open $U$, this last compactness
+also follows by extending zero to a fixed enclosing ball and applying
+Chapter~5 there.
+
+
+\Needspace{45mm}
+\PDEAnnotation{紧性来自空间之间的往返}{求解方程先把 $L^2$ 数据送入更强的 $H^1_0$ 空间，再忘掉导数回到 $L^2$。这第二步是紧嵌入；有界性本身不足以推出逆算子紧。}
+
+\PDEBodyDiagram{6.2}{Compatibility uses the adjoint kernel.}
+{In this explicit nonsymmetric matrix example, the range is the diagonal line. A right side with $f_1\ne f_2$ is unsolvable. Its obstruction is its component along $\ker M^T$, while the horizontal $\ker M$ describes nonuniqueness of solutions. The elliptic Fredholm alternative has the same distinction.}
+{ch06-fredholm-plane}
+
+\begin{lemma}[Compact Fredholm alternative]\label{lem:6-fredholm}
+For a compact operator $T$ on a Hilbert space, $I-T$ has closed range,
+finite-dimensional kernel and cokernel of equal dimension, and
+\[
+ \operatorname{ran}(I-T)=\ker(I-T^*)^\perp.
+\]
+In particular, injectivity is equivalent to surjectivity.
+\end{lemma}
+\Needspace{45mm}
+\PDEAnnotation{无限维问题的有限维障碍}{紧性不能保证可逆，但能把不可逆的障碍压缩到有限维核中。右端必须与伴随核正交；非对称情形不能把伴随核随意换成原算子的核。}
+\begin{expandedproof}
+Compactness makes $T$ a norm limit of finite-rank operators: choose a
+finite $\varepsilon$-net for the image of the unit ball, project onto
+the span of its centers, and set $F=PT$. Then
+$\|T-F\|\leq\varepsilon$. Choose $\varepsilon<1$, put $E=T-F$, and
+invert $Q=I-E$ by its norm-convergent Neumann series.
+We have $I-T=Q(I-G)$, where $G=Q^{-1}F$ has finite rank.
+
+Let $M=\operatorname{ran}G$. Relative to $H=M\oplus M^\perp$,
+\[
+ I-G=\begin{pmatrix}D&-G|_{M^\perp}\\0&I\end{pmatrix},
+ \qquad D=I_M-G|_M.
+\]
+Its kernel is $\ker D\oplus\{0\}$. Its range consists of pairs $(x,y)$
+with $x+Gy\in\operatorname{ran}D$. This condition defines a closed
+subspace of codimension $\dim(M/\operatorname{ran}D)=\dim\ker D$.
+Multiplication by the isomorphism $Q$ preserves closedness and both
+dimensions. Finally, for every bounded operator $S$,
+$(\operatorname{ran}S)^\perp=\ker S^*$; closedness now gives the formula.
+\end{expandedproof}
+
+\begin{theorem}[Solvability and resonance]\label{thm:6-fredholm-pde}
+For each real $\lambda$, the weak Dirichlet equation
+$(L-\lambda)u=f$, $f\in L^2(U)$, has the following alternative.
+Either the homogeneous equation has only the zero solution and every
+$f$ has a unique solution, or its kernel is nonzero and finite dimensional.
+In the latter case solvability is exactly
+\[
+ (f,v)_{L^2}=0
+ \quad\hbox{for every weak solution }(L^*-\lambda)v=0.
+\]
+Whenever a solution exists, all solutions differ by a homogeneous solution.
+\end{theorem}
+\begin{expandedproof}
+For $\lambda\ne-\kappa$ the equation is equivalent to
+\begin{equation}\label{eq:6-resolvent}
+ [I-(\lambda+\kappa)R]u=Rf
+ \quad\hbox{in }L^2(U).
+\end{equation}
+Conversely, any $L^2$ solution of this identity satisfies
+$u=R((\lambda+\kappa)u+f)$, so lies in $H^1_0(U)$ and solves the
+original weak equation.
+
+The adjoint inverse is $R^*=(L^*+\kappa)^{-1}$: if $u=Rf$ and
+$v=(L^*+\kappa)^{-1}g$, then
+$(u,g)=B_\kappa[u,v]=(f,v)$.
+Thus the kernel of $I-(\lambda+\kappa)R^*$ is precisely
+$\ker(L^*-\lambda)$. For $v$ in this kernel,
+\[
+ (Rf,v)=(f,R^*v)=\frac{(f,v)}{\lambda+\kappa}.
+\]
+
+\Needspace{45mm}
+\PDEAnnotation{相容条件来自伴随恒等式}{若伴随齐次解为 $v$，把原方程与它配对就得到 $(f,v)=0$。Fredholm 定理补上反方向：所有这些正交条件满足时，解确实存在。}
+Lemma~\ref{lem:6-fredholm} gives the required compatibility condition
+and the finite dimensional alternative. At $\lambda=-\kappa$ the shifted
+problem is already uniquely solvable. Subtraction describes all solutions.
+\end{expandedproof}
+
+\Needspace{35mm}
+\subsection{The exceptional set and bounds for the inverse}
+\begin{theorem}[Evans \S6.2.3, Theorems 5--6]\label{thm:6-discrete}
+Let $\Sigma$ be the set of real Dirichlet eigenvalues of $L$.
+It is bounded below and has only finitely many elements in any bounded
+interval. If infinite, its elements tend to $+\infty$.
+If $\lambda\notin\Sigma$, the solution of $(L-\lambda)u=f$ satisfies
+\[
+ \|u\|_{H^1(U)}\leq C_\lambda\|f\|_2.
+\]
+\end{theorem}
+\begin{expandedproof}
+For an eigenfunction, G{\aa}rding gives
+$\lambda\|u\|_2^2=B[u,u]\geq-C_0\|u\|_2^2$, hence $\lambda\geq-C_0$.
+Nonzero eigenvalues $\mu$ of the compact operator $R$ have finite
+multiplicity and cannot accumulate away from zero.
+Here is the compactness argument for the latter assertion. If infinitely
+many distinct $\mu_j$ satisfy $|\mu_j|\geq\delta>0$, let $E_j$ be the
+span of eigenvectors for $\mu_1,\ldots,\mu_j$, and choose
+$x_j\in E_j\cap E_{j-1}^\perp$ with $\|x_j\|=1$.
+Then $(R-\mu_j I)x_j\in E_{j-1}$, whereas $Rx_i\in E_{j-1}$ for $i<j$.
+Consequently $\|Rx_j-Rx_i\|\geq|\mu_j|\geq\delta$, contradicting
+compactness. An infinite-dimensional eigenspace is excluded by the
+same argument with an orthonormal sequence.
+Since $\mu=(\lambda+\kappa)^{-1}$, the assertions about real $\Sigma$ follow.
+
+If an $L^2$ inverse bound failed at a fixed $\lambda\notin\Sigma$,
+there would be solutions $u_j$ with $\|u_j\|_2=1$ and right sides
+$f_j\to0$ in $L^2$. G{\aa}rding, applied to
+$B[u_j,u_j]=\lambda\|u_j\|_2^2+(f_j,u_j)$, bounds $(u_j)$ in $H^1_0$.
+A subsequence converges weakly in $H^1_0$ and strongly in $L^2$ to
+$u$ of norm one. Passing to each fixed test function yields
+$(L-\lambda)u=0$, a contradiction. The same energy inequality then
+upgrades the $L^2$ bound to the displayed $H^1$ estimate.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{逼近共振时常数会变大}{若 $Lw=\lambda_*w$ 且 $\|w\|_2=1$，则用右端 $(\lambda_*-\lambda)w$ 得到解 $w$。因此逆算子范数至少为 $|\lambda-\lambda_*|^{-1}$，不能给出跨越共振点的一致估计。}
+For a nonsymmetric operator, complex eigenvalues can also occur after
+complexification, and the real exceptional set need not be infinite.
+An orthogonal eigenbasis or an exact inverse norm equal to a reciprocal
+spectral distance requires additional self-adjoint structure.

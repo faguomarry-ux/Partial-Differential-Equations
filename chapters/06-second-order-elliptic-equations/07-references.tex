@@ -1,13 +1,34 @@
-% Evans second edition, section 6.7.
-% English source: printed p. 348; PDF page 365 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{References}
+% Evans 6.7: English printed p.348 / PDF p.365; Chinese printed p.246 / PDF p.264.
+\Needspace{65mm}
+\section{References and Proof Dependencies}
 \label{sec:6-7}
+The primary source is Lawrence C. Evans, \emph{Partial Differential
+Equations}, second edition, Chapter~6, printed pp.~293--348
+(local English PDF pp.~310--365). The Chinese scan corresponds to
+printed pp.~208--246 (PDF pp.~226--264); selected page comparisons
+are recorded in \texttt{docs/CHAPTER-06.md}.
+The English prose, proof expansions, solutions and Chinese annotations
+here are editorial reconstructions.
 
-\PDEPending
+Evans's references point to Gilbarg--Trudinger for weak elliptic theory,
+regularity, maximum principles and Harnack; Krylov and
+Ladyzhenskaya--Uraltseva for regularity; Protter--Weinberger and
+Pucci--Serrin for maximum principles; and Smoller for spectral theory.
+For domain variations the source cites Garabedian; for radiation it
+cites Colton. These are source bibliography pointers, not claims
+that those books have been independently consulted for this draft.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\paragraph{Dependencies and boundaries.}
+Riesz representation, Hilbert weak compactness and Hilbert Parseval
+are prerequisites. Chapter~5 supplies the Sobolev tools.
+Lax--Milgram, the compact Fredholm lemma, regularity, maximum principles,
+the smooth principal-part Harnack inequality, compact self-adjoint
+spectral decomposition and the principal-eigenvalue arguments are
+expanded above. The nonsymmetric existence proof explicitly invokes
+Schaefer's fixed-point theorem. Weyl's law is stated as an unproved
+source remark. The general measurable-coefficient Harnack theorem
+is described as an extension, not claimed as proved.
+All 17 source problems have editorial solutions.
+Compilation, model calculations and layout checks do not constitute
+independent mathematical review; this chapter remains an author-checked
+study draft.

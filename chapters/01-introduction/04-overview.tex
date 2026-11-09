@@ -1,13 +1,55 @@
-% Evans second edition, section 1.4.
-% English source: printed p. 8; PDF page 25 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans second edition, section 1.4, printed pp. 8--11; PDF pages 25--28.
+% Chinese: printed pp. 7--8; PDF pages 25--26.
 \section{Overview}
 \label{sec:1-4}
 
-\PDEPending
+This textbook is divided into three major Parts.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection*{Part I: Representation Formulas for Solutions} Here we identify those important partial differential equations for which in certain circumstances explicit or more-or-less explicit formulas can be had for solutions. The general progression of the exposition is from direct formulas for certain linear equations to far less concrete representation formulas, of a sort, for various nonlinear PDE.
+
+Chapter 2 is a detailed study of four exactly solvable partial differential equations: the linear transport equation, Laplace's equation, the heat equation, and the wave equation. These PDE, which serve as archetypes for the more complicated equations introduced later, admit directly computable solutions, at least in the case that there is no domain whose boundary geometry complicates matters. The explicit formulas are augmented by various indirect, but easy and attractive, ``energy''-type arguments, which serve as motivation for the developments in Chapters 6, 7 and thereafter.
+
+Chapter 3 continues the theme of searching for explicit formulas, now for general first-order nonlinear PDE. The key insight is that such PDE can, locally at least, be transformed into systems of ordinary differential equations (ODE), the characteristic equations. We stipulate that once the problem becomes ``only'' the question of integrating a system of ODE, it is in principle solved, sometimes quite explicitly. The derivation of the characteristic equations given in the text is very simple and does not require any geometric insights. It is in truth so easy to derive the characteristic equations that no real purpose is had by dealing with the quasilinear case first.
+
+We introduce also the Hopf--Lax formula for Hamilton--Jacobi equations (\S3.3) and the Lax--Oleinik formula for scalar conservation laws (\S3.4). (Some knowledge of measure theory is useful here but is not essential.) These sections provide an early acquaintance with the global theory of these important nonlinear PDE and so motivate the later Chapters 10 and 11. \par\Needspace{65mm}
+\PDEAnnotation{局部存在不等于稳定}{Cauchy--Kovalevskaya 定理要求解析系数、解析初值及非特征初始面，
+给出局部解析解。它不直接给出光滑或 Sobolev 数据下的连续依赖，
+也不保证全局解。}
+
+Chapter 4 is a grab bag of techniques for explicitly (or kind of explicitly) solving various linear and nonlinear partial differential equations, and the reader should study only whatever seems interesting. The section on the Fourier transform is, however, essential. The Cauchy--Kovalevskaya Theorem appears at the very end. Although this is basically the only general existence theorem in the subject, and thus logically should perhaps be regarded as central, in practice these power series methods are not so prevalent.
+
+\subsection*{Part II: Theory for Linear Partial Differential Equations} Next we abandon the search for explicit formulas and instead rely on functional analysis and relatively easy ``energy'' estimates to prove the existence of weak solutions to various linear PDE. We investigate also the uniqueness and regularity of such solutions and deduce various other properties.
+
+\par\Needspace{65mm}
+\PDEAnnotation{指数与维数}{Sobolev 空间的指数不能随意固定。
+当 $1\leq p<n$，临界指数 $p^*=np/(n-p)$ 控制可积性增益；
+当 $p>n$，Morrey 估计给出 Hölder 连续性。维数在这里直接决定可得的正则性。}
+
+Chapter 5 is an introduction to Sobolev spaces, the proper setting for the study of many linear and nonlinear partial differential equations via energy methods. This is a hard chapter, the real worth of which is only later revealed, and requires some basic knowledge of Lebesgue measure theory. However, the requirements are not really so great, and the review in Appendix E should suffice. In my opinion there is no particular advantage in considering only the Sobolev spaces with exponent $p=2$, and indeed insisting upon this obscures the two central inequalities, those of Gagliardo--Nirenberg--Sobolev (\S5.6.1) and of Morrey (\S5.6.2).
+
+In Chapter 6 we vastly generalize our knowledge of Laplace's equation to other second-order elliptic equations. Here we work through a rather complete treatment of existence, uniqueness and regularity theory for solutions, including the maximum principle, and also a reasonable introduction to the study of eigenvalues, including a discussion of the principal eigenvalue for nonselfadjoint operators.
+
+Chapter 7 expands the energy methods to a variety of linear partial differential equations characterizing evolutions in time. We broaden our earlier investigation of the heat equation to general second-order parabolic PDE and of the wave equation to general second-order hyperbolic PDE. We study as well linear first-order hyperbolic systems, with the aim of motivating the developments concerning nonlinear systems of conservation laws in Chapter 11. The concluding Section 7.4 presents the alternative functional analytic method of semigroups for building solutions.
+
+(Missing from this long Part II on linear partial differential equations is any discussion of distribution theory or potential theory. These are important topics, but for our purposes seem dispensable, even in a book of such length. These omissions do not slow us up much and make room for more nonlinear theory.) \subsection*{Part III: Theory for Nonlinear Partial Differential Equations} This section parallels for nonlinear PDE the development in Part II but is far less unified in its approach, as the various types of nonlinearity must be treated in quite different ways.
+
+Chapter 8 commences the general study of nonlinear partial differential equations with an extensive discussion of the calculus of variations. Here we set forth a careful derivation of the direct method for deducing the existence of minimizers and discuss also a variety of variational systems and constrained problems, as well as minimax methods. Variational theory is the most useful and accessible of the methods for nonlinear PDE, and so this chapter is fundamental.
+
+\par\Needspace{65mm}
+\PDEAnnotation{不同的广义解机制}{守恒律用积分恒等式表达守恒，再加熵不等式；
+Hamilton--Jacobi 方程的黏性解用接触试验函数表达微分不等式。
+两者的稳定性和唯一性机制不同，不能仅以“弱导数存在”统一定义。}
+
+Chapter 9 is, rather like Chapter 4 earlier, a gathering of assorted other techniques of use for nonlinear elliptic and parabolic partial differential equations. We encounter here monotonicity and fixed point methods and a variety of other devices, mostly involving the maximum principle. We study as well certain nice aspects of nonlinear semigroup theory, to complement the linear semigroup theory from Chapter 7.
+
+
+
+Chapter 10 is an introduction to the modern theory of Hamilton--Jacobi PDE and in particular to the notion of ``viscosity solutions''. We encounter also the connections with the optimal control of ODE, through dynamic programming.
+
+Chapter 11 picks up from Chapter 3 the discussion of conservation laws, now systems of conservation laws. Unlike the general theoretical developments in Chapters 5--9, for which Sobolev spaces provide the proper abstract framework, we are forced to employ here direct linear algebra and calculus computations. We pay particular attention to the solution of Riemann's problem and to entropy criteria.
+
+Chapter 12, an introduction to nonlinear wave equations, is new with this edition. We provide long time and short time existence theorems for certain quasilinear wave equations and an in-depth examination of semilinear wave equations, especially for subcritical and critical power nonlinearities in three space dimensions. To complement these existence theorems, the final section identifies various criteria ensuring nonexistence of solutions.
+
+Appendices A--E provide for the reader's convenience some background material, with selected proofs, on inequalities, linear functional analysis, measure theory, etc.
+
+The Bibliography is an updated and extensive listing of interesting PDE books to consult for further information. Since this is a textbook and not a reference monograph, I have mostly not attempted to track down and document the original sources for the myriads of ideas and methods we will encounter. The mathematical literature for partial differential equations is truly vast, but the books cited in the Bibliography should at least provide a starting point for locating the primary sources. (Citations to selected research papers appear throughout the text.)

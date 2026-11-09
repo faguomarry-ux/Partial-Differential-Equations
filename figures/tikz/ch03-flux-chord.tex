@@ -1,0 +1,18 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=2.6cm,y=2cm]
+ \draw[pde axis] (0,0)--(1.8,0) node[right] {$u$};
+ \draw[pde axis] (0,0)--(0,1.55) node[above] {$f(u)$};
+ \draw[pde curve] plot[domain=0:1.6,samples=80] (\x,{.5*\x*\x});
+ \draw[pde warm] (.2,.02)--(1.4,.98);
+ \draw[LumenBlue,dashed] plot[domain=.9:1.6,samples=2] (\x,{1.4*\x-.98});
+ \draw[LumenBlue,dashed] plot[domain=0:.8,samples=2] (\x,{.2*\x-.02});
+ \foreach \x/\y/\lab in {.2/.02/R,1.4/.98/L}{
+  \fill[LumenAccent] (\x,\y) circle[radius=2pt];
+  \draw[LumenMuted,dashed] (\x,\y)--(\x,0);
+  \node[below] at (\x,0) {$u_\lab$};}
+ \node[above left] at (1.15,.8) {chord};
+ \node[pde box,text width=50mm,anchor=west] at (2.15,.65)
+  {$\displaystyle\sigma=\frac{f(u_L)-f(u_R)}{u_L-u_R}$\\[6pt]
+   $\displaystyle f'(u_R)<\sigma<f'(u_L)$\\[5pt]
+   for this convex flux and $u_L>u_R$};
+\end{tikzpicture}

@@ -1,0 +1,150 @@
+% Expanded proof of Evans 6.5.2, Theorem 3; Schaefer is an external prerequisite.
+\Needspace{35mm}
+\subsection{A positive eigenfunction without symmetry (Evans \S6.5.2)}
+Now write $L=-a^{ij}\partial_{ij}+b^i\partial_i+c$ and assume $c\geq0$.
+The matrix $A$ is symmetric, but the full operator need not be self-adjoint.
+For weak formulations and adjoints, first rewrite it in divergence form:
+the drift in $B$ is $b^i+\partial_j a^{ij}$, rather than $b^i$ itself.
+
+\begin{theorem}\label{thm:6-principal-nonsym}
+There is a real eigenvalue $\lambda_1>0$ and an eigenfunction
+$\phi>0$ in $U$, $\phi=0$ on $\partial U$.
+Its eigenspace is one dimensional. Every complex eigenvalue $\lambda$
+satisfies $\operatorname{Re}\lambda\geq\lambda_1$.
+\end{theorem}
+\Needspace{45mm}
+\PDEAnnotation{非对称时换一种结构}{非对称算子通常没有正交特征基，Rayleigh 商也不再直接给出全部谱。主特征值的存在依赖紧逆算子保持非负性，极小实部则由正特征函数的商变换证明。}
+\begin{expandedproof}
+\paragraph{1. Construct a positive compact inverse.}
+The homogeneous zero-Dirichlet problem has only the zero solution:
+regularity makes a weak homogeneous solution classical, and comparison
+applied to both signs gives zero. Fredholm therefore supplies $T=L^{-1}$.
+Fix an integer $m>n/2+2$ and let $X=H^m(U)\cap H^1_0(U)$ with its $H^m$
+norm. Boundary regularity makes $T:X\to H^{m+2}(U)\cap H^1_0(U)$ bounded,
+so $T:X\to X$ is compact.
+The closed convex cone $\mathcal C=\{u\in X:u\geq0\}$ is preserved by $T$.
+
+Fix $0\ne w\in C^\infty_c(U)$, $w\geq0$.
+The strong minimum principle and Hopf's lemma imply
+$Tw>0$ inside and $\partial_\nu(Tw)<0$ on the boundary.
+Since $w$ has compact support, some $\mu>0$ satisfies $\mu Tw\geq w$.
+
+\paragraph{2. A compact fixed-point argument yields an eigenvector.}
+We invoke the following \emph{external} form of Schaefer's theorem:
+if a continuous compact map $F:\mathcal C\to\mathcal C$ has a bounded
+set $\{u:u=tF(u),\ 0\leq t\leq1\}$, then $F$ has a fixed point.
+This topological theorem is a prerequisite here, not proved in this chapter.
+
+For $\varepsilon>0$, consider
+\[
+ u=\eta T(u+\varepsilon w),\qquad u\in\mathcal C.
+\]
+No solution can have $\eta>\mu$. Indeed positivity gives
+$u\geq\varepsilon(\eta/\mu)w$; iterating $u\geq\eta Tu$ gives
+$u\geq\varepsilon(\eta/\mu)^kw$ for every $k$, impossible at a point
+where $w>0$.
+If the solutions for $0\leq\eta\leq2\mu$ were bounded, Schaefer applied
+to $F(u)=2\mu T(u+\varepsilon w)$ would give a solution at $\eta=2\mu$,
+a contradiction. Hence that solution set is unbounded.
+Choose $\varepsilon_j\downarrow0$ and solutions $u_j,\eta_j$ with
+$\|u_j\|_X\geq\varepsilon_j^{-1}$ and $0\leq\eta_j\leq2\mu$.
+Normalize $v_j=u_j/\|u_j\|_X$. Then
+\[
+ v_j=\eta_j T\left(v_j+\frac{\varepsilon_jw}{\|u_j\|_X}\right).
+\]
+Compactness gives a subsequence converging in $X$ to $v$ with
+$\|v\|_X=1$, $v=\eta Tv$, and $\eta>0$ (otherwise the right side
+would converge to zero). Thus $Lv=\eta v$, $v\geq0$.
+Regularity, the strong minimum principle and Hopf give a smooth
+$\phi=v>0$, $\partial_\nu\phi<0$, with $\lambda_1=\eta>0$.
+
+\Needspace{45mm}
+\PDEAnnotation{归一化保住非零极限}{紧性本身可能只给出零极限。把无界解列除以自身范数后，范数固定为一；扰动项同时趋零，极限才成为真正的非零特征函数。}
+\paragraph{3. Exclude eigenvalues to the left of $\lambda_1$.}
+For a complex eigenfunction $z$, smoothness and zero boundary values imply
+$|z(x)|\leq C d(x)$ near the boundary, with
+$d(x)=\operatorname{dist}(x,\partial U)$.
+Hopf and compactness of $\partial U$ give $\phi(x)\geq a d(x)$.
+For $0<\delta<1$, put $h=\phi^{1-\delta}$ and $v=z/h$.
+Then $v$ extends continuously as zero on $\partial U$.
+
+\PDEMarginDiagram{6.M}{商为何在边界趋零}
+{由 $|z|\leq Cd$ 与 $\phi\geq ad$，得到 $|z|/\phi^{1-\delta}\leq C'd^\delta\to0$。图示上界取 $\delta=1/2$。}
+{ch06-boundary-ratio-margin}
+
+A product calculation gives
+\[
+ L(hv)=hKv+vLh,\qquad
+ K=-A:D^2+(b-2AD\log h)\cdot D,
+\]
+and the chain rule gives
+\[
+ \frac{Lh}{h}
+ =(1-\delta)\lambda_1+\delta c+
+ \delta(1-\delta)\frac{A D\phi\cdot D\phi}{\phi^2}
+ \geq(1-\delta)\lambda_1.
+\]
+Consequently, for $q=|v|^2$,
+\[
+ Kq=2\operatorname{Re}(\overline v Kv)-2A Dv\cdot D\overline v
+ \leq2\left(\operatorname{Re}\lambda-\frac{Lh}{h}\right)q .
+\]
+If $\operatorname{Re}\lambda<\lambda_1$, choose $\delta$ small so that
+the coefficient on the right is strictly negative.
+The nonzero continuous function $q$, zero on $\partial U$, has a
+positive interior maximum, where $Dq=0$ and $-A:D^2q\geq0$,
+a contradiction. This argument is pointwise at that maximum; it does
+not assume the drift $D\log h$ is bounded near the boundary.
+
+\paragraph{4. Prove geometric simplicity by sliding positive functions.}
+Let $z$ be a real eigenfunction for $\lambda_1$, changing its sign if
+necessary so it is positive somewhere.
+The estimates $\phi\geq a d$ and $|z|\leq C d$, also valid after adjusting
+constants on the interior compact region, show that
+\[
+ t_*=\sup\{t\geq0:\phi-tz\geq0\text{ in }U\}
+\]
+is positive and finite. At $t_*$ the residual $r=\phi-t_*z$ is nonnegative
+and satisfies $Lr=\lambda_1r\geq0$.
+If it were nonzero, the strong minimum principle and Hopf would give
+$r\geq a' d$. Since $|z|\leq C d$, a small further increase of $t_*$
+would preserve nonnegativity, a contradiction.
+Hence $r=0$. Apply this separately to real and imaginary parts for
+complex eigenfunctions at the real value $\lambda_1$.
+\end{expandedproof}
+
+\Needspace{35mm}
+\subsection{The positive adjoint eigenfunction}
+\begin{lemma}\label{lem:6-positive-adjoint}
+The formal Dirichlet adjoint has a positive eigenfunction $\phi^*$
+for the same $\lambda_1$.
+\end{lemma}
+\begin{expandedproof}
+The inverse $T^*$ is positive on $L^2$: for $f,g\geq0$,
+$(T^*f,g)=(f,Tg)\geq0$.
+Regularity makes its restriction to $X$ compact.
+If $f\in\mathcal C$ is nonzero, $v=T^*f\geq0$ is nonzero.
+Although the expanded potential $c^*$ of $L^*$ may be negative,
+choose $M$ with $c^*+M\geq0$; then
+$(L^*+M)v=f+Mv\geq0$.
+The strong minimum principle and Hopf applied to $L^*+M$ give
+$v>0$ and $\partial_\nu v<0$.
+The compact-cone construction in Steps 1--2, with $T^*$ in place of $T$,
+therefore gives $\phi^*>0$ and $L^*\phi^*=\lambda^*\phi^*$, $\lambda^*>0$.
+Both eigenfunctions have zero trace, so weak adjointness yields
+\[
+ \lambda_1(\phi,\phi^*)=B[\phi,\phi^*]
+ =(\phi,L^*\phi^*)=\lambda^*(\phi,\phi^*).
+\]
+The inner product is positive, hence $\lambda^*=\lambda_1$.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{伴随的零阶项可能变号}{原算子的 $c\geq0$ 不推出伴随算子的零阶项非负。先由逆算子的对偶关系得到非负性，再加常数使用强最大值原理，才能严谨得到伴随正特征函数。}
+If $c$ has arbitrary sign but is bounded, apply the theorem to $L+\kappa$
+with $c+\kappa\geq0$. Translating its eigenvalues back preserves the positive
+principal eigenfunction, simplicity and the least-real-part property;
+the resulting $\lambda_1$ need not be positive.
+The word \emph{simple} above describes the eigenspace. In fact there is
+also no generalized eigenvector at $\lambda_1$: an equation
+$(L-\lambda_1)z=\phi$ contradicts pairing with $\phi^*$, since
+$(\phi,\phi^*)>0$.

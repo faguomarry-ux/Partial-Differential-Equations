@@ -1,13 +1,215 @@
 % Evans second edition, section 2.4.
 % English source: printed p. 63; PDF page 80 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked from chapter opening, PDF 31; mean-value pages checked at PDF 36-37 and 53-55.
+% Status: editorial study draft with reconstructed proofs and mathematical annotations.
 \section{Wave Equation}
 \label{sec:2-4}
 
-\PDEPending
+\subsection{Spherical means and explicit solutions (Evans \S2.4.1)}
+The wave equation $u_{tt}-\Delta u=0$ needs two initial data:
+$u(\cdot,0)=g$, $u_t(\cdot,0)=h$.
+Unlike the heat equation, it scales with $t\mapsto\lambda t$ when
+$x\mapsto\lambda x$.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\paragraph{One dimension: d'Alembert (source Theorem 1).}
+Write $\xi=x+t$, $\eta=x-t$. Then
+$\partial_t^2-\partial_x^2=-4\partial_\xi\partial_\eta$.
+Thus $u_{\xi\eta}=0$, and integration gives $u=F(\xi)+G(\eta)$.
+At $t=0$, $F+G=g$ and $F'-G'=h$, whereas $F'+G'=g'$.
+Solving for $F',G'$ and integrating yields
+\[
+ u(x,t)=\frac{g(x+t)+g(x-t)}2
+              +\frac12\int_{x-t}^{x+t}h(y)\,dy .
+ \tag{DA}
+\]
+For $g\in C^2$, $h\in C^1$, direct differentiation verifies the equation,
+$u(\cdot,0)=g$, and $u_t(\cdot,0)=h$.
+Only initial points in $[x-t,x+t]$ matter.
+
+\Needspace{45mm}
+\PDEAnnotation{两个初值各管什么}{初始位移 $g$ 生成两列反向平移的形状；初始速度 $h$ 在区间内累积。热方程只需一个初值，而波动方程的二阶时间导数要求两个。}
+
+
+\PDEBodyDiagram{2.4}{The wave equation has a finite domain of dependence.}
+{For speed one in one dimension, the solution at $(x,t)$ uses initial data only on $[x-t,x+t]$. At an intermediate time $s$, the relevant interval is $|y-x|\leq t-s$. In higher dimensions this interval becomes a ball. A forced equation also accumulates sources from the past cone.}
+{ch02-wave-cone}
+
+\paragraph{The common spherical-mean identity.}
+Fix a spatial center $x$ and set
+$M(r,t)=|\partial B_r|^{-1}\int_{\partial B_r(x)}u(y,t)\,dS$.
+The radius-flux computation used for harmonic means now gives
+\[
+ M_r=\frac1{n\omega_n r^{n-1}}\int_{B_r(x)}\Delta u,\qquad
+ (r^{n-1}M_r)_r=r^{n-1}M_{tt}.
+\]
+Thus $M$ satisfies the Euler--Poisson--Darboux equation
+\[
+ M_{tt}=M_{rr}+\frac{n-1}rM_r,\qquad
+ M(0,t)=u(x,t),\quad M_r(0,t)=0 .
+ \tag{EPD}
+\]
+The second radius derivative differentiates the ball integral by shells;
+the wave equation changes $\Delta u$ into $u_{tt}$.
+\Needspace{45mm}
+\PDEAnnotation{同一个通量公式三次出现}{Laplace 方程令球面平均对半径不变；波动方程把同一半径变化联系到二阶时间导数；热方程则需要带方向的时空平均。不要因都出现球面而混为一谈。}
+
+\paragraph{Three dimensions: Kirchhoff.}
+For $n=3$, $W(r,t)=rM(r,t)$ satisfies $W_{tt}=W_{rr}$.
+Extend $M$ evenly in $r$, hence $W$ oddly. Its initial data are
+$rS_g(x,r)$ and $rS_h(x,r)$.
+Use (DA) for $W$ and differentiate in $r$ at zero.
+Since $W_r(0,t)=u(x,t)$, this gives
+\[
+ u(x,t)=\partial_t\big[tS_g(x,t)\big]+tS_h(x,t).
+ \tag{KIR}
+\]
+Equivalently
+\[
+ u(x,t)=\frac1{4\pi}\int_{\partial B_1}
+ [g(x+t\theta)+tDg(x+t\theta)\cdot\theta+t h(x+t\theta)]\,dS_\theta.
+\]
+The latter fixed-sphere expression makes initial limits transparent.
+The formula solves the wave equation: by (EPD) applied to spatial
+spherical means of $g$ or $h$, $tS_h$ satisfies the wave equation
+in the variables $(x,t)$; time differentiation handles the $g$ term.
+At zero, $tS_h=t h(x)+O(t^3)$ and
+$\partial_t(tS_g)=g(x)+O(t^2)$.
+These observations prove existence as well as the derivation from a
+hypothetical solution, for smooth data.
+
+\paragraph{Two dimensions: descent from three dimensions.}
+Make $g,h$ independent of a third coordinate.
+Project the upper and lower hemispheres onto the disk. Each contributes
+surface Jacobian $t/\sqrt{t^2-|y-x|^2}$.
+Formula (KIR) becomes
+\[
+ u(x,t)=\partial_t\left[\frac1{2\pi}
+          \int_{B_t(x)}\frac{g(y)}{\sqrt{t^2-|y-x|^2}}\,dy\right]
+       +\frac1{2\pi}\int_{B_t(x)}
+          \frac{h(y)}{\sqrt{t^2-|y-x|^2}}\,dy .
+ \tag{W2}
+\]
+Use $y=x+tz$ before differentiating: the singularity
+$(1-|z|^2)^{-1/2}$ is integrable on the fixed unit disk.
+This justifies differentiation for sufficiently smooth data.
+Descent preserves the PDE because the third-coordinate derivative is
+zero; the three-dimensional initial limits give the desired two data.
+\Needspace{45mm}
+\PDEAnnotation{降维为何出现权重}{投影把球面压到圆盘，靠近圆周时球面近乎竖直，面积 Jacobian 变大，产生 $(t^2-|y-x|^2)^{-1/2}$。它是几何投影权重，不是热球的权重。}
+
+\paragraph{All odd dimensions (source Theorem 2).}
+For $n=2k+1\geq3$, put $D_r=r^{-1}\partial_r$ and
+$\gamma_n=1\cdot3\cdots(n-2)$. Define
+\[
+ S_n(t)f=\frac1{\gamma_n}D_t^{\,k-1}
+                         \big[t^{n-2}S_f(x,t)\big].
+\]
+Then
+\[
+ u(x,t)=\partial_t S_n(t)g+S_n(t)h.
+ \tag{WO}
+\]
+Here $S_n(t)$ denotes a solution operator, whereas $S_f(x,t)$ is the
+normalized spherical average defined earlier.
+
+\begin{expandedproof}[the radial intertwining step]
+Let $E=r\partial_r$ and
+$A_kF=D_r^{k-1}(r^{2k-1}F)=rP(E)F$,
+where $P(E)=\prod_{j=1}^{k-1}(E+2j+1)$; for $k=1$ the product is one.
+This factorization follows successively from
+$D_r(r^aF)=r^{a-2}(E+a)F$.
+The radial Laplacian is $r^{-2}E(E+2k-1)$.
+The polynomial identity
+\[
+ (E+1)P(E)=(E+2k-1)P(E-2)
+\]
+therefore proves
+\[
+ (A_kF)''=A_k\left(F''+\frac{2k}{r}F'\right).
+\]
+For $F(r)=S_f(x,r)$ the bracket equals $\Delta_xF$ by the divergence
+identity behind (EPD). Hence $A_kS_f$, now with $r=t$, solves the wave
+equation. It commutes with $\Delta_x$ since the operator acts only on $r$.
+
+Spherical symmetry gives $S_f(x,t)=f(x)+O(t^2)$ with an even smooth
+extension at zero. The coefficient of $t f(x)$ in
+$A_kS_f$ is $P(0)=3\cdot5\cdots(2k-1)=\gamma_n$.
+All other terms start at $t^3$.
+Thus $S_n(t)f=t f+O(t^3)$, giving initial value zero and initial
+velocity $f$. Its time derivative has initial value $f$ and initial
+velocity zero. This proves (WO) for smooth data and explains its constants.
+Finite differentiability follows by differentiating the fixed-sphere
+integrals; the source sufficient assumptions are
+$g\in C^{m+1}$, $h\in C^m$, $m=(n+1)/2$.
+\end{expandedproof}
+
+\paragraph{All even dimensions (source Theorem 3).}
+For even $n\geq2$, put $\gamma_n=2\cdot4\cdots n$ and
+\[
+ B_f(x,t)=\frac{t^n}{\omega_nt^n}
+          \int_{B_t(x)}\frac{f(y)}{\sqrt{t^2-|y-x|^2}}\,dy
+ =\frac1{\omega_n}\int_{B_t(x)}
+          \frac{f(y)}{\sqrt{t^2-|y-x|^2}}\,dy .
+\]
+Set $S_n(t)f=\gamma_n^{-1}D_t^{(n-2)/2}B_f(x,t)$.
+The same formula $u=\partial_tS_n(t)g+S_n(t)h$ holds.
+To derive it, extend the data constantly in one extra coordinate,
+apply (WO) in dimension $n+1$, and project both hemispheres.
+Their Jacobian gives $2t/\sqrt{t^2-|y-x|^2}$; the sphere and ball
+area constants simplify to the displayed $\gamma_n$.
+The inherited PDE and initial limits prove it.
+For smooth data there is no endpoint issue; for the source finite
+regularity statement take $m=(n+2)/2$, $g\in C^{m+1}$, $h\in C^m$.
+When $n=2$, this reduces to (W2).
+
+For odd $n\geq3$, only data on the sphere at distance $t$ enter the
+formula, the sharp Huygens phenomenon.
+For even $n$, the whole ball enters and a trailing influence remains.
+Dimension one is an exception to the odd-dimensional sharp-front
+statement: (DA) includes an interval integral of $h$.
+
+\subsection{Forcing (Evans \S2.4.2, Theorem 4)}
+The operator $S_n(t)$ above solves the homogeneous equation with
+initial displacement zero and velocity $f$.
+For smooth forcing set
+\[
+ v(t)=\int_0^t S_n(t-s)f(s)\,ds.
+\]
+Since $S_n(0)=0$ and $\partial_tS_n(0)=I$, differentiate twice:
+\[
+ v_t=\int_0^t\partial_tS_n(t-s)f(s)\,ds,\qquad
+ v_{tt}=f(t)+\int_0^t\partial_t^2S_n(t-s)f(s)\,ds.
+\]
+The integrals in $v_{tt}$ and $\Delta v$ cancel.
+Thus $v_{tt}-\Delta v=f$, with both initial data zero.
+Add the homogeneous solution for general initial data.
+
+\subsection{Energy and finite propagation (Evans \S2.4.3, Theorems 5--6)}
+For a smooth solution with fixed zero Dirichlet boundary values,
+\[
+ \mathcal E(t)=\frac12\int_U(u_t^2+|Du|^2),\qquad
+ \mathcal E'(t)=\int_{\partial U}u_t\partial_\nu u=0.
+\]
+The boundary term vanishes because $u=0$ there for all times implies
+$u_t=0$ there. Apply this to the difference for uniqueness; zero initial
+energy gives $Du=u_t=0$, and zero initial displacement removes constants.
+
+For local propagation, consider the shrinking ball
+$B_{R-t}(x_0)$ and the cone energy
+\[
+ e(t)=\frac12\int_{B_{R-t}(x_0)}(u_t^2+|Du|^2).
+\]
+Differentiating the moving domain contributes a negative surface term.
+The PDE and spatial integration by parts yield
+\[
+ e'(t)=\int_{\partial B_{R-t}}
+ \left[u_t\partial_\nu u-\tfrac12(u_t^2+|Du|^2)\right]\,dS\leq0.
+\]
+The inequality follows from
+$2u_t\partial_\nu u\leq u_t^2+|\partial_\nu u|^2\leq u_t^2+|Du|^2$.
+If both initial data vanish on $B_R(x_0)$, $e(0)=0$ and hence
+$e(t)=0$ for $t<R$. Along each vertical segment inside the cone
+$u_t=0$ and its initial value is zero, so $u=0$ throughout the cone.
+Continuity gives the apex value when applicable.
+\Needspace{45mm}
+\PDEAnnotation{传播速度来自能量通量}{球半径以速度 $1$ 收缩时，移边界损失足以压住波的能量流入。热核虽处处为正，波的锥外影响却严格为零；这是两个方程的本质区别。}

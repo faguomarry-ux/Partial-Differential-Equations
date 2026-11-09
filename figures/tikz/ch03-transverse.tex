@@ -1,0 +1,24 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram]
+ \begin{scope}
+  \draw[pde axis] (0,0)--(4.7,0) node[right] {$x_1$};
+  \draw[pde axis] (0,0)--(0,3.2) node[above] {$x_2$};
+  \draw[pde blue,line width=1.4pt] (.25,.9)--(4.3,.9);
+  \node[below] at (3.6,.9) {$\Gamma$};
+  \foreach \a in {.7,1.8,2.9}
+   \draw[pde curve,-{Latex}] (\a,.9)--({\a+.8},2.6);
+  \draw[pde axis] (1.8,.9)--(1.8,1.65) node[left] {$\nu$};
+  \node[align=center] at (2.2,-.8)
+   {\textbf{Transverse}\\$F_p\cdot\nu\ne0$};
+ \end{scope}
+ \begin{scope}[shift={(6.5,0)}]
+  \draw[pde axis] (0,0)--(4.7,0) node[right] {$x_1$};
+  \draw[pde axis] (0,0)--(0,3.2) node[above] {$x_2$};
+  \draw[pde blue,line width=1.4pt] (.25,.9)--(4.3,.9);
+  \draw[pde warm,-{Latex}] (.7,.9)--(3.7,.9);
+  \draw[pde axis] (1.8,.9)--(1.8,1.65) node[left] {$\nu$};
+  \node[above,text=LumenWarm] at (3,1.05) {$F_p$ tangent};
+  \node[align=center] at (2.2,-.8)
+   {\textbf{Characteristic data surface}\\$F_p\cdot\nu=0$};
+ \end{scope}
+\end{tikzpicture}

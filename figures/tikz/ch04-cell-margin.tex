@@ -1,0 +1,12 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,pde tiny,x=1cm,y=1cm]
+ \fill[LumenAccent!12] (0,0) rectangle (1.55,1);
+ \fill[LumenWarm!15] (1.55,0) rectangle (3.1,1);
+ \draw[LumenInk] (0,0) rectangle (3.1,1);
+ \draw[LumenInk] (1.55,0)--(1.55,1);
+ \node at (.78,.5) {$a_1=1$};
+ \node at (2.32,.5) {$a_2=4$};
+ \draw[pde axis] (.2,1.35)--(2.9,1.35) node[midway,above] {$q$ constant};
+ \node[below] at (0,0) {$0$}; \node[below] at (3.1,0) {$1$};
+ \node at (1.55,-.75) {$\bar a=(\tfrac12+\tfrac18)^{-1}=1.6$};
+\end{tikzpicture}

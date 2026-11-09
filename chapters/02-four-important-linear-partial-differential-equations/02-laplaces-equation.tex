@@ -1,13 +1,324 @@
 % Evans second edition, section 2.2.
 % English source: printed p. 19; PDF page 36 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked from chapter opening, PDF 31; mean-value pages checked at PDF 36-37 and 53-55.
+% Status: editorial study draft with reconstructed proofs and mathematical annotations.
 \section{Laplace's Equation}
 \label{sec:2-2}
 
-\PDEPending
+\subsection{Fundamental solution (Evans \S2.2.1, Theorem 1)}
+A radial function $v(x)=F(r)$, $r=|x|>0$, satisfies
+\[
+ \Delta v=F''(r)+\frac{n-1}rF'(r).
+\]
+Thus harmonicity off zero gives $(r^{n-1}F')'=0$. Integration yields
+a constant plus $r^{2-n}$ if $n\geq3$, or a constant plus $\log r$
+if $n=2$. Choose the constants so that the inward flux is one:
+\[
+ \Phi(x)=
+ \begin{cases}
+ [n(n-2)\omega_n]^{-1}|x|^{2-n},&n\geq3,\\
+ -(2\pi)^{-1}\log|x|,&n=2.
+ \end{cases}
+ \qquad -\Delta\Phi=\delta_0.
+\]
+\Needspace{45mm}
+\PDEAnnotation{符号由通量固定}{我们求解 $-\Delta u=f$，故要求 $-\int_{\partial B_r}\partial_\nu\Phi=1$。若改用 $\Delta$ 作基本算子，基本解及 Green 公式的符号也要一起改。}
+\begin{expandedproof}[the distributional singularity]
+The displayed function is locally integrable and harmonic away from zero,
+and $\partial_r\Phi=-1/(n\omega_n r^{n-1})$.
+For $\phi\in C_c^\infty$, apply Green's identity on a large ball
+containing its support, with $\overline B_\varepsilon$ removed:
+\[
+ \int_{|x|>\varepsilon}\Phi(-\Delta\phi)
+ =\int_{\partial B_\varepsilon}
+      \bigl(\Phi\partial_r\phi-\phi\partial_r\Phi\bigr)\,dS.
+\]
+The first term tends to zero: it is $O(\varepsilon)$ for $n\geq3$,
+and $O(\varepsilon|\log\varepsilon|)$ for $n=2$.
+The second is the normalized spherical mean of $\phi$, tending to
+$\phi(0)$. Local integrability permits passage in the volume integral.
+Hence $-\Delta\Phi=\delta_0$ as a distribution.
+\end{expandedproof}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+For $f\in C_c^2(\R^n)$ put $u=\Phi*f$. Write
+$u(x)=\int\Phi(y)f(x-y)\,dy$ and differentiate $f$, not the singular
+kernel. On each compact set of $x$, all these integrals have common
+bounded support in $y$ and are dominated by an integrable multiple of
+$|\Phi|$. Thus $u\in C^2$ and
+\[
+ -\Delta u(x)=\int\Phi(y)(-\Delta_y f(x-y))\,dy=f(x)
+\]
+by the distribution identity just proved. This avoids an illegal
+unqualified differentiation of $D^2\Phi$ at zero.
+For $n=1$, $\Phi(x)=-|x|/2$ has the same normalization.
+
+\input{chapters/02-four-important-linear-partial-differential-equations/02a-laplace-mean-value}
+
+\subsection{Consequences of averaging (Evans \S2.2.3)}
+\begin{theorem}[Strong maximum principle; source Theorems 4--5]
+If $U$ is bounded and $u\in C^2(U)\cap C(\overline U)$ is harmonic,
+its maximum and minimum are attained on $\partial U$.
+If $U$ is connected and a maximum is attained inside, $u$ is constant.
+Consequently the classical Dirichlet problem $-\Delta u=f$, $u=g$
+has at most one solution in this class.
+\end{theorem}
+\begin{expandedproof}
+Let $M=\max_{\overline U}u$ and suppose $u(x)=M$ at an interior point.
+The ball identity gives $\int_{B_r(x)}(M-u)=0$.
+The integrand is nonnegative and continuous. If it were positive at
+one point, continuity would give a positive integral on a smaller ball,
+a contradiction. Thus $u=M$ throughout $B_r(x)$.
+The set $\{u=M\}$ is open and relatively closed in $U$.
+On a connected component containing an interior maximum it is the
+whole component, and continuity transfers this value to that component's
+boundary, which lies in $\partial U$. This proves the boundary maximum
+statement even if $U$ has several components.
+Apply the argument to $-u$ for minima.
+The difference of two Dirichlet solutions is harmonic with zero boundary
+values, so its maximum and minimum are both zero.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{正权平均的等号条件}{平均值达到所有被平均数的上界，意味着它们几乎处处都达到该上界；连续性再把“几乎处处”提升为处处。热球的强最大值原理使用同一机制。}
+
+\paragraph{Smoothness and derivative estimates (source Theorems 6--7).}
+Radial convolution equals $u$ by the mean identity, as proved in
+\S\ref{sec:2-elliptic-mean}, so harmonic functions are $C^\infty$.
+Fix a radial mollifier $\rho$ with support in $B_1$.
+For $B_r(x)\Subset U$, use a convolution radius $r/2$ near $x$:
+\[
+ |D^\alpha u(x)|
+ =\left|\int D^\alpha\rho_{r/2}(x-y)u(y)\,dy\right|
+ \leq C_{\alpha,n}r^{-n-|\alpha|}\|u\|_{L^1(B_r(x))}.
+ \tag{D}
+\]
+All derivatives land on the smooth kernel; its scaling explains the power
+of $r$. With a first derivative the same argument gives
+$\|Du\|_{L^\infty(B_{R-\delta})}
+ \leq C_n\delta^{-1}\|u\|_{L^\infty(B_R)}$.
+
+\begin{theorem}[Liouville and bounded Poisson representation; source 8--9]
+A bounded harmonic function on $\R^n$ is constant.
+For $n\geq3$ and $f\in C_c^2$, every bounded solution of
+$-\Delta u=f$ is $\Phi*f+C$.
+\end{theorem}
+\begin{expandedproof}
+Apply (D) for $|\alpha|=1$ on $B_R(x)$:
+$|Du(x)|\leq C_nR^{-1}\|u\|_\infty\to0$ as $R\to\infty$.
+Thus $Du=0$ and connectedness makes $u$ constant.
+For $n\geq3$, $\Phi*f$ is continuous and tends to zero at infinity,
+hence bounded. Subtract it from $u$ and apply Liouville.
+For $n=2$, the logarithmic potential need not be bounded at infinity,
+so that final step cannot be asserted with the same hypotheses.
+\end{expandedproof}
+
+\begin{theorem}[Analyticity; source Theorem 10]
+Harmonic functions are real analytic in the interior.
+\end{theorem}
+\begin{expandedproof}[quantitative iteration rather than smoothness alone]
+Fix $B_R(x_0)\Subset U$, with $M=\|u\|_{L^\infty(B_R)}$.
+Every derivative of $u$ is harmonic, because derivatives commute with
+$\Delta$. Iterate the first-derivative estimate $k$ times on concentric
+balls whose successive radii differ by $R/(2k)$.
+For any $|\alpha|=k$ this gives
+\[
+ \|D^\alpha u\|_{L^\infty(B_{R/2})}
+ \leq M(2C_n k/R)^k
+ \leq M(2eC_n/R)^k k!.
+\]
+The last inequality follows from
+$\log(k!)=\sum_{j=1}^k\log j\geq\int_1^k\log s\,ds
+\geq k\log k-k$.
+For $h$ small enough that the segment from $x_0$ to $x_0+h$ stays in
+$B_{R/2}$, apply one-dimensional Taylor's theorem to
+$q(t)=u(x_0+th)$. Its $k$th derivative is
+\[
+ q^{(k)}(t)=\sum_{|\alpha|=k}\frac{k!}{\alpha!}
+                    h^\alpha D^\alpha u(x_0+th).
+\]
+Dividing the remainder by $k!$ and using
+$\sum_{|\alpha|=k}|h^\alpha|/\alpha!=|h|_1^k/k!$ bounds it by
+$M(2eC_n|h|_1/R)^k$, tending to zero for sufficiently small $h$.
+Thus the multivariable Taylor series equals $u$ near $x_0$.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{光滑不等于解析}{$C^\infty$ 只说明每阶导数存在；解析还需控制高阶导数的增长。这里的 $k!$ 型估计让 Taylor 余项趋零，不能省略这一环。}
+
+\begin{theorem}[Harnack; source Theorem 11]
+For connected $V\Subset U$ and nonnegative harmonic $u$,
+$\sup_Vu\leq C_{U,V,n}\inf_Vu$.
+\end{theorem}
+\begin{expandedproof}
+Choose $\rho>0$ with every $B_{2\rho}(z)$, $z\in V$, inside $U$.
+If $x,y\in V$ and $|x-y|\leq\rho$, then
+$B_\rho(y)\subset B_{2\rho}(x)$ and positivity gives
+\[
+ u(x)=\frac1{|B_{2\rho}|}\int_{B_{2\rho}(x)}u
+ \geq2^{-n}\frac1{|B_\rho|}\int_{B_\rho(y)}u=2^{-n}u(y).
+\]
+Exchange $x,y$ for the other inequality.
+Compactness gives a finite $\rho/4$ net of $V$.
+Connectedness permits a chain between any two net points with successive
+centers separated by at most $\rho$; one may obtain this by covering a
+path in $V$ and deleting loops in the finite cover graph.
+There is a uniform finite bound on the chain length.
+Multiplying the local factors proves the global comparison.
+If one value is zero, the same inequalities force every value in $V$
+to be zero, so the statement includes that case.
+\end{expandedproof}
+
+\subsection{Green and Poisson kernels (Evans \S2.2.4)}
+For sufficiently smooth $u,v$, the two Green identities are
+\[
+ \int_U Du\cdot Dv=-\int_Uv\Delta u+\int_{\partial U}v\partial_\nu u,
+\]
+\[
+ \int_U(u\Delta v-v\Delta u)
+ =\int_{\partial U}(u\partial_\nu v-v\partial_\nu u).
+\]
+The second is the difference of the first identity in the two orders.
+
+\paragraph{Boundary correction.}
+For fixed $x\in U$, suppose a harmonic corrector $h_x$ with
+$h_x(y)=\Phi(y-x)$ on $\partial U$ has been constructed.
+Set $G(x,y)=\Phi(y-x)-h_x(y)$. Then
+\[
+ -\Delta_yG(x,y)=\delta_x,\qquad G(x,y)=0\quad(y\in\partial U).
+\]
+General-domain existence of this corrector is not proved by the notation;
+it belongs to Dirichlet existence theory later in the book.
+The following representation is conditional on such a sufficiently
+regular Green function. Explicit examples below avoid that existence issue.
+\Needspace{45mm}
+\PDEAnnotation{Green 函数是修正后的点源}{基本解有正确的点源奇性，却通常不满足边界条件。减去调和修正项保留奇性、消掉边界值；“定义修正项”本身不等于证明它存在。}
+
+\begin{theorem}[Representation and symmetry; source Theorems 12--13]
+For $-\Delta u=f$, $u=g$ on the boundary,
+\[
+ u(x)=\int_U G(x,y)f(y)\,dy
+       -\int_{\partial U}g(y)\partial_{\nu_y}G(x,y)\,dS_y.
+ \tag{G}
+\]
+Furthermore $G(x,y)=G(y,x)$.
+\end{theorem}
+\begin{expandedproof}
+Apply the second Green identity on $U\setminus\overline B_\varepsilon(x)$
+to $u$ and $G(x,\cdot)$. Away from $x$, $\Delta G=0$.
+On the outer boundary $G=0$, leaving $\int g\partial_\nu G$.
+On the inner boundary the singular normal derivative has total flux
+one, with normal directed into the removed ball; the resulting term
+tends to $u(x)$. Terms involving $G\partial_\nu u$ tend to zero at
+rates $O(\varepsilon)$ or $O(\varepsilon|\log\varepsilon|)$.
+Thus $\int_U Gf=\int_{\partial U}g\partial_\nu G+u(x)$, giving (G).
+
+For symmetry, apply the same second identity to
+$G(x,\cdot),G(z,\cdot)$ with small disjoint balls about $x,z$ removed.
+Both are harmonic on the remaining domain and zero on the outer
+boundary. At the sphere around $x$, the term with the singular normal
+derivative tends to $G(z,x)$ and the opposite product tends to zero;
+the sphere around $z$ gives $-G(x,z)$.
+Their sum is zero, proving symmetry.
+\end{expandedproof}
+
+\paragraph{The upper half-space (source Theorem 14).}
+For $x_n>0$ let $x^*=(x',-x_n)$.
+Reflection gives $G(x,y)=\Phi(y-x)-\Phi(y-x^*)$.
+The singularity of the image lies outside the domain, and the two
+distances agree on $y_n=0$.
+Its boundary normal derivative gives
+\[
+ P(x,z)=\frac{2x_n}{n\omega_n(|x'-z|^2+x_n^2)^{n/2}},
+ \quad z\in\R^{n-1}.
+\]
+\[
+ u(x)=\int_{\R^{n-1}}P(x,z)g(z)\,dz.
+\]
+The kernel is harmonic in $x$, positive, and has mass one.
+To check the mass without imposing boundary decay, put $z=x'+x_n w$;
+the remaining integral is
+$[2/(n\omega_n)]\int(1+|w|^2)^{-n/2}\,dw=1$.
+Its value follows by polar coordinates, or the Gaussian integral and
+Gamma substitution.
+For bounded continuous $g$, split the boundary integral into
+$|z-x'_0|<\delta$ and its complement.
+Uniform continuity near $x'_0$ controls the first error; the latter
+kernel mass tends to zero as $x\to(x'_0,0)$.
+This proves boundary recovery and, by differentiation on compact interior
+sets, harmonicity.
+Uniqueness here is among bounded solutions: a bounded zero-boundary
+harmonic function extends oddly across the plane, is harmonic by the
+reflection argument in Problem 10, and is constant by Liouville, hence zero.
+
+
+\PDEBodyDiagram{2.2}{A reflected point source enforces the boundary value.}
+{The solid source at $x$ is inside the upper half-space; the image at $x^*$ is outside and has the opposite sign. Every boundary point $y$ is equidistant from the pair, so their potentials cancel there. The labels indicate source signs, not signed coordinate locations.}
+{ch02-image-source}
+
+\paragraph{The ball (source Theorem 15).}
+For $n\geq3$, $0<|x|<R$, put $x^*=R^2x/|x|^2$. An explicit Green function is
+\[
+ G(x,y)=\Phi(y-x)-(R/|x|)^{n-2}\Phi(y-x^*).
+\]
+On $|y|=R$, $|y-x^*|=(R/|x|)|y-x|$, so the boundary value is zero.
+At $x=0$ the formula has the limit $\Phi(y)-\Phi(R)$.
+In two dimensions use instead
+\[
+ G(x,y)=\frac1{2\pi}
+ \log\frac{|x|\,|y-x^*|}{R|y-x|},
+\]
+with the corresponding center limit $(2\pi)^{-1}\log(R/|y|)$.
+Differentiating in the boundary normal gives, for every $n\geq2$,
+\[
+ P_R(x,y)=\frac{R^2-|x|^2}{n\omega_n R|x-y|^n},
+ \qquad
+ u(x)=\int_{\partial B_R}P_R(x,y)g(y)\,dS_y.
+ \tag{PB}
+\]
+\begin{expandedproof}[why the boundary formula solves the problem]
+The constructed Green function and (G) applied to $u=1$ give
+$\int_{\partial B_R}P_R=1$. This uses a known constant harmonic function,
+so does not assume existence for arbitrary data.
+For $|y|=R$, direct differentiation yields
+\[
+ \Delta_x\big[(R^2-|x|^2)|x-y|^{-n}\big]
+ =2n(R^2-|y|^2)|x-y|^{-n-2}=0.
+\]
+Thus the integral is harmonic; all differentiations are dominated
+on compact subsets separated from the sphere.
+For $x\to y_0\in\partial B_R$ split $g(y)-g(y_0)$ into a small spherical
+neighborhood and its complement. Positivity and mass one control the
+near part by the modulus of continuity. On the complement the denominator
+stays bounded below while $R^2-|x|^2\to0$, so the far part tends to zero.
+This proves the boundary data. The maximum principle gives uniqueness.
+At $x=0$, $P_R$ is constant and (PB) reduces exactly to the spherical
+mean identity.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{中心平均与偏心平均}{从球心看，边界各方向权重相同；从偏心点看，靠近该点的边界权重更大，变成 Poisson 核。球面均值是 Poisson 表示的球心特例。}
+
+\subsection{Energy and Dirichlet's principle (Evans \S2.2.5, Theorems 16--17)}
+Let $U$ be bounded and smooth enough for the following integrations.
+For two $C^2(\overline U)$ solutions of the same Dirichlet problem,
+their difference $w$ has $\Delta w=0$ and $w|_{\partial U}=0$.
+Green's first identity gives
+$\int_U|Dw|^2=-\int_Uw\Delta w+\int_{\partial U}w\partial_\nu w=0$.
+Thus $w$ is constant on each component, and its boundary values make it zero.
+
+For $-\Delta u=f$, $u=g$, define
+\[
+ J(v)=\int_U\left(\tfrac12|Dv|^2-fv\right)\,dx.
+\]
+For $v=u+w$ with $w|_{\partial U}=0$,
+\[
+ J(v)-J(u)
+ =\int_U(Du\cdot Dw-fw)+\tfrac12\int_U|Dw|^2
+ =\tfrac12\int_U|Dw|^2\geq0.
+\]
+Here the linear term vanishes by Green's identity and the PDE.
+Conversely, if a smooth $u$ minimizes $J$ for its boundary data, test
+$v=u+\varepsilon\phi$ with $\phi\in C_c^\infty(U)$ and both signs of
+$\varepsilon$. Differentiating the quadratic polynomial at zero gives
+$\int Du\cdot D\phi=\int f\phi$, hence $-\Delta u=f$.
+This proves the equivalence in the smooth class; existence of a minimizer
+in a Sobolev class uses the later functional-analytic theory.
+\Needspace{45mm}
+\PDEAnnotation{从第二章走向第五章}{能量只含一阶导数，所以弱形式 $\int Du\cdot D\phi=\int f\phi$ 自然进入 $H^1$。第二章的显式公式与第五章的函数空间方法在这里接上。}

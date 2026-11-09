@@ -1,13 +1,437 @@
-% Evans second edition, section 4.7.
-% English source: printed p. 231; PDF page 248 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{Problems}
-\label{sec:4-7}
+% Evans 4.7, Problems 1--19, printed pp. 231--236; PDF pp. 248--253.
+\Needspace{65mm}
+\section{Problems}\label{sec:4-7}
+\noindent\emph{Source: Evans \S4.7, Problems 1--19.}
+Statements are restated concisely; all solutions and domain
+clarifications below are editorial.
 
-\PDEPending
+\Needspace{35mm}
+\subsection{Separation, scaling and traveling profiles}
+\Needspace{30mm}
+\paragraph{1. Aronsson's infinity-harmonic example.}
+\begin{proof}[Solution]
+For $u=f(x)+g(y)$, the equation is
+$(f')^2f''+(g')^2g''=0$.
+Set these terms equal to $64/81$ and $-64/81$ respectively.
+A resulting profile is
+\[
+ u(x,y)=|x|^{4/3}-|y|^{4/3}.
+\]
+Off the axes, $(f')^2f''=64/81$ and
+$(g')^2g''=-64/81$, so the PDE holds classically there.
+The function is $C^1$ on $\R^2$ but not $C^2$ on the axes.
+It is a global viscosity solution of
+$F(Du,D^2u)=-Du\cdot D^2u\,Du=0$, as follows.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+At $x=0$, $y\ne0$, no $C^2$ function touches $u$ from above:
+the positive $|x|^{4/3}$ increment is larger than every quadratic
+with zero first derivative at zero.
+For a test $\phi$ touching from below, $D\phi=Du$ and
+$\phi_{yy}\leq u_{yy}<0$, so
+$D\phi\cdot D^2\phi D\phi\leq0$, giving $F\geq0$.
+At $y=0$, $x\ne0$ the lower tests are absent, while an upper test has
+$\phi_{xx}\geq u_{xx}>0$ and hence $F\leq0$.
+At the origin every touching test has gradient zero, and $F=0$.
+These are exactly the viscosity inequalities.
+An affine function supplies a global classical solution if that
+solution class is required; the nonaffine Aronsson example needs the
+explicit weaker interpretation.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{经典解与黏性解要分清}{$|x|^{4/3}-|y|^{4/3}$ 不能在坐标轴上按经典二阶导数代入。本题用接触测试说明它的全局解意义；黏性解的一般理论留待第十章。}
+
+\Needspace{30mm}
+\paragraph{2. Hadamard instability of Laplace Cauchy data.}
+\begin{proof}[Solution]
+The separated ansatz $\sin(nx_1)T(x_2)$ gives $T''=n^2T$.
+The data $T(0)=0$, $T'(0)=1/n$ yield
+\[
+ u_n(x_1,x_2)=n^{-2}\sin(nx_1)\sinh(nx_2).
+\]
+The Cauchy data tend uniformly to zero, but on any line $x_2=h>0$,
+$\sup_{x_1}|u_n|=n^{-2}\sinh(nh)\to\infty$.
+Thus the data-to-solution map is not continuous in these uniform
+data and solution norms. One must not claim pointwise divergence
+at every fixed $x_1$, since $\sin(nx_1)$ can vanish.
+Existence of analytic solutions does not restore this stability.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{3. A balanced bistable front.}
+\begin{proof}[Solution]
+For $f(v)=-2v^3+3v^2-v$, $\int_0^1f=0$.
+The energy identity (BF4) forces speed $c=0$ for a nonconstant front.
+Here $F(v)=-v^2(1-v)^2/2$, so
+$(v')^2=v^2(1-v)^2$ and the increasing branch obeys $v'=v(1-v)$.
+Hence $v(s)=(1+e^{-(s-s_0)})^{-1}$.
+It has the required endpoints and vanishing derivatives.
+Its second derivative is $v(1-v)(1-2v)=-f(v)$,
+verifying the ODE directly.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{4. Emden--Fowler coordinates.}
+\begin{proof}[Solution]
+Put $a=2/(p-1)$, $t=\log r$, and $X(t)=e^{at}v(e^t)$.
+Then
+\[
+ v'=r^{-a-1}(X'-aX),\quad
+ v''=r^{-a-2}\{X''-(2a+1)X'+a(a+1)X\}.
+\]
+Since $ap=a+2$, the radial equation becomes the autonomous ODE
+\[
+ X''+(n-2-2a)X'+a(a-n+2)X+X^p=0.
+\]
+This change treats $r>0$; regularity at the center is an additional
+condition corresponding to $t\to-\infty$.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{5. Fast-diffusion scaling profile.}
+\begin{proof}[Solution]
+In the standard parabolic range $\max\{0,(n-2)/n\}<m<1$, use
+$\beta=1/(n(m-1)+2)>0$, $\alpha=n\beta$ as in \S4.2.
+Integrating $(W^m)'=-\beta rW$ gives
+\[
+ u(x,t)=t^{-\alpha}
+ \left(C+\frac{(1-m)\beta}{2m}|x|^2t^{-2\beta}\right)^{-1/(1-m)},
+ \qquad C>0.
+\]
+It is positive and smooth at every $t>0$.
+Its spatial tail is $|x|^{-2/(1-m)}$; integrability is equivalent to
+$2/(1-m)>n$, the stated mass-critical lower bound.
+Directly differentiating $W^{m-1}=C+(1-m)\beta r^2/(2m)$ verifies
+the profile ODE.
+Unlike the porous-medium profile it has no compact support.
+If $n=1$, the source's written bound $(n-2)/n<m<1$ alone
+also permits $m\leq0$. The above forward diffusion construction uses
+$m>0$; it does not assert a decaying positive profile for those
+nonparabolic exponents. At $m=0$ the positive equation is $u_t=0$,
+a separate degeneracy.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{快扩散仍需正的扩散指数}{扩散系数为 $m u^{m-1}$。$0<m<1$ 时在低密度处很大，产生代数尾；若 $m<0$，最高阶符号反转，已不是同一类前向抛物扩散。}
+
+\Needspace{30mm}
+\paragraph{6. A boundary blowup solution.}
+\begin{proof}[Solution]
+Assume $n\geq3$ and set $p=(n+2)/(n-2)$.
+For $u=A(1-r^2)^{-b}$, radial differentiation gives
+\[
+ \Delta u=2bA(1-r^2)^{-b-2}
+                 \{n+(2b+2-n)r^2\}.
+\]
+Choose $b=(n-2)/2$ so the brace is $n$ and $bp=b+2$.
+Then $-\Delta u+u^p=0$ if
+\[
+ A=[n(n-2)]^{(n-2)/4}.
+\]
+This is smooth and finite in the open ball but diverges at every
+boundary point, as required.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{7. Viscous shock profiles and the entropy direction.}
+\begin{proof}[Solution]
+For $u_t+F(u)_x-au_{xx}=0$ put $u=v(x-ct)$.
+Integration yields
+\[
+ av'=F(v)-cv+b=:Q(v).
+\]
+Separation gives $s=\int_{v(0)}^{v(s)}a/Q(z)\,dz$ wherever $Q\ne0$.
+A connection from $u_l$ to $u_r$ forces both endpoint values of $Q$
+to vanish; otherwise $v'$ stays away from zero near that endpoint
+and $v$ cannot have the asserted limit.
+Subtracting the endpoint identities gives
+$c=(F(u_l)-F(u_r))/(u_l-u_r)$.
+Conversely, for $u_l>u_r$, strict convexity makes
+$Q<0$ on $(u_r,u_l)$ when $b$ is chosen to make the endpoints zero.
+The zeros are simple: $Q'(u_r)<0<Q'(u_l)$.
+The integral therefore diverges to $+\infty$ as $v\downarrow u_r$
+and to $-\infty$ as $v\uparrow u_l$.
+Its inverse is the decreasing heteroclinic profile, unique up to shift.
+
+Normalize $v^\varepsilon(0)=(u_l+u_r)/2$.
+Then $v^\varepsilon(s)=v^1(s/\varepsilon)$.
+For $x-ct<0$ its limit is $u_l$, for $x-ct>0$ it is $u_r$,
+and on $x=ct$ it is the chosen midpoint.
+Boundedness gives local $L^1$ convergence to the Rankine--Hugoniot
+downward shock. The viscous connection thus selects the entropy direction.
+\end{proof}
+
+\Needspace{35mm}
+\subsection{Transforms and linearization}
+\Needspace{30mm}
+\paragraph{8. Schr\"odinger dispersive bound.}
+\begin{proof}[Solution]
+For $g\in L^1$, the modulus of the kernel in (SC4) is
+$(4\pi|t|)^{-n/2}$. The triangle inequality gives
+$\|u(t)\|_\infty\leq(4\pi|t|)^{-n/2}\|g\|_1$.
+The bound holds for both signs of $t\ne0$.
+It is consistent with conservation of the $L^2$ norm, since the
+norms measure different features.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{9. Inverting a nonlinear heat equation.}
+\begin{proof}[Solution]
+For $y=u(x,t)$, $x=v(y,t)$ and $u_x>0$, differentiate
+$u(v(y,t),t)=y$:
+\[
+ u_x=1/v_y,\quad u_t=-v_t/v_y,\quad u_{xx}=-v_{yy}/v_y^3.
+\]
+Substitution into $u_t=u_{xx}/u_x^2$ gives $v_t=v_{yy}$.
+This is local in the range of $u$; the inverse's spatial interval
+and boundary conditions may move with time.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{10. A local transformation to Liouville's equation.}
+\begin{proof}[Solution]
+Taken literally for every solution $u$ with a smooth real
+$f:\R^3\to\R$, the request is impossible: constant $u$ would give
+constant $w=f(u,0,0)$, while $w_{xt}=e^w>0$.
+The intended transformation must be local on a nondegenerate branch.
+
+For $u_{xt}=0$, write $u=A(x)+B(t)$.
+On $u\ne0$, $u_xu_t>0$, choose
+\[
+ w=f(u,u_x,u_t)=\log(2u_xu_t/u^2)
+        =\log2+\log|u_x|+\log|u_t|-2\log|u|.
+\]
+The first two derivative terms have zero mixed derivative, while
+\[
+ (-2\log|u|)_{xt}=2u_xu_t/u^2=e^w .
+\]
+This verifies the transformation on its real domain.
+More generally, for an additive ansatz $f=a(z)+b(p)+c(q)$,
+the mixed derivative equals $a''(u)u_xu_t$,
+which explains the logarithmic separation.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{变换的定义域不能隐去}{本题对数公式只在 $u\ne0$ 且 $u_xu_t>0$ 的分支上成立。常数解给出一个直接检查：不存在对所有三元输入光滑、又能转换所有解的实函数。}
+
+\Needspace{30mm}
+\paragraph{11. Lax pairs preserve a smooth eigenvalue branch.}
+\begin{proof}[Solution]
+Differentiate $Lw=\lambda w$ and take the real Hilbert inner
+product with $w\ne0$.
+Symmetry of $L$ cancels the two $w_t$ terms, leaving
+$\lambda'\|w\|^2=(L_tw,w)$.
+If $L_t=BL-LB$, then
+\[
+ (L_tw,w)=\lambda(Bw,w)-(Bw,Lw)=0.
+\]
+Thus $\lambda'=0$.
+For unbounded operators all these pairings require a common
+suitable domain and the differentiability stipulated by the exercise;
+formal operator symbols alone do not supply these hypotheses.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{12. The KdV commutator.}
+\begin{proof}[Solution]
+Let $D=\partial_x$, $L=-D^2+u$,
+$B=-4D^3+6uD+3u_x$.
+Using $D(av)=aDv+a_xv$ gives
+\[
+\begin{aligned}
+ [-4D^3,u]&=-12u_xD^2-12u_{xx}D-4u_{xxx},\\
+ [6uD,-D^2]&=12u_xD^2+6u_{xx}D,\\
+ [3u_x,-D^2]&=6u_{xx}D+3u_{xxx},\\
+ [6uD,u]&=6uu_x .
+\end{aligned}
+\]
+All derivative terms cancel, leaving $[B,L]=-u_{xxx}+6uu_x$.
+Since $L_t$ is multiplication by $u_t$,
+$(L_t-[B,L])v=(u_t+u_{xxx}-6uu_x)v$.
+For a KdV solution, every eigenvalue branch meeting Problem 11's
+operator hypotheses is constant.
+This is a conditional spectral conclusion, not a domain-free proof
+about every possible realization of the differential expression.
+\end{proof}
+
+\Needspace{35mm}
+\subsection{Asymptotics, homogenization and analytic obstructions}
+\Needspace{30mm}
+\paragraph{13. The plume's Gaussian width.}
+\begin{proof}[Solution]
+Set $A=\sigma v$ in (PL4). Then
+$A_t-A_{zz}+(\beta zA)_z=0$ and $A(0)=\delta_0$.
+For $A=(\pi\Gamma)^{-1/2}e^{-z^2/\Gamma}$,
+\[
+ A_t/A=-\Gamma'/(2\Gamma)+z^2\Gamma'/\Gamma^2,\quad
+ A_{zz}/A=-2/\Gamma+4z^2/\Gamma^2.
+\]
+Also $(\beta zA)_z/A=\beta-2\beta z^2/\Gamma$.
+Both coefficients vanish precisely when
+$\Gamma'=4+2\beta\Gamma$, with $\Gamma(0)=0$ for the point-mass trace.
+Hence
+\[
+ \Gamma(t)=4e^{2\int_0^t\beta(r)\,dr}
+                \int_0^te^{-2\int_0^s\beta(r)\,dr}\,ds>0 .
+\]
+The normalized Gaussian has mass one and converges weakly to $\delta_0$,
+verifying the initial condition after division by $\sigma$.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{14. A relaxation system produces logarithmic diffusion.}
+\begin{proof}[Solution]
+Write the equations as
+$u_t^\varepsilon+\varepsilon^{-1}u_x^\varepsilon
+=\varepsilon^{-2}((v^\varepsilon)^2-(u^\varepsilon)^2)$
+and the opposite equation for $v^\varepsilon$.
+Multiplying by $\varepsilon^2$ and using the assumed bounded
+remainders yields $(u^0)^2=(v^0)^2$.
+Positivity forces $u^0=v^0=w$.
+
+Define the bounded corrections
+$U^\varepsilon=(u^\varepsilon-w)/\varepsilon$ and
+$V^\varepsilon=(v^\varepsilon-w)/\varepsilon$;
+the source's remainder is only assumed to be order $\varepsilon$.
+The first equation, multiplied by $\varepsilon$, gives
+\[
+ (V^\varepsilon-U^\varepsilon)(u^\varepsilon+v^\varepsilon)
+       =u_x^\varepsilon+\varepsilon u_t^\varepsilon.
+\]
+On compact sets $w>0$, so the denominator stays positive and
+$V^\varepsilon-U^\varepsilon\to w_x/(2w)$ locally uniformly.
+Adding the two original equations gives
+\[
+ u_t^\varepsilon+v_t^\varepsilon
+                 +\partial_x(U^\varepsilon-V^\varepsilon)=0 .
+\]
+Pass to the limit in distributions, using the uniform derivative
+bounds in the hypotheses. The result is
+$2w_t-\partial_x(w_x/(2w))=0$, or
+\[
+ w_t-\tfrac14(\log w)_{xx}=0 .
+\]
+No separate limit of the two first-order corrections is needed.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{只能按实际余项阶数做比较}{若余项仍是 $\varepsilon$ 乘一个有界函数，就不能把固定的 $u_1,v_1$ 自动认作唯一一阶系数。证明直接控制两者的差，再用两方程之和取极限。}
+
+\Needspace{30mm}
+\paragraph{15. Gaussian contour deformation.}
+\begin{proof}[Solution]
+For $q=\delta-i\lambda$, $\delta>0$, the completed-square variable
+puts the contour on a translated line $e^{i\theta}\R+c$,
+where $\theta=\arg\sqrt q$ satisfies $|\theta|<\pi/4$.
+First remove the translation: close the two parallel line segments
+at parameters $\pm R$ by segments of bounded length.
+On those connectors
+$\operatorname{Re}z^2\geq R^2\cos(2\theta)-C R-C$,
+so their integrals of $e^{-z^2}$ tend to zero.
+Cauchy's theorem equates the two infinite line integrals.
+
+Then rotate $e^{i\theta}\R$ onto $\R$.
+On connecting arcs of radius $R$ within the fixed sector,
+$|e^{-z^2}|\leq e^{-R^2\cos(2\theta)}$; their length is $O(R)$,
+so they also vanish. The integral is $\sqrt\pi$ with the inherited
+orientation.
+This argument holds for each fixed $\delta>0$;
+the limiting Fresnel branch is obtained afterward, not by claiming
+uniform decay on a sector boundary where the cosine is zero.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{16. Schr\"odinger initial recovery.}
+\begin{proof}[Solution]
+For $g\in C_c^\infty$, apply (SP4) to
+$\phi(y)=|x-y|^2/4$ with parameter $t>0$.
+Its sole critical point is $y=x$ and Hessian is $I/2$.
+The factor $(4\pi t)^{n/2}e^{i\pi n/4}$ from stationary phase
+cancels the prefactor in (SC4), so $u(x,t)=g(x)+O(t)$,
+uniformly for $x$ in compact sets.
+For general $g\in L^2$, the multiplier and dominated convergence give
+$u(t)\to g$ strongly in $L^2$, as proved in \S4.3.
+One cannot replace this by absolute-integral approximate-identity
+theory for a positive kernel: the Schr\"odinger kernel is oscillatory
+and is not in $L^1$ as a function of space.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{17. One-dimensional effective coefficient.}
+\begin{proof}[Solution]
+Set $F(x)=\int_0^xf(s)\,ds$ and $b=1/a$.
+Integration of the flux equation gives
+\[
+ (u^\varepsilon)'=b(x/\varepsilon)(C_\varepsilon-F(x)),\qquad
+ C_\varepsilon=
+ \frac{\int_0^1b(x/\varepsilon)F(x)\,dx}
+      {\int_0^1b(x/\varepsilon)\,dx}.
+\]
+The boundary condition $\int_0^1(u^\varepsilon)'=0$
+determines this constant.
+Periodic averaging gives $b(x/\varepsilon)\rightharpoonup^*\langle b\rangle$,
+$C_\varepsilon\to C=\int_0^1F$.
+The formula is uniformly bounded in $L^2$, and its weak limit is
+$u'=\langle b\rangle(C-F)$.
+The zero traces and uniqueness identify the weak $H_0^1$ limit, with
+$-\overline a\,u''=f$, $\overline a=\langle1/a\rangle^{-1}$.
+For the cell problem, $a(1-\chi')$ is constant;
+integrating $\chi'=1-\overline a/a$ over a period yields exactly
+the same harmonic mean.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{18. Primal and dual variational principles.}
+\begin{proof}[Solution]
+All averages use the unit cube, of volume one.
+For $\chi_\xi=\sum\xi_i\chi_i$, the cell orthogonality proves
+\[
+ \xi\cdot\overline A\xi
+ =\min_{v\ {\rm periodic}}\int_Q(\xi+Dv)\cdot A(\xi+Dv),
+\]
+with minimizer $v=-\chi_\xi$.
+For the dual problem fix $\eta$ and set
+$\xi=\overline A^{-1}\eta$,
+$\sigma_*=A(\xi-D\chi_\xi)$.
+It is periodic, divergence free and has mean $\eta$.
+For any admissible $\sigma=\sigma_*+\tau$, $\int_Q\tau=0$ and
+$\operatorname{div}\tau=0$, so periodic integration by parts gives
+\[
+ \int_Q\tau\cdot A^{-1}\sigma_*
+ =\int_Q\tau\cdot(\xi-D\chi_\xi)=0 .
+\]
+Expansion of the square therefore shows that $\sigma_*$ minimizes
+$\int_Q\sigma\cdot A^{-1}\sigma$, with minimum
+$\xi\cdot\overline A\xi=\eta\cdot\overline A^{-1}\eta$.
+
+The primal competitor $v=0$ gives $\overline A\leq\int_QA$.
+The constant dual competitor $\sigma=\eta$ gives
+$\overline A^{-1}\leq\int_QA^{-1}$.
+Inverting positive definite matrices reverses this order
+(conjugate by a square root and diagonalize), so
+\[
+ \left(\int_QA^{-1}\right)^{-1}\leq\overline A\leq\int_QA .
+\]
+These are quadratic-form inequalities, not entrywise inequalities.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{19. Analytic initial data need not give a time-analytic heat solution.}
+\begin{proof}[Solution]
+The total-order-two principal polynomial of $u_t-u_{xx}$ is $-\xi^2$.
+At the normal to $\{t=0\}$, $(\xi,\tau)=(0,1)$, it vanishes.
+Thus this is a characteristic surface for the CK theorem.
+
+If a solution with $u(x,0)=1/(1+x^2)$ were analytic near $(0,0)$,
+the PDE would give
+\[
+ \partial_t^ku(0,0)=\partial_x^{2k}(1+x^2)^{-1}|_{x=0}
+                 =(-1)^k(2k)! .
+\]
+Its time Taylor series along $x=0$ would be
+$\sum_{k\geq0}(-1)^k(2k)!t^k/k!$.
+For every $t\ne0$, successive term magnitudes have ratio
+$|t|(2k+2)(2k+1)/(k+1)\to\infty$, so terms do not even tend to zero.
+There is no analytic solution in a neighborhood of $(0,0)$,
+and therefore none on all $\R^2$.
+The bounded forward heat solution still exists and is smooth for
+$t>0$; it is time analyticity across the initial surface that fails.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{数据解析与跨初始面的解析性不同}{空间初值在原点附近解析，却可能因连续两次空间求导反复产生过快的阶乘增长，使时间 Taylor 级数发散。这与正时间的热方程光滑化没有矛盾。}

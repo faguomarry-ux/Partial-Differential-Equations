@@ -1,0 +1,92 @@
+% Expanded special-case proof of Evans 6.4.3, Theorem 5.
+\Needspace{35mm}
+\subsection{Harnack's inequality (Evans \S6.4.3, Theorem 5)}
+\begin{theorem}[Smooth principal-part case proved here]\label{thm:6-harnack}
+Suppose $A$ is smooth and uniformly elliptic and
+$-a^{ij}u_{ij}=0$, $u\geq0$ in $U$. For connected $V\Subset U$,
+\[
+ \sup_Vu\leq C\inf_Vu.
+\]
+The constant depends on the geometry of $V$ inside $U$, ellipticity and
+local coefficient bounds, including the derivatives used below, but not on $u$.
+\end{theorem}
+\Needspace{45mm}
+\PDEAnnotation{Harnack 是定量正性}{强最大值原理说非负非零解处处为正；Harnack 还控制内区任意两点的比值。它需要方程等式，不能随意用于只有单边不等式的函数。}
+\begin{expandedproof}
+\paragraph{1. Take a logarithm to estimate relative oscillation.}
+First take $u>0$, and put $v=\log u$ and $w=a^{ij}v_iv_j$.
+Then
+\begin{equation}\label{eq:6-log}
+ -a^{ij}v_{ij}=w,\qquad \theta|Dv|^2\leq w\leq\Lambda|Dv|^2.
+\end{equation}
+Interior smoothness justifies the following differentiations:
+rewrite the smooth nondivergence equation in divergence form and
+apply \S\ref{sec:6-3}. On a fixed compact region,
+\[
+ w_{kl}=2a^{ij}v_{ikl}v_j+2a^{ij}v_{ik}v_{jl}+R_{kl},
+ \quad
+ |R_{kl}|\leq\varepsilon|D^2v|^2+C_\varepsilon|Dv|^2.
+\]
+The remainder consists of $D^2A\,Dv\,Dv$ and $DA\,D^2v\,Dv$.
+Differentiate \eqref{eq:6-log} once to obtain
+$-a^{kl}v_{ikl}=w_i+(\partial_i a^{kl})v_{kl}$.
+Also
+$a^{ij}a^{kl}v_{ik}v_{jl}\geq\theta^2|D^2v|^2$;
+this is seen by diagonalizing the positive matrix $A$ at the point.
+Absorbing coefficient remainders gives, for
+$\mathcal M=-a^{kl}\partial_{kl}-2a^{ij}v_j\partial_i$,
+\[
+ \mathcal Mw\leq-\gamma|D^2v|^2+C|Dv|^2
+                \leq-\gamma_1w^2+Cw.
+\]
+The second inequality uses $w= -A:D^2v\leq C|D^2v|$.
+
+\paragraph{2. Localize and retain the drift--cutoff error.}
+Take $\zeta\in C^\infty_c(U)$ with $0\leq\zeta\leq1$ and $\zeta=1$
+on a chosen ball $V$. Let $z=\zeta^4w$.
+If its maximum is positive, it occurs where $\zeta>0$, and
+$\zeta Dw=-4wD\zeta$. At this point $Dz=0$ and
+$\mathcal Mz=-A:D^2z\geq0$.
+Expanding the product yields
+\[
+ 0\leq-\gamma_1\zeta^4w^2+
+        C\zeta^2w+C\zeta^3w^{3/2}.
+\]
+The last term comes from
+$-2ADv\cdot D(\zeta^4)\,w$ and uses $|Dv|\leq C\sqrt w$.
+It must be included because this drift depends on $v$.
+Set $Y=\zeta^2w$ at this maximum point. Then
+\[
+ \gamma_1Y^2\leq C(Y+Y^{3/2}).
+\]
+For $Y>0$, divide by $Y$ and solve the resulting quadratic inequality
+in $\sqrt Y$ to get $Y\leq C$. Hence $z\leq C$ at its maximum,
+and $w\leq C$, $|Dv|\leq C$ on $V$.
+
+\Needspace{45mm}
+\PDEAnnotation{对数变换后的漂移项}{新算子的漂移含有 $D\log u$，不能预先当成已有一致界的系数。截断计算保留三次项，再用四次项吸收，才能保证最终常数不依赖解。}
+\paragraph{3. Integrate the logarithmic gradient.}
+For $x,y$ in the ball, integrate along their segment:
+$|v(x)-v(y)|\leq C|x-y|\leq C\operatorname{diam}V$.
+Exponentiation bounds $u(x)/u(y)$.
+For a general connected $V\Subset U$, cover it by finitely many balls
+whose slightly larger concentric balls remain inside $U$.
+A finite chain of overlapping balls connects their values; multiplying
+the finitely many comparison constants proves the result.
+Finally apply the estimate to $u+\delta$, which solves the same equation
+because there are no lower-order terms, and let $\delta\downarrow0$.
+\end{expandedproof}
+
+
+\PDEBodyDiagram{6.4}{Local positivity comparisons propagate along a chain.}
+{Choose overlapping balls whose slightly larger balls still lie inside $U$. Comparing at overlap points transfers a local Harnack bound from $x$ to $y$. The resulting constant depends on the finite chain and its distance from the boundary, which is why connected compact interior regions occur in the theorem.}
+{ch06-harnack-chain}
+
+\paragraph{Scope of the source theorem.}
+Evans states Harnack for the full operator with lower-order terms
+and indicates extensions to bounded measurable coefficients.
+The proof supplied in the source, and reconstructed above, is restricted
+to smooth $A$ and $b=c=0$. The broader theorem is a further regularity
+result, cited there to Gilbarg--Trudinger; it is not proved by the
+logarithmic computation above. In the general case $u+\delta$ need not
+solve $Lu=0$, and differentiating measurable coefficients is unavailable.

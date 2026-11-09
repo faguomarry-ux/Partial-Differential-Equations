@@ -1,0 +1,26 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram]
+ \begin{scope}[x=1.3cm,y=2cm]
+  \draw[pde axis] (0,0)--(3.35,0) node[right] {$k$};
+  \draw[pde axis] (0,0)--(0,1.35) node[above] {gain};
+  \draw[pde curve] plot[domain=0:3.1,samples=90] (\x,{exp(-.35*\x*\x)});
+  \foreach \k in {1,2,3}{
+   \fill[LumenAccent] (\k,{exp(-.35*\k*\k)}) circle[radius=1.2pt];
+   \node[below] at (\k,0) {\k};}
+  \node[left] at (0,1) {$1$};
+  \node[align=center] at (1.55,1.75)
+   {\textbf{Forward heat}\\$e^{-k^2T}$};
+ \end{scope}
+ \begin{scope}[shift={(6.6,0)},x=1.3cm,y=.09cm]
+  \draw[pde axis] (0,0)--(3.35,0) node[right] {$k$};
+  \draw[pde axis] (0,0)--(0,30) node[above] {gain};
+  \draw[pde warm] plot[domain=0:3.05,samples=90] (\x,{exp(.35*\x*\x)});
+  \foreach \k in {1,2,3}{
+   \fill[LumenWarm] (\k,{exp(.35*\k*\k)}) circle[radius=1.2pt];
+   \node[below] at (\k,0) {\k};}
+  \node[left] at (0,1) {$1$};
+  \node[left] at (0,25) {$25$};
+  \node[align=center] at (1.55,39)
+   {\textbf{Backward reconstruction}\\$e^{k^2T}$};
+ \end{scope}
+\end{tikzpicture}

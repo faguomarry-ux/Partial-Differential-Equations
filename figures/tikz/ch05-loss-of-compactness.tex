@@ -1,0 +1,27 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram]
+ \begin{scope}[x=4.1cm,y=1cm]
+  \draw[pde axis] (0,0)--(1.1,0) node[right] {$r$};
+  \draw[pde axis] (0,-.05)--(0,2.6);
+  \foreach \e/\col in {.8/LumenBlue,.4/LumenAccent,.2/LumenWarm}{
+   \draw[draw=\col,line width=1.1pt]
+    plot[domain=0:\e,samples=60]
+     (\x,{pow(\e,-.5)*pow(1-pow(\x/\e,2),2)});
+   \node[above,draw=none,text=\col] at (\e,.07) {$\e$};}
+  \node[above] at (.5,3.1) {\textbf{Concentration: $n=3,\ p=2$}};
+  \node[align=center] at (.5,-.75)
+   {$u_\varepsilon(x)=\varepsilon^{-1/2}\psi(x/\varepsilon)$\\
+    $\|Du_\varepsilon\|_2,\ \|u_\varepsilon\|_6$ stay fixed};
+ \end{scope}
+ \begin{scope}[shift={(6.1,0)},x=.8cm,y=1.7cm]
+  \draw[pde axis] (0,0)--(6.6,0) node[right] {$x$};
+  \foreach \a/\col in {1/LumenBlue,3/LumenAccent,5/LumenWarm}
+   \draw[draw=\col,line width=1.1pt]
+    plot[domain=-.7:.7,samples=55]
+     ({\x+\a},{pow(1-pow(\x/.7,2),2)});
+  \draw[pde axis] (1,1.35)--(5.3,1.35);
+  \node[above] at (3.2,1.82) {\textbf{Translation on $\R$}};
+  \node[align=center] at (3.2,-.44)
+   {$u_j(x)=\psi(x-j)$\\same norm, support escapes};
+ \end{scope}
+\end{tikzpicture}

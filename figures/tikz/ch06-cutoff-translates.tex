@@ -1,0 +1,20 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram]
+ \draw[LumenMuted] (0,0) circle[radius=2.3cm];
+ \draw[pde blue] (0,0) circle[radius=1.85cm];
+ \draw[LumenWarm,dashed] (0,0) circle[radius=1cm];
+ \filldraw[fill=LumenAccent!10,draw=LumenAccent] (0,0) circle[radius=.65cm];
+ \node at (0,0) {$V$};
+ \node[fill=white,inner sep=1pt] at (-1.55,.45) {$W$};
+ \node[fill=white,inner sep=1pt] at (-2.02,.55) {$U$};
+ \node[above,text=LumenWarm] at (0,1) {$\operatorname{supp}\eta$};
+ \fill[LumenAccent] (.9,.1) circle[radius=1.8pt];
+ \fill[LumenAccent] (1.28,.1) circle[radius=1.8pt];
+ \draw[pde axis] (.9,.1)--(1.28,.1);
+ \node[below] at (1.05,-.06) {$he_k$};
+ \node[pde box,text width=62mm,anchor=west] at (3,0)
+  {$V\Subset W\Subset U,\qquad \eta=1\text{ on }V$\\[5pt]
+   choose $h$ before testing:\\[3pt]
+   $2|h|<\operatorname{dist}(\operatorname{supp}\eta,\partial W)$\\[5pt]
+   all translated tests remain inside $W$};
+\end{tikzpicture}

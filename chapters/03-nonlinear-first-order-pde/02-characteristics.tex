@@ -1,13 +1,238 @@
 % Evans second edition, section 3.2.
 % English source: printed p. 94; PDF page 111 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts: checked against the chapter-opening list, PDF p. 79.
+% Status: editorial study draft with detailed proofs and mathematical notes; no independent review.
+\Needspace{65mm}
 \section{Characteristics}
 \label{sec:3-2}
 
-\PDEPending
+\subsection{Deriving the full characteristic system (Evans \S3.2.1)}
+Suppose first that a $C^2$ solution exists. Along a curve $X(s)$ set
+$Z(s)=u(X(s))$ and $P(s)=Du(X(s))$.
+Then
+\[
+ \dot P_i=\sum_j u_{x_ix_j}(X)\dot X_j.
+\]
+Differentiate the PDE itself in $x_i$:
+\[
+ \sum_j F_{p_j}u_{x_jx_i}+F_z u_{x_i}+F_{x_i}=0.
+\]
+Choosing $\dot X_j=F_{p_j}$ makes the unknown Hessian sum match
+the first expression. Hence
+\[
+ \boxed{\begin{aligned}
+ \dot X&=F_p(P,Z,X),\\
+ \dot P&=-F_x(P,Z,X)-F_z(P,Z,X)P,\\
+ \dot Z&=P\cdot F_p(P,Z,X).
+ \end{aligned}}
+ \tag{CH}
+\]
+All partial derivatives of $F$ here hold its other arguments fixed.
+The third equation is the chain rule for $u(X(s))$.
+\Needspace{45mm}
+\PDEAnnotation{选择路径是为了消去 Hessian}{任意路径的梯度变化含 $D^2u$，并不封闭。取速度 $F_p$ 后，恰好能用微分后的 PDE 替换这组二阶导数，得到只含 $X,P,Z$ 的 ODE。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\paragraph{An invariant of the system.}
+Even before knowing $P=Du$, solutions of (CH) satisfy
+\[
+ \frac d{ds}F(P,Z,X)
+ =F_p\cdot(-F_x-F_zP)+F_z(P\cdot F_p)+F_x\cdot F_p=0.
+\]
+Initial data with $F(P(0),Z(0),X(0))=0$ therefore remain on the
+PDE constraint surface. This invariant alone does not yet prove
+that the transported vector $P$ is the gradient of a single-valued function.
+
+\subsection{Reduced systems and explicit examples (Evans \S3.2.2)}
+For $b(x)\cdot Du+c(x)u=f(x)$, only
+\[
+ \dot X=b(X),\qquad \dot Z=f(X)-c(X)Z
+\]
+are needed to compute values.
+If $b=b(x,u)$, the value equation remains
+$\dot Z=-c(X,Z)$ for $b(x,u)\cdot Du+c(x,u)=0$;
+the path now depends on the unknown value.
+
+\paragraph{Rotation.}
+For $x_1u_{x_2}-x_2u_{x_1}=u$ in the first quadrant with
+$u(r,0)=g(r)$,
+\[
+ X(s)=(r\cos s,r\sin s),\qquad Z(s)=e^s g(r).
+\]
+Thus
+$u(x_1,x_2)=e^{\arctan(x_2/x_1)}g(\sqrt{x_1^2+x_2^2})$.
+This is also immediate from $u_\theta=u$ in polar coordinates.
+
+\paragraph{Value blow-up without crossing.}
+For $u_{x_1}+u_{x_2}=u^2$, $u(x_1,0)=g(x_1)$,
+\[
+ X(s)=(r+s,s),\qquad Z(s)=\frac{g(r)}{1-sg(r)},
+\]
+so
+\[
+ u(x_1,x_2)=\frac{g(x_1-x_2)}
+                      {1-x_2g(x_1-x_2)}
+\]
+on the connected region reached before a denominator vanishes.
+If $g(r)>0$, the characteristic value blows up at $s=1/g(r)$.
+Continuing the rational expression beyond its pole is not continuing
+a finite classical solution through the blow-up time.
+\Needspace{45mm}
+\PDEAnnotation{两种失效机制}{半线性例子可在路径不相交时因 $Z$ 爆破失效；守恒律常见的是值仍有界、空间梯度先爆破。只检查特征线位置还不够。}
+
+\paragraph{A fully nonlinear example.}
+For $u_{x_1}u_{x_2}=u$, $u(0,r)=r^2$, compatibility gives
+$P_2(0)=2r$ and $P_1(0)=r/2$ when $r\ne0$.
+The system is $\dot P_i=P_i$, $\dot X_1=P_2$,
+$\dot X_2=P_1$, $\dot Z=2P_1P_2$.
+It integrates to
+\[
+ X_1=2r(e^s-1),\quad X_2=\tfrac r2(e^s+1),\quad Z=r^2e^{2s}.
+\]
+Since $4X_2-X_1=4r$ and $4X_2+X_1=4re^s$,
+\[
+ u(x_1,x_2)=\frac{(x_1+4x_2)^2}{16}.
+\]
+Direct differentiation verifies the PDE and boundary data everywhere.
+The characteristic construction just given is locally invertible only
+where $r\ne0$; the polynomial formula extends across the excluded locus.
+An explicit extension does not mean the local existence theorem was
+applicable at the characteristic boundary point $r=0$.
+
+\subsection{Admissible and noncharacteristic data (Evans \S3.2.3)}
+Flatten the initial hypersurface to $x_n=0$ and write its coordinates
+as $y\in\R^{n-1}$. Prescribing $u(y,0)=g(y)$ fixes
+\[
+ Z(0)=g(y),\quad P_i(0)=g_{y_i}(y)\ (i<n),\quad
+ F(P(0),g(y),(y,0))=0.
+ \tag{IC}
+\]
+Only the normal derivative $P_n(0)$ remains to be found.
+At an admissible root $p^0$, the sufficient condition
+$F_{p_n}(p^0,g(y_0),(y_0,0))\ne0$
+lets the implicit function theorem solve for a smooth branch $q_n(y)$.
+Different roots may produce different local solutions; uniqueness is
+relative to the chosen admissible branch.
+\Needspace{45mm}
+\PDEAnnotation{边界值没有给出完整梯度}{沿边界求导只能得到切向分量，法向分量要由 PDE 求出。代数方程可能无根或多根；非特征条件保证的是已选根附近的局部唯一分支。}
+
+For a curved surface, choose a smooth extension of $g$ and write
+$p=D_{\tan}g+\lambda\nu$, where $\nu$ is its unit normal.
+Differentiating the scalar constraint in $\lambda$ gives
+\[
+ \frac d{d\lambda}F(D_{\tan}g+\lambda\nu,g,x)
+       =F_p\cdot\nu.
+\]
+Thus the invariant geometric noncharacteristic condition is
+$F_p\cdot\nu\ne0$: the characteristic velocity crosses the surface.
+Changing the normal's orientation changes the sign, not this condition.
+
+For example $u_{x_2}=0$ with data on $x_2=0$ is noncharacteristic.
+The equation $u_{x_1}=0$ on the same boundary is characteristic:
+nonconstant data in $x_1$ are incompatible, while constant data leave
+the $x_2$ dependence undetermined. Failure of the hypothesis can mean
+either nonexistence or nonuniqueness.
+
+
+\PDEBodyDiagram{3.1}{Noncharacteristic data permit local reconstruction.}
+{The projected characteristic direction is $F_p$. Transversality makes the initial-surface parameters together with the flow parameter independent local coordinates. A tangent direction makes this coordinate construction singular; it does not by itself prove that no solution can exist.}
+{ch03-transverse}
+
+\subsection{Reconstructing a local solution (Evans \S3.2.4, Theorem 2)}
+\Needspace{45mm}
+\PDEAnnotation{非特征条件是局部条件}{$F_p\cdot\nu\ne0$ 让特征穿过初始曲面，从而给出局部坐标。它不保证以后投影仍可逆；法向速度的正负另用于区分流入、流出方向。}
+\begin{theorem}\label{thm:3-local}
+For smooth $F,g$ and a chosen admissible noncharacteristic triple,
+(CH) with data (IC) reconstructs a smooth local solution.
+The construction is unique locally among smooth solutions sharing
+that branch of boundary gradient.
+\end{theorem}
+\begin{expandedproof}[including the gradient compatibility step]
+\paragraph{1. Solve the ODE with boundary parameters.}
+Use the boundary-parameterized solution
+\[
+ (X,P,Z)(y,0)=((y,0),q(y),g(y)).
+\]
+Local ODE theory with smooth dependence supplies a common parameter neighborhood.
+At $s=0$, the columns $X_{y_i}$ are $e_i$, $i<n$, and
+$X_s=F_p$. Hence
+\[
+ \det D_{(y,s)}X(y_0,0)=F_{p_n}(p^0,z^0,x^0)\ne0.
+\]
+The inverse function theorem gives local coordinates
+$(y,s)=(y(x),s(x))$. Define $u(x)=Z(y(x),s(x))$.
+
+\paragraph{2. Preserve the algebraic PDE constraint.}
+The invariant above and initial compatibility give
+$F(P(y,s),Z(y,s),X(y,s))=0$.
+We still have to prove $P(y,s)=Du(X(y,s))$.
+
+\paragraph{3. Propagate the contact identities.}
+The $s$ identity $Z_s=P\cdot X_s$ is in (CH).
+For every boundary parameter set
+$R_i=Z_{y_i}-P\cdot X_{y_i}$.
+Initially $R_i=0$, by the tangential compatibility in (IC).
+Differentiate:
+\[
+ \begin{split}
+ (R_i)_s
+ &=P_{y_i}\cdot X_s-P_s\cdot X_{y_i}\\
+ &=F_p\cdot P_{y_i}+F_x\cdot X_{y_i}
+                         +F_zP\cdot X_{y_i}.
+ \end{split}
+\]
+Differentiating the preserved identity $F(P,Z,X)=0$ in $y_i$ yields
+$F_p\cdot P_{y_i}+F_x\cdot X_{y_i}=-F_zZ_{y_i}$.
+Therefore $(R_i)_s=-F_zR_i$ with zero initial value.
+Uniqueness for this scalar linear ODE gives $R_i=0$.
+
+\paragraph{4. Return to physical coordinates.}
+Together the identities say $dZ=P\cdot dX$ for all parameter
+differentials. Since $D_{(y,s)}X$ is invertible, every physical
+differential occurs, so $Du=P$.
+The preserved constraint now becomes $F(Du,u,x)=0$.
+At $s=0$ we recover $u=g$. Any other smooth solution with the same
+boundary gradient branch generates the same characteristic ODE data,
+so ODE uniqueness and coordinate invertibility identify the solutions.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{不能提前把 $P$ 叫作梯度}{从 ODE 构造出来的 $P$ 起初只是向量场。必须证明 $dZ=P\cdot dX$，再利用坐标可逆性，才能认定 $P=Du$；否则只保留 $F(P,Z,X)=0$ 还没有解出 PDE。}
+
+\subsection{Evolution equations and breakdown (Evans \S3.2.5)}
+For $u_t+\mathbf f'(u)\cdot D_xu=0$ with initial data $g$,
+\[
+ X(a,t)=a+t\mathbf f'(g(a)),\qquad u(X(a,t),t)=g(a).
+\]
+Eliminating $a$ gives $u=g(x-t\mathbf f'(u))$ while the map is invertible.
+Its Jacobian is $I+t\,\mathbf f''(g(a))\otimes Dg(a)$.
+The rank-one determinant identity yields
+\[
+ \det D_aX=1+t\,Dg(a)\cdot\mathbf f''(g(a)).
+\]
+In one dimension,
+\[
+ u_x(X(a,t),t)=\frac{g'(a)}
+                    {1+t f''(g(a))g'(a)}.
+\]
+If the denominator first vanishes with $g'(a)<0$ and $f''>0$,
+gradients blow up although $u=g(a)$ remains finite.
+For Burgers flux $f(u)=u^2/2$ and bounded $C^1$ data with
+$m=\inf g'<0$, the first loss of a uniform positive Jacobian is at
+$T_*=-1/m$. If the infimum is attained, that characteristic gives
+an actual zero Jacobian at $T_*$.
+\Needspace{45mm}
+\PDEAnnotation{相空间不交不保证投影不交}{扩展状态 $(X,P,Z)$ 的 ODE 可保持唯一性，但只看 $X$ 时不同状态可落在同一位置。物理空间的逆映射失效，正是特征构造中光滑解失效的关键。}
+
+For $u_t+H(D_xu,x)=0$, the full system becomes Hamilton's equations
+and an action equation:
+\[
+ \dot X=H_p(P,X),\qquad
+ \dot P=-H_x(P,X),\qquad
+ \dot Z=P\cdot H_p-H.
+\]
+When $H=H(p)$, $P=Dg(a)$ stays constant and
+\[
+ X=a+tDH(Dg(a)),\qquad
+ Z=g(a)+t[Dg(a)\cdot DH(Dg(a))-H(Dg(a))].
+\]
+This formula is local until the projection ceases to be invertible.
+The next section gives a variational continuation with a selection rule.

@@ -1,13 +1,116 @@
 % Evans second edition, section 5.7.
 % English source: printed p. 270; PDF page 287 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked against the chapter opening on PDF page 187; see docs/CHAPTER-05.md.
+% Status: editorial study draft; expanded proofs and Chinese mathematical annotations.
 \section{Compactness}
 \label{sec:5-7}
 
-\PDEPending
+\subsection{Rellich--Kondrachov (Evans \S5.7, Theorem 1)}
+\begin{theorem}\label{thm:5-rellich}
+Let $U$ be bounded with $C^1$ boundary. If $1\leq p<n$ and
+$1\leq q<p^*$, every bounded sequence in $W^{1,p}(U)$ has a subsequence
+converging in $L^q(U)$. We write $W^{1,p}(U)\Subset L^q(U)$.
+For $p=n$ the same conclusion holds for every finite $q$.
+For $p>n$, including $p=\infty$, bounded sequences have subsequences
+converging uniformly on $\overline U$.
+\end{theorem}
+\Needspace{45mm}
+\PDEAnnotation{连续嵌入与紧嵌入}{连续嵌入只把有界集送到有界集；紧嵌入还能从任意有界序列抽出强收敛子列。强收敛常用于通过非线性项的极限。}
+\begin{expandedproof}
+\paragraph{1. Put every function on the same compact set.}
+Extend a bounded sequence $(u_j)$ by the fixed operator in
+Theorem~\ref{thm:5-extension}. Call the extensions $v_j$.
+They have uniformly bounded $W^{1,p}(\R^n)$ norm and support in a fixed
+compact set $K$.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\paragraph{2. Uniform smoothing error.}
+For smooth $v$, the line integral formula and Minkowski give
+\[
+ \|v(\cdot+h)-v\|_p
+ \leq |h|\int_0^1\|Dv(\cdot+th)\|_p\,dt
+ =|h|\|Dv\|_p .
+\]
+Smooth approximation passes this to every finite-$p$ Sobolev function.
+Consequently
+\[
+ \|\rho_\varepsilon*v_j-v_j\|_p
+ \leq C\varepsilon\|Dv_j\|_p\leq C\varepsilon
+\]
+uniformly in $j$.
+For $q\leq p$, finite support gives the corresponding $L^q$ bound.
+For $p<q<p^*$ choose $0<\theta<1$ with
+$1/q=\theta/p+(1-\theta)/p^*$. H\"older interpolation gives
+\[
+ \|\rho_\varepsilon*v_j-v_j\|_q
+ \leq\|\rho_\varepsilon*v_j-v_j\|_p^\theta
+      \|\rho_\varepsilon*v_j-v_j\|_{p^*}^{1-\theta}
+ \leq C\varepsilon^\theta .
+\]
+The second factor is uniformly bounded by the Sobolev inequality
+and convolution's $L^{p^*}$ bound.
+
+\paragraph{3. Compactness for a fixed smoothing radius.}
+For fixed $\varepsilon$, the functions $v_{j,\varepsilon}
+=\rho_\varepsilon*v_j$ have support in $K+\overline B_\varepsilon$.
+Moreover
+\[
+ \|v_{j,\varepsilon}\|_\infty
+ \leq\|\rho_\varepsilon\|_\infty\|v_j\|_1,\qquad
+ \|Dv_{j,\varepsilon}\|_\infty
+ \leq\|D\rho_\varepsilon\|_\infty\|v_j\|_1 .
+\]
+The right sides are independent of $j$ by bounded support and H\"older.
+Arzel\`a--Ascoli, invoked here as a prerequisite, supplies a uniformly
+convergent subsequence on that compact set.
+
+\paragraph{4. Make one subsequence work at every scale.}
+Choose $\varepsilon_l\downarrow0$ so the $L^q$ smoothing error is
+at most $2^{-l}$. Extract nested subsequences for $l=1,2,\ldots$, and
+take the diagonal sequence $(v_{j_a})$. For fixed $l$, its smoothed
+sequence is Cauchy, so
+\[
+ \limsup_{a,b\to\infty}\|v_{j_a}-v_{j_b}\|_q\leq2^{1-l}.
+\]
+Let $l\to\infty$. Completeness of $L^q$ gives convergence, and restriction
+to $U$ proves the result.
+
+\paragraph{5. The remaining exponents.}
+If $p=n\geq2$, choose $1\leq r<n$ with $r^*>q$ and apply the preceding
+result to the bounded $W^{1,r}$ sequence. If $p>n$, Morrey gives
+uniform boundedness and a common H\"older modulus on $\overline U$;
+Arzel\`a--Ascoli gives uniform convergence.
+For the exceptional case $n=p=1$, extension to a fixed bounded interval
+and the translation/smoothing argument above prove compactness in $L^1$.
+The interval fundamental theorem gives a uniform $L^\infty$ bound;
+interpolation then gives compactness in every finite $L^q$.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{对角线到底做什么}{固定 $\varepsilon$ 得到的子列可能随 $\varepsilon$ 改变。先抽嵌套子列再取对角线，保证每个固定尺度最终都收敛；最后才令尺度趋零。}
+
+\subsection{Why the critical exponent is excluded}
+Fix nonzero $\psi\in C_c^\infty(B_1)$ and an interior point $x_0$.
+For $p<n$ define, for sufficiently large $\lambda$,
+\[
+ u_\lambda(x)=\lambda^{(n-p)/p}\psi(\lambda(x-x_0)).
+\]
+Then $\|Du_\lambda\|_p=\|D\psi\|_p$,
+$\|u_\lambda\|_p=\lambda^{-1}\|\psi\|_p$, but
+$\|u_\lambda\|_{p^*}=\|\psi\|_{p^*}>0$.
+The sequence tends to zero at every $x\ne x_0$.
+A strongly $L^{p^*}$ convergent subsequence would have a further
+almost-everywhere convergent subsequence, so its limit would be zero,
+contradicting its constant nonzero norm.
+\Needspace{45mm}
+\PDEAnnotation{集中导致临界失紧}{尖峰越来越窄、越来越高，梯度范数和临界范数都不变。次临界范数会衰减，因此 $q<p^*$ 留出的余量正好压住集中。}
+
+
+\PDEBodyDiagram{5.4}{Bounded norms do not prevent concentration or escape.}
+{The left panel uses radial bump profiles $\psi(x)=(1-|x|^2)_+^2$ in $\R^3$, scaled with $\varepsilon=0.8,0.4,0.2$; their gradient $L^2$ and critical $L^6$ norms stay fixed. The right panel illustrates translations of a compact bump on $\R$. Each mechanism obstructs strong compactness for a different reason.}
+{ch05-loss-of-compactness}
+
+\paragraph{Zero boundary data on rough bounded domains.}
+For finite $p$, zero extensions of a bounded sequence in $W^{1,p}_0(U)$
+have a common compact support and bounded whole-space Sobolev norm.
+The proof above therefore gives compactness in $L^p(U)$ on any bounded
+open $U$, without regular boundary. On unbounded domains, translations
+of a fixed bump can escape to infinity and destroy global compactness.

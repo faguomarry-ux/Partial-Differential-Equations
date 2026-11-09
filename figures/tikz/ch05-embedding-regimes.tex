@@ -1,0 +1,19 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram]
+ \node[pde box,text width=29mm,minimum height=24mm] (a) at (1.8,1.3)
+  {$1\leq p<n$\\[5pt]
+   $L^{p^*},\quad p^*=\dfrac{np}{n-p}$};
+ \node[pde box,text width=29mm,minimum height=24mm] (b) at (6.0,1.3)
+  {$p=n$\\[5pt]
+   $L^q$ for every $q<\infty$};
+ \node[pde box,text width=29mm,minimum height=24mm] (c) at (10.2,1.3)
+  {$p>n$\\[5pt]
+   $C^{0,\alpha},\quad\alpha=1-\dfrac np$};
+ \draw[pde axis] (.2,-.65)--(11.85,-.65) node[right] {$p$};
+ \draw[LumenWarm,line width=1.5pt] (6,-.8)--(6,-.5);
+ \node[below] at (6,-.85) {$n$};
+ \node[above] at (2.2,-.65) {integrability gain};
+ \node[above] at (10.1,-.65) {continuity};
+ \node[align=center] at (6,3.15)
+  {bounded $C^1$ domain, $n\geq2$: what does $W^{1,p}$ control?};
+\end{tikzpicture}

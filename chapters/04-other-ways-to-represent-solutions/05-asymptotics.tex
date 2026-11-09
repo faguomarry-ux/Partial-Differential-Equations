@@ -1,13 +1,155 @@
-% Evans second edition, section 4.5.
-% English source: printed p. 200; PDF page 217 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{Asymptotics}
-\label{sec:4-5}
+% Evans 4.5.1--2, printed pp. 200--206; PDF pp. 217--223.
+\Needspace{65mm}
+\section{Asymptotics}\label{sec:4-5}
+The source presents several asymptotic constructions formally.
+We distinguish exact algebraic identities, proved local integral
+asymptotics, and conditional PDE expansions.
+No convergence theorem is inferred merely by matching powers.
 
-\PDEPending
+\Needspace{35mm}
+\subsection{A small-diffusion plume: geometry and transverse scale}
+Consider $\operatorname{div}(\mathbf b\,\mu)=\delta_0$ in two dimensions.
+Let $\dot X=\mathbf b(X)$, $X(0)=0$, and suppose $|\mathbf b(X)|>0$.
+If the forward trajectory leaves compact sets, the locally finite measure
+\[
+ \int\phi\,d\mu=\int_0^\infty\phi(X(t))\,dt
+\]
+solves this equation, since
+\[
+ -\int\mathbf b\cdot D\phi\,d\mu
+ =-\int_0^\infty\frac d{dt}\phi(X(t))\,dt=\phi(0).
+\]
+This is an outgoing solution; an extra background homogeneous solution
+is not excluded by this calculation.
+With speed $\sigma=|\mathbf b(X)|$, tangent $\tau$ and unit normal $\nu$,
+use $x=X(t)+y\nu(t)$ in a nonoverlapping tubular neighborhood.
+Frenet identities give $\nu'=-\sigma\kappa\tau$ and
+\[
+ x_t=\sigma(1-\kappa y)\tau,\quad x_y=\nu,\quad
+ dx=H\,dt\,dy,\qquad H=\sigma(1-\kappa y)>0.
+\]
+Thus the same measure has density $\delta(y)/\sigma(t)$ with respect
+to spatial area.
+\Needspace{45mm}
+\PDEAnnotation{线上的密度必须带速度因子}{注入量按行进时间计量，而面积元在曲线处含 $\sigma(t)$。因此横向 Dirac 前要乘 $1/\sigma$。若轨道封闭或反复回返，时间积分可能不是局部有限测度。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+Now perturb to $-\varepsilon\Delta u^\varepsilon+
+\operatorname{div}(\mathbf b u^\varepsilon)=\delta_0$.
+Away from the injection point, set
+$z=y/\sqrt\varepsilon$,
+$u^\varepsilon=\varepsilon^{-1/2}v^\varepsilon(t,z)$.
+The coordinate metric gives the exact identity
+\[
+ \Delta w=\frac1H\partial_t(H^{-1}w_t)
+                  +\frac1H\partial_y(Hw_y).
+\]
+Also write
+$\mathbf b=(\sigma+\alpha y+O(y^2))\tau+
+(\beta y+O(y^2))\nu$.
+Then on compact $t>0$, bounded $z$, provided the needed derivatives
+of $v^\varepsilon$ are uniformly bounded,
+\[
+ \mathbf b\cdot Dv^\varepsilon
+       =v^\varepsilon_t+\beta z v^\varepsilon_z+O(\sqrt\varepsilon),
+ \qquad
+ \varepsilon\Delta v^\varepsilon=v^\varepsilon_{zz}+O(\sqrt\varepsilon),
+\]
+\[
+ \operatorname{div}\mathbf b
+       =\sigma'/\sigma+\beta+O(\sqrt\varepsilon).
+\]
+For example the transverse first-derivative term in the Laplacian
+is $\varepsilon(H_y/H)\partial_yv^\varepsilon=O(\sqrt\varepsilon)$;
+the tangential second-derivative terms are $O(\varepsilon)$.
+Thus the conditional leading equation is
+\[
+ v_t-v_{zz}+(\beta z v)_z+(\sigma'/\sigma)v=0,\qquad
+ v(0)=\delta_0/\sigma(0).
+ \tag{PL4}
+\]
+Its exact Gaussian solution, derived again in Problem 13, is
+\[
+ v(t,z)=\frac{e^{-z^2/\Gamma(t)}}{\sigma(t)\sqrt{\pi\Gamma(t)}},
+ \qquad \Gamma'=4+2\beta\Gamma,\quad\Gamma(0)=0 .
+\]
+Indeed $A=\sigma v$ satisfies $A_t=A_{zz}-(\beta zA)_z$;
+substituting the Gaussian gives the displayed ODE and mass $\int A=1$.
+The transverse width is $\sqrt{\varepsilon\Gamma(t)}$.
+This does not by itself prove approximation of the original elliptic
+Green function, nor control the injection region or large times.
+\Needspace{45mm}
+\PDEAnnotation{形式余项依赖尚未证明的统一界}{把 $y$ 换成 $\sqrt\varepsilon z$ 后，系数误差很小，但它仍乘着解的导数。只有这些导数在所考察区域有统一界，才能写成统一的 $O(\sqrt\varepsilon)$。}
+
+\Needspace{35mm}
+\subsection{Laplace concentration and vanishing viscosity}\label{sec:4-laplace}
+\begin{lemma}[Source asymptotics lemma, with tail control]
+Let $k,l$ be continuous on $\R$, $|l(y)|\leq C(1+|y|)$,
+and $k(y)\geq c y^2-C$, $c>0$.
+If $k$ has a unique minimum at $y_0$, then
+\[
+ \frac{\int l(y)e^{-k(y)/\varepsilon}\,dy}
+      {\int e^{-k(y)/\varepsilon}\,dy}\longrightarrow l(y_0).
+ \tag{LC4}
+\]
+\end{lemma}
+\begin{expandedproof}
+Subtract the minimum $k_0$ and put $h=k-k_0\geq0$.
+Fix a small neighborhood $N$ of $y_0$ on which
+$|l-l(y_0)|<\eta$.
+On a large compact interval outside $N$, $h\geq d>0$ by uniqueness.
+Increase the interval so that outside it
+$h(y)\geq d/2+(c/2)y^2$, decreasing $d$ if necessary.
+By continuity there is an interval of length $2r>0$ near $y_0$
+where $h<d/4$.
+The denominator is at least $2r e^{-d/(4\varepsilon)}$.
+The numerator of the absolute error over the compact complement
+is at most $C_1e^{-d/\varepsilon}$.
+The tail numerator is bounded by
+\[
+ C_2e^{-d/(2\varepsilon)}
+       \int(1+|y|)e^{-cy^2/(2\varepsilon)}\,dy,
+\]
+whose ratio to the denominator tends to zero.
+Inside $N$ the normalized error is at most $\eta$.
+Let $\varepsilon\downarrow0$ and then $\eta\downarrow0$.
+This proves concentration together with the required control of
+the unbounded observable $l$.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{逐点密度趋零不足以推出集中}{归一化密度在每个非极小点趋零，还不能控制积分或无穷远的质量。证明需要分母下界、远离极小点的能量间隙，以及带权尾积分。}
+
+For bounded initial $g$, let $P'=g$ and
+$K(y)=(x-y)^2/(2t)+P(y)$.
+The quadratic term dominates the Lipschitz primitive.
+Formula (VB4) and (LC4), with parameter $2\varepsilon$, imply
+\[
+ u^\varepsilon(x,t)\longrightarrow \frac{x-y(x,t)}t
+\]
+whenever the minimizing point is unique.
+By Chapter~3, at each $t>0$ only countably many $x$ have multiple
+minimizers, and the right side is the Lax--Oleinik entropy solution.
+Since $|u^\varepsilon|\leq\|g\|_\infty$, this convergence is also
+$L^1_{\rm loc}$ in $x$ for each fixed $t$.
+Joint a.e. convergence and the same bound give local space-time
+$L^1$ convergence away from zero.
+The multiple-minimizer set is measurable, for instance by expressing
+separation of two minimizers using rational compact neighborhoods;
+Fubini therefore applies to the countable time slices.
+\Needspace{45mm}
+\PDEAnnotation{与第三章的最小化公式接上了}{黏性解是最优速度的指数加权平均。黏性趋零时，权重集中到作用量最低点；最低点的分支竞争正对应守恒律的激波。}
+
+If $k$ is smooth with finitely many nondegenerate global minima $y_j$,
+local Taylor expansion $y=y_j+\sqrt\varepsilon z$ and Gaussian
+domination give
+\[
+ \int l e^{-k/\varepsilon}
+ =e^{-k_0/\varepsilon}\sqrt{2\pi\varepsilon}
+       \left(\sum_j\frac{l(y_j)}{\sqrt{k''(y_j)}}+o(1)\right).
+\]
+To justify domination, restrict to a small neighborhood where
+$k-k_0\geq c_j|y-y_j|^2$, and use the energy gap outside.
+Thus at a tie the limit is a weighted average, not necessarily
+the velocity at one selected minimizing point.
+Values on shock curves do not affect the weak solution.
+\input{chapters/04-other-ways-to-represent-solutions/05a-stationary-phase}
+\input{chapters/04-other-ways-to-represent-solutions/05b-homogenization}

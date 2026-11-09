@@ -1,13 +1,159 @@
-% Evans second edition, section 4.4.
-% English source: printed p. 195; PDF page 212 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{Converting Nonlinear into Linear PDE}
-\label{sec:4-4}
+% Evans 4.4, printed pp. 195--200; PDF pp. 212--217.
+\Needspace{65mm}
+\section{Converting Nonlinear into Linear PDE}\label{sec:4-4}
+\Needspace{35mm}
+\subsection{Cole--Hopf: choose the change of unknown by cancellation}
+Consider $u_t-a\Delta u+b|Du|^2=0$, $a>0$.
+For $w=\phi(u)$, the chain rule yields
+\[
+ w_t-a\Delta w=-(b\phi'(u)+a\phi''(u))|Du|^2 .
+\]
+To cancel the nonlinear term solve $a\phi''+b\phi'=0$.
+For $b\ne0$ choose $\phi(z)=e^{-bz/a}$.
+\begin{theorem}[Cole--Hopf; source \S4.4.1]
+If $g$ is bounded and continuous, define
+\[
+ w(x,t)=\int_{\R^n}G_{at}(x-y)e^{-bg(y)/a}\,dy,\qquad
+ u=-\frac ab\log w .
+ \tag{CH4}
+\]
+Then $u$ is smooth for $t>0$, solves the nonlinear PDE, and
+has initial value $g$ at continuity points. It is the unique bounded
+classical solution with these data in the corresponding heat uniqueness class.
+\end{theorem}
+\begin{expandedproof}
+Boundedness of $g$ gives positive constants $0<c\leq w\leq C$,
+since the heat kernel is positive and has mass one.
+Heat smoothing, differentiation under Gaussian integrals and
+$w_t=a\Delta w$ hold for $t>0$.
+Thus the logarithm is well defined and differentiable; substitution
+or the preceding chain rule proves the nonlinear equation.
+The approximate-identity limit gives $w\to e^{-bg/a}$ and hence $u\to g$.
+Conversely any bounded classical solution transforms into a bounded
+heat solution. Heat uniqueness and injectivity of the exponential prove
+the assertion. If $b=0$, the original equation is already the heat
+equation; division by $b$ in (CH4) is not allowed.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{正性同时保证变换可逆}{指数变换总是正的，而热核保持严格正性。反变换要取对数，所以不能把任意带符号的热解代入；有界初值还给出远离零的统一下界。}
 
-\PDEPending
+For viscous Burgers, $u_t+uu_x-au_{xx}=0$, let $P'=g$.
+A potential $W$ with $W_x=u$ satisfies
+$W_t+\tfrac12W_x^2-aW_{xx}=c(t)$.
+Subtracting $\int c$ removes this purely time-dependent term.
+With $Z=e^{-W/(2a)}$, $Z_t=aZ_{xx}$, so
+\[
+ W=-2a\log\int_{\R} G_{at}(x-y)e^{-P(y)/(2a)}\,dy ,
+\]
+\[
+ u(x,t)=
+ \frac{\int_{\R} (x-y)t^{-1}e^{-\{(x-y)^2/(2t)+P(y)\}/(2a)}\,dy}
+      {\int_{\R} e^{-\{(x-y)^2/(2t)+P(y)\}/(2a)}\,dy}.
+ \tag{VB4}
+\]
+For bounded $g$, choose $P(x)=\int_0^xg$; it is Lipschitz and need
+not be bounded. The Gaussian dominates its at-most-linear growth,
+so the integrals and their derivatives on compact positive-time sets
+converge.
+Integrating the $y$ derivative of the exponential shows also
+$u$ is its weighted average of $g(y)$, a.e.:
+\[
+ \int_{\R}\big((x-y)/t-g(y)\big)e^{-K(y)/(2a)}\,dy=0 .
+\]
+The endpoint terms vanish by quadratic Gaussian decay.
+In particular $|u|\leq\|g\|_\infty$.
+\Needspace{45mm}
+\PDEAnnotation{原函数的常数与时间规范}{给 $P$ 加常数只会把热解 $Z$ 乘一个正数，不改变 $u=-2aZ_x/Z$。从 Burgers 积分得到的时间函数也能吸收进势函数，不能无说明地直接丢掉。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{35mm}
+\subsection{Potential flow and Bernoulli's law}
+For incompressible Euler,
+$\mathbf u_t+(\mathbf u\cdot D)\mathbf u=-Dp+D h$ and
+$\operatorname{div}\mathbf u=0$, impose the additional ansatz
+$\mathbf u=Dv$.
+Then $\Delta v=0$, and componentwise symmetry of $D^2v$ gives
+\[
+ [(\mathbf u\cdot D)\mathbf u]_i
+ =\sum_jv_{x_j}v_{x_ix_j}
+ =\partial_i\left(\tfrac12|Dv|^2\right).
+\]
+Therefore
+\[
+ D(v_t+\tfrac12|Dv|^2+p-h)=0,\qquad
+ p=h-v_t-\tfrac12|Dv|^2+c(t)
+\]
+on each connected spatial component.
+To match initial data one needs $\mathbf g=Dv_0$ as well as
+$\operatorname{div}\mathbf g=0$.
+Locally curl-free data admit a potential; globally a topological
+condition or a prescribed global potential is required.
+\Needspace{45mm}
+\PDEAnnotation{无散初值还不足以成为势流}{$\operatorname{div}\mathbf g=0$ 是不可压条件，不能推出 $\mathbf g=Dv_0$。还需无旋及相应的全局条件；这里线性化的是势流子类，并未解出一般 Euler 方程。}
+
+\Needspace{35mm}
+\subsection{Hodograph: invert dependent and independent variables}
+Write the two velocity components as $p=u^1$, $q=u^2$.
+For steady irrotational compressible flow the equations are
+\[
+ (c^2-p^2)p_{x_1}-pq(p_{x_2}+q_{x_1})
+       +(c^2-q^2)q_{x_2}=0,\qquad p_{x_2}=q_{x_1},
+\]
+where $c=c(p,q)>0$ is given.
+If $J=\det D_x(p,q)\ne0$, invert to $x=X(p,q)$.
+The inverse matrix identity is
+\[
+ \begin{pmatrix}p_{x_1}&p_{x_2}\\q_{x_1}&q_{x_2}\end{pmatrix}
+ =J\begin{pmatrix}X^2_q&-X^1_q\\-X^2_p&X^1_p\end{pmatrix}.
+\]
+Substitution and division by $J$ give the linear system
+\[
+ (c^2-p^2)X^2_q+pq(X^1_q+X^2_p)+(c^2-q^2)X^1_p=0,
+ \qquad X^1_q=X^2_p .
+\]
+Locally $X=DV$ for a scalar potential $V(p,q)$, and
+\[
+ (c^2-q^2)V_{pp}+2pqV_{pq}+(c^2-p^2)V_{qq}=0 .
+\]
+The coefficient determinant is $c^2(c^2-p^2-q^2)$:
+the equation is elliptic in the subsonic region and hyperbolic
+in the supersonic region, degenerate at sonic speed.
+\Needspace{45mm}
+\PDEAnnotation{变线性没有消除退化}{系数现在依赖独立变量，因而方程线性，但声速边界仍使主部退化。还要把 $X(p,q)$ 反解回去；Jacobian 变零处不能继续套用变换。}
+
+\Needspace{35mm}
+\subsection{A local Legendre transform for the minimal surface equation}
+In two dimensions the minimal surface equation is
+\[
+ (1+u_{x_2}^2)u_{x_1x_1}
+ -2u_{x_1}u_{x_2}u_{x_1x_2}
+ +(1+u_{x_1}^2)u_{x_2x_2}=0 .
+\]
+Assume $\det D^2u=J\ne0$ locally.
+Use $p=Du(x)$ as independent variable, let $x=X(p)$, and set
+$v(p)=X(p)\cdot p-u(X(p))$.
+\begin{expandedproof}[the Hessian inverse and the linear equation]
+The chain rule gives
+\[
+ \partial_{p_i}v=X_i+\sum_jp_j\partial_{p_i}X_j
+                 -\sum_ju_{x_j}\partial_{p_i}X_j=X_i .
+\]
+Hence $D^2v=D_pX=(D^2u)^{-1}$.
+For a symmetric $2\times2$ matrix the inverse formula implies
+\[
+ u_{x_1x_1}=Jv_{p_2p_2},\quad
+ u_{x_1x_2}=-Jv_{p_1p_2},\quad
+ u_{x_2x_2}=Jv_{p_1p_1}.
+\]
+Substitute and divide by $J$ to obtain
+\[
+ (1+p_1^2)v_{p_1p_1}+2p_1p_2v_{p_1p_2}
+                    +(1+p_2^2)v_{p_2p_2}=0 .
+\]
+Its coefficient matrix $I+p\otimes p$ is positive definite.
+Conversely, a solution with invertible Hessian yields a local inverse
+$x=Dv(p)$ and reconstructs $u=x\cdot p-v$ satisfying the original PDE.
+Boundary data need a separate transformation; a fixed boundary in
+$x$ generally becomes an unknown surface in $p$.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{局部 Legendre 变换不要求凸性}{这里凭 $\det D^2u\ne0$ 局部反演，Hessian 可以不定。第三章的凸共轭是全局上确界构造；两者在严格凸、可逆情形相接，但假设与用途不同。}

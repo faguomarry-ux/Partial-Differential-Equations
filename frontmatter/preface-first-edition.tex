@@ -10,7 +10,7 @@
 I present in this book a wide-ranging survey of many important topics in the
 theory of partial differential equations (PDE), with particular emphasis on
 various modern approaches.%
-\PDEVocab{survey; exposition}{survey 在此指综述；exposition 指系统讲解。全书既讲显式解公式，也讲能量方法、变分法与守恒律。}
+
 I have made a huge number of editorial decisions
 about what to keep and what to toss out, and can only claim that this selection
 seems to me about right. I of course include the usual formulas for solutions
@@ -21,7 +21,9 @@ laws, etc.
 My general working principles in the writing have been these:
 
 \noindent\textbf{a. PDE theory is (mostly) not restricted to two independent variables.}
-\PDEIdea{作者提醒：偏微分方程不限于两个自变量，也研究高维问题。他质疑的是把二维分类当作普适框架，并非否定具体方程的分类。}
+\PDEAnnotation{高维中的主部}{二阶线性算子的主部由矩阵 $A=(a^{ij})$ 描述，
+其二次型 $\xi^TA\xi$ 决定椭圆性等结构。
+二维判别式只能覆盖这一框架的特殊情形，不能据此统一处理任意阶数、方程组和非线性。}
 Many texts describe PDE as if functions of the two variables $(x,y)$ or $(x,t)$
 were all that matter. This emphasis seems to me misleading, as modern
 discoveries concerning many types of equations, both linear and nonlinear,
@@ -31,7 +33,7 @@ this is possible in two variables, but creates the false impression that there
 is some kind of general and useful classification scheme available in general.
 
 \noindent\textbf{b. Many interesting equations are nonlinear.}
-\PDEVocab{accordingly; analogues}{accordingly：因此、相应地。nonlinear analogues 指线性理论在非线性问题中的相应思想或结果；能否推广仍须逐项证明。}
+
 My view is that overall we know too much about linear PDE and too little about
 nonlinear PDE. I have accordingly introduced nonlinear concepts early in the
 text and have tried hard to emphasize everywhere nonlinear analogues of the
@@ -39,7 +41,9 @@ linear theory.
 
 \clearpage
 \noindent\textbf{c. Understanding generalized solutions is fundamental.}
-\PDEIdea{“弱化解的定义”与“保持唯一性”必须一起考虑。弱解、熵解、黏性解有各自的定义和适用情形，不能简单混用。}
+\PDEAnnotation{广义解仍需选择原则}{守恒律的分布弱形式容许不连续解，
+但单凭积分恒等式一般无法保证唯一性，还需熵条件。
+Hamilton--Jacobi 方程则采用黏性解；解的定义必须配合方程结构。}
 Many of the partial differential equations we study, especially nonlinear
 first-order equations, do not in general possess smooth solutions. It is
 therefore essential to devise some kind of proper notion of generalized or
@@ -48,20 +52,24 @@ hardest material in this book concerns the uniqueness of appropriately
 defined weak solutions.
 
 \noindent\textbf{d. PDE theory is not a branch of functional analysis.}
-\PDEChinese{作者强调不能只依靠抽象算子框架；具体的微积分计算、测度论和估计同样关键。这并不排斥使用泛函分析。}
+\PDEAnnotation{估计与抽象框架的分工}{把 PDE 写成算子方程后，仍须证明适用条件：
+例如椭圆问题的强制性来自能量估计，非线性极限常需紧性或单调性。
+抽象存在定理不会自动提供这些针对具体方程的估计。}
 Whereas certain classes of equations can profitably be viewed as generating
 abstract operators between Banach spaces, the insistence on an overly abstract
 viewpoint, and consequent ignoring of deep calculus and measure theoretic
 estimates, is ultimately limiting.
 
 \noindent\textbf{e. Notation is a nightmare.}
-\PDEVocab{at variance with}{意为“与……不一致”。本书为保持全书统一，部分符号可能不同于某个专门领域的惯例；阅读时先核对附录 A。}
+
 I have really tried to introduce consistent notation, which works for all the
 important classes of equations studied. This attempt is sometimes at variance
 with notational conventions within a given subarea.
 
 \noindent\textbf{f. Good theory is (almost) as useful as exact formulas.}
-\PDEChinese{三部分的主线：先求显式公式，再研究线性方程的一般理论，最后研究若干重要非线性方程。存在性、唯一性等结论本身也是“求解”的成果。}
+\PDEAnnotation{估计提供可检验的结论}{若能建立
+$\|u-\widetilde u\|_Y\leq C\|g-\widetilde g\|_X$，
+就同时得到唯一性与定量稳定性。这类结论即使没有显式公式，也能说明数据误差如何传到解。}
 I incorporate this principle into the overall organization of the text, which
 is subdivided into three parts, roughly mimicking the historical development
 of PDE theory itself. Part~I concerns the search for explicit formulas for
@@ -74,7 +82,9 @@ Let me also explicitly comment here that I intend the development within each
 section to be rigorous and complete (exceptions being the frankly heuristic
 treatment of asymptotics in \S4.5 and an occasional reference to a research
 paper).%
-\PDEVocab{heuristic / sharp}{heuristic：启发式的；arcane：深奥的；sharp：条件、常数等更精确或接近最优。作者优先解释思想；初读可暂缓部分难证明，不能把启发式推导当作完整证明。}
+\PDEAnnotation{渐近展开的证明责任}{形式上把幂级数代入 PDE 只能给出系数关系。
+要证明渐近公式有效，还须在指定区域和范数中估计余项；
+没有余项控制的形式展开不能作为解存在或误差界的证明。}
 This means that even locally within each chapter the topics do not
 necessarily progress logically from ``easy'' to ``hard'' concepts. There are
 many difficult proofs and computations early on, but as compensation many

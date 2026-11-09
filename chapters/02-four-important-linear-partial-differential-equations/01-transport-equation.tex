@@ -1,13 +1,72 @@
 % Evans second edition, section 2.1.
 % English source: printed p. 17; PDF page 34 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked from chapter opening, PDF 31; mean-value pages checked at PDF 36-37 and 53-55.
+% Status: editorial study draft with reconstructed proofs and mathematical annotations.
 \section{Transport Equation}
 \label{sec:2-1}
 
-\PDEPending
+\subsection{Characteristics and the initial-value problem (Evans \S2.1.1)}
+For fixed $b\in\R^n$, consider $u_t+b\cdot Du=0$, $u(x,0)=g(x)$.
+Through $(x,t)$ trace the line
+\[
+ X(s)=x+(s-t)b,\qquad 0\leq s\leq t.
+\]
+For a $C^1$ solution, the chain rule gives
+\[
+ \frac d{ds}u(X(s),s)=Du(X(s),s)\cdot b+u_t(X(s),s)=0.
+\]
+Integrating from $0$ to $t$ proves necessity of
+\[
+ \boxed{u(x,t)=g(x-tb).}
+\]
+Conversely, if $g\in C^1$, differentiation of this formula yields
+$u_t=-b\cdot Dg(x-tb)$ and $Du=Dg(x-tb)$, proving the PDE and initial
+condition. This establishes both existence and uniqueness in the classical
+class, rather than merely guessing a candidate.
+\Needspace{45mm}
+\PDEAnnotation{回溯特征线}{计算当前点 $(x,t)$ 的值，要沿速度 $b$ 回到初始平面，落点是 $x-tb$。正负号可用一维脉冲向右移动检验：$g(x-bt)$ 的峰位于 $x=bt$。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+
+\PDEBodyDiagram{2.1}{Read a transport solution backward.}
+{The solution is constant on each characteristic when the source is zero. With $b>0$, the forward line tilts right, while evaluation at a target requires its leftward initial foot $x-bt$. The orange arrow indicates evaluation backward in time, not a negative physical velocity.}
+{ch02-transport-foot}
+
+\paragraph{Nonsmooth data and weak solutions.}
+For $g\in L^1_{\mathrm{loc}}$, the same formula is locally integrable.
+For a compactly supported smooth test function on
+$\R^n\times[0,\infty)$, change variables $x=z+tb$:
+\[
+ \begin{split}
+ \int_0^\infty\!\!\int u(\phi_t+b\cdot D\phi)\,dx\,dt
+ &=\int_{\R^n}g(z)\int_0^\infty
+          \frac d{dt}\phi(z+tb,t)\,dt\,dz\\
+ &=-\int_{\R^n}g(z)\phi(z,0)\,dz.
+ \end{split}
+\]
+Fubini is justified by compact test support and local integrability.
+This is the distributional formulation with the initial datum included.
+There is no need to assign a classical derivative at a moving jump.
+Translations preserve $L^p$ norms:
+$\|u(\cdot,t)\|_p=\|g\|_p$ whenever $g\in L^p$.
+
+\subsection{Forcing and Duhamel's principle (Evans \S2.1.2)}
+If $u_t+b\cdot Du=f$ and $u(x,0)=g(x)$, then
+\[
+ \frac d{ds}u(X(s),s)=f(X(s),s).
+\]
+Integration along the same characteristic gives
+\[
+ \boxed{u(x,t)=g(x-tb)+\int_0^t f(x-(t-s)b,s)\,ds.}
+\]
+For $C^1$ data differentiate under the integral, with the upper endpoint
+contributing $f(x,t)$; the remaining integrals cancel between
+$u_t$ and $b\cdot Du$. This directly verifies the formula.
+\Needspace{45mm}
+\PDEAnnotation{源项沿轨迹累积}{在时间 $s$ 注入的源，之后还要平移 $(t-s)b$ 才到达当前点。Duhamel 的共同思想是把每个时刻的小冲量，按齐次方程传播后相加。}
+For the additional constant term $cu$, multiply along characteristics
+by $e^{cs}$:
+\[
+ u(x,t)=e^{-ct}g(x-tb)
+       +\int_0^t e^{-c(t-s)}f(x-(t-s)b,s)\,ds.
+\]
+The damping factor belongs to the elapsed time $t-s$, not to $s$ alone.

@@ -1,0 +1,19 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram]
+ \begin{scope}
+  \fill[LumenAccent!8] (0,0) ellipse[x radius=1.8cm,y radius=.9cm];
+  \draw[LumenMuted,dashed] (0,0) circle[radius=1.8cm];
+  \draw[pde blue,dashed] (0,0) circle[radius=.9cm];
+  \draw[pde curve] (0,0) ellipse[x radius=1.8cm,y radius=.9cm];
+  \draw[pde axis] (-2.15,0)--(2.2,0) node[right] {$\xi_1$};
+  \draw[pde axis] (0,-2.05)--(0,2.15) node[above] {$\xi_2$};
+  \node[above right] at (1.45,.65) {$q(\xi)=1$};
+  \node[below] at (1.8,0) {$1$};
+  \node[left] at (0,.9) {$1/2$};
+ \end{scope}
+ \node[pde box,text width=62mm,anchor=west] at (3,0)
+  {$A=\operatorname{diag}(1,4)$,\quad $q=\xi_1^2+4\xi_2^2$\\[5pt]
+   $|\xi|^2\leq q(\xi)\leq4|\xi|^2$\\[5pt]
+   $\{|\xi|\leq\tfrac12\}\subset\{q\leq1\}
+                 \subset\{|\xi|\leq1\}$};
+\end{tikzpicture}

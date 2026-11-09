@@ -1,13 +1,129 @@
-% Evans second edition, section 6.4.
-% English source: printed p. 323; PDF page 340 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 6.4: English printed p.323 / PDF p.340; Chinese printed p.229 / PDF p.247.
+\Needspace{65mm}
 \section{Maximum Principles}
 \label{sec:6-4}
+Here we use nondivergence notation
+\[
+ Lu=-a^{ij}u_{ij}+b^iu_i+cu.
+\]
+Assume $U$ bounded, $A$ uniformly elliptic, and coefficients bounded and
+continuous unless a stronger hypothesis is stated.
+Solutions are classical, $u\in C^2(U)\cap C(\overline U)$.
+These are different assumptions from the measurable-coefficient weak theory.
 
-\PDEPending
+\subsection{Weak maximum principles (Evans \S6.4.1, Theorems 1--2)}
+\begin{theorem}\label{thm:6-weak-max}
+If $c=0$ and $Lu\leq0$, then
+$\max_{\overline U}u=\max_{\partial U}u$.
+If $c\geq0$ and $Lu\leq0$, then
+\[
+ \max_{\overline U}u\leq\max_{\partial U}u^+.
+\]
+In particular, $Lu\leq Lv$ and $u\leq v$ on $\partial U$ imply $u\leq v$
+in $U$ when $c\geq0$.
+\end{theorem}
+\Needspace{45mm}
+\PDEAnnotation{先固定算子符号}{本章主部是负号 $-a^{ij}u_{ij}$。因此 $Lu\leq0$ 控制上界；在内部极大点，$Du=0$、$D^2u\leq0$，主部反而非负。换符号时不等式也要一起换。}
+\begin{expandedproof}
+First let $c=0$. A strict subsolution $Lu<0$ cannot have an interior
+maximum: at such a point $Du=0$, $D^2u$ is negative semidefinite,
+and $-A:D^2u\geq0$, a contradiction.
+For a non-strict subsolution use $u_\varepsilon=u+\varepsilon e^{\tau x_1}$.
+Since
+\[
+ L(e^{\tau x_1})=(-a^{11}\tau^2+b^1\tau)e^{\tau x_1}<0
+\]
+for a fixed sufficiently large $\tau$, $u_\varepsilon$ has its maximum
+on the boundary. Let $\varepsilon\downarrow0$.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+For $c\geq0$, on the open set $D=\{u>0\}$ the operator
+$K=L-c$ satisfies $Ku=Lu-cu\leq0$.
+Apply the zero-potential result on $D$; boundary values on
+$\partial D\cap U$ are zero, while the remaining values come from
+$\partial U$. The proof uses compact maxima and does not require a
+smooth level-set boundary. If $D$ is empty the conclusion is immediate.
+Apply this assertion to $u-v$ for comparison.
+\end{expandedproof}
+Applying the theorem to $-u$ gives the corresponding minimum principles.
+The restriction on $c$ is substantive: on $(0,\pi)$,
+$u=\sin x$ solves $-u''-u=0$ with zero boundary values but is positive inside.
+
+\Needspace{45mm}
+\PDEAnnotation{弱最大值原理中的“弱”}{这里“弱”表示结论只控制边界极值，并非指 Sobolev 弱解。对弱解也有相应原理，但必须说明测试函数和系数条件，不能混用两个含义。}
+For comparison, a direct weak energy argument is available in divergence
+form when $b\in C^1(\overline U)$ and
+$c-\tfrac12\operatorname{div}b\geq0$.
+For a weak subsolution with $u^+\in H^1_0(U)$, testing with $u^+$ gives
+\[
+ 0\geq B[u,u^+]
+ =\int A Du^+\cdot Du^+
+  +\int(c-\tfrac12\operatorname{div}b)(u^+)^2
+ \geq\theta\|Du^+\|_2^2.
+\]
+Thus $u\leq0$. The drift integral was integrated by parts after writing
+$u^+Du^+=D((u^+)^2)/2$.
+This sufficient energy condition is distinct from $c\geq0$ in the
+classical nondivergence argument.
+
+\Needspace{35mm}
+\subsection{Hopf's boundary lemma (Evans \S6.4.2)}
+\begin{lemma}\label{lem:6-hopf}
+Suppose an interior ball $B_r(y)\subset U$ touches $\partial U$ at $x_0$,
+$u(x)<u(x_0)=M$ for all $x\in U$, and $Lu\leq0$.
+Assume either $c=0$, or $c\geq0$ and $M\geq0$.
+If $u$ is $C^1$ at $x_0$ in the inward-ball neighborhood, then
+\[
+ \partial_\nu u(x_0)>0,\qquad \nu=(x_0-y)/r.
+\]
+At a smooth tangency this is the outward normal to $U$.
+\end{lemma}
+\begin{expandedproof}
+On $r/2<|x-y|<r$, put
+$h(x)=e^{-\alpha|x-y|^2}-e^{-\alpha r^2}$.
+It is positive inside and zero on the outer sphere. A direct calculation,
+with $s=|x-y|$, gives
+\[
+ Lh\leq e^{-\alpha s^2}
+ \bigl(-4\theta\alpha^2s^2+
+       2\alpha\operatorname{tr}A+2\alpha|b|s+c\bigr)\leq0
+\]
+for sufficiently large $\alpha$; for $c=0$ the same bound applies.
+On the inner sphere $u-M$ has a strictly negative maximum, so choose
+$\varepsilon>0$ with $u-M+\varepsilon h\leq0$ there.
+It is also nonpositive on the outer sphere.
+Moreover $L(u-M+\varepsilon h)\leq-cM\leq0$.
+Comparison on the annulus gives $u-M\leq-\varepsilon h$.
+Along the radius $x_0-t\nu$ divide by $t>0$ and let $t\downarrow0$:
+\[
+ \partial_\nu u(x_0)\geq-\varepsilon\partial_\nu h(x_0)
+ =2\varepsilon\alpha r e^{-\alpha r^2}>0.
+\]
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{Hopf 引理提供严格斜率}{最大值原理只说内部不能超过边界。Hopf 引理进一步说：若内部严格更小，函数沿外法向到达边界极大值时必须有正斜率；内球条件保证可放入显式屏障。}
+
+\Needspace{35mm}
+\subsection{Strong maximum principle (Evans \S6.4.2, Theorems 3--4)}
+\begin{theorem}\label{thm:6-strong-max}
+Let $U$ be connected. If $Lu\leq0$ and $c=0$, attainment of a maximum
+at an interior point forces $u$ to be constant.
+For $c\geq0$ the same holds for a nonnegative interior maximum.
+Dually, a nonpositive interior minimum of a supersolution forces constancy.
+\end{theorem}
+\begin{expandedproof}
+Let $M=\max_Uu$, attained inside, and suppose both sets
+$C=\{u=M\}$ and $V=\{u<M\}$ are nonempty.
+A path inside $U$ from $V$ to $C$ shows that their common relative
+boundary contains a point in $U$.
+Choose $y\in V$ sufficiently close to this point so that the ball with
+radius $\operatorname{dist}(y,C)$ is contained in $U$.
+Its interior is in $V$ and its boundary touches $C$ at some $x_0\in U$.
+Hopf's lemma on this ball gives a strictly positive radial derivative
+at $x_0$. But $x_0$ is an interior maximum of a differentiable function,
+so $Du(x_0)=0$. This contradiction proves the assertion.
+The minimum statement follows by replacing $u$ by $-u$.
+\end{expandedproof}
+In particular, for $c\geq0$, a nonzero nonnegative supersolution
+$Lu\geq0$ is strictly positive in a connected domain.
+
+\input{chapters/06-second-order-elliptic-equations/04-harnack}

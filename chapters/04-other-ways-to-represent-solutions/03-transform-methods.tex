@@ -1,13 +1,190 @@
-% Evans second edition, section 4.3.
-% English source: printed p. 177; PDF page 194 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{Transform Methods}
-\label{sec:4-3}
+% Evans 4.3.1, printed pp. 177--186; PDF pp. 194--203.
+\Needspace{65mm}
+\section{Transform Methods}\label{sec:4-3}
+\Needspace{35mm}
+\subsection{Fourier transform: normalization and Plancherel}
+For $f\in L^1(\R^n)$ define
+\[
+ \begin{aligned}
+ \widehat f(\xi)&=(2\pi)^{-n/2}\int e^{-ix\cdot\xi}f(x)\,dx,\\
+ \mathcal F^{-1}h(x)&=(2\pi)^{-n/2}\int e^{ix\cdot\xi}h(\xi)\,d\xi .
+ \end{aligned}
+\]
+The integrals are absolutely convergent.
+For Schwartz functions integration by parts and Fubini yield
+\[
+ \widehat{\partial_j f}=i\xi_j\widehat f,\qquad
+ \widehat{f*h}=(2\pi)^{n/2}\widehat f\,\widehat h .
+ \tag{F4}
+\]
+For the second identity, set $x=z+y$ in the double integral.
+Both normalizations must be retained; $\mathcal F$ is unitary,
+whereas ordinary convolution has no normalizing factor.
+\Needspace{45mm}
+\PDEAnnotation{卷积公式为何多一个常数}{每个 Fourier 变换自带 $(2\pi)^{-n/2}$，两个变换相乘就出现两份。卷积只做一次变换，所以要乘回 $(2\pi)^{n/2}$；后面的核常数都由此决定。}
 
-\PDEPending
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\PDEBodyDiagram{4.2}{Fourier transformation turns differentiation into multiplication.}
+{The square commutes with the unitary normalization used here. There is no $2\pi$ in the multiplier because the exponential is $e^{-ix\cdot\xi}$. The heat multiplier is small at large $|\xi|$, connecting this representation with the stability picture in Chapter 1.}
+{ch04-fourier-square}
+
+\begin{theorem}[Plancherel and inversion; source Theorems 1--2]
+The Fourier transform extends uniquely to a unitary operator on $L^2$.
+It preserves inner products, has the displayed inverse, and
+$\widehat{D^\gamma f}=(i\xi)^\gamma\widehat f$ whenever
+the weak derivative is in $L^2$.
+\end{theorem}
+\begin{expandedproof}[Gaussian regularization without circular inversion]
+\paragraph{1. The Gaussian transform.}
+For $a>0$, $I(b)=\int_{\R} e^{-ax^2}e^{-ibx}\,dx$.
+Differentiate under the integral and integrate by parts to get
+$I'(b)=-bI(b)/(2a)$.
+Since $I(0)=\sqrt{\pi/a}$,
+$I(b)=\sqrt{\pi/a}\,e^{-b^2/(4a)}$.
+Products give the $n$-dimensional identity.
+This real-variable proof does not yet require contour deformation.
+
+\paragraph{2. The norm identity.}
+For $f\in L^1\cap L^2$ and $\eta>0$, Fubini gives
+\[
+ \int e^{-\eta|\xi|^2}|\widehat f(\xi)|^2\,d\xi
+ =\iint f(x)\overline{f(y)}G_\eta(x-y)\,dx\,dy,
+\]
+where $G_\eta(z)=(4\pi\eta)^{-n/2}e^{-|z|^2/(4\eta)}$.
+Fubini is legitimate since $\|f\|_1^2<\infty$ and the frequency
+Gaussian is integrable.
+The right side tends to $\|f\|_2^2$ because $G_\eta*f\to f$ in $L^2$.
+For completeness,
+\[
+ \|G_\eta*f-f\|_2
+ \leq\int G_\eta(z)\|f(\cdot-z)-f\|_2\,dz\longrightarrow0:
+\]
+translations are continuous in $L^2$ by approximation with compact
+continuous functions; split the last integral into a small ball and
+its Gaussian tail. Monotone convergence on the left gives the norm identity.
+Polarization gives the inner-product identity.
+
+\paragraph{3. Inversion and extension.}
+For Schwartz $f$, (F4) implies rapid decay of $\widehat f$.
+Fubini and the Gaussian formula give
+\[
+ \mathcal F^{-1}(e^{-\eta|\xi|^2}\widehat f)=G_\eta*f.
+\]
+The right side tends to $f$; the left tends to
+$\mathcal F^{-1}\widehat f$ by dominated convergence.
+Thus inversion holds on Schwartz functions.
+Approximate arbitrary $L^2$ data by Schwartz functions.
+The norm identity makes their transforms Cauchy and makes the limit
+independent of the approximation. Inversion extends by continuity,
+so the range is all of $L^2$.
+Finally integration by parts against Schwartz tests proves the derivative
+identity in distributions; if both sides belong to $L^2$, it is an
+a.e. equality of those representatives.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{$L^2$ 变换不必是逐点积分}{一般 $L^2$ 函数未必可积，其 Fourier 变换通过范数极限定义。反演和乘子公式首先是 $L^2$ 等式；若要逐点表示，还须增加可积性或正则性。}
+
+\Needspace{35mm}
+\subsection{Fourier multipliers and evolution equations}
+\paragraph{Bessel potential.}
+For $-\Delta u+u=f$, $f\in L^2$,
+$\widehat u=(1+|\xi|^2)^{-1}\widehat f$.
+This gives a unique $L^2$ distributional solution with
+$\int(1+|\xi|^2)^2|\widehat u|^2<\infty$.
+A rigorous kernel representation is
+\[
+ K(x)=\int_0^\infty e^{-s}G_s(x)\,ds,\qquad u=K*f .
+\]
+Tonelli gives $K\geq0$ and $\|K\|_1=1$;
+its transform is $(2\pi)^{-n/2}/(1+|\xi|^2)$.
+The kernel called $B$ in the source is $(2\pi)^{n/2}K$.
+The singularity of $K$ at zero in some dimensions does not prevent
+its $L^1$ integrability or convolution action on $L^2$.
+\Needspace{45mm}
+\PDEAnnotation{乘子有界不表示核处处有限}{$(1+|\xi|^2)^{-1}$ 给出有界的 $L^2$ 乘子。对应核可能在原点无界，但仍可积；不能把一个点的奇性误当作表示公式失效。}
+
+\paragraph{Heat and Schr\"odinger equations.}
+Spatial transformation of $u_t-\Delta u=0$ gives
+$\widehat u_t+|\xi|^2\widehat u=0$, hence
+$\widehat u=e^{-t|\xi|^2}\widehat g$.
+Gaussian inversion recovers $u=G_t*g$ from Chapter~2.
+For $iu_t+\Delta u=0$ the sign is instead
+$\widehat u_t=-i|\xi|^2\widehat u$, so
+\[
+ \widehat u=e^{-it|\xi|^2}\widehat g,\qquad
+ u(x,t)=(4\pi it)^{-n/2}\int e^{i|x-y|^2/(4t)}g(y)\,dy .
+ \tag{SC4}
+\]
+For $t\ne0$ use
+$(it)^{-n/2}=|t|^{-n/2}e^{-i\pi n\,\operatorname{sgn}(t)/4}$.
+The kernel identity follows by first replacing $it$ with $\eta+it$,
+$\eta>0$, and then letting $\eta\downarrow0$.
+For $g\in L^1\cap L^2$, the kernels converge under the spatial integral
+by domination, while the multipliers converge in $L^2$.
+Thus both descriptions agree.
+For $L^2$ data this defines a unitary group:
+\[
+ \|u(t)\|_2=\|g\|_2,\qquad
+ \|u(t)-g\|_2^2
+ =\int|e^{-it|\xi|^2}-1|^2|\widehat g|^2\longrightarrow0 .
+\]
+If $g,|x|^2g\in L^1$, differentiation of (SC4) on compact
+space-time sets away from $t=0$ verifies the classical PDE.
+For arbitrary $L^2$ data the statement is distributional.
+\Needspace{45mm}
+\PDEAnnotation{色散与耗散的范数表现不同}{热乘子模长小于一，会压低高频；Schr\"odinger 乘子模长为一，保持 $L^2$。后者的点态衰减来自振荡抵消，不来自 $L^2$ 质量损失。}
+
+\paragraph{Wave and telegraph equations.}
+For $u_{tt}-\Delta u=0$, $u(0)=g$, $u_t(0)=h$,
+\[
+ \widehat u(\xi,t)=\cos(t|\xi|)\widehat g
+              +\frac{\sin(t|\xi|)}{|\xi|}\widehat h.
+ \tag{WV4}
+\]
+At $\xi=0$ the quotient is defined as $t$.
+It is bounded by $t$, so the formula has no genuine zero-frequency pole.
+For $u_{tt}+2du_t-u_{xx}=0$ use $\widehat u=e^{-dt}v$.
+Then $v''+(\xi^2-d^2)v=0$ and
+\[
+ \widehat u=e^{-dt}
+ \begin{cases}
+ \cosh(qt)\widehat g+\dfrac{\sinh(qt)}q(\widehat h+d\widehat g),
+                 &|\xi|<d,\ q=\sqrt{d^2-\xi^2},\\
+ \widehat g+t(\widehat h+d\widehat g),&|\xi|=d,\\
+ \cos(qt)\widehat g+\dfrac{\sin(qt)}q(\widehat h+d\widehat g),
+                 &|\xi|>d,\ q=\sqrt{\xi^2-d^2}.
+ \end{cases}
+\]
+These are the overdamped, critical and oscillatory regimes.
+The common limiting formula at $q=0$ is essential.
+
+\begin{theorem}[Asymptotic energy equipartition; source \S4.3.1]
+If $g\in H^1(\R^n)$ and $h\in L^2(\R^n)$, the wave solution has
+\[
+ \|Du(t)\|_2^2\longrightarrow E_0,\qquad
+ \|u_t(t)\|_2^2\longrightarrow E_0,\qquad
+ E_0=\tfrac12(\|Dg\|_2^2+\|h\|_2^2).
+\]
+\end{theorem}
+\begin{expandedproof}
+Write $A=|\xi|\widehat g$ and $B=\widehat h$ in $L^2$.
+Plancherel and (WV4) give
+\[
+ \|Du\|_2^2
+ =\int|A|^2\cos^2(t|\xi|)+|B|^2\sin^2(t|\xi|)
+       +2\operatorname{Re}(A\overline B)\sin(t|\xi|)\cos(t|\xi|).
+\]
+All three coefficient functions are $L^1$, the cross term by
+Cauchy--Schwarz.
+For any $F\in L^1(\R^n)$, polar coordinates give
+$\int e^{2it|\xi|}F(\xi)\,d\xi=\int_0^\infty e^{2itr}H(r)\,dr$
+with $\|H\|_1\leq\|F\|_1$.
+The latter tends to zero: approximate $H$ in $L^1$ by smooth functions
+supported inside $(0,\infty)$ and integrate those by parts.
+Now use the double-angle identities to obtain the first limit.
+The analogous formula for $u_t$ gives energy conservation and
+the second limit.
+This also handles $n=1$ without discarding a possible endpoint term
+in a radial integration by parts.
+\end{expandedproof}
+\input{chapters/04-other-ways-to-represent-solutions/03a-radon-laplace}

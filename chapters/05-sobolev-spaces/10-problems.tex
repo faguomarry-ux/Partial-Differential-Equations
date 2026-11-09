@@ -1,13 +1,408 @@
 % Evans second edition, section 5.10.
 % English source: printed p. 289; PDF page 306 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked against the chapter opening on PDF page 187; see docs/CHAPTER-05.md.
+% Status: editorial study draft; expanded proofs and Chinese mathematical annotations.
 \section{Problems}
 \label{sec:5-10}
 
-\PDEPending
+\noindent\textit{Evans \S5.10, Problems 1--21, printed pp.~289--292
+(PDF pp.~306--309).} Statements are concisely restated; solutions are
+editorial. Boundary smoothness is assumed where needed.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection{Problems 1--6: the basic language}
+\paragraph{1. Completeness of H\"older spaces.}
+Prove $C^{k,\gamma}(\overline U)$ is Banach.
+\begin{proof}[Solution]
+The full proof in \S\ref{sec:5-1} identifies uniform limits of derivative
+components through coordinate-segment integration, then passes the
+Cauchy bound to the H\"older seminorm. Derivative compatibility and
+seminorm convergence are both needed, beyond uniform convergence of $u_j$.
+\end{proof}
+
+\paragraph{2. H\"older interpolation.}
+For $0<\beta<\gamma\leq1$, prove
+\[
+ \|u\|_{C^{0,\gamma}}
+ \leq\|u\|_{C^{0,\beta}}^{(1-\gamma)/(1-\beta)}
+      \|u\|_{C^{0,1}}^{(\gamma-\beta)/(1-\beta)}.
+\]
+\begin{proof}[Solution]
+The quotient factorization and two-term H\"older inequality in
+\S\ref{sec:5-1} give this formula. The weights sum to one and satisfy
+$\gamma=(1-\theta)\beta+\theta$ for
+$\theta=(\gamma-\beta)/(1-\beta)$.
+\end{proof}
+
+\paragraph{3. A pyramid on a square.}
+On $U=(-1,1)^2$ the source's piecewise function is
+$u(x)=1-\max(|x_1|,|x_2|)$. Determine its $W^{1,p}$ membership.
+\begin{proof}[Solution]
+On the four sectors where one signed coordinate is largest, $Du$ is
+respectively $(-1,0),(1,0),(0,-1),(0,1)$.
+Integrate against a test function separately on the sectors.
+At each shared edge, values of $u$ agree and outward normals are
+opposite, so the interface terms cancel. This bounded vector field
+is the weak gradient. Both $u$ and $Du$ are bounded on a finite-measure
+domain, so $u\in W^{1,p}(U)$ for all $1\leq p\leq\infty$.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{分片求导还要查接口}{每块导数有界仍不够，必须检查接口函数值相同。若有跳跃，弱导数就会多出沿接口集中的测度。}
+
+\paragraph{4. One-dimensional Sobolev functions.}
+Show $u\in W^{1,p}(0,1)$, $p<\infty$, has an absolutely continuous
+representative, and derive a H\"older estimate for $p>1$.
+\begin{proof}[Solution]
+Let $g$ be its weak derivative and $G(x)=\int_0^xg(t)\,dt$.
+Fubini shows $G'=g$ weakly. Since $(u-G)'=0$,
+Lemma~\ref{lem:5-constant} makes $u-G$ constant.
+The representative $c+G$ is absolutely continuous, with classical
+derivative $g$ a.e. For every $x,y\in[0,1]$, H\"older gives
+\[
+ |u(x)-u(y)|\leq\int_{\min(x,y)}^{\max(x,y)}|g|
+ \leq|x-y|^{1-1/p}\|g\|_{L^p(0,1)}.
+\]
+For $p=1$, absolute continuity persists but this argument supplies no
+fixed positive H\"older exponent.
+\end{proof}
+
+\paragraph{5. A smooth cutoff.}
+For $V\Subset U$, construct $\zeta\in C_c^\infty(U)$ with $\zeta=1$ on $V$.
+\begin{proof}[Solution]
+Put $d=\min\{1,\operatorname{dist}(\overline V,\R^n\setminus U)\}>0$ and
+$W=\{x:\operatorname{dist}(x,\overline V)<d/3\}$.
+For $\varepsilon<d/6$, $\zeta=\rho_\varepsilon*\mathbf1_W$ equals
+one on $V$, lies in $[0,1]$, and has compact support within distance
+$d/2$ of $\overline V$, hence inside $U$.
+\end{proof}
+
+\paragraph{6. A finite partition of unity.}
+If $\overline U$ is compact and contained in $\bigcup_{i=1}^NV_i$,
+construct smooth $\zeta_i$ supported in $V_i$, with $0\leq\zeta_i\leq1$
+and $\sum_i\zeta_i=1$ on $U$.
+\begin{proof}[Solution]
+Cover $\overline U$ by finitely many smaller balls with closures in the
+given cover. Choose nonnegative smooth bumps positive on these balls
+and group them by $V_i$, obtaining $\psi_i\in C_c^\infty(V_i)$.
+Their sum $S$ is positive on a neighborhood $O$ of $\overline U$.
+Choose $\chi\in C_c^\infty(O)$ equal to one near $\overline U$,
+with $0\leq\chi\leq1$. Set $\zeta_i=\chi\psi_i/S$ on $O$, zero
+elsewhere. The cutoff makes this smooth globally, and $\psi_i\leq S$
+gives $\zeta_i\leq1$. Their sum is $\chi$, as required.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{分母先保证为正}{$S$ 只在目标集邻域中确定为正；乘上 $\chi$ 后，在离开该邻域前商已为零，才可安全延拓。}
+
+\subsection{Problems 7--10: boundary and interpolation estimates}
+\paragraph{7. Trace from a transverse vector field.}
+If $\alpha$ is smooth and $\alpha\cdot\nu\geq1$ on $\partial U$, prove
+the trace estimate for $1\leq p<\infty$.
+\begin{proof}[Solution]
+For smooth $u$ and $p>1$, divergence and Young's inequality give
+\[
+ \begin{split}
+ \int_{\partial U}|u|^p
+ &\leq\int_{\partial U}|u|^p\alpha\cdot\nu\\
+ &=\int_U|u|^p\operatorname{div}\alpha
+       +p|u|^{p-2}u\,\alpha\cdot Du\\
+ &\leq C\int_U(|u|^p+|Du|^p).
+ \end{split}
+\]
+The coefficients $\alpha,D\alpha$ are bounded on the compact closure.
+For $p=1$, replace $|u|$ by $\sqrt{u^2+\varepsilon^2}$; its gradient
+has magnitude at most $|Du|$. Let $\varepsilon\to0$.
+Smooth boundary approximation gives the Sobolev estimate.
+\end{proof}
+
+\paragraph{8. No bounded trace on $L^p$ alone.}
+On a nonempty bounded $C^1$ domain, show no bounded linear map
+$L^p(U)\to L^p(\partial U)$, $p<\infty$, can agree with continuous
+boundary restriction.
+\begin{proof}[Solution]
+Write $d(x)=\operatorname{dist}(x,\partial U)$.
+Choose continuous $\eta:[0,\infty)\to[0,1]$ with $\eta(0)=1$ and
+$\eta=0$ on $[1,\infty)$. The functions
+$v_\delta(x)=\eta(d(x)/\delta)$ are continuous on $\overline U$,
+equal one on $\partial U$, and tend pointwise to zero in $U$.
+Dominated convergence gives $\|v_\delta\|_{L^p(U)}\to0$.
+A bounded trace would force
+$0<|\partial U|^{1/p}=\|Tv_\delta\|_p\to0$, a contradiction.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{边界薄层反例}{函数支撑在越来越薄的边界层中，体积范数趋零，边界值却始终为 $1$。其梯度变大，说明迹估计为何需要导数信息。}
+
+\paragraph{9. An $L^2$ interpolation estimate.}
+Prove $\|Du\|_2\leq C\|u\|_2^{1/2}\|D^2u\|_2^{1/2}$ for
+$C_c^\infty(U)$ and $H^2(U)\cap H^1_0(U)$.
+\begin{proof}[Solution]
+For compactly supported smooth $u$,
+\[
+ \|Du\|_2^2=-\int_Uu\Delta u
+ \leq\|u\|_2\|\Delta u\|_2
+ \leq C_n\|u\|_2\|D^2u\|_2.
+\]
+For $u\in H^2\cap H^1_0$, the distributional identity
+$\int Du\cdot D\phi=-\int(\Delta u)\phi$ extends from tests to
+$\phi\in H^1_0$ by density, since both sides are continuous in that
+norm. Take $\phi=u$. No compactly supported $H^2$ approximation
+is needed.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{不能假设更强的逼近}{紧支函数在 $H^2$ 中的闭包还会限制法向导数，通常比 $H^2\cap H^1_0$ 小。此处只在 $H^1_0$ 中延伸测试恒等式，避免加上多余边界条件。}
+
+\paragraph{10. Nonlinear interpolation.}
+For compactly supported smooth $u$, prove
+\[
+ \|Du\|_p\leq C\|u\|_p^{1/2}\|D^2u\|_p^{1/2}\quad(2\leq p<\infty),
+\]
+\[
+ \|Du\|_{2p}\leq C\|u\|_\infty^{1/2}\|D^2u\|_p^{1/2}
+ \quad(1\leq p<\infty).
+\]
+\begin{proof}[Solution]
+For $s\geq2$, integrate by parts and differentiate
+$|Du|^{s-2}Du$ to get
+\[
+ \int|Du|^s\leq C_s\int|u|\,|Du|^{s-2}|D^2u|.
+\]
+The vector map $z\mapsto|z|^{s-2}z$ is $C^1$ for $s\geq2$,
+including the linear case $s=2$.
+With $s=p>2$, H\"older with exponents $p,p/(p-2),p$ gives
+$\|Du\|_p^p\leq C_p\|u\|_p\|Du\|_p^{p-2}\|D^2u\|_p$.
+At $p=2$ use Cauchy directly. Cancel the gradient factor unless zero,
+then take a square root.
+With $s=2p$, use $\|u\|_\infty$ and exponents $p,p/(p-1)$ to get
+\[
+ \|Du\|_{2p}^{2p}
+ \leq C_p\|u\|_\infty\|D^2u\|_p\|Du\|_{2p}^{2p-2}.
+\]
+For $p=1$ the last factor is one. Cancellation gives the second result.
+\end{proof}
+
+\subsection{Problems 11--16: the limits of the theory}
+\paragraph{11. Zero weak gradient.}
+Prove on connected $U$ that $Du=0$ implies $u$ constant a.e.
+\begin{proof}[Solution]
+Lemma~\ref{lem:5-constant} gives the full argument: mollify on balls,
+identify constant limits, and propagate the common constant along a
+finite chain of overlapping balls. Connectedness enters the last step.
+\end{proof}
+
+\paragraph{12. Failure at $p=1$.}
+Show bounded $L^1$ difference quotients do not imply $W^{1,1}$ membership.
+\begin{proof}[Solution]
+Take $U=(-2,2)$, $V=(-1,1)$, and $u=\mathbf1_{(0,2)}$ on $U$.
+For small $h$, $|D^hu|=1/|h|$ on an interval of length $|h|$,
+and is zero elsewhere in $V$. Thus $\|D^hu\|_{L^1(V)}=1$.
+But its distributional derivative is $\delta_0$, so it is not in
+$W^{1,1}(V)$.
+\end{proof}
+
+\paragraph{13. Bounded gradient without global Lipschitz continuity.}
+\begin{proof}[Solution]
+Let $U$ be the slit annulus
+$\{(r\cos\theta,r\sin\theta):1/2<r<1,\ 0<\theta<2\pi\}$
+and put $u(r,\theta)=\theta$.
+This is smooth on $U$, with $|u|\leq2\pi$ and $|Du|=1/r\leq2$.
+At $r=3/4$, points of angles $\varepsilon$ and $2\pi-\varepsilon$
+approach each other, but their values differ by $2\pi-2\varepsilon$.
+The function is in $W^{1,\infty}(U)$ and is not globally Lipschitz.
+The domain is connected but fails the regular boundary hypothesis at
+the slit.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{梯度控制路径长度}{梯度界控制沿域内路径的变化；路径长度未必能由直线距离统一控制。裂缝反例不违背球内的局部 Lipschitz 结论。}
+
+\paragraph{14. The source's unbounded critical example.}
+For $n>1$ verify $u(x)=\log\log(1+1/|x|)\in W^{1,n}(B_1)$.
+\begin{proof}[Solution]
+For $r=|x|$,
+\[
+ |u'(r)|=\frac1{r(r+1)\log(1+1/r)}
+ \asymp\frac1{r\log(1/r)}\quad(r\downarrow0).
+\]
+The gradient integral near zero is comparable to
+$\int_0^{1/2}dr/(r\log(1/r)^n)$, finite for $n>1$.
+The function integral has an exponentially decaying weight after
+$t=\log(1/r)$, and is also finite. Away from zero all quantities are
+bounded. The inner integration-by-parts term is bounded by
+$C\varepsilon^{n-1}|u(\varepsilon)|\to0$, proving that the classical
+gradient off zero is its weak gradient.
+The function itself diverges as $r\downarrow0$.
+\end{proof}
+
+\paragraph{15. A zero set of positive measure.}
+If $u\in H^1(B_1)$ and $|\{u=0\}|\geq\alpha>0$, prove
+$\|u\|_2\leq C_{n,\alpha}\|Du\|_2$.
+\begin{proof}[Solution]
+Let $c=u_{B_1}$ and $Z=\{u=0\}$. Poincaré gives
+\[
+ \alpha|c|^2\leq\int_Z|u-c|^2
+ \leq\|u-c\|_2^2\leq C_n\|Du\|_2^2.
+\]
+Then $\|u\|_2\leq\|u-c\|_2+|B_1|^{1/2}|c|$ proves the estimate,
+with constant $C_n(1+|B_1|^{1/2}\alpha^{-1/2})$.
+\end{proof}
+
+\paragraph{16. Whole-space Hardy inequality.}
+For $n\geq3$ prove
+\[
+ \int_{\R^n}\frac{|u|^2}{|x|^2}
+ \leq\frac4{(n-2)^2}\int_{\R^n}|Du|^2,\qquad u\in H^1(\R^n).
+\]
+\begin{proof}[Solution]
+First take compactly supported smooth $u$. Integrate the identity
+\[
+ \operatorname{div}\left(\frac{x}{|x|^2}\right)
+ =\frac{n-2}{|x|^2}
+\]
+outside $B_\varepsilon$.
+The inner boundary term is $O(\varepsilon^{n-2})$ and vanishes;
+there is no outer term. Thus
+\[
+ (n-2)\int\frac{u^2}{|x|^2}
+ =-2\int u\,Du\cdot\frac{x}{|x|^2}
+ \leq2\left(\int\frac{u^2}{|x|^2}\right)^{1/2}\|Du\|_2.
+\]
+Cancel and square. For general $u$, compactly supported smooth
+$H^1$ approximations are available by cutoff and convolution.
+The estimate on differences makes $u_j/|x|$ Cauchy in $L^2$;
+an a.e. convergent subsequence identifies its limit with $u/|x|$.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{用常数检验边界项}{球域 Hardy 需要低阶项，因为常数在球上属于 $H^1$；全空间非零常数不在 $L^2$，所以不反驳纯梯度型估计。}
+
+\subsection{Problems 17--19: nonlinear operations}
+\paragraph{17. Chain rule.}
+On bounded $U$, let $F\in C^1(\R)$ have bounded derivative.
+Prove $F(u)\in W^{1,p}$ and $D(F(u))=F'(u)Du$.
+\begin{proof}[Solution]
+The bound $|F(s)|\leq|F(0)|+\|F'\|_\infty|s|$ gives integrability.
+For finite $p$, smooth interior approximations converge in local
+$W^{1,p}$ and, along a subsequence, a.e.
+The Lipschitz bound gives $F(u_j)\to F(u)$ in local $L^p$.
+Split the gradients:
+\[
+ F'(u_j)Du_j-F'(u)Du
+ =F'(u_j)(Du_j-Du)+(F'(u_j)-F'(u))Du.
+\]
+The first term tends to zero by boundedness of $F'$; the second by
+dominated convergence with majorant $2\|F'\|_\infty|Du|$.
+Pass to the weak identity locally. The candidate derivative is globally
+$L^p$, so this proves membership on $U$.
+For $p=\infty$, use finite local exponents and retain the resulting
+$L^\infty$ bounds on function and gradient.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{链式法则如何取极限}{$F'(u_j)\to F'(u)$ 只是逐点信息；第二项需要由 $2\|F'\|_\infty|Du|$ 支配，第一项则依赖梯度的强收敛。}
+
+\paragraph{18. Positive parts and level sets.}
+Prove $|u|,u^+,u^-\in W^{1,p}(U)$ and
+\[
+ Du^+=\mathbf1_{\{u>0\}}Du,\qquad
+ Du^-=-\mathbf1_{\{u<0\}}Du,\qquad
+ Du=0\text{ a.e. on }\{u=0\}.
+\]
+\begin{proof}[Solution]
+The function
+\[
+ F_\varepsilon(s)=
+ \begin{cases}\sqrt{s^2+\varepsilon^2}-\varepsilon,&s\geq0,\\
+ 0,&s<0\end{cases}
+\]
+is $C^1$, with $|F_\varepsilon'|\leq1$,
+$F_\varepsilon'\to\mathbf1_{\{s>0\}}$ pointwise, and
+$|F_\varepsilon(s)-s^+|\leq\varepsilon$.
+Problem 17 and dominated convergence show for finite $p$ that
+\[
+ F_\varepsilon(u)\to u^+\text{ in }L^p,\qquad
+ D(F_\varepsilon(u))\to\mathbf1_{\{u>0\}}Du\text{ in }L^p.
+\]
+The weak identity yields the positive-part formula. Apply it to $-u$
+for the negative part.
+Differentiate $u=u^+-u^-$ to obtain
+$Du=\mathbf1_{\{u\ne0\}}Du$, proving the level-set assertion.
+Use $|u|=u^++u^-$ for the absolute value.
+For $p=\infty$ use a finite exponent on bounded $U$ and the derivative
+bounds to recover $W^{1,\infty}$ membership.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{不能漏掉零水平集}{$\{u=0\}$ 可能有正测度，不能只在正负区域求导就结束。先证明正负部公式，再由 $u=u^+-u^-$ 推出该集合上梯度为零。}
+
+\paragraph{19. A second level-set argument for $H^1$.}
+Let $\phi$ be smooth, bounded, nondecreasing, with bounded derivative,
+and $\phi(s)=s$ for $|s|\leq1$. Set
+$u_\varepsilon=\varepsilon\phi(u/\varepsilon)$.
+\begin{proof}[Solution]
+Since $\phi(0)=0$ and $\phi'$ is bounded,
+$|u_\varepsilon|\leq\|\phi'\|_\infty|u|$ while
+$|u_\varepsilon|\leq\varepsilon\|\phi\|_\infty\to0$ pointwise.
+Dominated convergence gives $u_\varepsilon\to0$ in $L^2$, even when
+$U$ has infinite measure. Also
+$Du_\varepsilon=\phi'(u/\varepsilon)Du$ is bounded in $L^2$.
+Every sequence $\varepsilon_j\to0$ has a weak $H^1$ subsequence by
+reflexivity; its limit is zero by strong $L^2$ convergence.
+Thus the whole family converges weakly to zero.
+Pairing its gradient with $Du$ gives
+\[
+ 0\leq\int_{\{u=0\}}|Du|^2
+ \leq\int_U\phi'(u/\varepsilon)|Du|^2
+ =\int_U Du_\varepsilon\cdot Du\to0.
+\]
+We used $\phi'\geq0$ and $\phi'(0)=1$, without needing any pointwise
+limit of $\phi'(u/\varepsilon)$ away from $\{u=0\}$.
+\end{proof}
+
+\subsection{Problems 20--21: Fourier estimates}
+\paragraph{20. Boundedness above half the dimension.}
+Show $H^s(\R^n)\hookrightarrow L^\infty$ for $s>n/2$.
+\begin{proof}[Solution]
+Put $w_s(\xi)=(1+|\xi|^2)^{s/2}$. Cauchy--Schwarz gives
+\[
+ \|\widehat u\|_1
+ \leq\|w_s\widehat u\|_2
+ \left(\int_{\R^n}(1+|\xi|^2)^{-s}\,d\xi\right)^{1/2}
+ \leq C_{n,s}\|u\|_{H^s}.
+\]
+The radial integral at infinity is
+$\int_1^\infty r^{n-1-2s}\,dr$, finite exactly when $2s>n$.
+The inverse Fourier integral is bounded and continuous, with supremum
+at most $(2\pi)^{-n/2}\|\widehat u\|_1$, and agrees with $u$ in $L^2$
+by Plancherel/inversion.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{半维数的来源}{要让逆变换绝对可积，频率权重的倒数需属于 $L^2$；径向积分恰好给出条件 $2s>n$，而不是随意选的正则性门槛。}
+
+\paragraph{21. The algebra property.}
+For $s>n/2$, prove
+$\|uv\|_{H^s}\leq C_{n,s}\|u\|_{H^s}\|v\|_{H^s}$.
+\begin{proof}[Solution]
+For Schwartz functions the triangle inequality gives
+$w_s(\xi)\leq C_s(w_s(\eta)+w_s(\xi-\eta))$.
+The product-convolution formula implies
+\[
+ w_s|\widehat{uv}|\leq C_{n,s}
+ \bigl[(w_s|\widehat u|)*|\widehat v|
+       +|\widehat u|*(w_s|\widehat v|)\bigr].
+\]
+Young's $L^2*L^1\to L^2$ inequality and Problem 20 give
+\[
+ \begin{split}
+ \|uv\|_{H^s}
+ &\leq C_{n,s}\bigl(\|u\|_{H^s}\|\widehat v\|_1
+                 +\|\widehat u\|_1\|v\|_{H^s}\bigr)\\
+ &\leq C_{n,s}\|u\|_{H^s}\|v\|_{H^s}.
+ \end{split}
+\]
+For general $u,v$, approximate their transforms by smooth compactly
+supported functions in weighted $L^2$. Their inverse transforms are
+Schwartz. The bilinear estimate makes their products Cauchy in $H^s$.
+Problem 20 gives uniform convergence of the factors, and
+\[
+ \|u_jv_j-uv\|_2
+ \leq\|u_j\|_\infty\|v_j-v\|_2
+      +\|u_j-u\|_\infty\|v\|_2\to0.
+\]
+Thus the $H^s$ limit is the actual product $uv$.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{乘积为何不丢阶}{$s>n/2$ 提供频率的 $L^1$ 控制，使卷积可用 $L^2*L^1$ 估计。因此多项式非线性可以在同一个 $H^s$ 空间内处理。}

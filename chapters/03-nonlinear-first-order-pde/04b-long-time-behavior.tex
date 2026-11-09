@@ -1,0 +1,132 @@
+\subsection{Long-time decay and N-waves (Evans \S3.4.5)}
+For this subsection assume $f(0)=0$, $f$ smooth, and
+$0<\theta\leq f''\leq\Theta<\infty$.
+These convenient sufficient hypotheses ensure uniform convexity of
+both $f$ and $L=f^*$, as required in the source asymptotic arguments.
+Write $\sigma=f'(0)$ and $d=f''(0)$.
+
+\begin{theorem}[Supremum decay; source Theorem 5]
+For bounded integrable initial data,
+$\|u(\cdot,t)\|_\infty\leq C t^{-1/2}$.
+\end{theorem}
+\begin{expandedproof}
+The primitive $P$ in (LOP) is bounded by $M=\|g\|_1$.
+Duality gives $L(\sigma)=0$, $L'(\sigma)=0$.
+Since $L''\geq1/\Theta$,
+$L(v)\geq(v-\sigma)^2/(2\Theta)$.
+Compare a minimizing $y$ with $y_0=x-\sigma t$:
+\[
+ \frac{|x-y-\sigma t|^2}{2\Theta t}-M
+ \leq tL((x-y)/t)+P(y)\leq P(x-\sigma t)\leq M.
+\]
+Thus $|(x-y)/t-\sigma|\leq C/\sqrt t$.
+As $G(\sigma)=0$ and $G$ is $1/\theta$-Lipschitz,
+formula (LO) gives the claim.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{衰减的是高度，不一定是质量}{波的高度可按 $t^{-1/2}$ 降低，同时宽度按 $\sqrt t$ 增长。积分质量不一定趋零，所以长期形状应和一个展开的 N 波比较，而非只和零比较。}
+
+Suppose additionally $\supp g\subset[-R,R]$.
+Use the equivalent primitive $P(x)=\int_{-\infty}^xg$,
+so $P_-=0$, $P_+=m=\int g$.
+Let $P_*=\min P$,
+\[
+ p=-2P_*,\qquad q=2(m-P_*),\qquad p,q\geq0.
+\]
+The associated N-wave is
+\[
+ N(x,t)=\begin{cases}
+ (x-\sigma t)/(dt),
+   &-\sqrt{pdt}<x-\sigma t<\sqrt{qdt},\\
+ 0,&\text{otherwise}.
+ \end{cases}
+ \tag{NW}
+\]
+Its negative and positive signed areas are $-p/2$ and $q/2$,
+so $\int N=(q-p)/2=m$.
+\Needspace{45mm}
+\PDEAnnotation{N 波参数由原函数最低点决定}{$p,q$ 不是初值正负质量各乘二。例如先取正脉冲再取等质量负脉冲，原函数始终非负且最终回零，此时 $p=q=0$，即使初值两种符号都有。}
+\begin{theorem}[Source Theorem 6]
+If $p,q>0$, then $\|u(\cdot,t)-N(\cdot,t)\|_1\leq C t^{-1/2}$.
+\end{theorem}
+\begin{expandedproof}[locating the edges before integrating the error]
+Pass to the moving coordinate $\xi=x-\sigma t$ and put
+$\ell(v)=L(\sigma+v)$. Then
+$\ell(0)=\ell'(0)=0$ and $\ell''(0)=1/d$.
+The minimizing velocity bound just proved is $|(\xi-y)/t|\leq C/\sqrt t$.
+Taylor expansion on this fixed small-velocity range gives
+\[
+ t\ell((\xi-y)/t)=\frac{(\xi-y)^2}{2dt}+O(t^{-1/2}),
+\]
+\[
+ u(x,t)=\frac{\xi-y(x,t)}{dt}+O(t^{-1}).
+ \tag{NT}
+\]
+The constants are uniform for minimizers; the same Taylor bound holds
+for the bounded starting-point competitors used below when $|\xi|=O(\sqrt t)$.
+
+Choose $\varepsilon=A/\sqrt t$ with a fixed sufficiently large $A$.
+We work for large $t$, so $\varepsilon<1$.
+
+\paragraph{1. Exterior edges: the solution is zero beyond them.}
+If $\xi<-R-\sqrt{pd(1+\varepsilon)t}$, the competitor $y=\xi$ has
+objective $P_-=0$.
+A minimizing $y\geq-R$ would, by (NT), have objective at least
+\[
+ \frac{pd(1+\varepsilon)t}{2dt}+P_*+O(t^{-1/2})
+ =\frac{pA}{2\sqrt t}+O(t^{-1/2})>0.
+\]
+This contradicts the competitor when $A$ is large enough.
+Thus $y<-R$, where $P=0$, and the strictly positive cost $\ell$
+is minimized only by $y=\xi$. Hence $u=G(\sigma)=0$.
+The right-tail argument is the same with the baseline $P_+=m$ and $q$.
+Therefore $u=0$ outside
+\[
+ -R-\sqrt{pd(1+\varepsilon)t}
+ \leq \xi\leq
+ R+\sqrt{qd(1+\varepsilon)t}.
+ \tag{OUT}
+\]
+
+\paragraph{2. Interior edges: the minimizing point stays in the initial support.}
+At $\xi_l=R-\sqrt{pd(1-\varepsilon)t}$, any $y<-R$ has objective
+at least $P_-=0$. Choose a point $z\in[-R,R]$ with $P(z)=P_*$.
+Since $|\xi_l-z|\leq\sqrt{pd(1-\varepsilon)t}$ for large $t$,
+its objective is at most
+\[
+ \frac{p(1-\varepsilon)}2+P_*+O(t^{-1/2})
+ =-\frac{pA}{2\sqrt t}+O(t^{-1/2})<0.
+\]
+Thus every minimizer at $\xi_l$ is at least $-R$.
+Similarly at $\xi_r=-R+\sqrt{qd(1-\varepsilon)t}$ it is at most $R$.
+Monotonicity of minimizers then gives $|y(x,t)|\leq R$
+throughout $\xi_l<\xi<\xi_r$.
+There (NT) implies
+$|u(x,t)-\xi/(dt)|\leq C/t$.
+
+\paragraph{3. Integrate over the middle and the transition strips.}
+The middle interval has length $O(\sqrt t)$ and lies inside the ideal
+N-wave interval, so its $L^1$ error is $O(t^{-1/2})$.
+Each strip between the interior, ideal, and exterior edges has bounded
+length, since
+$\sqrt{(1\pm A/\sqrt t)t}-\sqrt t=O(1)$.
+Both $|u|$ and $|N|$ are $O(t^{-1/2})$, giving the same error there.
+Outside (OUT) both are zero. This proves the bound for large times.
+
+For a bounded time interval the minimizing-velocity bound from (HL)
+gives finite propagation of the compact support and $|u|\leq\|g\|_\infty$.
+Thus $\|u\|_1$ is uniformly bounded on that interval; $\|N\|_1=(p+q)/2$.
+Enlarge $C$ to cover all remaining $t>0$.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{边缘位置也要估计}{只有波内 $O(1/t)$ 点态误差还不够做全空间积分。还要把两侧支集误差压进宽度 $O(1)$ 的条带，再乘以高度 $O(t^{-1/2})$，才能得到总误差。}
+
+For Burgers flow with initial data $\mathbf1_{(0,1)}$, the fan is $u=x/t$.
+Until $t=2$ it meets a height-one plateau ending at shock $x=1+t/2$.
+After $t=2$ the shock is $x=\sqrt{2t}$ and
+$u=x/t$ on $0<x<\sqrt{2t}$, zero elsewhere.
+This follows from the fan--shock matching equation
+$\gamma'=\gamma/(2t)$ and $\gamma(2)=2$.
+It has height $O(t^{-1/2})$ and constant mass one.
+Here $p=0$, $q=2$; the explicit example illustrates decay, while
+the general $L^1$ theorem above was stated with $p,q>0$.

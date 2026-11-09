@@ -1,13 +1,152 @@
-% Evans second edition, section 1.3.
-% English source: printed p. 6; PDF page 23 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans second edition, section 1.3, printed pp. 6--8; PDF pages 23--25.
+% Chinese: printed pp. 5--7; PDF pages 23--25.
 \section{Strategies for Studying PDE}
 \label{sec:1-3}
 
-\PDEPending
+As explained in \S1.1 our goal is the discovery of ways to solve partial differential equations of various sorts, but---as should now be clear in view of the many diverse examples set forth in \S1.2---this is no easy task. And indeed the very question of what it means to ``solve'' a given PDE can be subtle, depending in large part on the particular structure of the problem at hand.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection{Well-posed problems, classical solutions} The informal notion of a well-posed problem captures many of the desirable features of what it means to solve a PDE. We say that a given problem for a partial differential equation is well-posed if \begin{enumerate}[label=(\roman*)]
+\item the problem in fact has a solution;
+\item this solution is unique; and
+\item the solution depends continuously on the data given in the problem.
+\end{enumerate} \par\Needspace{65mm}
+\PDEAnnotation{适定性依赖拓扑}{连续依赖必须指定数据空间 $X$ 和解空间 $Y$。
+常见目标是 $\|u-\widetilde u\|_Y\leq C\|g-\widetilde g\|_X$。
+同一方程更换范数、时间方向或边界条件后，适定性可能改变。}
+
+The last condition is particularly important for problems arising from physical applications: we would prefer that our (unique) solution changes only a little when the conditions specifying the problem change a little. (For many problems, on the other hand, uniqueness is not to be expected. In these cases the primary mathematical tasks are to classify and to characterize the solutions.)
+
+Now clearly it would be desirable to ``solve'' PDE in such a way that (i)--(iii) hold. But notice that we still have not carefully defined what we mean by a ``solution''. Should we ask, for example, that a ``solution'' $u$ must be real analytic or at least infinitely differentiable? This might be desirable, but perhaps we are asking too much. Maybe it would be wiser to require a solution of a PDE of order $k$ to be at least $k$ times continuously differentiable. Then at least all the derivatives which appear in the statement of the PDE will exist and be continuous, although maybe certain higher derivatives will not exist. Let us informally call a solution with this much smoothness a classical solution of the PDE: this is certainly the most obvious notion of solution.
+
+So by solving a partial differential equation in the classical sense we mean if possible to write down a formula for a classical solution satisfying (i)--(iii) above, or at least to show such a solution exists, and to deduce various of its properties.
+
+
+\PDEMarginDiagram{1.M}{连续依赖的方向}
+{先说明数据与解各用什么范数，再检验解映射是否连续。存在、唯一和连续依赖是三个不同问题。}
+{ch01-data-map-margin}
+
+\subsection{Weak solutions and regularity} But can we achieve this? The answer is that certain specific partial differential equations (e.g. Laplace's equation) can be solved in the classical sense, but many others, if not most others, cannot. Consider for instance the scalar conservation law \[ u_t+F(u)_x=0. \] We will see in \S3.4 that this PDE governs various one-dimensional phenomena involving fluid dynamics, and in particular models the formation and propagation of shock waves. Now a shock wave is a curve of discontinuity of the solution $u$; and so if we wish to study conservation laws, and recover the underlying physics, we must surely allow for solutions $u$ which are not continuously differentiable or even continuous. In general, as we shall see, the conservation law has no classical solutions but is well-posed if we allow for properly defined generalized or weak solutions. \par\Needspace{65mm}
+\PDEAnnotation{经典解可局部存在}{“没有经典解”不能理解成任意初值、任意短时间都无解。
+光滑 Burgers 初值通常先产生局部经典解，再因特征线相交形成激波。
+失效的是一般情形下全局保持光滑的要求。}
+
+This is all to say that we may be forced by the structure of the particular equation to abandon the search for smooth, classical solutions. We must instead, while still hoping to achieve the well-posedness conditions (i)--(iii), investigate a wider class of candidates for solutions. And in fact, even for those PDE which turn out to be classically solvable, it is often most expedient initially to search for some appropriate kind of weak solution.
+
+The point is this: if from the outset we demand that our solutions be very regular, say $k$-times continuously differentiable, then we are usually going to have a really hard time finding them, as our proofs must then necessarily include possibly intricate demonstrations that the functions we are building are in fact smooth enough. A far more reasonable strategy is to consider as separate the existence and the smoothness (or regularity) problems. The idea is to define for a given PDE a reasonably wide notion of a weak solution, with the expectation that since we are not asking too much by way of smoothness of this weak solution, it may be easier to establish its existence, uniqueness, and continuous dependence on the given data. Thus, to repeat, it is often wise to aim at proving well-posedness in some appropriate class of weak or generalized solutions. \par\Needspace{65mm}
+\PDEAnnotation{弱形式与唯一性}{分部积分把导数转移给光滑试验函数，降低对 $u$ 的正则性要求。
+但守恒律的分布弱解通常不唯一；还需熵条件筛选物理解。
+“弱解存在”本身不等于问题已经适定。}
+
+Now, as noted above, for various partial differential equations this is the best that can be done. For other equations we can hope that our weak solution may turn out after all to be smooth enough to qualify as a classical solution. This leads to the question of regularity of weak solutions. As we will see, it is often the case that the existence of weak solutions depends upon rather simple estimates plus ideas of functional analysis, whereas the regularity of the weak solutions, when true, usually rests upon many intricate calculus estimates.
+
+Let me explicitly note here that once we are past Part I (Chapters 2--4), our efforts will be largely devoted to proving mathematically the existence of solutions to various sorts of partial differential equations, and not so much to deriving formulas for these solutions. This may seem wasted or misguided effort, but in fact mathematicians are like theologians: we regard existence as the prime attribute of what we study. But unlike theologians, we need not always rely upon faith alone.
+
+\subsection{Typical difficulties} Following are some vague but general principles, which may be useful to keep in mind: \begin{enumerate}[label=(\roman*)]
+\item Nonlinear equations are more difficult than linear equations; and, indeed, the more the nonlinearity affects the higher derivatives, the more difficult the PDE is.
+\item Higher-order PDE are more difficult than lower-order PDE.
+\item Systems are harder than single equations.
+\item Partial differential equations entailing many independent variables are harder than PDE entailing few independent variables.
+\item For most partial differential equations it is not possible to write out explicit formulas for solutions.
+\end{enumerate}
+None of these assertions is without important exceptions.
+
+\subsection*{Editorial supplement: estimates, instability, and shocks}
+The following three calculations make the preceding distinctions precise.
+They are editorial additions, not proofs stated in the source introduction.
+
+\paragraph{1. A forward heat estimate.}
+Let $U$ be a bounded smooth domain, and let $u,v$ be sufficiently smooth
+solutions of $u_t-\Delta u=0$ with the same homogeneous Dirichlet boundary
+condition. For $w=u-v$, multiplication by $w$ and integration by parts give
+\[
+ \frac12\frac{d}{dt}\int_U w^2\,dx
+ +\int_U|Dw|^2\,dx
+ =\int_{\partial U}w\,\partial_\nu w\,dS=0.
+\]
+Consequently, for every time within their common interval of existence,
+\[
+ \|u(t)-v(t)\|_{L^2(U)}\leq\|u(0)-v(0)\|_{L^2(U)}.
+\]
+This proves uniqueness in this smooth class and an $L^2$ continuous-dependence
+estimate. It does not prove existence. Extending the calculation to weak
+solutions requires a justification for the time derivative and the test
+function $w$; the formal identity alone is not that justification.
+\par\Needspace{65mm}
+\PDEAnnotation{边界项决定估计}{这里消失的是 $w\partial_\nu w$，依据为相同的齐次
+Dirichlet 条件。若边值不同，就不能直接令边界项为零。
+同样的能量计算必须随边界条件调整，不能只从方程形式照抄结论。}
+
+\paragraph{2. Reversing time destroys this stability.}
+On $U=(0,\pi)$ fix $T>0$, with zero boundary values, and define
+\[
+ u_j(x,t)=e^{j^2(T-t)}\sin(jx),\qquad 0\leq t\leq T.
+\]
+Every $u_j$ is a smooth forward heat solution. Its terminal and initial
+norms satisfy
+\[
+ \|u_j(T)\|_2=\sqrt{\pi/2},\qquad
+ \|u_j(0)\|_2=e^{j^2T}\sqrt{\pi/2}.
+\]
+More decisively, $v_j=e^{-j^2T/2}u_j$ satisfies
+\[
+ \|v_j(T)\|_2\longrightarrow0,
+ \qquad \|v_j(0)\|_2\longrightarrow\infty.
+\]
+Thus the map from terminal data to the initial solution cannot be continuous
+at zero in $L^2$, even when restricted to these smooth solvable data.
+No claim of nonexistence is needed for this instability argument.
+
+
+\PDEBodyDiagram{1.3}{High frequencies distinguish stability from solvability.}
+{For the Dirichlet mode $\sin(kx)$ on $(0,\pi)$, forward heat evolution multiplies amplitude by $e^{-k^2T}$; reconstruction multiplies by its reciprocal. Here $T=0.35$ and vertical scales differ. Arbitrarily small terminal errors in high modes can therefore give large reconstructed initial errors.}
+{ch01-heat-stability}
+
+\paragraph{3. Smooth data can create a Burgers singularity.}
+For $u_t+uu_x=0$ on the line, let $u(x,0)=g(x)$, where $g\in C^1(\R)$
+and both $g$ and $g'$ are bounded. Along a characteristic starting at $\xi$,
+\[
+ X(\xi,t)=\xi+t g(\xi),\qquad u(X(\xi,t),t)=g(\xi).
+\]
+Before $\partial_\xi X=1+t g'(\xi)$ vanishes, inversion and the chain rule
+give
+\[
+ u_x(X(\xi,t),t)=\frac{g'(\xi)}{1+t g'(\xi)}.
+\]
+If $g'(\xi_0)<0$, this denominator vanishes at
+$t=-1/g'(\xi_0)>0$, so the formula cannot continue as a $C^1$ solution
+through that event. If the negative minimum $m=\min_{\R}g'$ is attained,
+the first such time is $T_*=-1/m$. A bounded amplitude therefore does not
+prevent derivative blow-up.
+\par\Needspace{65mm}
+\PDEAnnotation{爆破的量必须说明}{Burgers 特征线上 $u=g(\xi)$ 始终有界，
+失控的是 $u_x$。这叫梯度爆破，不能误写成 $|u|\to\infty$。
+局部存在定理的延拓判据通常取决于某个特定范数，而不是笼统的“解变大”。}
+
+
+\PDEBodyDiagram{1.4}{Loss of invertibility precedes a shock.}
+{For the local initial profile $g(\xi)=-\xi$, the characteristics meet at $t=1$. The characteristic formula is valid for $t<1$; the meeting point depicts failure of a classical continuation, rather than several values of an admissible solution at one point.}
+{ch01-burgers-focus}
+
+To include a discontinuity, write $F(u)=u^2/2$. A locally bounded weak
+solution with initial data $g$ must satisfy
+\[
+ \int_0^\infty\!\int_{\R}
+   \bigl(u\varphi_t+F(u)\varphi_x\bigr)\,dx\,dt
+ +\int_{\R}g(x)\varphi(x,0)\,dx=0
+\]
+for every smooth test function compactly supported in
+$\R\times[0,\infty)$. The initial term follows from time integration by
+parts; compact support removes the spatial boundary term.
+
+For a piecewise constant state $u_L$ to the left of $x=st$ and $u_R$ to
+the right, the delta coefficient in $u_t+F(u)_x$ is
+$-s(u_R-u_L)+F(u_R)-F(u_L)$. It vanishes precisely when
+\[
+ s(u_R-u_L)=F(u_R)-F(u_L).
+\]
+This is the Rankine--Hugoniot condition. For Burgers with $u_L\ne u_R$,
+it gives $s=(u_L+u_R)/2$. Yet it permits both compressive and expansive
+jumps. The entropy criterion selects a compressive shock, $u_L>u_R$,
+for which $u_R<s<u_L$; a jump with $u_L<u_R$ is not the entropy solution.
+This calculation explains why merely imposing the weak identity is
+insufficient. The general entropy theory belongs to the later chapters.

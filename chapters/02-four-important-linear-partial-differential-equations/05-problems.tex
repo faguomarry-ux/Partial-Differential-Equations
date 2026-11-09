@@ -1,13 +1,396 @@
 % Evans second edition, section 2.5.
 % English source: printed p. 81; PDF page 98 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked from chapter opening, PDF 31; mean-value pages checked at PDF 36-37 and 53-55.
+% Status: editorial study draft with reconstructed proofs and mathematical annotations.
 \section{Problems}
 \label{sec:2-5}
 
-\PDEPending
+\noindent\textit{Source: Evans \S2.5, Problems 1--24, printed pp.~81--86
+(PDF pp.~98--103).} Statements are concisely restated, and solutions
+are editorial. Smoothness is assumed wherever a displayed differentiation
+requires it. Problems 3--5 and 17 are especially useful checks on the
+mean-value arguments.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection{Problems 1--8: transport and elliptic averages}
+\paragraph{1. Transport with a zeroth-order term.}
+Solve $u_t+b\cdot Du+cu=0$, $u(\cdot,0)=g$.
+\begin{proof}[Solution]
+Along $X(s)=x+(s-t)b$, the quantity $e^{cs}u(X(s),s)$ has derivative
+zero. Evaluate at $s=0,t$ to obtain $u(x,t)=e^{-ct}g(x-tb)$.
+\end{proof}
+
+\paragraph{2. Rotation invariance of the Laplacian.}
+\begin{proof}[Solution]
+For an orthogonal matrix $O$, the Hessian of $v(x)=u(Ox)$ is
+$D^2v=O^T(D^2u)(Ox)O$. Its trace equals
+$\operatorname{tr}((D^2u)(Ox)OO^T)=\Delta u(Ox)$.
+Thus a harmonic $u$ gives a harmonic $v$.
+\end{proof}
+
+\paragraph{3. The center value for Poisson's equation.}
+Derive the center formula for $-\Delta u=f$ on $B_r$, $u=g$ on $\partial B_r$.
+\begin{proof}[Solution]
+Integrate (M) from zero to $r$:
+\[
+ S_u(0,r)-u(0)
+ =-\frac1{n\omega_n}\int_0^r\rho^{1-n}
+                         \int_{B_\rho}f(y)\,dy\,d\rho.
+\]
+Changing the order gives (P), with the nonnegative kernel
+$[|y|^{2-n}-r^{2-n}]/[n(n-2)\omega_n]$ when $n\geq3$.
+Replace $S_u(0,r)$ by the boundary average of $g$.
+The kernel's singularity is locally integrable, justifying the change
+for bounded $f$; signed $f$ is treated by absolute integrability.
+\end{proof}
+
+\paragraph{4. A direct maximum-principle proof.}
+\begin{proof}[Solution]
+For $\varepsilon>0$, $v=u+\varepsilon|x|^2$ satisfies
+$\Delta v=2n\varepsilon>0$. At an interior maximum its Hessian would
+be negative semidefinite and $\Delta v\leq0$, impossible.
+Thus $v$ reaches its maximum on the boundary.
+Bound the added quadratic uniformly on bounded $U$ and let
+$\varepsilon\downarrow0$.
+\end{proof}
+
+\paragraph{5. Subharmonic functions.}
+Show the mean inequality and boundary maximum principle for $\Delta v\geq0$;
+prove that $\phi(u)$ and $|Du|^2$ are subharmonic for harmonic $u$
+and smooth convex $\phi$.
+\begin{proof}[Solution]
+Formula (M) makes spherical means nondecreasing, and (SB) gives
+$v(x)\leq A_v(x,r)$.
+For the boundary maximum argument use
+$v+\varepsilon|x|^2$, as in Problem 4.
+The chain rule gives
+$\Delta\phi(u)=\phi''(u)|Du|^2+\phi'(u)\Delta u\geq0$.
+Since harmonic functions are smooth, differentiating the PDE is valid:
+\[
+ \Delta|Du|^2=2|D^2u|^2+2Du\cdot D\Delta u=2|D^2u|^2\geq0.
+\]
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{凸性与平均相容}{调和函数经凸函数变换后不一定仍调和，却成为次调和。Jensen 不等式给直觉，链式法则中的 $\phi''(u)|Du|^2$ 给出可核验的原因。}
+
+\paragraph{6. A uniform Poisson bound.}
+\begin{proof}[Solution]
+Enclose $U$ in $B_R(0)$, put $F=\|f\|_\infty$, $G=\|g\|_\infty$, and set
+$b(x)=G+F(R^2-|x|^2)/(2n)$.
+Then $b\geq G$ on $\partial U$ and $-\Delta b=F$.
+The function $u-b$ is subharmonic because $-\Delta(u-b)=f-F\leq0$;
+its boundary values are nonpositive. Problem 5 yields $u\leq b$.
+Repeat for $-u$, giving
+$\|u\|_\infty\leq G+R^2F/(2n)$.
+\end{proof}
+
+\paragraph{7. Explicit Harnack bounds on a ball.}
+\begin{proof}[Solution]
+For positive harmonic $u$ on $B_R$ with continuous boundary values,
+use (PB), $R-|x|\leq|x-y|\leq R+|x|$, and
+$\int_{\partial B_R}u=n\omega_nR^{n-1}u(0)$:
+\[
+ R^{n-2}\frac{R-|x|}{(R+|x|)^{n-1}}u(0)
+ \leq u(x)\leq
+ R^{n-2}\frac{R+|x|}{(R-|x|)^{n-1}}u(0).
+\]
+If $u$ is only given on the open ball, first use radii $\rho<R$
+with $|x|<\rho$, then let $\rho\uparrow R$.
+\end{proof}
+
+\paragraph{8. Verify the ball Poisson formula.}
+\begin{proof}[Solution]
+The full verification following (PB) establishes mass one using the
+known solution $1$, harmonicity by direct differentiation, and boundary
+convergence by a near/far split. Positivity controls the near error,
+and the factor $R^2-|x|^2$ kills the far error.
+This proves existence; the maximum principle supplies uniqueness.
+\end{proof}
+
+\subsection{Problems 9--17: boundaries and the heat equation}
+\paragraph{9. Lipschitz boundary data can give an unbounded normal derivative.}
+Let bounded continuous half-space data satisfy $g(z)=|z|$ for $|z|\leq1$,
+$n\geq2$. Show the Poisson solution has unbounded gradient near zero.
+\begin{proof}[Solution]
+The boundary value at zero is zero. For $\lambda>0$,
+\[
+ \frac{u(\lambda e_n)}{\lambda}
+ =\frac2{n\omega_n}\int_{\R^{n-1}}
+                \frac{g(z)}{(|z|^2+\lambda^2)^{n/2}}\,dz.
+\]
+The portion $|z|>1$ is uniformly bounded in absolute value, by boundedness
+of $g$ and the integrable radial tail.
+On $\lambda<|z|<1$, polar coordinates bound the remaining positive
+integral below by $c_n\int_\lambda^1 d\rho/\rho$, diverging.
+A bounded gradient would bound this difference quotient, a contradiction.
+\end{proof}
+
+\paragraph{10. Odd reflection across a flat zero boundary.}
+\begin{proof}[Solution]
+First assume $u$ is $C^2$ up to the flat boundary of a half-ball,
+harmonic inside, and zero on the flat portion.
+Tangential first and second derivatives vanish there.
+The PDE then makes $u_{nn}=0$ there.
+For the odd extension, tangential derivatives change sign below the
+plane, normal first derivatives match, mixed derivatives match, and
+normal second derivatives match because their boundary values are zero.
+Thus the extension is $C^2$ and harmonic.
+
+For only continuous boundary regularity, take a small full ball centered
+on the flat plane. Prescribe its continuous odd-reflected spherical data
+and solve by (PB). Uniqueness makes this harmonic extension odd,
+hence zero on the plane. On the upper half-ball it and $u$ have the
+same full boundary data, so the maximum principle makes them equal.
+Its lower half is the desired odd reflection. Such balls cover the interface.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{反射要检查到二阶}{奇延拓的函数值匹配只是第一步。要直接证明 $C^2$，还需用零边界值消去切向二阶导数，再用方程推出法向二阶导数为零。}
+
+\paragraph{11. Kelvin transform.}
+Show $\overline u(x)=|x|^{2-n}u(x/|x|^2)$ is harmonic when $u$ is harmonic,
+on the inverted domain away from zero.
+\begin{proof}[Solution]
+Put $r=|x|$, $z=x/r^2$ and $e=x/r$.
+Then $Dz=r^{-2}(I-2ee^T)$, so $Dz(Dz)^T=r^{-4}I$,
+and $\Delta z_i=-2(n-2)x_i/r^4$.
+Also $\Delta r^{2-n}=0$ off zero.
+In the Laplacian product and chain rule, the first-derivative terms cancel:
+the contribution from $r^{2-n}\Delta z_i$ is opposite to that from
+$2D(r^{2-n})\cdot Dz_i$. The remaining Hessian term is
+\[
+ \Delta_x\big[r^{2-n}u(z)\big]=r^{-n-2}(\Delta u)(z).
+\]
+This proves the claim, including $n=2$ with prefactor one.
+\end{proof}
+
+\paragraph{12. Parabolic scaling and its infinitesimal generator.}
+\begin{proof}[Solution]
+For $\lambda>0$, define $u_\lambda(x,t)=u(\lambda x,\lambda^2t)$. The chain rule gives
+\[
+ Lu_\lambda=\lambda^2(Lu)(\lambda x,\lambda^2t)=0.
+\]
+Differentiate this identity in $\lambda$ at one.
+The result is $L(x\cdot Du+2tu_t)=0$.
+Nonzero negative $\lambda$ also gives a solution by spatial reflection;
+$\lambda=0$ requires data at time zero and is not needed for the argument.
+\end{proof}
+
+\paragraph{13. A self-similar profile.}
+For $u(x,t)=v(x/\sqrt t)$ in one space dimension, derive the kernel.
+\begin{proof}[Solution]
+For $z=x/\sqrt t$, $u_t=-zv'/(2t)$ and $u_{xx}=v''/t$.
+Thus $v''+(z/2)v'=0$, so $v'=c e^{-z^2/4}$ and
+$v(z)=c\int_0^z e^{-q^2/4}\,dq+d$.
+Choose $c=(4\pi)^{-1/2}$ and $d=1/2$ to obtain initial step data.
+Differentiating in $x$ gives
+$u_x=(4\pi t)^{-1/2}e^{-x^2/(4t)}=K(x,t)$.
+The distributional derivative of the initial step is $\delta_0$,
+so this construction indeed produces the fundamental solution.
+\end{proof}
+
+\paragraph{14. Heat flow with reaction and forcing.}
+\begin{proof}[Solution]
+For $u_t-\Delta u+cu=f$, let $v=e^{ct}u$.
+Then $Lv=e^{ct}f$ and $v(\cdot,0)=g$. Duhamel gives
+\[
+ u(x,t)=e^{-ct}(K_t*g)(x)
+       +\int_0^te^{-c(t-s)}(K_{t-s}*f(\cdot,s))(x)\,ds.
+\]
+\end{proof}
+
+\paragraph{15. Heat equation on a half-line with boundary forcing.}
+For zero initial data and boundary value $g(t)$, $g(0)=0$, derive
+\[
+ u(x,t)=\int_0^t
+ \frac{x\,e^{-x^2/[4(t-s)]}}{\sqrt{4\pi}(t-s)^{3/2}}g(s)\,ds,\qquad x>0.
+\]
+\begin{proof}[Solution]
+The zero-boundary half-line heat Green kernel is
+$K(x-y,\tau)-K(x+y,\tau)$.
+Its inward boundary flux gives the Poisson kernel
+$P(x,\tau)=-2K_x(x,\tau)
+=x e^{-x^2/(4\tau)}/(\sqrt{4\pi}\tau^{3/2})$.
+It satisfies the heat equation for $x,\tau>0$.
+The substitution $z=x/(2\sqrt\tau)$ shows
+$\int_0^\infty P(x,\tau)\,d\tau=1$.
+As $x\downarrow0$, the mass on $\tau>\delta$ tends to zero.
+Thus $P(x,\cdot)$ is an approximate identity at time zero.
+After extending $g$ by zero to negative times, its convolution tends
+to $g(t)$; compatibility $g(0)=0$ makes the corner continuous.
+For fixed $x>0$, the exponential kills all singular powers at
+$\tau=0$, justifying differentiation and the PDE.
+The time interval shrinks to zero at the initial limit, proving the
+zero initial datum.
+\end{proof}
+
+\paragraph{16. Direct parabolic maximum principle.}
+\begin{proof}[Solution]
+The argument $v=u-\varepsilon t$ in \S2.3.3 supplies the proof.
+At a top-time maximum the left derivative is nonnegative; one does not
+need to pretend that the terminal point is a two-sided time maximum.
+\end{proof}
+
+\paragraph{17. Subsolutions and convex transformations.}
+\begin{proof}[Solution]
+For $Lv\leq0$, (HR) and its limit at zero imply $v(x,t)\leq M_r[v]$.
+The perturbed maximum argument from Problem 16 applies to subsolutions,
+giving the boundary maximum principle on bounded cylinders.
+If $\phi$ is smooth and convex and $Lu=0$, then
+\[
+ L\phi(u)=\phi'(u)Lu-\phi''(u)|Du|^2\leq0.
+\]
+For a smooth caloric $u$, spatial and time derivatives are caloric,
+and $L(w^2)=-2|Dw|^2$ whenever $Lw=0$.
+Sum for $w=\partial_i u$ and $w=u_t$:
+\[
+ L(|Du|^2+u_t^2)=-2|D^2u|^2-2|Du_t|^2\leq0.
+\]
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{椭圆与热的凸性公式}{椭圆侧是 $\Delta\phi(u)=\phi''(u)|Du|^2\geq0$；热算子侧是 $L\phi(u)=-\phi''(u)|Du|^2\leq0$。符号不同，得到的平均不等式方向一致。}
+
+\subsection{Problems 18--24: waves, systems, and energy}
+\paragraph{18. Stokes' rule.}
+If $u$ has wave data $(0,h)$, show $v=u_t$ has data $(h,0)$.
+\begin{proof}[Solution]
+Time differentiation commutes with $\partial_t^2-\Delta$, so $v$ solves
+the same PDE. At zero, $v=h$ and
+$v_t=u_{tt}=\Delta u=\Delta0=0$. This is also the reason the displacement
+part of the solution is a time derivative of the velocity solution operator.
+\end{proof}
+
+\paragraph{19. Null coordinates and one-way waves.}
+\begin{proof}[Solution]
+The equation $u_{xy}=0$ first makes $u_x$ independent of $y$;
+integrating gives $u=F(x)+G(y)$.
+For $\xi=x+t$, $\eta=x-t$, the wave operator is
+$-4\partial_\xi\partial_\eta$, so
+$u=F(x+t)+G(x-t)$. The initial conditions give
+$F'=(g'+h)/2$, $G'=(g'-h)/2$, producing (DA).
+A purely right-moving profile $G(x-t)$ requires $h=-g'$.
+A purely left-moving profile $F(x+t)$ requires $h=g'$.
+Additive constants can be allocated to either profile without changing
+these derivative conditions.
+\end{proof}
+
+\paragraph{20. Undistorted radial profiles.}
+For nonzero attenuation $\alpha(r)$ and nonnegative delay $\beta(r)$,
+$\beta(0)=0$, suppose $\alpha(r)\phi(t-\beta(r))$ solves the wave
+equation for every smooth profile $\phi$.
+\begin{proof}[Solution]
+Insert the form into $u_{tt}-u_{rr}-(n-1)u_r/r$.
+Independence of $\phi,\phi',\phi''$ gives
+\[
+ \alpha(1-\beta'^2)=0,\qquad
+ 2\alpha'\beta'+\alpha\beta''+\frac{n-1}r\alpha\beta'=0,
+\]
+\[
+ \alpha''+\frac{n-1}r\alpha'=0.
+\]
+For a nontrivial smooth attenuation, the first and the nonnegative-delay
+condition give $\beta(r)=r$; the middle equation gives
+$\alpha=Cr^{-(n-1)/2}$.
+Substitution into the last equation yields
+$(n-1)(n-3)C=0$. Thus $n=1$, $\alpha=C$, or $n=3$, $\alpha=C/r$.
+The identically zero attenuation is a trivial exception and has to be
+excluded to make the dimension claim true.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{量词“任意波形”很强}{把 $\phi,\phi',\phi''$ 的系数分别置零，依赖于要求对所有光滑 $\phi$ 成立。若只要求某一个特定波形，不能推出相同的维数限制。}
+
+\paragraph{21. Maxwell and elastic waves.}
+\begin{proof}[Solution]
+Differentiate $E_t=\operatorname{curl}B$ and use
+$B_t=-\operatorname{curl}E$:
+\[
+ E_{tt}=-\operatorname{curl}\operatorname{curl}E
+       =-\nabla\operatorname{div}E+\Delta E=\Delta E.
+\]
+Likewise $B_{tt}=\Delta B$, using the divergence constraints.
+For elasticity,
+$u_{tt}-\mu\Delta u-(\lambda+\mu)\nabla\operatorname{div}u=0$.
+Taking divergence and curl respectively gives
+\[
+ w_{tt}-(\lambda+2\mu)\Delta w=0,\qquad
+ \mathbf w_{tt}-\mu\Delta\mathbf w=0,
+\]
+where $w=\operatorname{div}u$ and $\mathbf w=\operatorname{curl}u$.
+When $\mu>0$ and $\lambda+2\mu>0$, the longitudinal and transverse
+speeds are $\sqrt{\lambda+2\mu}$ and $\sqrt\mu$.
+\end{proof}
+
+\paragraph{22. Telegraph equation from velocity switching.}
+Given $u_t+u_x=d(v-u)$ and $v_t-v_x=d(u-v)$, show each component satisfies
+$w_{tt}+2dw_t-w_{xx}=0$.
+\begin{proof}[Solution]
+Let $a=u+v$, $b=u-v$. Adding and subtracting gives
+$a_t+b_x=0$ and $b_t+a_x=-2db$.
+Differentiate the first in time:
+$a_{tt}=-b_{xt}=a_{xx}+2db_x=a_{xx}-2da_t$.
+Differentiate the second in time and use $a_{xt}=-b_{xx}$:
+$b_{tt}=b_{xx}-2db_t$.
+Linear combinations give the same telegraph equation for $u,v$.
+\end{proof}
+
+\paragraph{23. A compact space-time source and its outgoing shape.}
+In the diamond $S=\{|x|+|t-2|<1\}$, take $f=1$ below $t=x+2$
+and $f=-1$ above it, zero elsewhere. Solve with zero wave data
+and describe $u$ for $t>3$.
+\begin{proof}[Solution]
+The one-dimensional Duhamel formula is
+\[
+ u(x,t)=\frac12\int_0^t
+                 \int_{x-(t-s)}^{x+(t-s)}f(y,s)\,dy\,ds.
+\]
+Set $\alpha=s+y$, $\beta=s-y$.
+Then $S$ becomes $1<\alpha<3$, $1<\beta<3$,
+and $dy\,ds=\tfrac12d\alpha\,d\beta$.
+The sign depends only on $\beta$: it is $+1$ for $\beta<2$,
+$-1$ for $\beta>2$.
+The backward cone imposes $\alpha\leq t+x$, $\beta\leq t-x$.
+Define
+\[
+ F(a)=\min\{2,\max\{0,a-1\}\},
+\]
+\[
+ H(b)=
+ \begin{cases}
+ 0,&b\leq1,\\
+ b-1,&1<b\leq2,\\
+ 3-b,&2<b<3,\\
+ 0,&b\geq3.
+ \end{cases}
+\]
+The integrals factor, giving $u(x,t)=\tfrac14F(t+x)H(t-x)$.
+If $t>3$ and $H(t-x)\ne0$, then $t+x=2t-(t-x)>3$,
+so $F(t+x)=2$. Therefore
+\[
+ u(x,t)=\tfrac12H(t-x)\quad(t>3).
+\]
+It is a right-moving triangular pulse of height $1/2$, supported on
+$t-3<x<t-1$, with peak at $x=t-2$. The sign-balanced source cancels
+the other outgoing pulse.
+This piecewise forcing is interpreted through the integral formula;
+across its jump lines the PDE is read distributionally.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{特征坐标把菱形变方形}{$\alpha=s+y,\beta=s-y$ 同时把波锥不等式变成坐标上界。二重积分才能分解成两个一维截断积分；漏掉 Jacobian 的 $1/2$ 会让最终脉冲高度错一倍。}
+
+\paragraph{24. Equipartition in one dimension.}
+For compactly supported smooth $g,h$, show total wave energy is constant
+and kinetic and potential energies eventually coincide.
+\begin{proof}[Solution]
+Write $u=F(x+t)+G(x-t)$ as in Problem 19.
+Although the primitives $F,G$ need not be compactly supported,
+their derivatives $F'=(g'+h)/2$, $G'=(g'-h)/2$ are.
+Since $u_t=F'-G'$ and $u_x=F'+G'$,
+\[
+ k(t)+p(t)=\int_{\R}\bigl(F'(x+t)^2+G'(x-t)^2\bigr)\,dx
+\]
+is independent of $t$ by translation invariance. Also
+\[
+ k(t)-p(t)=-2\int_{\R} F'(x+t)G'(x-t)\,dx.
+\]
+For sufficiently large $t$ the translated compact supports are disjoint,
+so this integral is zero. If the initial supports lie in $[-R,R]$,
+every $t>R$ suffices.
+\end{proof}

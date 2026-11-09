@@ -3,12 +3,39 @@
 \label{chap:sobolev-spaces}
 
 \PDESource
-  {Chapter 5; printed p.~239; PDF page~256}
-  {中译本对应章：Sobolev 空间，书内第 169 页起。}
+  {Chapter 5; printed pp.~239--292; PDF pages~256--309}
+  {中译本：书内第 169--207 页；PDF 第 187--225 页。}
 
-\noindent\textbf{Status: outline only / 目录骨架。}
-English exposition, Chinese margin notes, and expanded proofs will be added section by section.
+\noindent\textit{Editorial study edition.}
+This is an original expanded exposition following Evans, Chapter 5, rather
+than a verbatim transcription. Source section and theorem identifiers are
+given in headings. Proofs, worked solutions, and Chinese annotations are
+editorial reconstructions. Our theorem numbers run throughout the chapter
+and differ from the source. The 21 source problems are concisely restated
+with editorial solutions in \S5.10.
 
+\Needspace{45mm}
+\PDEAnnotation{先看整条逻辑链}{弱导数容纳能量有限但不光滑的函数；逼近让经典计算可用；延拓处理边界；迹解释边界值；嵌入与紧性负责估计和取极限。}
+The model is the Dirichlet problem $-\Delta u=f$. Its weak formulation is
+\[
+ \int_U Du\cdot D\phi\,dx=\langle f,\phi\rangle,
+ \qquad\phi\in H^1_0(U).
+\]
+Only one derivative of $u$ is required. This chapter makes each symbol
+precise and explains which estimates survive limits of approximate solutions.
+
+\paragraph{Reading route and prerequisites.}
+Read \S\ref{sec:5-2}--\S\ref{sec:5-7} in order; use \S\ref{sec:5-8}
+as a toolbox and \S\ref{sec:5-9} for evolution equations. Unless stated
+otherwise, $U\subset\R^n$ is open, derivatives are weak, and functions equal
+almost everywhere are identified. The notation $V\Subset U$ means
+$\overline V$ is compact and contained in $U$. Constants $C$ are independent
+of the functions being estimated. Basic integration theory, H\"older and
+Minkowski inequalities, completeness of $L^p$, smooth partitions of unity,
+and explicitly named functional analysis theorems are prerequisites;
+they are not proved anew here.
+
+\clearpage
 \input{chapters/05-sobolev-spaces/01-holder-spaces}
 \input{chapters/05-sobolev-spaces/02-sobolev-spaces}
 \input{chapters/05-sobolev-spaces/03-approximation}

@@ -1,0 +1,12 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,pde tiny]
+ \fill[LumenAccent!6] (1.6,1.4) circle[radius=1.03cm];
+ \fill[LumenWarm!25,even odd rule]
+  (1.6,1.4) circle[radius=.8cm] (1.6,1.4) circle[radius=.64cm];
+ \draw[LumenAccent] (1.6,1.4) circle[radius=1.03cm];
+ \draw[pde axis] (1.6,1.4)--(2.32,1.75);
+ \node[above] at (2.07,1.67) {$\rho$};
+ \fill[LumenAccent] (1.6,1.4) circle[radius=1.2pt];
+ \node[align=center] at (1.6,-.15)
+  {shell volume\\$n\omega_n\rho^{n-1}\,d\rho$};
+\end{tikzpicture}

@@ -1,0 +1,124 @@
+\subsection{A one-sided estimate and uniqueness (Evans \S3.4.3)}
+\label{sec:3-entropy}
+For the Lax--Oleinik solution, choose a monotone minimizing
+representative $y(x,t)$ (for example the largest minimizer).
+For $z>0$,
+$y(x+z,t)\geq y(x,t)$ and therefore
+\[
+ u(x+z,t)-u(x,t)\leq \frac{z}{\theta t}.
+ \tag{OS}
+\]
+Indeed the corresponding velocity can increase by at most $z/t$;
+$G$ is increasing and $1/\theta$-Lipschitz.
+If the velocity decreases, the displayed upper bound is automatic.
+Thus $u(x,t)-x/(\theta t)$ is nonincreasing at fixed $t$.
+It has one-sided limits and only downward jumps, although its
+decrease may be arbitrarily steep.
+\Needspace{45mm}
+\PDEAnnotation{单边界允许激波}{约束是 $u(x+z)-u(x)\leq Cz/t$，不是绝对值的 Lipschitz 界。向下跳跃完全允许，向上跳跃则被禁止；这正适合包含压缩激波的解空间。}
+
+The source's entropy class consists of bounded integral solutions
+with a representative satisfying
+$u(x+z,t)-u(x,t)\leq C(1+t^{-1})z$ for $z>0$ a.e.
+The term $1$ permits a more general bound than (OS).
+
+\begin{theorem}[Source Theorem 3]
+For smooth convex $f$, an entropy solution in this one-sided class
+with a prescribed bounded initial datum is unique up to null sets.
+Uniform convexity is used for the explicit Lax--Oleinik construction,
+but plain convexity suffices for this uniqueness statement.
+\end{theorem}
+\begin{expandedproof}[dual transport, with two separate small-time scales]
+Let $w=u-\widetilde u$ and
+\[
+ b(x,t)=\int_0^1f'(\lambda u+(1-\lambda)\widetilde u)\,d\lambda .
+\]
+Then $f(u)-f(\widetilde u)=bw$. Subtracting the two integral identities
+with the same initial datum gives
+\[
+ \iint w(\phi_t+b\phi_x)=0
+ \tag{DU}
+\]
+for tests compactly supported in $\R\times[0,\infty)$.
+The common data cancel exactly; no pointwise initial derivative is assumed.
+
+\paragraph{1. Regularize the velocity and control its upper derivative.}
+Smooth bounded extensions of $u,\widetilde u$ in space-time by
+nonnegative kernels and set
+$b_\varepsilon=\int_0^1f'(\lambda u_\varepsilon+
+(1-\lambda)\widetilde u_\varepsilon)\,d\lambda$.
+The coefficients are uniformly bounded, say $|b_\varepsilon|\leq R$,
+and converge a.e. to $b$.
+For $t>2\varepsilon$, the one-sided bound, averaged against the kernel
+and divided by $z$, gives
+$(u_\varepsilon)_x,(\widetilde u_\varepsilon)_x
+ \leq C'(1+t^{-1})$.
+Because $f''\geq0$ and is bounded on the common bounded value range,
+\[
+ (b_\varepsilon)_x
+ =\int_0^1 f''(\lambda u_\varepsilon+(1-\lambda)\widetilde u_\varepsilon)
+       [\lambda(u_\varepsilon)_x+
+                    (1-\lambda)(\widetilde u_\varepsilon)_x]\,d\lambda
+ \leq C''(1+t^{-1}).
+\]
+Negative derivatives need no lower bound.
+
+\paragraph{2. Solve a smooth backward test equation.}
+Fix $\psi\in C_c^\infty(\R\times(0,T))$.
+Let $v_\varepsilon$ solve
+$(v_\varepsilon)_t+b_\varepsilon(v_\varepsilon)_x=\psi$ with
+$v_\varepsilon(\cdot,T)=0$.
+The characteristic formula is
+\[
+ v_\varepsilon(x,t)
+ =-\int_t^T\psi(X_\varepsilon(s;x,t),s)\,ds,\qquad
+ \dot X_\varepsilon=b_\varepsilon(X_\varepsilon,s).
+\]
+Bounded speed makes all its supports lie in a fixed spatial interval.
+It vanishes near $T$, so it is an admissible smooth test in (DU).
+
+For any fixed $\delta>0$, $\varepsilon<\delta/2$,
+differentiate the flow in $x$:
+\[
+ \partial_xX_\varepsilon(s;x,t)
+ =\exp\left(\int_t^s(b_\varepsilon)_x(X_\varepsilon(\tau),\tau)\,d\tau\right).
+\]
+The upper derivative bound for $t\geq\delta$ gives a uniform finite
+bound on this positive factor.
+Differentiating the test formula therefore yields
+$|(v_\varepsilon)_x|\leq C_\delta$ for $\delta\leq t\leq T$.
+
+\Needspace{45mm}
+\PDEAnnotation{一维保序带来变差守恒}{光滑流关于初始位置严格递增，因此复合流只是重新排列同一条曲线上的取值次序，不增加总变差。这里不需要流的导数在零时刻附近有统一上界。}
+\paragraph{3. A fixed early interval controls total variation.}
+Choose a fixed $t_*>0$ so that $\psi=0$ for $0<t<2t_*$.
+For $t\leq t_*$, $v_\varepsilon$ is transported unchanged along
+characteristics to time $t_*$.
+A one-dimensional smooth flow preserves order and is a diffeomorphism
+of $\R$ (its speed is bounded). Hence composition with this flow
+preserves total variation:
+\[
+ \int_{\R}|(v_\varepsilon)_x(x,t)|\,dx
+ =\operatorname{Var}v_\varepsilon(\cdot,t)
+ =\operatorname{Var}v_\varepsilon(\cdot,t_*)\leq D.
+\]
+The final bound follows from the derivative bound at the fixed $t_*$
+and the fixed compact support. Crucially, $D$ is independent of both
+$\varepsilon$ and a later splitting time $\delta<t_*$.
+
+\paragraph{4. Pass the dual identity to the limit.}
+Use $v_\varepsilon$ in (DU):
+\[
+ \iint w\psi=\iint w(b_\varepsilon-b)(v_\varepsilon)_x.
+\]
+Split at $t=\delta$, with $0<\delta<t_*$.
+On $[\delta,T]$ the integrand tends to zero by dominated convergence,
+using $C_\delta$ and common compact support.
+On $(0,\delta)$, boundedness of $w,b_\varepsilon,b$ and the
+total-variation estimate bound its absolute integral by $C D\delta$.
+First let $\varepsilon\downarrow0$ for this fixed $\delta$,
+then let $\delta\downarrow0$.
+Thus $\iint w\psi=0$ for every interior test $\psi$, so $w=0$ a.e.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{两个小时间不能混用}{先固定源项消失的时段 $t_*$，用它得到统一的变差界；再另取 $\delta<t_*$ 切开误差。若让估计常数也随 $\delta$ 发散，就不能仅凭区间长度趋零断言误差消失。}

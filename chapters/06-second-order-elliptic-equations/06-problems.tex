@@ -1,13 +1,418 @@
-% Evans second edition, section 6.6.
-% English source: printed p. 343; PDF page 360 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{Problems}
+% Evans 6.6: English printed pp.343--348 / PDF pp.360--365.
+\Needspace{65mm}
+\section{Problems and Worked Solutions}
 \label{sec:6-6}
+These are concise restatements of the 17 source problems, with editorial
+solutions. Unless a problem says otherwise, $U$ is bounded with smooth
+boundary, coefficients are smooth and bounded, and ellipticity is uniform.
+Connectedness is specified where constants or positivity are involved.
+The same assumptions apply to each weak formulation below.
 
-\PDEPending
+\Needspace{30mm}
+\paragraph{1. Removing a potential by a positive solution.}
+Relate $-\Delta u+cu=0$ to $-\operatorname{div}(aDv)=0$.
+\begin{proof}[Solution]
+If $w>0$ solves the first equation, set $u=wv$. The product rule gives
+\[
+ -\Delta(wv)+cwv
+ =-w\Delta v-2Dw\cdot Dv+v(-\Delta w+cw)
+ =-w^{-1}\operatorname{div}(w^2Dv).
+\]
+Thus $u$ solves the first equation exactly when $v=u/w$ solves the
+second with $a=w^2$.
+Conversely, given a smooth positive $a$, set $w=\sqrt a$ and
+$c=\Delta w/w$. Then $-\Delta w+cw=0$, so the same identity proves
+that $u=\sqrt a\,v$ solves the potential equation.
+These are local identities wherever $w>0$; uniform bounds on $a$
+are additional requirements for a uniform elliptic theory.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{正解作为新的权重}{除以一个正解后，零阶项被吸收到权重 $w^2$ 中。关键是展开 $-\Delta(wv)$ 时保留两倍交叉项；反向构造的势是 $\Delta\sqrt a/\sqrt a$。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{30mm}
+
+\Needspace{45mm}
+\PDEAnnotation{负势可以由梯度能量吸收}{零阶系数略微为负并不立即破坏可解性。Poincar\'e 不等式把函数平方项转回梯度项；负势大小的阈值因此与区域几何有关。}
+\paragraph{2. A small negative potential.}
+For $L=-\partial_j(a^{ij}\partial_i)+c$, find $\mu>0$ so that
+$c\geq-\mu$ ensures Lax--Milgram.
+\begin{proof}[Solution]
+Let $\|u\|_2\leq C_P\|Du\|_2$ on $H^1_0(U)$ and choose
+$\mu=\theta/(2C_P^2)$. Then
+\[
+ B[u,u]\geq\theta\|Du\|_2^2-\mu\|u\|_2^2
+ \geq\tfrac{\theta}{2}\|Du\|_2^2\geq C\|u\|_{H^1}^2.
+\]
+Bounded coefficients give boundedness of $B$. Apply
+Theorem~\ref{thm:6-lax-milgram}. The permitted negative part depends on
+both ellipticity and the domain's Poincar\'e constant.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{3. The clamped biharmonic problem.}
+For $f\in L^2(U)$, solve
+$\Delta^2u=f$, with $u=\partial_\nu u=0$, weakly in $H^2_0(U)$.
+\begin{proof}[Solution]
+Use $B_2[u,v]=\int\Delta u\,\Delta v$ and $\ell(v)=\int fv$.
+For $u\in C^\infty_c(U)$, integration by parts twice gives
+\[
+ \int(\Delta u)^2=\sum_{i,j}\int u_{ii}u_{jj}
+                  =\sum_{i,j}\int u_{ij}^2.
+\]
+Approximation extends this to $H^2_0(U)$.
+Since $u$ and each $u_i$ belong to $H^1_0(U)$, Poincar\'e applied twice
+gives $\|u\|_{H^2}\leq C\|D^2u\|_2$.
+Thus $B_2$ is bounded and coercive on $H^2_0$ and $\ell$ is bounded.
+Lax--Milgram gives exactly one weak solution. On smooth boundaries
+the closure definition of $H^2_0$ encodes both zero traces.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{四阶方程用二阶能量空间}{双调和方程分部积分两次后只需二阶弱导数。$H^2_0$ 同时编码函数及一阶迹为零，不能用只有函数零迹的 $H^2\cap H^1_0$ 随意替代。}
+
+\Needspace{30mm}
+\paragraph{4. Neumann compatibility.}
+For connected $U$, prove that
+$\int Du\cdot Dv=\int fv$ for every $v\in H^1(U)$ is solvable exactly
+when $\int_U f=0$.
+\begin{proof}[Solution]
+Testing with $v=1$ proves necessity. On
+$V=\{u\in H^1(U):\int_Uu=0\}$, the mean-zero Poincar\'e inequality holds.
+To see this, a counterexample can be normalized to have $\|u_j\|_2=1$,
+mean zero and $\|Du_j\|_2\to0$.
+Rellich gives a strong $L^2$ limit, whose weak gradient is zero.
+It is constant by connectedness and zero by its mean, contradicting norm one.
+Lax--Milgram on $V$ gives a unique mean-zero solution.
+For arbitrary $v$, subtract its mean; the removed constant contributes
+zero on both sides because $\int f=0$. Thus the full weak equation holds.
+The difference of any two solutions has zero gradient, so all solutions
+differ by a constant.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{5. Robin boundary conditions.}
+Formulate and solve $-\Delta u=f$, $u+\partial_\nu u=0$.
+\begin{proof}[Solution]
+Use $H^1(U)$ and its trace $T$, with
+\[
+ B_R[u,v]=\int_U Du\cdot Dv+\int_{\partial U}Tu\,Tv,\qquad
+ \ell(v)=\int_Ufv.
+\]
+The plus boundary term follows from $\partial_\nu u=-u$ in Green's formula.
+Trace boundedness makes $B_R$ bounded. Also
+\[
+ \|u\|_{H^1}^2\leq C\left(\|Du\|_2^2+
+                            \|Tu\|_{L^2(\partial U)}^2\right).
+\]
+Otherwise normalize a violating sequence to norm one. Its gradients
+and traces tend to zero; Rellich and weak $H^1$ convergence yield a
+constant on each component, with zero trace, hence zero.
+Strong $L^2$ convergence and vanishing gradients contradict norm one.
+This proves coercivity; Lax--Milgram yields a unique solution for every $f$.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{边界项也能控制常数}{Neumann 能量看不见常数，所以需要相容条件并允许加常数。Robin 能量多了边界平方项，常数方向也受到控制，于是无需零均值条件且解唯一。}
+
+\Needspace{30mm}
+
+\Needspace{45mm}
+\PDEAnnotation{自然边界与本质边界}{Dirichlet 条件先限制解和测试函数所在空间，称为本质条件；Neumann 条件由分部积分后的边界项体现，称为自然条件。更换边界类型也就更换了变分空间。}
+\paragraph{6. Mixed Dirichlet--Neumann data.}
+Let connected $U$ have $\partial U=\Gamma_1\cup\Gamma_2$ with disjoint
+closed pieces. Impose $u=0$ on $\Gamma_1$ and $\partial_\nu u=0$ on $\Gamma_2$.
+\begin{proof}[Solution]
+Set $V=\{u\in H^1(U):Tu=0\text{ on }\Gamma_1\}$ and require
+$\int Du\cdot Dv=\int fv$ for every $v\in V$.
+The Dirichlet condition is built into $V$; the Neumann condition appears
+naturally after integration by parts.
+If $\Gamma_1$ has positive surface measure, Poincar\'e holds on $V$:
+a normalized counterexample converges to a constant by the argument
+in Problem 4, and its zero trace on $\Gamma_1$ forces that constant to vanish.
+Lax--Milgram gives existence and uniqueness for every $f$.
+Under the stated smoothness and disjoint closed partition, a nonempty
+$\Gamma_1$ is relatively open in $\partial U$ and has positive measure.
+If $\Gamma_1$ is empty, Problem 4 gives the Neumann compatibility and
+constant ambiguity. If $\Gamma_2$ is empty, this is the usual Dirichlet problem.
+For more general partitions that meet along an interface, the weak
+formulation still makes sense, but global $H^2$ regularity is a separate issue.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{7. A monotone semilinear estimate.}
+Let $u\in H^1(\R^n)$ have compact support and solve
+$-\Delta u+c(u)=f$ weakly, where $c$ is smooth, $c(0)=0$, $c'\geq0$,
+and $c(u),f\in L^2(\R^n)$. Prove $\|D^2u\|_2\leq C\|f\|_2$.
+\begin{proof}[Solution]
+For fixed $h$ in direction $e_k$, use
+$v=-\delta_{-h}\delta_hu\in H^1(\R^n)$, an admissible compactly
+supported weak test by density.
+Discrete integration by parts gives
+\[
+ \|\delta_hDu\|_2^2+
+ \int_{\R^n}\delta_h(c(u))\,\delta_hu
+ =-\int_{\R^n}f\,\delta_{-h}\delta_hu.
+\]
+The second term is nonnegative because
+$(c(s)-c(t))(s-t)\geq0$. Moreover,
+$\|\delta_{-h}\delta_hu\|_2\leq\|\partial_k\delta_hu\|_2
+\leq\|\delta_hDu\|_2$.
+Hence $\|\delta_hDu\|_2\leq\|f\|_2$ uniformly in $h$.
+The difference quotient criterion in each direction yields $u\in H^2$ and,
+for the Frobenius norm, $\|D^2u\|_2\leq\sqrt n\,\|f\|_2$.
+No upper bound on $c'$ is required in this monotonicity argument.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{单调性替代导数上界}{非线性项的差商乘积非负，因此可以留在左边后直接舍去。这里使用的是 $c$ 的单调性，不需要把 $c'(u)$ 当作有界系数来估计。}
+
+\Needspace{30mm}
+\paragraph{8. Bernstein's gradient estimate.}
+For $Lu=-a^{ij}u_{ij}=0$, show that
+$v=|Du|^2+Mu^2$ is a subsolution for large $M$ and deduce a boundary estimate.
+\begin{proof}[Solution]
+Differentiate the equation to get
+$Lu_k=(\partial_k a^{ij})u_{ij}$. Thus
+\[
+ L|Du|^2
+ =-2a^{ij}u_{ki}u_{kj}
+       +2u_k(\partial_k a^{ij})u_{ij}
+ \leq-\theta|D^2u|^2+C|Du|^2 .
+\]
+Also $L(u^2)=-2a^{ij}u_i u_j\leq-2\theta|Du|^2$.
+Choose $2M\theta\geq C$. Then $Lv\leq0$.
+The weak maximum principle gives
+$\sup_U|Du|^2\leq\sup_{\partial U}(|Du|^2+Mu^2)$, hence
+\[
+ \|Du\|_{L^\infty(U)}
+ \leq C\bigl(\|Du\|_{L^\infty(\partial U)}
+               +\|u\|_{L^\infty(\partial U)}\bigr).
+\]
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{9. A boundary barrier estimate.}
+For $Lu=-a^{ij}u_{ij}=f$, $u=0$ on $\partial U$, suppose
+$Lw\geq1$, $w\geq0$ on $\partial U$, and $w(x_0)=0$.
+\begin{proof}[Solution]
+The minimum principle gives $w\geq0$ in $U$.
+Let $F=\|f\|_\infty$. Since
+$L(\pm u-Fw)\leq0$ and $\pm u-Fw\leq0$ on the boundary,
+comparison gives $|u|\leq Fw$.
+Assuming the indicated boundary derivatives exist, evaluate at
+$x_0-t\nu$ and divide by $t$ to obtain
+$|\partial_\nu u(x_0)|\leq F|\partial_\nu w(x_0)|$.
+All tangential derivatives of the smooth zero-boundary function $u$
+vanish at $x_0$, so $|Du(x_0)|=|\partial_\nu u(x_0)|$.
+This is the desired estimate, with constant $F$.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{屏障把函数值变成法向斜率}{先比较得到整个区域的 $|u|\leq\|f\|_\infty w$，再沿内法线取差商。边界上 $u$ 恒为零，所以梯度只剩法向分量。}
+
+\Needspace{30mm}
+
+\Needspace{80mm}
+\PDEAnnotation{同一唯一性可有两种证明}{能量法用积分把整个梯度消掉；最大值原理通过极值位置与边界斜率制造矛盾。前者更适合弱解，后者直接揭示正性与边界几何的作用。}
+\paragraph{10. Harmonic Neumann solutions are constant.}
+Give energy and maximum-principle proofs on connected $U$.
+\begin{proof}[Solution]
+Green's identity gives
+$\int_U|Du|^2=-\int_Uu\Delta u+\int_{\partial U}u\partial_\nu u=0$,
+so $Du=0$ and connectedness gives constancy.
+Alternatively, if $u$ were nonconstant, its maximum would be on the
+boundary by the strong maximum principle and all interior values would
+be strictly smaller. Hopf's lemma at a boundary maximum would imply
+$\partial_\nu u>0$, contradicting the homogeneous Neumann condition.
+The latter proof uses a smooth boundary, or at least the needed interior ball.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{11. Convex functions of weak solutions.}
+If bounded $u\in H^1(U)$ satisfies
+$\int A Du\cdot Dv=0$ for $v\in H^1_0(U)$, prove that
+$w=\varphi(u)$ is a weak subsolution for smooth convex $\varphi$.
+\begin{proof}[Solution]
+The bounded range of $u$ makes $\varphi',\varphi''$ bounded on that range,
+so $w\in H^1(U)$ and $Dw=\varphi'(u)Du$.
+First take bounded $0\leq v\in H^1_0(U)$.
+The product $\varphi'(u)v\in H^1_0(U)$ is an admissible test and gives
+\[
+ \int A Dw\cdot Dv
+ =-\int \varphi''(u)v\, A Du\cdot Du\leq0 .
+\]
+For arbitrary $0\leq v\in H^1_0(U)$, use
+$v_M=\min(v,M)$ and pass in the left side by $v_M\to v$ in $H^1$.
+This proves the required inequality for every nonnegative weak test.
+The function $w$ need not have zero trace.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{测试函数的乘积要先检查}{若 $v$ 无界，$\varphi''(u)vDu$ 未必属于 $L^2$，不能直接宣布 $\varphi'(u)v$ 合法。先截断 $v$，证明不等式后再用 $H^1$ 收敛去掉截断。}
+
+\Needspace{30mm}
+\paragraph{12. A positive supersolution implies comparison.}
+Assume $h\in C^2(U)\cap C(\overline U)$,
+$h>0$ on \emph{all of} $\overline U$, and $Lh\geq0$.
+Prove the zero-boundary weak maximum principle without assuming $c\geq0$.
+\begin{proof}[Solution]
+For $Lu\leq0$ and $u\leq0$ on $\partial U$, set $z=u/h$.
+The product formula gives
+\[
+ Lu=hMz+zLh,\qquad
+ M=-A:D^2+(b-2ADh/h)\cdot D.
+\]
+On $\{z>0\}$, $Mz\leq0$ and $M$ has no potential.
+For each $\varepsilon>0$, the closure of $\{z>\varepsilon\}$ is compact
+in $U$, because $z\leq0$ on the boundary and $\min_{\overline U}h>0$.
+The drift is bounded there, so the zero-potential maximum principle
+gives $z\leq\varepsilon$ on this set, which must therefore be empty.
+Let $\varepsilon\downarrow0$.
+Positivity only in $U$ would not suffice:
+$h=\sin x$ for $L=-\partial_{xx}-1$ on $(0,\pi)$ is an interior
+positive solution but vanishes at the endpoints, and comparison fails.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{13. Courant's max--min principle.}
+For the symmetric operator of \S\ref{sec:6-5}, show
+\[
+ \lambda_k=\max_{\dim S=k-1}\ \min_{\substack{u\in H^1_0(U)\cap S^\perp\\\|u\|_2=1}} B[u,u],
+\]
+where $S\subset H^1_0(U)$ and orthogonality is in $L^2(U)$.
+\begin{proof}[Solution]
+For any such $S$, linear algebra supplies a nonzero vector in
+$\operatorname{span}(w_1,\ldots,w_k)\cap S^\perp$.
+Normalize it. Formula~\eqref{eq:6-energy-spectrum} gives its energy
+at most $\lambda_k$, so the inner minimum is at most $\lambda_k$.
+For $S=\operatorname{span}(w_1,\ldots,w_{k-1})$, every admissible $u$
+has only modes $j\geq k$, and the same formula gives
+$B[u,u]\geq\lambda_k$. Equality occurs at $w_k$.
+For any fixed $S$, the minimum exists by the direct method; its
+orthogonality constraints are preserved by strong $L^2$ convergence.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{极小极大中的正交空间}{这里去掉的是前若干模态在 $L^2$ 中的方向。任意少于 $k$ 个线性约束都不可能消灭前 $k$ 个模态的全部组合，这就是一半不等式的有限维理由。}
+
+\Needspace{30mm}
+
+\Needspace{45mm}
+\PDEAnnotation{非对称公式中的权重来自伴随}{不能只对 $Lu/u$ 做普通空间平均。与正的伴随特征函数配对后，正确权重是 $u\phi^*$；分部积分才把这个加权平均固定为主特征值。}
+\paragraph{14. A principal-eigenvalue max--min formula.}
+For the nonsymmetric operator, prove
+\[
+ \lambda_1=\sup_{\substack{u\in C^\infty(\overline U),\
+                  u>0\text{ in }U\\u=0\text{ on }\partial U}}
+                  \ \inf_{x\in U}\frac{Lu(x)}{u(x)}.
+\]
+\begin{proof}[Solution]
+Let $\phi^*>0$ be the adjoint eigenfunction from
+Lemma~\ref{lem:6-positive-adjoint}. Both functions have zero trace,
+so Green's identity, or the weak adjoint identity, gives
+\[
+ \int_U\phi^*Lu=\int_UuL^*\phi^*
+                =\lambda_1\int_Uu\phi^*.
+\]
+Thus the weighted average of $Lu/u$ with positive weight $u\phi^*$
+is $\lambda_1$. Its infimum cannot exceed this average.
+If the infimum is $-\infty$ the inequality is immediate; otherwise
+integrating its pointwise lower bound proves it directly.
+Taking $u=\phi$ achieves equality everywhere.
+A constant shift handles potentials of arbitrary bounded sign.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{15. Hadamard's domain-variation formula.}
+Let $-\Delta w=\lambda w$ on a smoothly moving domain $U(\tau)$,
+$w=0$ on its boundary and $\int_{U(\tau)}w^2=1$.
+Assume a smooth eigenvalue/eigenfunction branch, and denote boundary
+velocity by $\mathbf v$.
+\begin{proof}[Solution]
+Use the Eulerian derivative $\dot w$ at a fixed spatial point.
+Differentiating $w(x(\tau),\tau)=0$ on the moving boundary gives
+\[
+ \dot w=-Dw\cdot\mathbf v
+       =-\partial_\nu w\,(\mathbf v\cdot\nu).
+\]
+Reynolds' formula for normalization yields
+$2\int_Uw\dot w+\int_{\partial U}w^2\mathbf v\cdot\nu=0$,
+hence $\int_Uw\dot w=0$.
+Since $\lambda=\int_U|Dw|^2$, differentiate once more:
+\begin{align*}
+ \dot\lambda
+ &=2\int_U Dw\cdot D\dot w+
+             \int_{\partial U}|Dw|^2\mathbf v\cdot\nu\\
+ &=2\lambda\int_Uw\dot w+
+      2\int_{\partial U}\partial_\nu w\,\dot w+
+             \int_{\partial U}(\partial_\nu w)^2\mathbf v\cdot\nu\\
+ &=-\int_{\partial U}(\partial_\nu w)^2\mathbf v\cdot\nu.
+\end{align*}
+Tangential derivatives vanish because $w$ is zero on the boundary.
+The smooth-branch hypothesis is essential; a multiple eigenvalue need
+not admit a single arbitrarily chosen differentiable eigenfunction branch.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{扩张区域使特征值下降}{若边界向外移动，$\mathbf v\cdot\nu>0$，公式给出 $\dot\lambda<0$。负号来自移动边界条件 $\dot w=-\partial_\nu w\,\mathbf v\cdot\nu$，不是凭直觉添加。}
+
+\Needspace{30mm}
+
+\Needspace{45mm}
+\PDEAnnotation{辐射条件选择向外传播}{时间因子取 $e^{-i\sigma t}$ 时，$e^{i\sigma r}/r$ 描述向外传播的球面波。条件中的减号与这一时间约定配套；平面波不会在所有方向都向外辐射。}
+\paragraph{16. Helmholtz waves and radiation.}
+Let real $\sigma\ne0$ and $\lambda=\sigma^2$.
+\begin{proof}[Solution]
+(a) For $|\omega|=1$,
+$-\Delta e^{i\sigma\omega\cdot x}=\sigma^2e^{i\sigma\omega\cdot x}$.
+Thus $e^{i\sigma(\omega\cdot x-t)}$ solves the wave equation.
+
+(b) In dimension three put
+$\Phi(x)=e^{i\sigma r}/(4\pi r)$, $r=|x|$.
+The radial identity $\Delta g=g''+2g'/r$ shows
+$(-\Delta-\sigma^2)\Phi=0$ for $r>0$.
+At $r=\varepsilon$,
+\[
+ -\int_{\partial B_\varepsilon}\partial_r\Phi\,dS
+ =e^{i\sigma\varepsilon}(1-i\sigma\varepsilon)\longrightarrow1.
+\]
+Integration by parts against a smooth test function outside
+$B_\varepsilon$ therefore gives
+$(-\Delta-\sigma^2)\Phi=\delta_0$; the other shrinking-sphere term and
+the volume integral of $\sigma^2\Phi$ tend to zero.
+
+(c) For $\Phi$,
+$r(\Phi_r-i\sigma\Phi)=-e^{i\sigma r}/(4\pi r)\to0$ uniformly in angle.
+For the plane wave at $x=r\vartheta$,
+\[
+ r(w_r-i\sigma w)
+ =i\sigma r(\omega\cdot\vartheta-1)e^{i\sigma r\omega\cdot\vartheta},
+\]
+whose modulus diverges on every ray with $\omega\cdot\vartheta\ne1$.
+Thus the plane wave does not satisfy the Sommerfeld condition.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{17. Uniqueness of an entire radiating solution.}
+Suppose $w$ solves $-\Delta w=\sigma^2w$ throughout $\R^3$ and satisfies
+$r(w_r-i\sigma w)\to0$ \emph{uniformly in angle}. Prove $w=0$.
+\begin{proof}[Solution]
+Green's identity and the real coefficient $\sigma^2$ imply
+\[
+ 0=\int_{\partial B_R}(\overline w\,w_r-w\,\overline{w_r})\,dS.
+\]
+The imaginary flux is zero, so expansion of the square gives
+\[
+ \int_{\partial B_R}(|w_r|^2+\sigma^2|w|^2)\,dS
+ =\int_{\partial B_R}|w_r-i\sigma w|^2\,dS=o(1).
+\]
+Uniform radiation justifies the last step, since the sphere has area
+$4\pi R^2$ and the integrand is $o(R^{-2})$ uniformly.
+For a fixed $x_0$ and $R>|x_0|$, Green's representation with the
+outgoing kernel $\Phi(x-x_0)$ gives
+\[
+ w(x_0)=\int_{\partial B_R}
+   \bigl(\Phi\,w_r-w\,\partial_r\Phi\bigr)\,dS .
+\]
+Here $\partial_r$ on the kernel means the outward derivative on
+$\partial B_R$, not radial differentiation about $x_0$.
+For large $R$, both $\Phi(x-x_0)$ and this derivative are $O(R^{-1})$,
+so their $L^2(\partial B_R)$ norms remain bounded.
+Cauchy--Schwarz and the vanishing flux norm above imply $w(x_0)=0$.
+Since $x_0$ was arbitrary, $w\equiv0$.
+\end{proof}
+\Needspace{45mm}
+\PDEAnnotation{辐射条件还包含一致性}{从逐方向极限跳到球面积分极限需要控制角变量。这里明确采用对方向一致的 Sommerfeld 条件；基本解在原点有奇性，所以并不违背“全空间光滑辐射解只能为零”。}

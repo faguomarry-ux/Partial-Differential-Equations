@@ -1,0 +1,8 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,pde tiny]
+ \node[pde box,text width=22mm] (g) at (1.5,1.65) {data $g$};
+ \node[pde box,text width=22mm] (u) at (1.5,0) {solution $Sg$};
+ \draw[pde axis] (g)--node[right] {$S$} (u);
+ \node[align=center] at (1.5,-.8)
+  {$\|Sg-S\widetilde g\|$\\$\leq C\|g-\widetilde g\|$};
+\end{tikzpicture}

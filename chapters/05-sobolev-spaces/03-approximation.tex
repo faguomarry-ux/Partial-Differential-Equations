@@ -1,13 +1,108 @@
 % Evans second edition, section 5.3.
 % English source: printed p. 249; PDF page 266 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked against the chapter opening on PDF page 187; see docs/CHAPTER-05.md.
+% Status: editorial study draft; expanded proofs and Chinese mathematical annotations.
 \section{Approximation}
 \label{sec:5-3}
 
-\PDEPending
+\subsection{Interior smoothing (Evans \S5.3.1, Theorem 1)}
+Use the kernel $\rho$ above. If $u\in W^{k,p}(U)$, $V\Subset U$, and
+$\varepsilon<\operatorname{dist}(V,\partial U)$, then
+\[
+ D^\alpha(\rho_\varepsilon*u)=\rho_\varepsilon*D^\alpha u
+ \quad\hbox{on }V,
+\]
+\[
+ \rho_\varepsilon*u\to u\quad\hbox{in }W^{k,p}(V)
+ \quad (1\leq p<\infty).
+\]
+\Needspace{45mm}
+\PDEAnnotation{卷积不能越界}{卷积会读取半径 $\varepsilon$ 内的数据。任意补零可能在边界制造跳跃，因此不能直接把补零后的 $Du$ 当成补零函数的导数。}
+\begin{expandedproof}
+For fixed $x\in V$, differentiate the kernel under the integral; its
+smooth compact support and local integrability of $u$ justify this.
+Since $D_x^\alpha\rho_\varepsilon(x-y)=
+(-1)^{|\alpha|}D_y^\alpha\rho_\varepsilon(x-y)$, the weak identity in
+$y$ transfers derivatives to $u$ and cancels the signs.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+For $f=D^\alpha u$, multiply by a cutoff equal to one near $\overline V$
+and extend as an $L^p$ function to $\R^n$. Minkowski gives
+\[
+ \|\rho_\varepsilon*f-f\|_{L^p(V)}
+ \leq\int\rho(z)\|f(\cdot-\varepsilon z)-f\|_{L^p(V)}\,dz.
+\]
+Translations are continuous in $L^p$ for finite $p$: prove this first
+for continuous compactly supported functions by uniform continuity,
+then use their $L^p$ density and the translation isometry.
+The integrand is dominated by $2\|f\|_p$, so dominated convergence applies.
+Sum the finitely many derivative errors.
+\end{expandedproof}
+
+\subsection{Smooth in the interior (Evans \S5.3.2, Theorem 2)}
+\begin{theorem}[Meyers--Serrin approximation]
+For any open $U$ and finite $p$, $C^\infty(U)\cap W^{k,p}(U)$ is dense
+in $W^{k,p}(U)$.
+\end{theorem}
+\begin{expandedproof}
+Choose a locally finite smooth partition $(\zeta_j)$ with
+$\sum_j\zeta_j=1$ on $U$, each supported compactly in a relatively
+compact patch $A_j$. Slight enlargements of these patches can also be
+chosen locally finite, by using layers of an exhaustion of $U$.
+Extend $f_j=\zeta_j u$ by zero. There are no interface derivatives:
+the cutoff vanishes in a neighborhood of the edge of its patch.
+
+Given $\delta>0$, choose radii $\varepsilon_j$ so small that
+\[
+ \supp(\rho_{\varepsilon_j}*f_j)\subset A_j,\qquad
+ \|\rho_{\varepsilon_j}*f_j-f_j\|_{W^{k,p}(\R^n)}
+ <\delta2^{-j}.
+\]
+Then $v=\sum_j\rho_{\varepsilon_j}*f_j$ is locally a finite sum of
+smooth functions. The error series converges absolutely in the Banach
+space $W^{k,p}$, with norm at most $\delta$. Locally it equals $v-u$,
+since $\sum_j f_j=u$ locally. Uniqueness of distributions identifies
+its global sum with $v-u$. Thus $\|v-u\|_{W^{k,p}(U)}\leq\delta$.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{每块半径不同}{靠近边界的块需要更小的 $\varepsilon_j$。误差预算 $\delta2^{-j}$ 控制无穷多块的总误差；局部有限性保证内点附近只相加有限项。}
+
+\subsection{Smooth up to the boundary (Evans \S5.3.3, Theorem 3)}
+\begin{theorem}\label{thm:5-boundary-density}
+If $U$ is bounded with $C^1$ boundary and $p<\infty$, restrictions of
+functions smooth in a neighborhood of $\overline U$ are dense in $W^{k,p}(U)$.
+\end{theorem}
+\begin{expandedproof}
+Use a finite partition on $\overline U$, subordinate to interior patches
+and boundary graph patches. In a rotated boundary patch write
+$U=\{x_n>g(x')\}$ with $g\in C^1$. On the compact base, $g$ is
+Lipschitz with a constant $L$. Localize to $f=\zeta u$ supported away
+from the lateral edges. Translate inward:
+$f_\delta(x)=f(x+\delta e_n)$.
+
+For $x_n\geq g(x')$ and $|z|<c\delta$,
+\[
+ x_n+\delta-z_n-g(x'-z')
+ \geq\delta-(1+L)|z|>0
+ \quad\hbox{if }c<1/(1+L).
+\]
+Thus a small convolution of $f_\delta$ is defined in a neighborhood of
+the closed patch. The translated weak derivatives are
+$D^\alpha f(x+\delta e_n)$, by a change of test variables.
+Extend each $D^\alpha f$ by zero only for estimating $L^p$ translations.
+Translation continuity proves $f_\delta\to f$ in $W^{k,p}$ on the
+original patch intersected with $U$. For each fixed $\delta$, choose
+a smaller convolution radius giving any desired Sobolev error.
+The result is smooth across the original boundary. Approximate interior
+patches by ordinary convolution and sum the finitely many pieces.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{两种稠密性不同}{$C^\infty(\overline U)$ 稠密不等于 $C_c^\infty(U)$ 稠密。常数 $1$ 可光滑逼近，但在有界光滑域中不属于 $W^{1,p}_0$；它的迹不是零。}
+
+\paragraph{Why the endpoint $p=\infty$ is excluded.}
+The derivative of $|x|$ jumps from $-1$ to $1$. No continuous derivative
+can approximate it in essential supremum norm with error less than one:
+the two one-sided requirements contradict continuity at zero. Smooth
+functions need not be norm dense in $W^{1,\infty}$.
+Local smoothing does converge in every finite $W^{1,q}$ norm on bounded
+interior sets and remains uniformly bounded in $W^{1,\infty}$. Later
+endpoint arguments use those facts instead.

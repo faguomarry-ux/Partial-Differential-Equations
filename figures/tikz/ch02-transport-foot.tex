@@ -1,0 +1,17 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=1.2cm,y=1cm]
+ \fill[LumenAccent!5] (-.5,0) rectangle (7.6,3);
+ \draw[pde axis] (-.6,0)--(8,0) node[right] {$x$};
+ \draw[pde axis] (-.5,-.15)--(-.5,3.35) node[above] {time};
+ \foreach \a in {.1,1.5,2.9,4.3}{
+  \draw[LumenAccent!35] (\a,0)--({\a+2.4},3);}
+ \draw[pde curve] (2,0)--(4.4,3);
+ \draw[-{Latex[length=2.3mm]},LumenWarm,line width=1.2pt]
+  (3.95,2.45)--(3.1,1.38);
+ \fill[LumenAccent] (2,0) circle[radius=2pt];
+ \fill[LumenAccent] (4.4,3) circle[radius=2pt];
+ \node[below,align=center] at (2,0) {$x-bt$\\initial foot};
+ \node[above right] at (4.4,3) {$(x,t)$};
+ \node[anchor=west] at (5.25,1.2) {$u(x,t)=g(x-bt)$};
+ \node[anchor=west,text=LumenWarm] at (3.8,2.1) {trace backward};
+\end{tikzpicture}

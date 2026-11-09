@@ -1,0 +1,19 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=2.2cm,y=2.7cm]
+ \draw[pde axis] (-1.6,0)--(1.55,0) node[below] {$x$};
+ \draw[pde axis] (0,-.12)--(0,1.35) node[above] {$t$};
+ \foreach \a in {-1.25,-.75,-.25,.25,.75,1.25}{
+  \draw[pde curve] (\a,0)--(0,1);
+  \fill[LumenAccent] (\a,0) circle[radius=1.2pt];}
+ \draw[LumenWarm,dashed] (-1.5,1)--(1.5,1);
+ \fill[LumenWarm] (0,1) circle[radius=2pt];
+ \node[anchor=west,fill=white,inner sep=2pt] at (.18,1.12)
+  {$T_*=1$};
+ \node[align=left,anchor=west] at (1.9,.85)
+  {$g(\xi)=-\xi$ locally\\[3pt]
+   $X(\xi,t)=(1-t)\xi$\\[3pt]
+   $X_\xi=1-t\downarrow0$};
+ \node[align=left,anchor=west,text=LumenWarm] at (1.9,.15)
+  {$u_x=-1/(1-t)$\\amplitude stays bounded\\on these characteristics};
+ \node[below] at (-1.2,0) {$\xi$};
+\end{tikzpicture}

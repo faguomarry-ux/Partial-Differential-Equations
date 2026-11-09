@@ -1,0 +1,20 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=1.75cm,y=1.55cm]
+ \draw[pde axis] (-2.55,0)--(2.6,0) node[right] {$y$};
+ \draw[pde axis] (0,-.8)--(0,1.1) node[above] {cost};
+ \draw[pde curve] plot[domain=-2.35:2.35,samples=181]
+  (\x,{.5*\x*\x-min(abs(\x),2)});
+ \draw[LumenWarm,dashed] (-2.3,-.5)--(2.3,-.5);
+ \foreach \a in {-1,1}{
+  \fill[LumenWarm] (\a,-.5) circle[radius=2pt];
+  \draw[LumenMuted,dashed] (\a,-.5)--(\a,0);}
+ \node[above] at (-1,0) {$y=-1$};
+ \node[above] at (1,0) {$y=1$};
+ \node[below left] at (-1,-.5) {minimizer};
+ \node[below right] at (1,-.5) {minimizer};
+ \node[align=center] at (0,1.75)
+  {$g(y)=\max(-|y|,-2),\quad x=0,\ t=1$\\[3pt]
+   $g(y)+(x-y)^2/(2t)$};
+ \node[align=center,text=LumenBlue] at (0,-1.35)
+  {equal cost, different endpoint slopes: $(x-y)/t=+1,-1$};
+\end{tikzpicture}

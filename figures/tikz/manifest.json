@@ -1,0 +1,302 @@
+[
+  {
+    "id": "T1.1",
+    "chapter": 1,
+    "placement": "body",
+    "title": "Classify by the highest derivatives.",
+    "caption": "The first three classes allow successively more dependence on lower-order variables. In the last example the highest derivatives themselves enter nonlinearly. All displayed examples are second order.",
+    "drawing": "figures/tikz/ch01-linearity.tex",
+    "source": "chapters/01-introduction/01-partial-differential-equations.tex",
+    "section": "1.1"
+  },
+  {
+    "id": "T1.2",
+    "chapter": 1,
+    "placement": "body",
+    "title": "Three evolution mechanisms.",
+    "caption": "Dashed curves are initial profiles and solid curves are later profiles. Transport translates a shape; heat spreads a Gaussian while preserving its integral; the one-dimensional wave equation with zero initial velocity splits a profile into two half-amplitude translates. The panel axes are schematic and use separate scales.",
+    "drawing": "figures/tikz/ch01-models.tex",
+    "source": "chapters/01-introduction/02-examples.tex",
+    "section": "1.2"
+  },
+  {
+    "id": "T1.3",
+    "chapter": 1,
+    "placement": "body",
+    "title": "High frequencies distinguish stability from solvability.",
+    "caption": "For the Dirichlet mode $\\sin(kx)$ on $(0,\\pi)$, forward heat evolution multiplies amplitude by $e^{-k^2T}$; reconstruction multiplies by its reciprocal. Here $T=0.35$ and vertical scales differ. Arbitrarily small terminal errors in high modes can therefore give large reconstructed initial errors.",
+    "drawing": "figures/tikz/ch01-heat-stability.tex",
+    "source": "chapters/01-introduction/03-strategies-for-studying-pde.tex",
+    "section": "1.3"
+  },
+  {
+    "id": "T1.4",
+    "chapter": 1,
+    "placement": "body",
+    "title": "Loss of invertibility precedes a shock.",
+    "caption": "For the local initial profile $g(\\xi)=-\\xi$, the characteristics meet at $t=1$. The characteristic formula is valid for $t<1$; the meeting point depicts failure of a classical continuation, rather than several values of an admissible solution at one point.",
+    "drawing": "figures/tikz/ch01-burgers-focus.tex",
+    "source": "chapters/01-introduction/03-strategies-for-studying-pde.tex",
+    "section": "1.3"
+  },
+  {
+    "id": "T1.M",
+    "chapter": 1,
+    "placement": "margin",
+    "title": "连续依赖的方向",
+    "caption": "先说明数据与解各用什么范数，再检验解映射是否连续。存在、唯一和连续依赖是三个不同问题。",
+    "drawing": "figures/tikz/ch01-data-map-margin.tex",
+    "source": "chapters/01-introduction/03-strategies-for-studying-pde.tex",
+    "section": "1.3"
+  },
+  {
+    "id": "T2.1",
+    "chapter": 2,
+    "placement": "body",
+    "title": "Read a transport solution backward.",
+    "caption": "The solution is constant on each characteristic when the source is zero. With $b>0$, the forward line tilts right, while evaluation at a target requires its leftward initial foot $x-bt$. The orange arrow indicates evaluation backward in time, not a negative physical velocity.",
+    "drawing": "figures/tikz/ch02-transport-foot.tex",
+    "source": "chapters/02-four-important-linear-partial-differential-equations/01-transport-equation.tex",
+    "section": "2.1"
+  },
+  {
+    "id": "T2.2",
+    "chapter": 2,
+    "placement": "body",
+    "title": "A reflected point source enforces the boundary value.",
+    "caption": "The solid source at $x$ is inside the upper half-space; the image at $x^*$ is outside and has the opposite sign. Every boundary point $y$ is equidistant from the pair, so their potentials cancel there. The labels indicate source signs, not signed coordinate locations.",
+    "drawing": "figures/tikz/ch02-image-source.tex",
+    "source": "chapters/02-four-important-linear-partial-differential-equations/02-laplaces-equation.tex",
+    "section": "2.2"
+  },
+  {
+    "id": "T2.3",
+    "chapter": 2,
+    "placement": "body",
+    "title": "A heat ball carries a nonuniform averaging measure.",
+    "caption": "In one spatial dimension, fix a past time $\\tau=t-s$. The blue band marks the allowed interval, while orange heights illustrate the factor $z^2/(4r\\tau^2)$. The right panel shows its quadratic spatial dependence up to a fixed positive factor. This is a slice of the full space--time probability measure, not a separately normalized conditional density.",
+    "drawing": "figures/tikz/ch02-heatball-weight.tex",
+    "source": "chapters/02-four-important-linear-partial-differential-equations/03a-heatball-mean-value.tex",
+    "section": "2.3"
+  },
+  {
+    "id": "T2.4",
+    "chapter": 2,
+    "placement": "body",
+    "title": "The wave equation has a finite domain of dependence.",
+    "caption": "For speed one in one dimension, the solution at $(x,t)$ uses initial data only on $[x-t,x+t]$. At an intermediate time $s$, the relevant interval is $|y-x|\\leq t-s$. In higher dimensions this interval becomes a ball. A forced equation also accumulates sources from the past cone.",
+    "drawing": "figures/tikz/ch02-wave-cone.tex",
+    "source": "chapters/02-four-important-linear-partial-differential-equations/04-wave-equation.tex",
+    "section": "2.4"
+  },
+  {
+    "id": "T2.M",
+    "chapter": 2,
+    "placement": "margin",
+    "title": "球体由球壳相加",
+    "caption": "先对每个半径做球面平均，再乘球壳体积并积分。体积平均的径向权重不是均匀的。",
+    "drawing": "figures/tikz/ch02-shell-margin.tex",
+    "source": "chapters/02-four-important-linear-partial-differential-equations/02a-laplace-mean-value.tex",
+    "section": "2.2"
+  },
+  {
+    "id": "T3.1",
+    "chapter": 3,
+    "placement": "body",
+    "title": "Noncharacteristic data permit local reconstruction.",
+    "caption": "The projected characteristic direction is $F_p$. Transversality makes the initial-surface parameters together with the flow parameter independent local coordinates. A tangent direction makes this coordinate construction singular; it does not by itself prove that no solution can exist.",
+    "drawing": "figures/tikz/ch03-transverse.tex",
+    "source": "chapters/03-nonlinear-first-order-pde/02-characteristics.tex",
+    "section": "3.2"
+  },
+  {
+    "id": "T3.2",
+    "chapter": 3,
+    "placement": "body",
+    "title": "Legendre duality is a supporting-line construction.",
+    "caption": "For $H(p)=p^2/2$ and $v=1$, maximizing $vp-H(p)$ finds the tangent point $p=1$. The tangent's intercept is $-L(1)=-1/2$. Convexity makes the whole graph lie above this line, which is exactly the Fenchel inequality.",
+    "drawing": "figures/tikz/ch03-legendre-support.tex",
+    "source": "chapters/03-nonlinear-first-order-pde/03-introduction-to-hamilton-jacobi-equations.tex",
+    "section": "3.3"
+  },
+  {
+    "id": "T3.3",
+    "chapter": 3,
+    "placement": "body",
+    "title": "Equal minimizing costs can produce a corner in the value.",
+    "caption": "With $H(p)=p^2/2$, $t=1$ and $g(y)=\\max(-|y|,-2)$, the Hopf--Lax cost at $x=0$ has two minimizers $y=\\pm1$. Their candidate endpoint slopes $(x-y)/t$ differ. Indeed near $x=0$ the value is $u(x,1)=-1/2-|x|$, so it is not differentiable there.",
+    "drawing": "figures/tikz/ch03-hopflax-tie.tex",
+    "source": "chapters/03-nonlinear-first-order-pde/03-introduction-to-hamilton-jacobi-equations.tex",
+    "section": "3.3"
+  },
+  {
+    "id": "T3.4",
+    "chapter": 3,
+    "placement": "body",
+    "title": "Shock speed is a secant slope.",
+    "caption": "For $f(u)=u^2/2$, the secant between $u_R=0.2$ and $u_L=1.4$ has slope $\\sigma=0.8$. The tangent slopes satisfy $0.2<0.8<1.4$, so characteristics from both sides enter the shock. Reversing the spatial states keeps the secant slope but violates the compression direction.",
+    "drawing": "figures/tikz/ch03-flux-chord.tex",
+    "source": "chapters/03-nonlinear-first-order-pde/04-introduction-to-conservation-laws.tex",
+    "section": "3.4"
+  },
+  {
+    "id": "T3.M",
+    "chapter": 3,
+    "placement": "margin",
+    "title": "把路径在中途切开",
+    "caption": "中间点 $z$ 也要优化。两段代价相加后再取下确界，才得到动态规划恒等式。",
+    "drawing": "figures/tikz/ch03-path-split-margin.tex",
+    "source": "chapters/03-nonlinear-first-order-pde/03-introduction-to-hamilton-jacobi-equations.tex",
+    "section": "3.3"
+  },
+  {
+    "id": "T4.1",
+    "chapter": 4,
+    "placement": "body",
+    "title": "A separated mode and its nodal line.",
+    "caption": "On the unit square, this Dirichlet mode is the product of two one-dimensional modes. The dashed line $y=1/2$ is a zero set inside the domain. Applying $-\\Delta$ adds the two eigenvalues, giving $5\\pi^2$; heat evolution then changes only the time factor.",
+    "drawing": "figures/tikz/ch04-product-mode.tex",
+    "source": "chapters/04-other-ways-to-represent-solutions/01-separation-of-variables.tex",
+    "section": "4.1"
+  },
+  {
+    "id": "T4.2",
+    "chapter": 4,
+    "placement": "body",
+    "title": "Fourier transformation turns differentiation into multiplication.",
+    "caption": "The square commutes with the unitary normalization used here. There is no $2\\pi$ in the multiplier because the exponential is $e^{-ix\\cdot\\xi}$. The heat multiplier is small at large $|\\xi|$, connecting this representation with the stability picture in Chapter 1.",
+    "drawing": "figures/tikz/ch04-fourier-square.tex",
+    "source": "chapters/04-other-ways-to-represent-solutions/03-transform-methods.tex",
+    "section": "4.3"
+  },
+  {
+    "id": "T4.3",
+    "chapter": 4,
+    "placement": "body",
+    "title": "Radon data integrate along level hyperplanes.",
+    "caption": "In dimension two the integration sets are lines perpendicular to $\\omega$. The scalar $s$ is signed distance in the normal direction, not distance traveled along a line. The blue line is one member of the family; higher dimensions replace it by an $(n-1)$-plane.",
+    "drawing": "figures/tikz/ch04-radon-lines.tex",
+    "source": "chapters/04-other-ways-to-represent-solutions/03a-radon-laplace.tex",
+    "section": "4.3"
+  },
+  {
+    "id": "T4.4",
+    "chapter": 4,
+    "placement": "body",
+    "title": "Near a nondegenerate stationary point the scale is square-root.",
+    "caption": "For phase $x^2$, oscillation is slow near its stationary point at zero and rapid farther away. The highlighted interval has width $2\\sqrt{\\varepsilon}$. Rescaling $x=\\sqrt{\\varepsilon}\\,z$ explains the leading $\\varepsilon^{1/2}$ factor in one dimension; cancellation, not pointwise smallness of the integrand, suppresses the outer region.",
+    "drawing": "figures/tikz/ch04-stationary-window.tex",
+    "source": "chapters/04-other-ways-to-represent-solutions/05a-stationary-phase.tex",
+    "section": "4.5"
+  },
+  {
+    "id": "T4.M",
+    "chapter": 4,
+    "placement": "margin",
+    "title": "一维有效系数",
+    "caption": "两个半格串联时通量相同，梯度与系数成反比。平均的是阻力 $1/a$，再取倒数。分段常系数可按弱形式理解。",
+    "drawing": "figures/tikz/ch04-cell-margin.tex",
+    "source": "chapters/04-other-ways-to-represent-solutions/05b-homogenization.tex",
+    "section": "4.5"
+  },
+  {
+    "id": "T5.1",
+    "chapter": 5,
+    "placement": "body",
+    "title": "A corner and a jump have different distributional derivatives.",
+    "caption": "The continuous corner has a bounded weak first derivative. The step has a Dirac mass, so it has a distributional derivative but no weak first derivative representable by an $L^p$ function. The vertical Dirac arrow denotes mass, not a graph of a finite-valued function.",
+    "drawing": "figures/tikz/ch05-weak-cusp-jump.tex",
+    "source": "chapters/05-sobolev-spaces/02-sobolev-spaces.tex",
+    "section": "5.2"
+  },
+  {
+    "id": "T5.2",
+    "chapter": 5,
+    "placement": "body",
+    "title": "Reflection and zero extension treat the interface differently.",
+    "caption": "Take $u(t)=1+t$ for $0<t<1$ and inspect only the interface at zero. Reflection matches values and preserves first-order Sobolev regularity locally. Zero extension inserts a jump and a Dirac mass in the first derivative. Even reflection still has a corner, so higher-order extensions need additional matching.",
+    "drawing": "figures/tikz/ch05-reflection-zero.tex",
+    "source": "chapters/05-sobolev-spaces/04-extensions.tex",
+    "section": "5.4"
+  },
+  {
+    "id": "T5.3",
+    "chapter": 5,
+    "placement": "body",
+    "title": "The dimension separates three embedding regimes.",
+    "caption": "The diagram records standard continuous embeddings on a bounded $C^1$ domain with $n\\geq2$. At $p=n$, the conclusion is valid for each finite $q$, with constants that may depend on $q$. It does not provide a uniform estimate as $q\\to\\infty$. Compactness is a further question addressed in the next section.",
+    "drawing": "figures/tikz/ch05-embedding-regimes.tex",
+    "source": "chapters/05-sobolev-spaces/06-sobolev-inequalities.tex",
+    "section": "5.6"
+  },
+  {
+    "id": "T5.4",
+    "chapter": 5,
+    "placement": "body",
+    "title": "Bounded norms do not prevent concentration or escape.",
+    "caption": "The left panel uses radial bump profiles $\\psi(x)=(1-|x|^2)_+^2$ in $\\R^3$, scaled with $\\varepsilon=0.8,0.4,0.2$; their gradient $L^2$ and critical $L^6$ norms stay fixed. The right panel illustrates translations of a compact bump on $\\R$. Each mechanism obstructs strong compactness for a different reason.",
+    "drawing": "figures/tikz/ch05-loss-of-compactness.tex",
+    "source": "chapters/05-sobolev-spaces/07-compactness.tex",
+    "section": "5.7"
+  },
+  {
+    "id": "T5.M",
+    "chapter": 5,
+    "placement": "margin",
+    "title": "沿法向控制边界值",
+    "caption": "先沿固定 $x'$ 的线段比较内部值与边界值，再对高度和切向变量积分。图中外法向朝下。",
+    "drawing": "figures/tikz/ch05-trace-strip-margin.tex",
+    "source": "chapters/05-sobolev-spaces/05-traces.tex",
+    "section": "5.5"
+  },
+  {
+    "id": "T6.1",
+    "chapter": 6,
+    "placement": "body",
+    "title": "Ellipticity bounds the shape of the principal quadratic form.",
+    "caption": "Here $\\theta=1$ and $\\Lambda=4$. The sublevel ellipse contains the circle of radius $\\Lambda^{-1/2}$ and lies inside the circle of radius $\\theta^{-1/2}$. A uniform positive lower bound prevents this principal geometry from degenerating as the base point varies.",
+    "drawing": "figures/tikz/ch06-ellipticity.tex",
+    "source": "chapters/06-second-order-elliptic-equations/01-definitions.tex",
+    "section": "6.1"
+  },
+  {
+    "id": "T6.2",
+    "chapter": 6,
+    "placement": "body",
+    "title": "Compatibility uses the adjoint kernel.",
+    "caption": "In this explicit nonsymmetric matrix example, the range is the diagonal line. A right side with $f_1\\ne f_2$ is unsolvable. Its obstruction is its component along $\\ker M^T$, while the horizontal $\\ker M$ describes nonuniqueness of solutions. The elliptic Fredholm alternative has the same distinction.",
+    "drawing": "figures/tikz/ch06-fredholm-plane.tex",
+    "source": "chapters/06-second-order-elliptic-equations/02-existence-of-weak-solutions.tex",
+    "section": "6.2"
+  },
+  {
+    "id": "T6.3",
+    "chapter": 6,
+    "placement": "body",
+    "title": "Localize before taking differences.",
+    "caption": "The cutoff equals one on $V$ and is supported strictly inside $W$. A fixed geometric gap permits all sufficiently small positive and negative steps. The support condition is settled before the estimate; the estimate's constant must then stay independent of $h$ as $h\\to0$.",
+    "drawing": "figures/tikz/ch06-cutoff-translates.tex",
+    "source": "chapters/06-second-order-elliptic-equations/03-regularity.tex",
+    "section": "6.3"
+  },
+  {
+    "id": "T6.4",
+    "chapter": 6,
+    "placement": "body",
+    "title": "Local positivity comparisons propagate along a chain.",
+    "caption": "Choose overlapping balls whose slightly larger balls still lie inside $U$. Comparing at overlap points transfers a local Harnack bound from $x$ to $y$. The resulting constant depends on the finite chain and its distance from the boundary, which is why connected compact interior regions occur in the theorem.",
+    "drawing": "figures/tikz/ch06-harnack-chain.tex",
+    "source": "chapters/06-second-order-elliptic-equations/04-harnack.tex",
+    "section": "6.4"
+  },
+  {
+    "id": "T6.M",
+    "chapter": 6,
+    "placement": "margin",
+    "title": "商为何在边界趋零",
+    "caption": "由 $|z|\\leq Cd$ 与 $\\phi\\geq ad$，得到 $|z|/\\phi^{1-\\delta}\\leq C'd^\\delta\\to0$。图示上界取 $\\delta=1/2$。",
+    "drawing": "figures/tikz/ch06-boundary-ratio-margin.tex",
+    "source": "chapters/06-second-order-elliptic-equations/05-nonsymmetric-spectrum.tex",
+    "section": "6.5"
+  }
+]

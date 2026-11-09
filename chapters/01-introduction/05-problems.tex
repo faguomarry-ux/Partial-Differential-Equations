@@ -1,13 +1,240 @@
-% Evans second edition, section 1.5.
-% English source: printed p. 11; PDF page 28 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans second edition, section 1.5, printed pp. 11--12; PDF pages 28--29.
+% Chinese: printed pp. 8--9; PDF pages 26--27.
 \section{Problems}
 \label{sec:1-5}
 
-\PDEPending
+\subsection*{Source problems (Evans, Chapter 1, Problems 1--5)}
+The numbering in this list is the source problem numbering. Solutions in
+the next subsection are editorial additions.
+\begin{enumerate}
+\item Classify each of the partial differential equations in \S1.2 as follows:
+\begin{enumerate}[label=(\alph*)]
+\item Is the PDE linear, semilinear, quasilinear or fully nonlinear?
+\item What is the order of the PDE?
+\end{enumerate}
+\item Let $k$ be a positive integer. Show that a smooth function defined on
+$\R^n$ has in general
+\[
+ \binom{n+k-1}{k}=\binom{n+k-1}{n-1}
+\]
+distinct partial derivatives of order $k$.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+(Hint: This is the number of ways of inserting $n-1$ dividers $|$ within a
+row of $k$ symbols $\circ$: for example,
+$\circ\circ\,||\,\circ\circ\circ\,|\,\circ\,|\,\circ\circ\circ\,||\,
+\circ\circ\circ\circ\,|$.
+Explain why each such pattern corresponds to precisely one of the partial
+derivatives of order $k$.)
+\end{enumerate}
+
+The next exercises provide some practice with the multiindex notation
+introduced in Appendix A.
+\begin{enumerate}[resume]
+\item Prove the Multinomial Theorem:
+\[
+ (x_1+\cdots+x_n)^k=\sum_{|\alpha|=k}\binom{|\alpha|}{\alpha}x^\alpha,
+\]
+where $\binom{|\alpha|}{\alpha}:=|\alpha|!/\alpha!$,
+$\alpha!=\alpha_1!\cdots\alpha_n!$, and
+$x^\alpha=x_1^{\alpha_1}\cdots x_n^{\alpha_n}$.
+The sum is taken over all multiindices $\alpha=(\alpha_1,\ldots,\alpha_n)$
+with $|\alpha|=k$.
+\item Prove Leibniz's formula:
+\[
+ D^\alpha(uv)=\sum_{\beta\leq\alpha}\binom{\alpha}{\beta}
+ D^\beta uD^{\alpha-\beta}v,
+\]
+where $u,v:\R^n\to\R$ are smooth,
+$\binom{\alpha}{\beta}:=\alpha!/[\beta!(\alpha-\beta)!]$, and
+$\beta\leq\alpha$ means $\beta_i\leq\alpha_i$ $(i=1,\ldots,n)$.
+\item Assume that $f:\R^n\to\R$ is smooth. Prove
+\[
+ f(x)=\sum_{|\alpha|\leq k}\frac1{\alpha!}D^\alpha f(0)x^\alpha
+ +O(|x|^{k+1})\qquad\text{as }x\to0
+\]
+for each $k=1,2,\ldots$. This is Taylor's formula in multiindex notation.
+
+(Hint: Fix $x\in\R^n$ and consider the function of one variable
+$g(t):=f(tx)$.)
+\end{enumerate}
+
+\subsection*{Editorial supplement: solutions to Problems 1--5}
+\paragraph{Problem 1: classification.}
+The following tables use the most restrictive applicable class, for generic
+nonlinearities. The order is the largest total derivative order in space
+and time. Coefficients and forcing terms are prescribed, not additional
+unknowns, unless explicitly stated otherwise.
+
+\begin{center}\small
+\begin{tabular}{@{}llc@{}}
+\textbf{Scalar linear equation (\S1.2.1a)}&\textbf{Class}&\textbf{Order}\\\hline
+1. Laplace & Linear & 2\\
+2. Helmholtz & Linear & 2\\
+3. Transport & Linear & 1\\
+4. Liouville & Linear & 1\\
+5. Heat & Linear & 2\\
+6. Schrödinger & Linear & 2\\
+7. Kolmogorov & Linear & 2\\
+8. Fokker--Planck & Linear & 2\\
+9. Wave & Linear & 2\\
+10. Klein--Gordon & Linear & 2\\
+11. Telegraph & Linear & 2\\
+12. General wave & Linear & 2\\
+13. Airy & Linear & 3\\
+14. Beam & Linear & 4
+\end{tabular}
+\end{center}
+
+\begin{center}\small
+\begin{tabular}{@{}llc@{}}
+\textbf{Scalar nonlinear equation (\S1.2.1b)}&\textbf{Class}&\textbf{Order}\\\hline
+1. Eikonal & Fully nonlinear & 1\\
+2. Nonlinear Poisson & Semilinear & 2\\
+3. $p$-Laplacian & Quasilinear & 2\\
+4. Minimal surface & Quasilinear & 2\\
+5. Monge--Ampère & Fully nonlinear & 2\\
+6. Hamilton--Jacobi & Fully nonlinear & 1\\
+7. Scalar conservation law & Quasilinear & 1\\
+8. Inviscid Burgers & Quasilinear & 1\\
+9. Reaction-diffusion & Semilinear & 2\\
+10. Porous medium & Quasilinear & 2\\
+11. Nonlinear wave & Semilinear & 2\\
+12. KdV & Semilinear & 3\\
+13. Nonlinear Schrödinger & Semilinear & 2
+\end{tabular}
+\end{center}
+\par\Needspace{65mm}
+\PDEAnnotation{先约定参数与分支}{表中按一般非线性列出。
+$p=2$ 时 $p$-Laplacian 变为线性；$\gamma=1$ 时多孔介质式变为热方程；
+$n=1$ 且 $f$ 已知时 Monge--Ampère 式是 $u_{xx}=f$。
+忽略这些例外会把分类误当成方程名称的固定属性。}
+
+The $p$-Laplacian entry assumes $1<p<\infty$, $p\ne2$, using its
+classical expansion away from $Du=0$ as in \S\ref{sec:1-2}.
+The porous medium entry assumes $\gamma>1$ and uses the expansion where
+$u>0$. The Monge--Ampère entry assumes $n\geq2$ and given $f$.
+If $H(q,x)$ is affine in $q$, Hamilton--Jacobi is quasilinear (in fact
+linear in this particular displayed form). If $f(u)$ is affine, the
+nonlinear Poisson, reaction-diffusion and nonlinear wave equations become
+linear. For the Schrödinger equations the unknown is complex-valued; one
+may equivalently use its real and imaginary parts as a real system.
+
+\begin{center}\small
+\begin{tabular}{@{}llc@{}}
+\textbf{System (\S1.2.2)}&\textbf{Class}&\textbf{Order}\\\hline
+a1. Elastic equilibrium & Linear & 2\\
+a2. Elastic evolution & Linear & 2\\
+a3. Maxwell & Linear & 1\\
+b1. Conservation laws & Quasilinear & 1\\
+b2. Reaction-diffusion & Semilinear & 2\\
+b3. Incompressible Euler & Quasilinear & 1\\
+b4. Incompressible Navier--Stokes & Semilinear & 2
+\end{tabular}
+\end{center}
+
+For a smooth scalar flux, the chain rule gives
+\[
+ \operatorname{div}\mathbf F(u)=\sum_i(F^i)'(u)u_{x_i},
+\]
+hence its quasilinear form. For a system with $m$ components,
+$\mathbf F:\R^m\to\R^{m\times n}$ and
+$(\operatorname{div}\mathbf F(\mathbf u))^a
+=\sum_i\partial_{x_i}F^{ai}(\mathbf u)$.
+Affine fluxes give linear equations or systems.
+
+For the incompressible flow entries, the unknowns are $(\mathbf u,p)$.
+Navier--Stokes has constant coefficients on the second derivatives of
+$\mathbf u$; its nonlinear convection term has order one. This is the
+sense of the semilinear classification in the table. The divergence equation
+has order one, and there are no second derivatives of $p$ in the displayed
+system. It is a system of mixed differential orders, not an unconstrained
+uniformly parabolic system for all $n+1$ unknowns. Euler has first-order
+derivatives with coefficients depending on $\mathbf u$, hence is quasilinear.
+
+\paragraph{Problem 2: counting independent derivative operators.}
+\begin{expandedproof}[editorial solution to source Problem 2]
+For a $C^k$ function, the order of differentiation does not matter. Thus a
+distinct derivative operator of order $k$ is determined by a multiindex
+$\alpha\in\{0,1,2,\ldots\}^n$ satisfying
+$\alpha_1+\cdots+\alpha_n=k$. Represent $\alpha_i$ by $\alpha_i$ circles
+in the $i$th compartment between $n-1$ dividers. Empty compartments are
+allowed: they encode $\alpha_i=0$. This is a bijection.
+
+Among the $k+n-1$ positions, choose the $n-1$ divider positions, giving
+$\binom{k+n-1}{n-1}=\binom{k+n-1}{k}$. For $n=1$ there are no dividers
+and exactly one derivative, as the same formula predicts. This counts
+operators; special functions may have several derivatives with equal values.
+\end{expandedproof}
+
+\paragraph{Problem 3: the multinomial theorem.}
+\begin{expandedproof}[editorial solution to source Problem 3]
+Expand the product of $k$ copies of $(x_1+\cdots+x_n)$ by distributivity.
+A term $x^\alpha$ is obtained by selecting $x_i$ from exactly $\alpha_i$
+of the factors. First choose $\alpha_1$ of the $k$ factors, then
+$\alpha_2$ of the remaining factors, and so on. The number of such choices is
+\[
+ \binom{k}{\alpha_1}\binom{k-\alpha_1}{\alpha_2}\cdots
+ \binom{\alpha_n}{\alpha_n}=\frac{k!}{\alpha_1!\cdots\alpha_n!}.
+\]
+Grouping all terms with the same multiindex proves the formula. The
+identity also holds for $k=0$, with the single multiindex $\alpha=0$.
+\end{expandedproof}
+\par\Needspace{65mm}
+\PDEAnnotation{两类组合系数}{多项式展开中 $\binom{k}{\alpha}=k!/\alpha!$，要求 $|\alpha|=k$。
+乘积求导中 $\binom{\alpha}{\beta}=\prod_i\binom{\alpha_i}{\beta_i}$，
+逐坐标分配导数。后者一般不等于 $\binom{|\alpha|}{|\beta|}$。}
+
+\paragraph{Problem 4: the multiindex product rule.}
+\begin{expandedproof}[editorial solution to source Problem 4]
+Apply the one-variable product rule $\alpha_i$ times in coordinate $x_i$,
+for each $i=1,\ldots,n$. If exactly $\beta_i$ of these derivatives fall
+on $u$, the remaining $\alpha_i-\beta_i$ fall on $v$, and the coefficient
+is $\binom{\alpha_i}{\beta_i}$. Since mixed derivatives commute under the
+smoothness assumption, the resulting term is
+$D^\beta u\,D^{\alpha-\beta}v$, with coefficient
+\[
+ \prod_{i=1}^n\binom{\alpha_i}{\beta_i}
+ =\frac{\alpha!}{\beta!(\alpha-\beta)!}.
+\]
+Summing over all coordinatewise choices $0\leq\beta_i\leq\alpha_i$
+proves the identity. For $\alpha=0$ it reduces to $uv=uv$.
+\end{expandedproof}
+
+\paragraph{Problem 5: Taylor's formula with a uniform remainder.}
+\begin{expandedproof}[editorial solution to source Problem 5]
+It suffices that $f\in C^{k+1}$ on a neighborhood of $0$. Choose $r>0$
+so the closed ball $\overline B_r(0)$ lies inside this neighborhood. For
+$|x|<r$ set $g_x(t)=f(tx)$, $0\leq t\leq1$. Repeated differentiation
+and the multinomial theorem give, for $0\leq j\leq k+1$,
+\[
+ g_x^{(j)}(t)
+ =\left(\sum_{i=1}^n x_i\partial_{x_i}\right)^j f(tx)
+ =\sum_{|\alpha|=j}\frac{j!}{\alpha!}x^\alpha D^\alpha f(tx).
+\]
+The one-variable Taylor formula with integral remainder gives
+\begin{align*}
+ f(x)&=\sum_{j=0}^k\frac{g_x^{(j)}(0)}{j!}+R_k(x),\\
+ R_k(x)&=\frac1{k!}\int_0^1(1-t)^k g_x^{(k+1)}(t)\,dt.
+\end{align*}
+Substituting the derivative formula converts the finite sum into
+\[
+ \sum_{|\alpha|\leq k}\frac{D^\alpha f(0)}{\alpha!}x^\alpha.
+\]
+Continuity and compactness give a finite common bound
+\[
+ M=\max_{\substack{|\alpha|=k+1\\y\in\overline B_r(0)}}
+       |D^\alpha f(y)|.
+\]
+Using $|x^\alpha|\leq|x|^{k+1}$ and
+$\int_0^1(1-t)^k\,dt=1/(k+1)$, we obtain
+\[
+ |R_k(x)|\leq M\left(\sum_{|\alpha|=k+1}\frac1{\alpha!}\right)
+ |x|^{k+1}.
+\]
+The constant depends only on $n,k$ and the indicated local derivative bound,
+not on the direction of $x$. This proves the required $O(|x|^{k+1})$.
+\end{expandedproof}
+\par\Needspace{65mm}
+\PDEAnnotation{余项须对方向一致}{逐条射线使用一元 Taylor 公式还不够：余项常数可能依赖方向。
+在固定闭球上统一控制所有 $k+1$ 阶导数，才得到真正的多元
+$O(|x|^{k+1})$。仅假设 $C^k$ 通常只能得到 $o(|x|^k)$。}

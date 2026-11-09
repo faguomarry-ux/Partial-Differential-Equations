@@ -1,13 +1,212 @@
 % Evans second edition, section 5.9.
 % English source: printed p. 282; PDF page 299 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked against the chapter opening on PDF page 187; see docs/CHAPTER-05.md.
+% Status: editorial study draft; expanded proofs and Chinese mathematical annotations.
 \section{Other Spaces of Functions}
 \label{sec:5-9}
 
-\PDEPending
+\subsection{The dual space $H^{-1}$ (Evans \S5.9.1, Theorem 1)}
+Define $H^{-1}(U)=(H^1_0(U))^*$ with
+\[
+ \|f\|_{H^{-1}}=\sup_{\|v\|_{H^1}\leq1}|\langle f,v\rangle|.
+\]
+Here we use the full $H^1$ norm, rather than the equivalent gradient
+norm available on bounded domains.
+\begin{theorem}
+For every $f\in H^{-1}(U)$ there are $f^0,\ldots,f^n\in L^2(U)$ with
+\[
+ \langle f,v\rangle=\int_U f^0v+\sum_{i=1}^nf^i\partial_i v\,dx,
+ \qquad v\in H^1_0(U).
+\]
+Moreover
+\[
+ \|f\|_{H^{-1}}
+ =\min\left\{\left(\sum_{i=0}^n\|f^i\|_2^2\right)^{1/2}:
+                (f^0,\ldots,f^n)\text{ represents }f\right\}.
+\]
+In distributions, $f=f^0-\sum_i\partial_i f^i$.
+\end{theorem}
+\Needspace{45mm}
+\PDEAnnotation{负一阶不是负次求导}{$H^{-1}$ 的元素可以是导数型分布。若 $F\in L^2(U;\R^n)$，则 $-\operatorname{div}F$ 作用在 $v$ 上是 $\int F\cdot Dv$，由 Cauchy 不等式连续。}
+\begin{expandedproof}
+Apply the Hilbert-space Riesz representation theorem, an external
+functional analysis result, to $H^1_0(U)$ with inner product
+$\int(wv+Dw\cdot Dv)$. There is a unique $w\in H^1_0(U)$ such that
+\[
+ \langle f,v\rangle=\int_U(wv+Dw\cdot Dv),\qquad
+ \|f\|_{H^{-1}}=\|w\|_{H^1}.
+\]
+Set $f^0=w$ and $f^i=\partial_iw$. Their product $L^2$ norm equals
+$\|f\|_{H^{-1}}$. Any other representation $(g^i)$ satisfies
+$|\langle f,v\rangle|\leq(\sum_i\|g^i\|_2^2)^{1/2}\|v\|_{H^1}$
+by Cauchy--Schwarz. Take the supremum over unit $v$ to prove minimality.
+The distributional sign follows from
+$\langle\partial_i g,v\rangle=-\int g\partial_i v$.
+\end{expandedproof}
+The embedding $L^2(U)\to H^{-1}(U)$ is
+$\langle f,v\rangle=\int_Ufv$, with norm at most $\|f\|_2$.
+It is injective because test functions separate locally integrable
+functions. Thus the useful pivot-space chain is
+\[
+ H^1_0(U)\subset L^2(U)\subset H^{-1}(U).
+\]
+\Needspace{45mm}
+\PDEAnnotation{不要抹去中间的 $L^2$}{Riesz 可把 Hilbert 空间与其对偶抽象同构，但演化方程要保留 $L^2$ 配对。$u_t$ 可只在 $H^{-1}$ 中，$\langle u_t,u\rangle$ 仍有意义。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection{Banach-valued time functions (Evans \S5.9.2, Theorem 2)}
+For a real Banach space $X$, $L^p(0,T;X)$ consists of strongly
+measurable functions with integrable $p$th power of their $X$ norm
+(or essentially bounded norm when $p=\infty$).
+Integration below is Bochner integration. Its construction, norm
+inequality, and Fubini properties are prerequisites from measure theory.
+We say $u'=g$ weakly if
+\[
+ \int_0^T u(t)\phi'(t)\,dt=-\int_0^Tg(t)\phi(t)\,dt
+ \quad(\phi\in C_c^\infty(0,T)),
+\]
+as an equality in $X$. The space $W^{1,p}(0,T;X)$ requires both
+$u$ and $g$ in $L^p(0,T;X)$.
+
+\begin{theorem}[Fundamental theorem in $X$]\label{thm:5-time-ftc}
+Every $u\in W^{1,p}(0,T;X)$ has a continuous representative with
+\[
+ u(t)-u(s)=\int_s^tu'(\tau)\,d\tau.
+\]
+\[
+ \max_{[0,T]}\|u(t)\|_X
+ \leq T^{-1/p}\|u\|_{L^p(X)}
+       +T^{1-1/p}\|u'\|_{L^p(X)}.
+\]
+Interpret $1/p=0$ for $p=\infty$.
+\end{theorem}
+\begin{expandedproof}
+Set $G(t)=\int_0^tu'(\tau)\,d\tau$. The Bochner integral norm
+inequality makes $G$ absolutely continuous. Fubini against scalar test
+functions shows $G'=u'$ weakly, hence $w=u-G$ has weak derivative zero.
+
+To show $w$ is constant without making an uncountable exceptional-set
+argument over $X^*$, smooth $w$ in time on interior intervals.
+Its smooth derivative is zero, so $w_\varepsilon$ is an $X$-valued
+constant there. The convergence $w_\varepsilon\to w$ in local
+$L^1(0,T;X)$ forces these constants to converge in $X$ on each fixed
+subinterval. Overlapping subintervals give the same constant $c$.
+Thus $u=c+G$ almost everywhere; take $c+G$ as the representative.
+The formula holds for all $s,t$, including endpoints.
+Its norm inequality gives
+\[
+ \|u(t)\|_X\leq\|u(s)\|_X+\int_0^T\|u'(\tau)\|_X\,d\tau.
+\]
+Average in $s$ and apply H\"older, obtaining the stated bound.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{初值需要时间代表元}{$L^p$ 时间函数可以在单个时刻任意修改，因此 $u(0)$ 原先没有确定意义。时间基本定理选出连续代表元，才允许严谨地指定初值。}
+
+\subsection{Energy-space continuity (Evans \S5.9.2, Theorem 3)}
+Write $V=H^1_0(U)$, $H=L^2(U)$, and $V^*=H^{-1}(U)$.
+\begin{theorem}\label{thm:5-energy-time}
+If $u\in L^2(0,T;V)$ and $u'\in L^2(0,T;V^*)$, then
+$u$ has a representative in $C([0,T];H)$ and
+\[
+ \|u(t)\|_H^2-\|u(s)\|_H^2
+ =2\int_s^t\langle u'(\tau),u(\tau)\rangle\,d\tau.
+\]
+The squared norm is absolutely continuous and its derivative is the
+integrand almost everywhere. Also
+\[
+ \max_t\|u(t)\|_H
+ \leq C_T\bigl(\|u\|_{L^2(V)}+\|u'\|_{L^2(V^*)}\bigr).
+\]
+\end{theorem}
+\begin{expandedproof}
+\paragraph{1. Construct time-smooth approximations without endpoint jumps.}
+Since $V\subset V^*$ continuously, $u\in W^{1,2}(0,T;V^*)$.
+Theorem~\ref{thm:5-time-ftc} gives a continuous $V^*$ representative.
+Reflect it across $0$ and $T$ to a slightly larger interval.
+The reflected function remains in $L^2(V)$, with weak derivative
+in $L^2(V^*)$ and the appropriate reflected signs.
+There is no endpoint Dirac term because the $V^*$ values match.
+Convolve in time. Translation continuity of Bochner $L^2$ gives
+\[
+ u_\varepsilon\to u\text{ in }L^2(V),\qquad
+ u_\varepsilon'\to u'\text{ in }L^2(V^*).
+\]
+Each smoothed function is smooth with values in $V$.
+
+\paragraph{2. A uniform-in-time Cauchy estimate.}
+For any smooth $w:[0,T]\to V$,
+$\frac{d}{dt}\|w\|_H^2=2\langle w',w\rangle$.
+Integrate between $s$ and $t$, take absolute values of the integral,
+and average $s$ over $(0,T)$. It follows that
+\[
+ \sup_t\|w(t)\|_H^2
+ \leq T^{-1}\|w\|_{L^2(H)}^2
+       +2\|w'\|_{L^2(V^*)}\|w\|_{L^2(V)}.
+\]
+Apply this to $w=u_\varepsilon-u_\delta$. Both graph-norm errors tend
+to zero, so $(u_\varepsilon)$ is Cauchy in $C([0,T];H)$.
+Its uniform limit agrees with $u$ almost everywhere by the $L^2(H)$
+convergence. This proves continuity, including at both endpoints.
+
+\paragraph{3. Pass the energy identity to the limit.}
+The endpoint terms converge uniformly. The integrands converge in $L^1$
+because
+\[
+ \begin{split}
+ \|\langle u_\varepsilon',u_\varepsilon\rangle
+       -\langle u',u\rangle\|_{L^1}
+ &\leq\|u_\varepsilon'-u'\|_{L^2(V^*)}
+          \|u_\varepsilon\|_{L^2(V)}\\
+ &\quad+\|u'\|_{L^2(V^*)}
+          \|u_\varepsilon-u\|_{L^2(V)}\to0.
+ \end{split}
+\]
+The limiting integral identity gives absolute continuity and its a.e.
+derivative. Applying the uniform estimate to $u_\varepsilon$ and then
+Young's inequality proves the norm bound.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{能量计算的合法化}{形式上把方程乘 $u$ 会得到 $\frac12(d/dt)\|u\|_2^2$。当 $u_t$ 只有 $H^{-1}$ 正则性时，必须先时间平滑、建立一致估计，再通过配对的 $L^1$ 收敛取极限。}
+
+\subsection{Continuity in a better spatial space (source Theorem 4)}
+Let $U$ be bounded with smooth boundary and $m\geq0$ an integer.
+If
+\[
+ u\in L^2(0,T;H^{m+2}(U)),\qquad
+ u'\in L^2(0,T;H^m(U)),
+\]
+then $u\in C([0,T];H^{m+1}(U))$, with the corresponding bound
+\[
+ \max_t\|u(t)\|_{H^{m+1}}
+ \leq C_{U,T,m}\bigl(\|u\|_{L^2(H^{m+2})}
+                         +\|u'\|_{L^2(H^m)}\bigr).
+\]
+\begin{expandedproof}
+First $m=0$. Choose the same compact-support extension operator $E$
+bounded both on $L^2$ and $H^2$, as constructed in
+\S\ref{sec:5-4}. Set $v=Eu$. Bounded linear maps commute with Bochner
+integration, so testing in time gives $v'=Eu'$.
+For time-smooth $v$, integrate by parts in space on $\R^n$:
+\[
+ \frac d{dt}\|v\|_{H^1(\R^n)}^2
+ =2(v-\Delta v,v')_{L^2}.
+\]
+This is valid for $H^2$ functions by spatial approximation, with no
+boundary term on the whole space. Thus its absolute value is at most
+$C\|v\|_{H^2}\|v'\|_2$.
+Average an integrated identity in the initial time to obtain
+\[
+ \sup_t\|v(t)\|_{H^1}^2
+ \leq C_T\bigl(\|v\|_{L^2(H^2)}^2+\|v'\|_{L^2(L^2)}^2\bigr).
+\]
+Reflect and convolve in time as in the preceding proof; now use
+continuity in $L^2$, which follows from
+$u\in W^{1,2}(0,T;L^2)$. The estimate on differences gives convergence
+in $C(H^1)$. Restrict to $U$ and use the bounds for $E$.
+For general $m$, apply this result to every $D^\alpha u$, $|\alpha|\leq m$.
+Spatial derivatives commute with the time weak derivative, as one
+checks against separated space-time test functions. Summing the
+finitely many $H^1$ estimates yields an equivalent $H^{m+1}$ norm
+and the claimed continuity.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{空间与时间交换一阶}{空间有 $m+2$ 阶、时间导数有 $m$ 阶，得到时间连续的中间空间 $H^{m+1}$。空间分部积分把两个导数移到同一侧，正是这个阶数配平的来源。}

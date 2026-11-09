@@ -1,0 +1,21 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=1cm,y=1cm]
+ \fill[LumenAccent!5] (-.5,0) rectangle (7.8,2.3);
+ \draw[LumenInk] (-.6,0)--(7.9,0);
+ \node[anchor=west] at (8,0) {$y_n=0$};
+ \node at (6.8,1.9) {$\R^n_+$};
+ \coordinate (x) at (2.2,1.6);
+ \coordinate (im) at (2.2,-1.6);
+ \coordinate (y) at (6,0);
+ \fill[LumenAccent] (x) circle[radius=2.5pt];
+ \draw[LumenWarm,line width=1pt] (im) circle[radius=2.5pt];
+ \fill[LumenBlue] (y) circle[radius=2pt];
+ \draw[pde blue] (x)--node[above,sloped] {$|y-x|$} (y);
+ \draw[pde blue] (im)--node[below,sloped] {$|y-x^*|$} (y);
+ \draw[LumenMuted,dashed] (x)--(im);
+ \node[left] at (x) {$+x$};
+ \node[left,text=LumenWarm] at (im) {$-x^*$};
+ \node[above right] at (y) {$y$};
+ \node[align=center] at (5.2,-2.55)
+  {equal distances on the boundary\\$\Phi(y-x)-\Phi(y-x^*)=0$};
+\end{tikzpicture}

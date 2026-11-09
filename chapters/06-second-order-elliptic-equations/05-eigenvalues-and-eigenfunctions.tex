@@ -1,13 +1,135 @@
-% Evans second edition, section 6.5.
-% English source: printed p. 333; PDF page 350 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 6.5: English printed p.333 / PDF p.350; Chinese printed p.236 / PDF p.254.
+\Needspace{65mm}
 \section{Eigenvalues and Eigenfunctions}
 \label{sec:6-5}
+Assume in this section that $U$ is bounded, connected and has smooth
+boundary, and that all coefficients are smooth on $\overline U$.
+This keeps the spectral arguments separate from technical boundary
+regularity issues. Eigenfunctions have zero Dirichlet trace.
 
-\PDEPending
+\subsection{Symmetric operators (Evans \S6.5.1, Theorem 1)}
+First let $Lu=-\partial_j(a^{ij}u_i)$ with $A$ symmetric uniformly elliptic.
+Then $B[u,v]=\int A Du\cdot Dv$ is a symmetric positive form.
+\begin{theorem}\label{thm:6-symmetric-spectrum}
+There are real eigenvalues, repeated according to multiplicity,
+\[
+ 0<\lambda_1\leq\lambda_2\leq\cdots,\qquad\lambda_j\longrightarrow\infty,
+\]
+and a complete orthonormal basis $(w_j)$ of $L^2(U)$ such that
+$Lw_j=\lambda_jw_j$. Each eigenspace is finite dimensional, and
+$w_j\in C^\infty(\overline U)$.
+\end{theorem}
+\begin{expandedproof}
+Let $S=L^{-1}:L^2\to L^2$. Lax--Milgram, Poincar\'e and Rellich show
+that $S$ is bounded and compact. If $u=Sf$ and $v=Sg$, then
+\[
+ (Sf,g)=B[u,v]=(f,Sg),\qquad
+ (Sf,f)=B[u,u]>0\quad(f\ne0).
+\]
+Thus $S$ is self-adjoint, positive definite, and injective.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+For completeness we give the compact spectral argument.
+Let $\mu_1=\sup_{\|f\|_2=1}(Sf,f)>0$.
+For a maximizing sequence $f_k$, pass to a weakly convergent subsequence
+$f_k\rightharpoonup f$ with $\|f\|_2\leq1$.
+Compactness gives $Sf_k\to Sf$, so $(Sf,f)=\mu_1$.
+If $\|f\|_2<1$, scaling $f$ to norm one increases this value, a
+contradiction. First variation on the unit sphere gives $Sf=\mu_1 f$.
+
+Its orthogonal complement is invariant under $S$, by self-adjointness.
+Repeat the argument there, recording multiplicities, to obtain
+$\mu_1\geq\mu_2\geq\cdots>0$ and orthonormal eigenvectors $w_j$.
+There are infinitely many, since an injective operator on infinite
+dimensional $L^2(U)$ cannot have finite-dimensional range.
+Compactness forces $\mu_j\to0$: otherwise $(Sw_j)$ has pairwise distances
+bounded below.
+If the closed span of the $w_j$ had a nonzero orthogonal complement,
+the restriction of $S$ to that complement would still be compact and
+positive definite and hence would have a positive maximal eigenvalue.
+That value would be at most every $\mu_j$, contradicting $\mu_j\to0$.
+This proves completeness. Set $\lambda_j=\mu_j^{-1}$.
+Finite multiplicity follows from compactness, and regularity bootstrapping
+applied to $Lw_j=\lambda_jw_j$ gives smoothness.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{先研究紧的逆算子}{$L$ 在 $L^2$ 上是无界算子，不宜直接套紧算子的谱定理。其逆先提升到 $H^1_0$，再由紧嵌入回到 $L^2$；逆的特征值趋零，对应 $L$ 的特征值趋无穷。}
+
+\Needspace{35mm}
+\subsection{Rayleigh quotient and positivity (Evans \S6.5.1, Theorem 2)}
+
+\Needspace{45mm}
+\PDEAnnotation{能量空间中的归一化不同}{$w_j$ 在 $L^2$ 中长度为一，但能量长度是 $\sqrt{\lambda_j}$。因此能量空间的正交归一基是 $w_j/\sqrt{\lambda_j}$，这决定了能量展开中的权重。}
+\begin{theorem}\label{thm:6-rayleigh}
+The first eigenvalue satisfies
+\[
+ \lambda_1=\min_{\substack{u\in H^1_0(U)\\\|u\|_2=1}}B[u,u].
+\]
+A minimizer solves $Lu=\lambda_1u$. There is a strictly positive first
+eigenfunction in $U$, and $\lambda_1$ is simple.
+Every eigenfunction for a larger eigenvalue changes sign.
+\end{theorem}
+\begin{expandedproof}
+The energy inner product is $B$, equivalent to the $H^1_0$ norm.
+The functions $w_j/\sqrt{\lambda_j}$ are orthonormal for this inner product,
+since $B[w_i,w_j]=\lambda_i(w_i,w_j)$.
+They are complete in the energy space: if $B[u,w_j]=0$ for all $j$,
+then $(u,w_j)=0$ for all $j$, hence $u=0$ by the $L^2$ basis.
+Hilbert-space Parseval therefore gives
+\begin{equation}\label{eq:6-energy-spectrum}
+ B[u,u]=\sum_j\lambda_j|(u,w_j)|^2,\qquad
+ \|u\|_2^2=\sum_j|(u,w_j)|^2 .
+\end{equation}
+The Rayleigh minimum follows, with equality at $w_1$.
+Alternatively, the direct method gives a minimizer: bounded energy
+gives weak $H^1_0$ convergence, Rellich preserves the $L^2$ normalization,
+and weak lower semicontinuity preserves minimality.
+
+Differentiating the quotient
+$B[u+tv,u+tv]/\|u+tv\|_2^2$ at $t=0$ yields
+$B[u,v]=\lambda_1(u,v)$ for every $v$.
+If $u$ is a minimizer, $|u|\in H^1_0$ has the same norm and energy
+by the Sobolev chain rule, so it is also a minimizer and hence smooth.
+It satisfies $L|u|=\lambda_1|u|\geq0$.
+The strong minimum principle, applied after rewriting $L$ in
+nondivergence form with zero potential, shows $|u|>0$ in $U$.
+Continuity and connectedness force $u$ to have one fixed sign.
+
+If two first eigenfunctions were independent, take a linear combination
+that vanishes at one interior point but is not identically zero.
+It is again a first eigenfunction, contradicting the preceding strict
+sign property. Thus the eigenspace is one dimensional.
+An eigenfunction for $\lambda>\lambda_1$ is orthogonal to the positive
+$w_1$, and consequently must take both signs.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{绝对值仍要通过变分方程}{不能直接对 $|u|$ 做经典二阶求导。先用 Sobolev 链式法则证明能量不变，因而它仍是极小元；再由 Euler 方程与正则性得到光滑性和严格正性。}
+For $-\partial_{xx}$ on $(0,\ell)$,
+$w_j=\sqrt{2/\ell}\sin(j\pi x/\ell)$ and
+$\lambda_j=(j\pi/\ell)^2$. Their oscillations illustrate positivity
+of the first mode and sign changes of the higher modes.
+
+
+\par\noindent\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=\linewidth]{output/figures/ch06-modes-resonance.pdf}
+\end{center}
+{\small\textit{Explicit interval model.} On $(0,\pi)$ the Dirichlet
+eigenvalues are $j^2$. For real $\lambda$ off the spectrum, the
+self-adjoint inverse norm is
+$\|(-\partial_{xx}-\lambda)^{-1}\|_{L^2\to L^2}
+=1/\min_j|j^2-\lambda|$. The poles mark loss of uniqueness.}
+\end{minipage}
+
+\paragraph{Weyl's law: a source remark, not a proved theorem here.}
+For the Dirichlet Laplacian on a smooth bounded domain,
+\[
+ N(\lambda):=\#\{j:\lambda_j\leq\lambda\}
+ \sim \frac{\omega_n|U|}{(2\pi)^n}\lambda^{n/2}.
+\]
+Equivalently,
+$\lambda_j\sim4\pi^2(j/(\omega_n|U|))^{2/n}$.
+This asymptotic statement appears as a remark in Evans; its proof
+requires additional spectral estimates and is not part of the
+compactness argument above. Here $\omega_n$ is the volume of the unit ball.
+
+\input{chapters/06-second-order-elliptic-equations/05-nonsymmetric-spectrum}

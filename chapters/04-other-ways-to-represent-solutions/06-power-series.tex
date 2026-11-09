@@ -1,13 +1,217 @@
-% Evans second edition, section 4.6.
-% English source: printed p. 220; PDF page 237 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{Power Series}
-\label{sec:4-6}
+% Evans 4.6, printed pp. 220--231; PDF pp. 237--248.
+\Needspace{65mm}
+\section{Power Series}\label{sec:4-6}
+\Needspace{35mm}
+\subsection{Noncharacteristic surfaces and determination of the full jet}
+For a quasilinear equation of order $k$, write
+\[
+ \sum_{|\gamma|=k}a_\gamma(D^{k-1}u,\ldots,u,x)D^\gamma u
+                     +a_0(D^{k-1}u,\ldots,u,x)=0 .
+\]
+Its principal polynomial is
+$P(x,\zeta)=\sum_{|\gamma|=k}a_\gamma\zeta^\gamma$,
+with coefficients evaluated on the chosen lower-order jet.
+Cauchy data on a hypersurface $\Gamma$ prescribe
+$u,\partial_\nu u,\ldots,\partial_\nu^{k-1}u$.
+Here $\partial_\nu^j$ is the contraction of $D^ju$ with $\nu^{\otimes j}$
+at the point, as in the source; iterating a variable normal field
+would also create lower-order curvature terms.
 
-\PDEPending
+\begin{theorem}[Source Theorem 1]
+If $P(x,\nu)\ne0$ along the specified data, then the PDE and the
+Cauchy data uniquely determine every derivative of any smooth solution
+along $\Gamma$.
+This is a determination statement, not an existence theorem.
+\end{theorem}
+\begin{expandedproof}
+On $\Gamma=\{x_n=0\}$ the derivatives of the Cauchy functions in
+$x'=(x_1,\ldots,x_{n-1})$ determine all derivatives of total order at
+most $k$, except $\partial_n^ku$.
+Its coefficient in the PDE is $a_{ke_n}=P(x,e_n)\ne0$.
+Solving the PDE gives this missing derivative.
+Its tangential derivatives then give every derivative with exactly
+$k$ normal differentiations.
+Differentiate the solved PDE once in $x_n$ to find
+$\partial_n^{k+1}u$; all right-side normal orders are now at most $k$.
+Repeat, inducting on normal order and allowing arbitrary tangential
+differentiation at each stage.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+For a curved surface use coordinates $y=\Psi(x)$ with
+$\Gamma=\{y_n=0\}$. The chain rule shows that the coefficient of
+$\partial_{y_n}^kv$ in $u=v\circ\Psi$ is
+\[
+ \sum_{|\gamma|=k}a_\gamma(D\Psi_n)^\gamma .
+\]
+On $\Gamma$, $D\Psi_n$ is a nonzero multiple of $\nu$, so homogeneity
+and the noncharacteristic condition make this coefficient nonzero.
+The prescribed normal derivatives convert to $y_n$ derivatives by
+a triangular system: at each order its leading coefficient is a
+nonzero power of $\partial_\nu\Psi_n$, while lower-order terms and
+tangential derivatives are already known.
+Apply the flat argument and transform the resulting jets back.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{知道所有导数不等于知道函数}{光滑函数可在一点具有全零 Taylor 系数而在邻域不为零，例如 $e^{-1/x^2}$ 的零延拓。要由 jet 恢复解，需要额外的解析性或其他唯一性理论。}
+For a surface $\{\rho=0\}$, use $P(x,D\rho)\ne0$.
+For the wave equation the principal polynomial is
+$\tau^2-|\xi|^2$, giving characteristic light cones.
+For the heat equation, considered as a total-order-two PDE,
+the principal polynomial is $-|\xi|^2$:
+the time-zero surface has $(\xi,\tau)=(0,1)$ and is characteristic.
+This convention does not negate forward parabolic well-posedness.
+
+\Needspace{35mm}
+\subsection{Analytic functions and coefficientwise majorants}
+An analytic function near zero is represented there by a convergent
+power series $f(x)=\sum_\gamma f_\gamma x^\gamma$,
+$f_\gamma=D^\gamma f(0)/\gamma!$.
+A formal series $F=\sum F_\gamma x^\gamma$ majorizes $f$ if
+$F_\gamma\geq|f_\gamma|$ for every $\gamma$; write $F\gg f$.
+\begin{lemma}[Source majorant lemma, with the operations made explicit]
+If $F$ has nonnegative coefficients and converges near zero, then
+$F\gg f$ implies absolute convergence of $f$ in a smaller neighborhood.
+Every analytic series has a majorant
+$C/(1-(x_1+\cdots+x_d)/r)$ after shrinking $r$.
+Majorization is preserved by addition, multiplication,
+partial differentiation, and composition with zero-constant-term series.
+\end{lemma}
+\begin{expandedproof}
+Coefficientwise comparison gives
+$\sum|f_\gamma x^\gamma|\leq F(|x_1|,\ldots,|x_d|)$.
+Analytic convergence on a smaller polydisc implies
+$|f_\gamma|\leq C r^{-|\gamma|}$.
+But the coefficient of $x^\gamma$ in the displayed rational series is
+$Cr^{-|\gamma|}|\gamma|!/\gamma!\geq Cr^{-|\gamma|}$.
+The multinomial expansion therefore proves the comparison.
+For products apply the triangle inequality to the finite coefficient
+convolution; for derivatives multiply each coefficient by its
+nonnegative integer exponent. Composition is a sum of such products.
+The zero constant term ensures that each fixed total-degree
+coefficient receives only finitely many composition contributions.
+These facts apply componentwise to vector and matrix series.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{控制函数值不等于控制系数}{majorant 比较的是每个 Taylor 系数的绝对值。它之所以能控制递推解，是因为求导、乘积和复合只通过非负组合数来组合这些系数。}
+
+\Needspace{35mm}
+\subsection{Cauchy--Kovalevskaya: recurrence and actual convergence}
+\label{sec:4-ck}
+After flattening an analytic noncharacteristic surface and subtracting
+analytic extensions of the Cauchy data, a quasilinear equation reduces
+to a first-order system for the derivatives of order below $k$.
+Write the normal coordinate as $t$ and the $d=n-1$ tangential
+coordinates as $x'$:
+\[
+ U_t=\sum_{j=1}^dB_j(U,x')U_{x_j}+c(U,x'),\qquad U(x',0)=0 .
+ \tag{CK4}
+\]
+Here $U$ has $m$ components.
+If coefficients originally depend on $t$, add a component
+$T_t=1$, $T(x',0)=0$, and replace explicit $t$ by $T$;
+this reduces to the displayed time-independent coefficient form.
+\begin{theorem}[Source Theorem 2]
+For analytic $B_j,c$ near $(0,0)$, (CK4) has a unique analytic
+solution in a neighborhood of zero.
+\end{theorem}
+\begin{expandedproof}[the explicit majorant, fully verified]
+\paragraph{1. Recursive formal solution.}
+Write $U=\sum_{\ell\geq1}t^\ell U_\ell(x')$.
+Equating the coefficient of $t^\ell$ gives
+\[
+ (\ell+1)U_{\ell+1}
+ =[t^\ell]\left\{\sum_jB_j(U,x')U_{x_j}+c(U,x')\right\}.
+\]
+The right side only uses $U_1,\ldots,U_\ell$ (and their tangential
+derivatives); $U_1=c(0,x')$.
+Equivalently, each joint Taylor coefficient is determined recursively
+by smaller normal order.
+Composition is legitimate as a formal joint series since $U(0,0)=0$.
+No negative combinatorial coefficients occur in the operations on
+the right. This proves formal uniqueness, but not yet convergence.
+
+\paragraph{2. Dominate the coefficient functions.}
+Choose $r,C>0$ so that every entry of every $B_j$ and $c$ is
+majorized by
+\[
+ F(Z,x')=\frac{Cr}{r-\sum_{j=1}^dx_j-\sum_{\ell=1}^mZ_\ell}.
+\]
+The preceding lemma supplies such a common choice for the finite
+collection of analytic entries.
+The comparison system has all its components equal to a scalar $v$.
+With $s=\sum_jx_j$, its equation is
+\[
+ v_t=\frac{Cr}{r-s-mv}(md\,v_s+1),\qquad v(s,0)=0.
+ \tag{MAJ4}
+\]
+Each of the $d$ matrix rows sums $m$ identical derivatives, explaining
+the factor $md$.
+
+\paragraph{3. Solve and check the majorant.}
+Let $N=m(d+1)$ and set
+\[
+ v(s,t)=\frac{r-s-\sqrt{(r-s)^2-2NCr\,t}}N .
+\]
+Use the square-root branch equal to $r-s$ near $(0,0)$.
+It is analytic near zero, is zero at $t=0$, and obeys
+\[
+ (r-s)v-\frac N2v^2=Cr\,t .
+\]
+Implicit differentiation gives
+$v_t=Cr/(r-s-Nv)$ and $v_s=v/(r-s-Nv)$.
+Thus
+\[
+ \frac{Cr}{r-s-mv}(md\,v_s+1)
+ =\frac{Cr}{r-s-mv}
+   \frac{r-s-Nv+md\,v}{r-s-Nv}=v_t,
+\]
+because $N=md+m$.
+The expansion of $1-\sqrt{1-z}$ has nonnegative coefficients;
+expanding $(r-s)^{-1}$ also does. Hence $v$ is a nonnegative
+coefficient majorant in $(x',t)$.
+
+\paragraph{4. Compare recursively and obtain a PDE solution.}
+At normal order zero both series vanish.
+Assume all coefficients up to normal order $\ell$ of $U$ are
+dominated by those of $(v,\ldots,v)$.
+The positive-operation rules and coefficient majorization of $B_j,c$
+give the same domination for the right side of the recurrence.
+Division by $\ell+1>0$ preserves it.
+Thus the domination holds at every normal order.
+The convergent analytic series $v$ bounds the absolute joint series
+of every component of $U$ on a smaller polydisc.
+On still smaller polydiscs derivatives also converge normally.
+The analytic compositions are therefore genuine functions;
+their Taylor coefficients satisfy (CK4), so the analytic identity
+holds near zero. Analytic uniqueness follows from the coefficient
+recurrence and equality with the Taylor series.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{优级数的作用是证明收敛}{形式递推只确定候选解的系数。显式平方根解控制这些系数的绝对值，才把形式级数变成可求导的解析函数；数据解析本身还没有完成收敛证明。}
+
+\paragraph{Returning to the scalar higher-order equation.}
+Include every derivative $D^\gamma u$, $|\gamma|<k$, as a component.
+Normal derivatives of lower-order components are other components;
+a derivative of a top-order component either is a tangential derivative
+of another top-order component or, for the pure normal term, is obtained
+from the solved original PDE.
+This yields the quasilinear system above.
+The formal scalar jet determined by the noncharacteristic recursion
+satisfies these derivative identities and hence the formal system.
+Its formally unique system solution is exactly the analytic series
+constructed above. Consequently all compatibility identities between
+the components hold as analytic identities.
+The zeroth component really is a scalar solution with the required
+derivatives; introducing a vector of independent unknowns did not
+silently discard compatibility.
+
+For nonzero analytic initial data subtract a polynomial in $t$
+with analytic $x'$ coefficients matching the prescribed normal jets,
+then incorporate its known terms into the coefficients.
+Analytic changes of coordinates preserve analyticity.
+This proves the quasilinear analytic noncharacteristic Cauchy theorem.
+A fully nonlinear version additionally solves its highest normal
+derivative by the analytic implicit function theorem and needs the
+corresponding nonzero derivative condition; that broader theorem is
+a further result, not proved by the quasilinear reduction alone.
+\Needspace{45mm}
+\PDEAnnotation{解析存在不保证低正则范数下稳定}{CK 给出非特征解析数据的局部解析解，未给出 $C^0$ 或 Sobolev 数据到解的连续依赖。习题 2 的 Laplace Cauchy 问题正好说明存在与稳定必须分别检查。}

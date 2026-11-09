@@ -1,0 +1,18 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram]
+ \node[pde box,text width=25mm] (a) at (1.5,1.4)
+  {\textbf{Linear}\\$-\Delta u+u=f(x)$};
+ \node[pde box,text width=28mm] (b) at (5.5,1.4)
+  {\textbf{Semilinear}\\$-\Delta u+u^3=0$};
+ \node[pde box,text width=34mm] (c) at (9.8,1.4)
+  {\textbf{Quasilinear}\\$-u_{xx}-e^u u_{yy}=0$};
+ \draw[pde axis] (a)--node[above,font=\small]{allow} (b);
+ \draw[pde axis] (b)--node[above,font=\small]{allow} (c);
+ \node[align=center] at (1.5,-.05) {all coefficients\\depend only on $x$};
+ \node[align=center] at (5.5,-.05) {nonlinear terms\\below order two};
+ \node[align=center] at (9.8,-.05) {highest derivatives\\still enter linearly};
+ \node[pde box,text width=52mm,draw=LumenWarm] at (5.5,-1.55)
+  {\textbf{Fully nonlinear: a different case}\\$\det D^2u=f(x)$};
+ \draw[pde warm] (2.7,-.8)--(8.3,-.8);
+ \node[pde tiny] at (10.0,-1.55) {$D^2u$ enters nonlinearly};
+\end{tikzpicture}

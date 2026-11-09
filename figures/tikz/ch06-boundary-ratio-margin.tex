@@ -1,0 +1,9 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,pde tiny,x=2.2cm,y=1.8cm]
+ \draw[pde axis] (0,0)--(1.18,0) node[right] {$d$};
+ \draw[pde axis] (0,0)--(0,1.25);
+ \draw[pde curve] plot[domain=0:1,samples=75] (\x,{sqrt(\x)});
+ \draw[LumenMuted,dashed] (0,0)--(1,1);
+ \node[above,align=center] at (.62,1.38) {upper bound\\$Cd^\delta$};
+ \node[below] at (0,0) {$0$};
+\end{tikzpicture}

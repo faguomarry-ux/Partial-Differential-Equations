@@ -1,0 +1,38 @@
+% Native TikZ study diagrams. Project-specific; template files remain unchanged.
+\usetikzlibrary{arrows.meta,calc,positioning,patterns,decorations.pathreplacing}
+\tikzset{
+ pde diagram/.style={font=\normalfont\fontsize{10}{12}\selectfont,
+   line width=.75pt,text=LumenInk},
+ pde axis/.style={-{Latex[length=2mm,width=1.3mm]},draw=LumenMuted},
+ pde curve/.style={draw=LumenAccent,line width=1.1pt},
+ pde warm/.style={draw=LumenWarm,line width=1.1pt},
+ pde blue/.style={draw=LumenBlue,line width=1.1pt},
+ pde dot/.style={circle,fill=LumenAccent,inner sep=1.6pt},
+ pde box/.style={draw=LumenAccent!70,fill=LumenAccent!4,
+   rounded corners=2pt,align=center,inner sep=6pt},
+ pde tiny/.style={font=\normalfont\fontsize{8.5}{10}\selectfont}
+}
+\makeatletter
+\newcommand{\PDEDiagramAnchor}[1]{%
+  \phantomsection\def\@currentlabel{T#1}\label{fig:tikz-#1}}
+\makeatother
+\NewDocumentCommand{\PDEBodyDiagram}{m m +m m}{%
+ \par\Needspace{70mm}\noindent
+ \begin{minipage}{\linewidth}
+  \vspace{3mm}\PDEDiagramAnchor{#1}%
+  \begin{center}
+   \InputIfFileExists{figures/tikz/#4.tex}{}{%
+     \PackageError{pde-diagrams}{Missing diagram #4}{Check figures/tikz.}}
+  \end{center}
+  {\normalfont\fontsize{10.5}{13}\selectfont\RaggedRight
+   \textcolor{LumenAccent}{\textbf{Diagram T#1. #2}}\enspace #3\par}
+  \vspace{3mm}
+ \end{minipage}\par\smallskip}
+\NewDocumentCommand{\PDEMarginDiagram}{m m +m m}{%
+ \par\Needspace{80mm}%
+ \mn{\PDEDiagramAnchor{#1}\marginheading{图 T#1：#2}%
+  \begin{center}
+   \InputIfFileExists{figures/tikz/#4.tex}{}{%
+     \PackageError{pde-diagrams}{Missing diagram #4}{Check figures/tikz.}}
+  \end{center}
+  \RaggedRight #3\par}}

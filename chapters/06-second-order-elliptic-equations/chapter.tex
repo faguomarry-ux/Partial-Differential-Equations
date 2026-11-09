@@ -1,14 +1,43 @@
-% Source: English Chapter 6, printed p. 293, PDF page 310.
+% Evans second edition, Chapter 6, printed pp. 293--348 / PDF pp. 310--365.
 \chapter[Second-Order Elliptic Equations]{Second-Order Elliptic\\Equations}
 \label{chap:second-order-elliptic-equations}
-
 \PDESource
-  {Chapter 6; printed p.~293; PDF page~310}
-  {中译本对应章：二阶椭圆型方程，书内第 208 页起。}
+  {Chapter 6; printed pp.~293--348; PDF pages~310--365}
+  {中译本：书内第 208--246 页；PDF 第 226--264 页。}
 
-\noindent\textbf{Status: outline only / 目录骨架。}
-English exposition, Chinese margin notes, and expanded proofs will be added section by section.
+\noindent\textit{Editorial study edition.}
+This chapter reconstructs Evans's exposition in original English, with
+expanded proofs and Chinese mathematical annotations. It is not a verbatim
+transcription. Headings identify the source results; our theorem numbers
+run throughout this chapter. All 17 source problems are restated concisely
+and solved. Foundational functional analysis is invoked explicitly;
+the Schaefer fixed-point theorem and Weyl's asymptotic law are identified
+where used or stated, rather than presented as proved here.
 
+\Needspace{45mm}
+\PDEAnnotation{弱解到经典解}{存在性先在能量空间中完成，不要求二阶导数。正则性随后补足导数，才能使用经典最大值原理；特征值问题再把紧性与正性结合起来。}
+The central example is
+\[
+ -\operatorname{div}(A Du)+b\cdot Du+cu=f\quad\hbox{in }U,
+ \qquad u=0\quad\hbox{on }\partial U.
+\]
+There are four distinct questions: does a weak solution exist, how smooth
+is it, what controls its sign, and when does the homogeneous equation
+have a nonzero solution? The answers require different hypotheses.
+
+\paragraph{Conventions and reading route.}
+Repeated indices are summed from $1$ to $n$. Unless specified otherwise,
+$U$ is a bounded open subset of $\R^n$, $A=(a^{ij})$ is real symmetric,
+and $a^{ij}\xi_i\xi_j\geq\theta|\xi|^2$ for some $\theta>0$.
+The norm $\|\cdot\|_2$ is over the indicated domain, or over $U$ if omitted.
+Begin with \S\ref{sec:6-1}--\S\ref{sec:6-2}, then follow the difference
+quotient argument in \S\ref{sec:6-3}. Read \S\ref{sec:6-4} before the
+positivity arguments in \S\ref{sec:6-5}. Chapter~5 supplies approximation,
+traces, Poincar\'e, difference quotients, and Rellich compactness.
+Riesz representation, weak subsequential compactness in Hilbert spaces,
+and basic finite-dimensional linear algebra are prerequisites.
+
+\clearpage
 \input{chapters/06-second-order-elliptic-equations/01-definitions}
 \input{chapters/06-second-order-elliptic-equations/02-existence-of-weak-solutions}
 \input{chapters/06-second-order-elliptic-equations/03-regularity}

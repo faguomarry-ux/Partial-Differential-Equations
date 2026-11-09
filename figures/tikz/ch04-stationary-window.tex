@@ -1,0 +1,18 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=2.35cm,y=1.2cm]
+ \fill[LumenWarm!14] (-.3873,-1.15) rectangle (.3873,1.15);
+ \draw[pde axis] (-2.15,0)--(2.25,0) node[right] {$x$};
+ \draw[pde axis] (-2.1,-1.25)--(-2.1,1.4);
+ \draw[pde curve] plot[domain=-2:2,samples=420]
+  (\x,{cos(deg(\x*\x/.15))});
+ \draw[LumenWarm,dashed] (-.3873,-1.15)--(-.3873,1.15);
+ \draw[LumenWarm,dashed] (.3873,-1.15)--(.3873,1.15);
+ \draw[decorate,decoration={brace,mirror,amplitude=4pt},LumenWarm]
+  (-.3873,-1.4)--(.3873,-1.4);
+ \node[below] at (0,-1.58) {$|x|\leq\sqrt{\varepsilon}$};
+ \node[above] at (0,1.8)
+  {$\operatorname{Re}e^{ix^2/\varepsilon}=\cos(x^2/\varepsilon),
+    \quad\varepsilon=0.15$};
+ \node[above] at (-1.4,1.1) {fast oscillation};
+ \node[above] at (1.4,1.1) {fast oscillation};
+\end{tikzpicture}

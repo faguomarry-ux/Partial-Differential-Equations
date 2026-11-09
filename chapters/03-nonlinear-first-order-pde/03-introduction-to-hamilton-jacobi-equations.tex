@@ -1,13 +1,205 @@
 % Evans second edition, section 3.3.
 % English source: printed p. 110; PDF page 127 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts: checked against the chapter-opening list, PDF p. 79.
+% Status: editorial study draft with detailed proofs and mathematical notes; no independent review.
+\Needspace{65mm}
 \section{Introduction to Hamilton--Jacobi Equations}
 \label{sec:3-3}
 
-\PDEPending
+\subsection{Variations and Hamilton's ODE (Evans \S3.3.1)}
+For a path $X:[0,t]\to\R^n$ with fixed endpoints consider
+\[
+ \mathcal A[X]=\int_0^t L(\dot X(s),X(s))\,ds.
+\]
+Suppose a smooth minimizer exists. For every smooth variation $V$
+vanishing at both endpoints, differentiate the action at $X+\varepsilon V$:
+\[
+ 0=\int_0^t[L_v(\dot X,X)\cdot\dot V+L_x(\dot X,X)\cdot V]\,ds.
+\]
+Integration by parts, with the endpoint terms zero, gives
+$\frac d{ds}L_v(\dot X,X)=L_x(\dot X,X)$ by the fundamental lemma
+of the calculus of variations. These are the Euler--Lagrange equations.
+They are necessary conditions; their derivation does not prove a
+minimizer exists or that every stationary path minimizes.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+Assume now the velocity--momentum relation $P=L_v(v,x)$ can be inverted,
+and define
+$H(P,x)=P\cdot v(P,x)-L(v(P,x),x)$.
+In differentiating this identity the terms containing derivatives of
+$v$ cancel because $P=L_v$. Thus $H_p=v$ and $H_x=-L_x$.
+The Euler--Lagrange equations become
+\[
+ \dot X=H_p(P,X),\qquad \dot P=-H_x(P,X).
+\]
+For $L(v,x)=|v|^2/2-V(x)$ this gives $P=v$,
+$H=|P|^2/2+V(x)$ and $\ddot X=-DV(X)$.
+For an autonomous Hamiltonian,
+$\frac d{ds}H=H_p\cdot(-H_x)+H_x\cdot H_p=0$.
+\Needspace{45mm}
+\PDEAnnotation{两个来源得到同一组 ODE}{变分法从作用量的驻值推出 Hamilton 方程；特征线法从 Hamilton--Jacobi PDE 推出同一方程。前者给出力学意义，后者解释它如何搬运函数与梯度。}
+
+\subsection{Convex duality and Hopf--Lax (Evans \S3.3.2)}
+\label{sec:3-hopflax}
+A function $A$ is superlinear if $A(v)/|v|\to+\infty$ as $|v|\to\infty$.
+For a finite convex function define
+\[
+ A^*(p)=\sup_v\{p\cdot v-A(v)\}.
+\]
+Superlinearity of $A$ makes the objective tend to $-\infty$,
+so the maximum is attained and $A^*$ is finite.
+It is convex as a supremum of affine functions.
+For every $R>0$,
+\[
+ A^*(p)\geq R|p|-\max_{|v|=R}A(v);
+\]
+hence $A^*$ is also superlinear when $A$ is finite everywhere.
+
+\begin{theorem}[Convex duality; source Theorem 3]
+For finite convex superlinear $A$, $A^{**}=A$ and
+\[
+ A(v)+A^*(p)\geq p\cdot v.
+\]
+Equality holds precisely when $p$ is a supporting slope of $A$ at $v$.
+For differentiable $A$, this means $p=DA(v)$.
+\end{theorem}
+\begin{expandedproof}
+The inequality is the definition of the supremum.
+A supporting slope satisfies
+$A(w)\geq A(v)+p\cdot(w-v)$ for every $w$.
+Rearranging shows the supremum defining $A^*(p)$ is attained at $v$,
+giving equality. Conversely equality rearranges to that support inequality.
+Always $A^{**}(v)\leq A(v)$. Choose a supporting slope at $v$;
+then the equality just established gives the reverse inequality.
+Existence of supporting hyperplanes for finite convex functions is
+the invoked convex-analysis prerequisite.
+For a differentiable convex function the tangent-plane inequality
+provides this slope directly as $DA(v)$.
+\end{expandedproof}
+The supporting-plane argument for $A^{**}=A$ also holds for every
+finite convex $A$ without superlinearity; in that case $A^*$ may take
+the value $+\infty$. Subdifferentials of such extended-valued functions
+are taken only at points where the function is finite.
+\Needspace{45mm}
+\PDEAnnotation{对偶变换中的极大值}{求 $v\cdot p-H(p)$ 的驻点只是候选；凸性让该目标关于 $p$ 凹，超线性增长使它在无穷远趋负无穷，才保证极大值确实取得。}
+
+\PDEBodyDiagram{3.2}{Legendre duality is a supporting-line construction.}
+{For $H(p)=p^2/2$ and $v=1$, maximizing $vp-H(p)$ finds the tangent point $p=1$. The tangent's intercept is $-L(1)=-1/2$. Convexity makes the whole graph lie above this line, which is exactly the Fenchel inequality.}
+{ch03-legendre-support}
+
+For the rest of this subsection assume $H$ is finite, convex, smooth
+and superlinear on $\R^n$, set $L=H^*$, and let $g$ be globally
+Lipschitz with constant $K$. Then $L$ is finite, convex and superlinear,
+and $H=L^*$.
+
+\Needspace{45mm}
+\PDEAnnotation{超线性排除逃向远方的起点}{$g$ 的下降至多是线性的，而 $tL((x-y)/t)$ 在位移很大时增长更快。这不仅给出最小值存在，还把最优起点限制在 $|x-y|\leq Rt$ 内。}
+\paragraph{Why a straight path gives the formula (source Theorem 4).}
+Since $L$ no longer depends on position, Jensen's inequality gives
+for any absolutely continuous path with $X(0)=y$, $X(t)=x$,
+\[
+ \int_0^tL(\dot X(s))\,ds
+ \geq tL\left(\frac1t\int_0^t\dot X(s)\,ds\right)
+ =tL((x-y)/t).
+\]
+The straight path $X(s)=y+s(x-y)/t$ attains equality.
+Minimizing over its starting point gives
+\[
+ \boxed{u(x,t)=\min_{y\in\R^n}
+             \{tL((x-y)/t)+g(y)\}.}
+ \tag{HL}
+\]
+The minimum exists: with $v=(x-y)/t$, its objective is at least
+$g(x)+t[L(v)-K|v|]$, coercive in $v$.
+Comparing with $y=x$ also proves that every minimizer satisfies
+$L(v)-K|v|\leq L(0)$, hence $|v|\leq R_K$ for a fixed finite $R_K$.
+This is the first finite-range localization of the minimization.
+\Needspace{45mm}
+\PDEAnnotation{直线最优依赖哪些条件}{这里用到 $L$ 的凸性和无位置依赖。若 $L=L(v,x)$，不同路径经过不同势场，不能只用端点位移除以时间就替代整条作用量。}
+
+
+\PDEMarginDiagram{3.M}{把路径在中途切开}
+{中间点 $z$ 也要优化。两段代价相加后再取下确界，才得到动态规划恒等式。}
+{ch03-path-split-margin}
+
+\begin{lemma}[Dynamic programming; source Lemma 1]\label{lem:3-dpp}
+For $0<s<t$,
+\[
+ u(x,t)=\min_z\{(t-s)L((x-z)/(t-s))+u(z,s)\}.
+ \tag{DP}
+\]
+\end{lemma}
+\begin{expandedproof}
+For any $z$ and a minimizing starting point $y$ for $u(z,s)$,
+convexity applied to
+$(x-y)/t=[(t-s)/t](x-z)/(t-s)+(s/t)(z-y)/s$
+gives
+$u(x,t)\leq(t-s)L((x-z)/(t-s))+u(z,s)$.
+This proves one inequality for the infimum over $z$.
+Conversely take a minimizer $y$ in (HL) and choose
+$z=y+(s/t)(x-y)$. Both subinterval velocities then equal $(x-y)/t$.
+Use this same $y$ as a competitor for $u(z,s)$ to obtain the opposite
+inequality. Coercivity ensures the intermediate minimum exists.
+\end{expandedproof}
+
+\begin{lemma}[Lipschitz bounds and initial values; source Lemma 2]
+The function in (HL) is globally Lipschitz in $(x,t)$ for $t\geq0$,
+when defined by $u(x,0)=g(x)$.
+\end{lemma}
+\begin{expandedproof}
+If $y$ minimizes at $x$, use $y+h$ as competitor at $x+h$.
+The velocity is unchanged, so $u(x+h,t)-u(x,t)\leq K|h|$.
+Exchange $x,x+h$ for the reverse inequality.
+
+For time zero, the competitor $y=x$ gives
+$u(x,t)\leq g(x)+tL(0)$, while duality gives
+\[
+ u(x,t)\geq g(x)+t\inf_v[L(v)-K|v|]
+ =g(x)-t\max_{|p|\leq K}H(p).
+\]
+Thus $|u(x,t)-g(x)|\leq Ct$, uniformly in $x$, with
+\[
+ C=\max\{|L(0)|,\max_{|p|\leq K}|H(p)|\}.
+\]
+Apply the same argument to (DP), using the spatial Lipschitz bound
+for $u(\cdot,s)$, to get $|u(x,t)-u(x,s)|\leq C|t-s|$.
+\end{expandedproof}
+
+
+\PDEBodyDiagram{3.3}{Equal minimizing costs can produce a corner in the value.}
+{With $H(p)=p^2/2$, $t=1$ and $g(y)=\max(-|y|,-2)$, the Hopf--Lax cost at $x=0$ has two minimizers $y=\pm1$. Their candidate endpoint slopes $(x-y)/t$ differ. Indeed near $x=0$ the value is $u(x,1)=-1/2-|x|$, so it is not differentiable there.}
+{ch03-hopflax-tie}
+
+\begin{theorem}[PDE at differentiability points; source Theorems 5--6]
+The Hopf--Lax function satisfies $u_t+H(Du)=0$ at every point where
+it is differentiable, hence almost everywhere by Rademacher's theorem.
+\end{theorem}
+\begin{expandedproof}
+At a differentiability point $(x,t)$, (DP) with the competitor $x$
+over a short forward time gives
+$u(x+hv,t+h)\leq hL(v)+u(x,t)$ for every fixed $v$.
+Divide by $h>0$ and pass to zero:
+$u_t+v\cdot Du\leq L(v)$. Supremizing in $v$ yields
+$u_t+H(Du)\leq0$.
+
+For the other sign choose a minimizing $y$ in (HL) at $(x,t)$ and
+put $v_*=(x-y)/t$.
+At time $t-h$, $z=x-hv_*$ lies on the straight minimizing path.
+Using $y$ as competitor there yields
+$u(x,t)-u(z,t-h)\geq hL(v_*)$.
+Differentiability gives $u_t+v_*\cdot Du\geq L(v_*)$.
+Since $H(Du)\geq v_*\cdot Du-L(v_*)$, the reverse sign follows.
+Neither argument differentiates a potentially nonsmooth minimizing
+point $y(x,t)$.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{最小值不一定可微}{多个最优起点可能同时出现，不能直接对 $y(x,t)$ 求导。动态规划用固定竞争者给一侧不等式，再沿一条最优路径给另一侧，避开了这个问题。}
+
+For $H(p)=|p|^2/2$, $L(v)=|v|^2/2$ and
+$u(x,t)=\min_y\{|x-y|^2/(2t)+g(y)\}$.
+At a smooth minimizing branch,
+$(x-y)/t=Dg(y)$, so $x=y+tDg(y)$ and $Du=Dg(y)$,
+recovering the local characteristic formulas.
+When branches compete, the minimum remains meaningful even though
+their smooth projection has broken down.
+
+\input{chapters/03-nonlinear-first-order-pde/03a-semiconcavity-uniqueness}

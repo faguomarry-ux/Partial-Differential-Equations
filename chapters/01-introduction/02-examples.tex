@@ -1,13 +1,201 @@
-% Evans second edition, section 1.2.
-% English source: printed p. 3; PDF page 20 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans second edition, section 1.2, printed pp. 3--6; PDF pages 20--23.
+% Chinese: printed pp. 2--5; PDF pages 20--23.
 \section{Examples}
 \label{sec:1-2}
 
-\PDEPending
+There is no general theory known concerning the solvability of all partial
+differential equations. Such a theory is extremely unlikely to exist, given the
+rich variety of physical, geometric, and probabilistic phenomena which can be
+modeled by PDE. Instead, research focuses on various particular partial
+differential equations that are important for applications within and outside
+of mathematics, with the hope that insight from the origins of these PDE can
+give clues as to their solutions.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+Following is a list of many specific partial differential equations of interest
+in current research. This listing is intended merely to familiarize the reader
+with the names and forms of various famous PDE. To display most clearly the
+mathematical structure of these equations, we have mostly set relevant physical
+constants to unity. We will later discuss the origin and interpretation of many
+of these PDE.
+
+Throughout $x\in U$, where $U$ is an open subset of $\R^n$, and $t\geq0$.
+Also $Du=D_xu=(u_{x_1},\ldots,u_{x_n})$ denotes the gradient of $u$ with
+respect to the spatial variable $x=(x_1,\ldots,x_n)$. The variable $t$ always
+denotes time.
+
+\subsection{Single partial differential equations}
+\subsubsection*{a. Linear equations}
+\begin{enumerate}
+\item Laplace's equation
+\[ \Delta u=\sum_{i=1}^n u_{x_ix_i}=0. \]
+\item Helmholtz's (or eigenvalue) equation
+\[ -\Delta u=\lambda u. \]
+\item Linear transport equation
+\[ u_t+\sum_{i=1}^n b^iu_{x_i}=0. \]
+\item Liouville's equation
+\[ u_t+\sum_{i=1}^n(b^iu)_{x_i}=0. \]
+\end{enumerate}
+\par\Needspace{65mm}
+\PDEAnnotation{随流不变与质量守恒}{输运方程沿 $\dot X=b(X,t)$ 保持 $u(X(t),t)$ 不变。
+Liouville 方程展开后多出 $(\operatorname{div}b)u$，描述密度随体积伸缩而变。
+只有 $\operatorname{div}b=0$ 时两式一致。}
+\begin{enumerate}[resume]
+\item Heat (or diffusion) equation
+\[ u_t-\Delta u=0. \]
+\item Schrödinger's equation
+\[ \mathrm i u_t+\Delta u=0. \]
+\item Kolmogorov's equation
+\[ u_t-\sum_{i,j=1}^n a^{ij}u_{x_ix_j}+\sum_{i=1}^n b^iu_{x_i}=0. \]
+\item Fokker--Planck equation
+\[ u_t-\sum_{i,j=1}^n(a^{ij}u)_{x_ix_j}-\sum_{i=1}^n(b^iu)_{x_i}=0. \]
+\end{enumerate}
+\par\Needspace{65mm}
+\PDEAnnotation{算子与形式伴随}{令 $L=a^{ij}\partial_{ij}-b^i\partial_i$（重复指标求和）。
+分部积分给出 $L^*\rho=\partial_{ij}(a^{ij}\rho)+\partial_i(b^i\rho)$。
+两式分别为 $u_t=Lu$ 与 $\rho_t=L^*\rho$，漂移项符号因此不同。}
+\begin{enumerate}[resume]
+\item Wave equation
+\[ u_{tt}-\Delta u=0. \]
+\item Klein--Gordon equation
+\[ u_{tt}-\Delta u+m^2u=0. \]
+\item Telegraph equation
+\[ u_{tt}+2du_t-u_{xx}=0. \]
+\par\Needspace{65mm}
+\PDEAnnotation{阶数与时间初值}{热方程、波方程都是二阶 PDE，但前者时间一阶，
+后者时间二阶，通常分别需给 $u(0)$ 与 $(u(0),u_t(0))$。
+梁方程总阶数为四、时间阶数为二；总阶数不能直接决定初值个数。}
+\item General wave equation
+\[ u_{tt}-\sum_{i,j=1}^n a^{ij}u_{x_ix_j}+\sum_{i=1}^n b^iu_{x_i}=0. \]
+\item Airy's equation
+\[ u_t+u_{xxx}=0. \]
+\item Beam equation
+\[ u_{tt}+u_{xxxx}=0. \]
+\end{enumerate}
+
+\subsubsection*{b. Nonlinear equations}
+\begin{enumerate}
+\item Eikonal equation
+\[ |Du|=1. \]
+\item Nonlinear Poisson equation
+\[ -\Delta u=f(u). \]
+\item $p$-Laplacian equation
+\[ \operatorname{div}(|Du|^{p-2}Du)=0. \]
+\item Minimal surface equation
+\[ \operatorname{div}\left(\frac{Du}{(1+|Du|^2)^{1/2}}\right)=0. \]
+\item Monge--Ampère equation
+\[ \det(D^2u)=f. \]
+\end{enumerate}
+\par\Needspace{65mm}
+\PDEAnnotation{退化与奇异}{对 $p$-Laplacian，$p>2$ 时主部在 $Du=0$ 退化；
+$1<p<2$ 时其线性化系数在那里奇异。散度形式及相应弱形式仍有意义，
+不能把只在 $Du\ne0$ 合法的展开直接用于临界点。}
+\begin{enumerate}[resume]
+\item Hamilton--Jacobi equation
+\[ u_t+H(Du,x)=0. \]
+\item Scalar conservation law
+\[ u_t+\operatorname{div}\mathbf F(u)=0. \]
+\item Inviscid Burgers' equation
+\[ u_t+uu_x=0. \]
+\item Scalar reaction-diffusion equation
+\[ u_t-\Delta u=f(u). \]
+\item Porous medium equation
+\[ u_t-\Delta(u^\gamma)=0. \]
+\end{enumerate}
+\par\Needspace{65mm}
+\PDEAnnotation{多孔介质的扩散系数}{在 $u>0$ 的光滑区，
+$\Delta(u^\gamma)=\gamma u^{\gamma-1}\Delta u+
+\gamma(\gamma-1)u^{\gamma-2}|Du|^2$。
+通常取 $\gamma>1,u\geq0$，主部在 $u=0$ 退化；$0<\gamma<1$ 对应快扩散情形。}
+\begin{enumerate}[resume]
+\item Nonlinear wave equation
+\[ u_{tt}-\Delta u+f(u)=0. \]
+\item Korteweg--deVries (KdV) equation
+\[ u_t+uu_x+u_{xxx}=0. \]
+\item Nonlinear Schrödinger equation
+\[ \mathrm i u_t+\Delta u=f(|u|^2)u. \]
+\end{enumerate}
+
+\subsection{Systems of partial differential equations}
+\subsubsection*{a. Linear systems}
+\begin{enumerate}
+\item Equilibrium equations of linear elasticity
+\[ \mu\Delta\mathbf u+(\lambda+\mu)D(\operatorname{div}\mathbf u)=\mathbf0. \]
+\item Evolution equations of linear elasticity
+\[ \mathbf u_{tt}-\mu\Delta\mathbf u
+ -(\lambda+\mu)D(\operatorname{div}\mathbf u)=\mathbf0. \]
+\item Maxwell's equations
+\[
+ \begin{cases}
+ \mathbf E_t=\operatorname{curl}\mathbf B,\\
+ \mathbf B_t=-\operatorname{curl}\mathbf E,\\
+ \operatorname{div}\mathbf B=\operatorname{div}\mathbf E=0.
+ \end{cases}
+\]
+\end{enumerate}
+\par\Needspace{65mm}
+\PDEAnnotation{约束的传播}{真空 Maxwell 系统中，
+$\partial_t\operatorname{div}\mathbf E=0$、
+$\partial_t\operatorname{div}\mathbf B=0$，因为散度作用于旋度为零。
+散度条件是初值必须满足且由演化保持的约束，不能视作任意额外数据。}
+
+\subsubsection*{b. Nonlinear systems}
+\begin{enumerate}
+\item System of conservation laws
+\[ \mathbf u_t+\operatorname{div}\mathbf F(\mathbf u)=\mathbf0. \]
+\item Reaction-diffusion system
+\[ \mathbf u_t-\Delta\mathbf u=\mathbf f(\mathbf u). \]
+\item Euler's equations for incompressible, inviscid flow
+\[
+ \begin{cases}
+ \mathbf u_t+\mathbf u\cdot D\mathbf u=-Dp,\\
+ \operatorname{div}\mathbf u=0.
+ \end{cases}
+\]
+\item Navier--Stokes equations for incompressible, viscous flow
+\[
+ \begin{cases}
+ \mathbf u_t+\mathbf u\cdot D\mathbf u-\Delta\mathbf u=-Dp,\\
+ \operatorname{div}\mathbf u=0.
+ \end{cases}
+\]
+\end{enumerate}
+\par\Needspace{65mm}
+\PDEAnnotation{压力是约束乘子}{对光滑不可压流取散度，得到
+$-\Delta p=\sum_{i,j}(\partial_i u^j)(\partial_j u^i)$。
+压力由速度及边界条件耦合确定；没有独立的压力演化方程。
+仅看速度的扩散项会漏掉这一非局部约束。}
+
+See Zwillinger [Zw] for a much more extensive listing of interesting PDE.
+
+
+\PDEBodyDiagram{1.2}{Three evolution mechanisms.}
+{Dashed curves are initial profiles and solid curves are later profiles. Transport translates a shape; heat spreads a Gaussian while preserving its integral; the one-dimensional wave equation with zero initial velocity splits a profile into two half-amplitude translates. The panel axes are schematic and use separate scales.}
+{ch01-models}
+
+\subsection*{Editorial supplement: two principal-part calculations}
+For $1<p<\infty$ and a $C^2$ function at a point where $Du\ne0$, the
+chain rule gives
+\begin{align*}
+ \operatorname{div}(|Du|^{p-2}Du)
+ &=\sum_{i,j=1}^n A_{ij}(Du)u_{x_ix_j},\\
+ A(q)&=|q|^{p-2}\left(I+(p-2)\frac{q\otimes q}{|q|^2}\right).
+\end{align*}
+The eigenvalue in the direction of $q$ is $(p-1)|q|^{p-2}$; in every
+orthogonal direction it is $|q|^{p-2}$. This proves ellipticity at $q\ne0$
+and explains its failure to be uniform as $|q|\to0$ or $|q|\to\infty$
+when $p\ne2$. At $p=2$ the equation is exactly Laplace's equation.
+
+Similarly, the minimal surface equation expands as
+\[
+ \frac1{\sqrt{1+|Du|^2}}
+ \sum_{i,j=1}^n\left(\delta_{ij}-\frac{u_{x_i}u_{x_j}}{1+|Du|^2}\right)
+ u_{x_ix_j}=0.
+\]
+The matrix in parentheses has eigenvalues $1$ transverse to $Du$ and
+$(1+|Du|^2)^{-1}$ parallel to $Du$. Thus it is positive definite for each
+finite gradient, and a bound on $|Du|$ supplies a uniform ellipticity bound.
+Both calculations exhibit quasilinear second-order equations.
+\par\Needspace{65mm}
+\PDEAnnotation{Monge--Ampère 的分支}{当 $n\geq2$，行列式非线性地依赖 Hessian。
+在 $D^2u$ 正定的凸解分支上，线性化系数为正定的余子式矩阵。
+离开该分支，椭圆性没有保证；仅写 $\det D^2u=f$ 还不足以指定椭圆问题。}

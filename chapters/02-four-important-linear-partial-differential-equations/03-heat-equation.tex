@@ -1,13 +1,236 @@
 % Evans second edition, section 2.3.
 % English source: printed p. 42; PDF page 59 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked from chapter opening, PDF 31; mean-value pages checked at PDF 36-37 and 53-55.
+% Status: editorial study draft with reconstructed proofs and mathematical annotations.
 \section{Heat Equation}
 \label{sec:2-3}
 
-\PDEPending
+\subsection{The Gaussian kernel and Duhamel (Evans \S2.3.1)}
+Heat balance with unit diffusivity is $u_t=\Delta u$.
+The scaling $x\mapsto\lambda x$, $t\mapsto\lambda^2t$ suggests a
+mass-preserving kernel $t^{-n/2}F(x/\sqrt t)$.
+Substitution gives
+$\Delta F+\frac12 z\cdot DF+\frac n2 F=0$.
+Taking $F(z)=C e^{-|z|^2/4}$ satisfies this equation; the product of
+one-dimensional Gaussian integrals fixes $C=(4\pi)^{-n/2}$.
+Thus
+\[
+ K(x,t)=(4\pi t)^{-n/2}e^{-|x|^2/(4t)}\quad(t>0),
+ \qquad K=0\quad(t\leq0).
+\]
+The value at the single point $(0,0)$ is interpreted distributionally.
+Direct differentiation verifies
+\[
+ K_t=\left(-\frac n{2t}+\frac{|x|^2}{4t^2}\right)K,\qquad
+ \Delta K=\left(-\frac n{2t}+\frac{|x|^2}{4t^2}\right)K.
+\]
+Also $K>0$, $\int K(x,t)\,dx=1$, and
+$\int_{|x|>\delta}K(x,t)\,dx\to0$ as $t\downarrow0$.
+The last assertion follows from $x=\sqrt t\,z$ and the integrable
+Gaussian tail.
+\Needspace{45mm}
+\PDEAnnotation{抛物缩放为何是平方}{空间二阶导数缩放为 $\lambda^2$，时间一阶导数也必须缩放为 $\lambda^2$ 才保持方程。热球的高度因此正比 $r^2$，不是 $r$。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\begin{theorem}[Source Theorem 1]
+For bounded continuous $g$,
+\[
+ u(x,t)=\int_{\R^n}K(x-y,t)g(y)\,dy
+\]
+is smooth for $t>0$, solves the heat equation, and tends to $g(x_0)$
+as $(x,t)\to(x_0,0)$.
+\end{theorem}
+\begin{expandedproof}
+On compact subsets of $t>0$, every kernel derivative is a polynomial
+times a Gaussian with an integrable uniform majorant.
+Differentiate under the integral and use $K_t=\Delta K$.
+For initial convergence use mass one:
+\[
+ u(x,t)-g(x_0)=\int K(x-y,t)[g(y)-g(x_0)]\,dy.
+\]
+Given $\varepsilon>0$, continuity makes the bracket smaller than
+$\varepsilon$ for $|y-x_0|<\delta$. For $|x-x_0|<\delta/2$, the far
+part is bounded by $2\|g\|_\infty$ times a Gaussian tail outside
+$B_{\delta/2}(x)$, which tends to zero. This proves the joint limit.
+Completing the square in a product of two Gaussians gives
+$K_t*K_s=K_{t+s}$, the semigroup law.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{瞬时传播不等于大量传播}{$K(x,t)>0$ 对任意 $x$、$t>0$ 成立，所以非零非负初值立即在全空间产生正值；远处的影响可极小，但不是严格为零。}
+
+For a time-dependent source with zero initial data, Duhamel gives
+\[
+ v(x,t)=\int_0^t(K_{t-s}*f(\cdot,s))(x)\,ds.
+\]
+For example assume $f$ is smooth on the time interval, with uniformly
+compact spatial support and bounded indicated derivatives.
+Change to $\tau=t-s$ if needed to keep differentiations away from
+the singular upper endpoint. Moving spatial derivatives to $f$ gives
+\[
+ v_t=f(x,t)+\int_0^tK_{t-s}*\Delta f(\cdot,s)\,ds,\qquad
+ \Delta v=\int_0^tK_{t-s}*\Delta f(\cdot,s)\,ds.
+\]
+The endpoint term uses $K_\varepsilon*f(\cdot,t)\to f(\cdot,t)$.
+The bounds on $f,D^2f$ provide domination, proving $Lv=f$ and
+$v(\cdot,0)=0$.
+Adding $K_t*g$ solves the full initial-value problem
+(source Theorem 2). We use these explicit smoothness assumptions
+rather than claim that arbitrary continuous forcing gives classical
+second derivatives without further justification.
+
+\input{chapters/02-four-important-linear-partial-differential-equations/03a-heatball-mean-value}
+
+\subsection{Maximum principles and regularity (Evans \S2.3.3)}
+Write $U_T=U\times(0,T]$ and
+$\Gamma_T=(\overline U\times\{0\})\cup(\partial U\times[0,T])$.
+The top $U\times\{T\}$ is not part of this parabolic boundary.
+
+\begin{theorem}[Source Theorems 4--5]
+On bounded $U$, a continuous classical solution satisfies
+$\max_{\overline U_T}u=\max_{\Gamma_T}u$.
+If $U$ is connected and the global maximum occurs at $(x_0,t_0)$
+with $x_0\in U$, $t_0>0$, then $u$ is constant on
+$\overline U\times[0,t_0]$.
+The initial-boundary problem has at most one classical solution for
+given forcing and parabolic boundary data.
+\end{theorem}
+\begin{expandedproof}
+For the weak maximum assertion set $v=u-\varepsilon t$.
+At a maximum in $U_T$, including the terminal time, the left time
+derivative is nonnegative and the spatial Laplacian is nonpositive.
+Thus $Lv\geq0$, contradicting $Lv=-\varepsilon$.
+A maximum must lie on $\Gamma_T$. Let $\varepsilon\downarrow0$.
+
+For the strong assertion put $M=\max u$.
+The heat-ball mean at an interior maximum averages $u\leq M$ against
+a probability density strictly positive except on a negligible axis.
+Equality forces $u=M$ almost everywhere in the heat ball; continuity
+makes it equal everywhere. This propagates equality backward locally.
+
+To reach a distant past point, use a polygonal spatial path in $U$
+and assign strictly decreasing times to its finitely many vertices.
+A small backward portion of each space-time line lies in a heat ball
+about its later endpoint: the spatial displacement is $O(\tau)$,
+whereas the heat-ball radius is of order
+$\sqrt{\tau\log(1/\tau)}$, which is larger for small $\tau$.
+On each segment the earliest time of an already-constant terminal
+portion is attained by continuity. If it were not the segment's
+earliest endpoint, a small heat ball would extend it, a contradiction.
+Propagate through the finite chain. Every earlier interior point
+therefore has value $M$; continuity reaches time zero and the boundary.
+Finally apply the weak principle to both signs of the difference
+of two solutions for uniqueness.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{强最大值结论只向过去}{内部时刻 $t_0$ 达到全局最大值，会强迫此前恒定；不自动强迫此后恒定。边界条件在未来改变时，解也可以随后改变。}
+
+\paragraph{Whole-space uniqueness needs a growth class (source 6--7).}
+Suppose $Lu\leq0$, $u(\cdot,0)\leq0$ and
+$u(x,t)\leq A e^{a|x|^2}$ for $0\leq t\leq T$.
+Choose $b>a$ and the positive caloric barrier
+\[
+ V(x,t)=(1-4bt)^{-n/2}
+                 \exp\left(\frac{b|x|^2}{1-4bt}\right)
+ \quad(0\leq t<1/(4b)).
+\]
+Its PDE follows from direct Gaussian-type differentiation.
+For fixed $\varepsilon>0$, $u-\varepsilon V<0$ on the lateral
+boundary of a sufficiently large ball, uniformly on a shorter interval
+$[0,\delta]$, $\delta<1/(4b)$; the exponent $b>a$ ensures domination.
+Its initial values are nonpositive. The bounded-cylinder principle
+gives $u\leq\varepsilon V$. Let the radius tend to infinity, then
+$\varepsilon\downarrow0$. Repeat on consecutive time intervals of
+length $\delta$, using the same growth bound, to cover $[0,T]$.
+This proves the whole-space maximum principle and, for
+$|u-\widetilde u|\leq A e^{a|x|^2}$, uniqueness.
+Without a growth restriction the source discusses nonphysical
+zero-initial-data solutions; this draft does not use their existence
+as a substitute for specifying a uniqueness class.
+
+\paragraph{Interior smoothing and derivative estimates (source 8--9).}
+For a backward cylinder
+$Q_r=B_r(x_0)\times(t_0-r^2,t_0]$ inside the domain,
+choose a smooth cutoff $\zeta$ equal to one on $Q_{3r/4}$,
+vanishing near the bottom and lateral boundary of $Q_r$.
+Then
+\[
+ L(\zeta u)=(\zeta_s-\Delta\zeta)u-2D\zeta\cdot Du.
+\]
+Duhamel and spatial integration by parts in the last term yield,
+on $Q_{r/2}$,
+\[
+ \begin{split}
+ u(x,t)=\iint_{Q_r}\bigl[
+ &K(x-y,t-s)(\zeta_s+\Delta\zeta)(y,s)\\
+ &+2D_yK(x-y,t-s)\cdot D\zeta(y,s)
+ \bigr]u(y,s)\,dy\,ds.
+ \end{split}
+ \tag{C}
+\]
+Set the kernel to zero for $s\geq t$.
+Where cutoff derivatives do not vanish, either $t-s$ stays separated
+from zero or $|x-y|$ stays separated from zero.
+In the latter case every derivative of the Gaussian tends to zero
+faster than any power as $s\uparrow t$.
+Thus the combined kernel in (C) is smooth with bounded derivatives
+on the relevant compact sets, despite the original fundamental
+solution's singularity. A preliminary local convolution proves (C)
+for merely $C^{2,1}$ functions, then passes to the limit.
+Differentiating (C) now gives $u\in C^\infty$ locally.
+
+On a unit cylinder, its kernel derivatives are bounded by constants
+$C_{\alpha,l}$. Rescale $v(z,\tau)=u(x_0+rz,t_0+r^2\tau)$ to obtain
+\[
+ \sup_{Q_{r/2}}|D_x^\alpha\partial_t^l u|
+ \leq C_{\alpha,l,n}r^{-n-2-|\alpha|-2l}
+                          \|u\|_{L^1(Q_r)} .
+\]
+One time derivative costs two powers of spatial scale.
+For completeness, spatial analyticity can also be read from (C), using
+the elementary complex-analytic parameter-integral theorem and Cauchy
+estimates as additional prerequisites. Fix a time and replace the spatial
+variable by $z=x+iv$ in the Gaussian, using the polynomial
+$\sum_j(z_j-y_j)^2$ in its exponent. Where $t-s$ is small and cutoff
+derivatives are nonzero, $|x-y|$ is bounded below by some $d>0$.
+For $|v|<d/2$ the real part of that polynomial remains positive,
+bounded below by a fixed multiple of $d^2$.
+The resulting Gaussian and its spatial derivatives have an integrable
+bound uniform on a small complex neighborhood.
+Where $t-s$ is bounded below there is no singularity at all.
+Thus (C) extends holomorphically in $z$ near every interior spatial point.
+Cauchy's formula supplies factorial derivative bounds, proving real
+analyticity in space. This argument says nothing comparable about
+analyticity in time; smoothness alone does not establish that.
+\Needspace{45mm}
+\PDEAnnotation{切断函数移走奇点}{把导数转移给核后，核奇点附近的切断导数全为零；远离空间中心时高斯又快速衰减。因此才可任意多次求导，而不是直接对奇异积分硬求导。}
+
+\subsection{Energy and backward uniqueness (Evans \S2.3.4, source 10--11)}
+Let $w$ be the difference of two sufficiently smooth solutions with
+the same lateral boundary values. Then $w=0$ on $\partial U$ and
+\[
+ \frac12\frac d{dt}\int_Uw^2
+ =\int_Uw\Delta w=-\int_U|Dw|^2.
+\]
+Zero initial difference gives zero energy at every later time.
+This proves forward uniqueness and displays dissipation.
+
+Backward uniqueness requires more than this decreasing-energy identity.
+Assume enough boundary and mixed derivative regularity for the next
+identities (smooth solutions up to the closed cylinder suffice).
+Set $e(t)=\int_Uw^2$. Since $w_t=0$ on the fixed lateral boundary,
+\[
+ e'=-2\int|Dw|^2,\qquad
+ e''=-4\int Dw\cdot Dw_t=4\int(\Delta w)^2.
+\]
+Cauchy--Schwarz in $\int|Dw|^2=-\int w\Delta w$ gives
+$(e')^2\leq ee''$. Wherever $e>0$, this means
+$(\log e)''\geq0$.
+If $e$ were positive at $t_1$ and first vanished at $t_2\leq T$,
+convexity on $[t_1,t_2)$ would give, for $0<\theta<1$ and $b<t_2$,
+\[
+ e((1-\theta)t_1+\theta b)
+ \leq e(t_1)^{1-\theta}e(b)^\theta .
+\]
+Let $b\uparrow t_2$. The right side vanishes, contradicting positivity
+at the earlier interior time. Thus $e(T)=0$ forces $e\equiv0$.
+\Needspace{45mm}
+\PDEAnnotation{逆向唯一不等于逆向稳定}{知道最终状态可唯一确定过去，不代表微小最终误差只造成微小过去误差。热方程高频逆向增长仍会导致严重不稳定，第一章的例子依然适用。}

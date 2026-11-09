@@ -1,14 +1,34 @@
-% Source: English Chapter 4, printed p. 159, PDF page 176.
+% Source: Evans, Chapter 4, printed pp. 159--236; PDF pp. 176--253.
 \chapter[Other Ways to Represent Solutions]{Other Ways to\\Represent Solutions}
 \label{chap:other-ways-to-represent-solutions}
-
 \PDESource
-  {Chapter 4; printed p.~159; PDF page~176}
-  {中译本对应章：解的其他表示方法，书内第 111 页起。}
+ {Chapter 4; printed pp.~159--236; PDF pp.~176--253}
+ {中译本：第四章，书内第 111 页起；章首页 PDF 第 129 页。}
+\noindent\emph{Editorial study edition.}
+This chapter reconstructs the source exposition, not its wording.
+Source theorem identifiers are stated separately from our numbering.
+Detailed proofs, Chinese mathematical annotations, exercise solutions
+and figures are editorial additions.
 
-\noindent\textbf{Status: outline only / 目录骨架。}
-English exposition, Chinese margin notes, and expanded proofs will be added section by section.
-
+The organizing question is how a PDE can be represented by simpler objects:
+\[
+ \begin{gathered}
+ \text{modes and profiles}\ \longrightarrow\ \text{integral transforms},\\
+ \text{changes of unknown}\ \longrightarrow\ \text{asymptotics and power series}.
+ \end{gathered}
+\]
+\Needspace{45mm}
+\PDEAnnotation{表示公式还需要合法性}{猜到一个形式不等于已经解决问题。接着要检查初边值、可逆性、级数或积分的收敛，以及能否逐项求导；渐近展开还需另估余项。}
+\paragraph{Reading conventions.}
+Fourier transforms use the unitary normalization $(2\pi)^{-n/2}$.
+The diffusion exponent is denoted by $m$ to distinguish it from
+multiindices. A formal asymptotic calculation is identified explicitly;
+its conclusion is not promoted to an unconditional convergence theorem.
+We invoke standard integration, ODE theory, implicit and inverse function
+theorems, and elementary complex analysis. Spectral completeness and
+elliptic solvability are identified where used, rather than proved by
+writing a series. Sobolev terminology is available in Chapter~5.
+\clearpage
 \input{chapters/04-other-ways-to-represent-solutions/01-separation-of-variables}
 \input{chapters/04-other-ways-to-represent-solutions/02-similarity-solutions}
 \input{chapters/04-other-ways-to-represent-solutions/03-transform-methods}

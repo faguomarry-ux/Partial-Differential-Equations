@@ -1,13 +1,236 @@
 % Evans second edition, section 5.8.
 % English source: printed p. 273; PDF page 290 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked against the chapter opening on PDF page 187; see docs/CHAPTER-05.md.
+% Status: editorial study draft; expanded proofs and Chinese mathematical annotations.
 \section{Additional Topics}
 \label{sec:5-8}
 
-\PDEPending
+\subsection{Poincaré inequalities (Evans \S5.8.1, Theorems 1--2)}
+\begin{lemma}[Zero gradient means constant]\label{lem:5-constant}
+If $U$ is connected and $u\in W^{1,1}_{\mathrm{loc}}(U)$ satisfies
+$Du=0$, then $u$ is constant almost everywhere.
+\end{lemma}
+\begin{expandedproof}[also source Problem 11]
+On a ball compactly contained in $U$, mollification has zero classical
+gradient on each smaller concentric ball and is constant there.
+As $\varepsilon\to0$ it converges in $L^1$; the constants converge to
+the average of $u$ on the smaller ball. Hence $u$ is constant there
+almost everywhere. Constants agree on overlapping balls, because the
+overlap has positive measure. Any two points in an open connected
+subset of $\R^n$ can be joined by a finite chain of such balls:
+the set of points reachable from a fixed ball is both relatively open
+and relatively closed. Connectedness completes the proof.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{连通性不可删}{在两个不相交的球上分别取常数 $0$ 和 $1$，梯度仍处处为零，却不是同一个常数。均值型 Poincaré 必须排除这种情况。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\begin{theorem}\label{thm:5-poincare}
+On a bounded connected $C^1$ domain, for $1\leq p\leq\infty$,
+\[
+ \|u-u_U\|_{L^p(U)}\leq C_{U,n,p}\|Du\|_{L^p(U)},\qquad
+ u_U=|U|^{-1}\int_Uu.
+\]
+On a ball $B_r$ the constant is $C_{n,p}r$.
+\end{theorem}
+\begin{expandedproof}
+If the inequality failed, normalization would give
+\[
+ (v_j)_U=0,\quad\|v_j\|_p=1,\quad\|Dv_j\|_p<1/j.
+\]
+For finite $p$, compactness gives a subsequence converging strongly
+in $L^p$ to $v$; for $p=\infty$, use the uniform compactness just proved.
+The mean and norm pass to the limit, giving $v_U=0$ and $\|v\|_p=1$.
+Testing the weak derivative identity and passing to the limit gives
+$Dv=0$. Lemma~\ref{lem:5-constant} makes $v$ constant, and its zero
+mean makes it zero, a contradiction.
+For $B_r(x_0)$ use $w(y)=u(x_0+ry)$:
+the function norm scales by $r^{-n/p}$ and the gradient norm by
+$r^{1-n/p}$, leaving precisely one factor $r$.
+\end{expandedproof}
+
+For $u\in W^{1,n}(\R^n)$, $n\geq2$, the $p=1$ ball estimate and H\"older give
+\[
+ \frac1{|B_r|}\int_{B_r}|u-u_{B_r}|
+ \leq Cr\frac1{|B_r|}\int_{B_r}|Du|
+ \leq C\|Du\|_{L^n(\R^n)}.
+\]
+Thus $W^{1,n}$ controls bounded mean oscillation (BMO), whose seminorm
+is the supremum of the left side over balls. BMO controls average
+oscillation rather than pointwise size.
+\Needspace{45mm}
+\PDEAnnotation{消掉常数的两种方式}{零迹型要求 $Tu=0$；均值型减去 $u_U$。二者都排除梯度算子的常数核，但适用条件和边界信息不同。}
+
+\subsection{Difference quotients (Evans \S5.8.2, Theorem 3)}
+For $h\ne0$ define
+\[
+ D_i^hu(x)=\frac{u(x+he_i)-u(x)}h.
+\]
+\begin{theorem}\label{thm:5-difference}
+If $u\in W^{1,p}(U)$, $V\Subset U$, and
+$|h|<\frac12\operatorname{dist}(V,\partial U)$, then
+$\|D_i^hu\|_{L^p(V)}\leq\|\partial_i u\|_{L^p(U)}$ for finite $p$.
+Conversely, if $1<p<\infty$, $u\in L^p(U)$, and all these quotients
+are uniformly bounded in $L^p(V)$ for every coordinate, then
+$u\in W^{1,p}(V)$, with the corresponding derivative bounds.
+\end{theorem}
+\begin{expandedproof}
+For smooth $u$,
+$D_i^hu(x)=\int_0^1\partial_i u(x+the_i)\,dt$.
+Jensen and Fubini give
+\[
+ \int_V|D_i^hu|^p
+ \leq\int_0^1\int_V|\partial_i u(x+the_i)|^p\,dx\,dt
+ \leq\int_U|\partial_i u|^p.
+\]
+Interior approximation on a slightly larger set passes this to $u$.
+
+For the converse, choose $h_j\to0$. Reflexivity of $L^p(V)$ gives,
+after a finite diagonal extraction over coordinates,
+$D_i^{h_j}u\rightharpoonup g_i$ in $L^p(V)$.
+For a test function $\phi$ and small $h$ a change of variables yields
+\[
+ \int D_i^hu\,\phi=-\int uD_i^{-h}\phi.
+\]
+There are no edge terms because the test support and its translates
+stay inside $V$. Since $D_i^{-h}\phi\to\partial_i\phi$ uniformly on
+a common compact support, the right side tends to
+$-\int u\partial_i\phi$. The left side tends weakly to $\int g_i\phi$.
+Thus $g_i=\partial_i u$. Weak lower semicontinuity proves the norm bound.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{$p=1$ 的反向结论失效}{阶跃函数的差商高度为 $1/|h|$、支集宽约 $|h|$，故 $L^1$ 范数有界；极限却是 Dirac 质量。$L^1$ 有界不保证弱子列极限仍是函数。}
+
+For finite $p$, one also has $D_i^hu\to\partial_i u$ strongly on
+interior sets: subtract the derivative in the line-average formula
+and use $L^p$ translation continuity. This gives a practical way to
+recognize weak derivatives in elliptic regularity estimates.
+
+\subsection{Lipschitz functions (Evans \S5.8.2, Theorem 4)}
+Locally, $W^{1,\infty}$ functions have Lipschitz representatives, by
+smoothing on balls and using the gradient bound on segments.
+Conversely an $L$-Lipschitz function has bounded difference quotients.
+On a relatively compact ball, extract weak limits in $L^2$.
+The weak identity above gives weak derivatives; the limit still satisfies
+$|g_i|\leq L$ almost everywhere, since the closed convex set
+$\{g:|g|\leq L\}$ is weakly closed in $L^2$.
+This identifies locally bounded weak derivatives without appealing
+to Rademacher's theorem.
+
+On bounded $C^1$ domains the extension theorem gives a global Lipschitz
+representative for $W^{1,\infty}(U)$, with constant controlled by the
+full $W^{1,\infty}$ norm. Global Lipschitz continuity need not follow
+on arbitrary domains: points across a narrow slit can be very close
+in Euclidean distance but far apart along paths inside the domain.
+\Needspace{45mm}
+\PDEAnnotation{避免循环证明}{先由差商得到 Lipschitz 函数的弱导数，再由 Morrey 和微分定理证明几乎处处可微。若先引用 Rademacher 来构造弱导数，又用它证明 Rademacher，就循环了。}
+
+\subsection{Differentiability a.e. (Evans \S5.8.3, Theorems 5--6)}
+\begin{theorem}
+For $p>n$, a function $u\in W^{1,p}_{\mathrm{loc}}(U)$, identified with
+its continuous representative, is differentiable almost everywhere,
+and its classical gradient equals its weak gradient there.
+Every locally Lipschitz function is therefore differentiable a.e.
+\end{theorem}
+\begin{expandedproof}
+First let $n<p<\infty$. The $L^p$ version of the Lebesgue differentiation
+theorem, invoked here, says that for almost every $x$,
+\[
+ \frac1{|B_r|}\int_{B_r(x)}|Du(z)-Du(x)|^p\,dz\to0.
+\]
+Fix such an $x$ and put
+$v(z)=u(z)-u(x)-Du(x)\cdot(z-x)$.
+For $r=|y-x|$ small enough that $B(x,2r)\Subset U$, the local Morrey
+estimate gives
+\[
+ \begin{split}
+ |v(y)-v(x)|
+ &\leq C r^{1-n/p}
+       \left(\int_{B(x,2r)}|Du(z)-Du(x)|^p\,dz\right)^{1/p}\\
+ &=Cr\left(\frac1{|B_{2r}|}
+       \int_{B(x,2r)}|Du(z)-Du(x)|^p\,dz\right)^{1/p}
+ =o(r).
+ \end{split}
+\]
+This is precisely differentiability with derivative $Du(x)$.
+For $p=\infty$, work locally with any finite exponent greater than $n$.
+A locally Lipschitz function belongs locally to $W^{1,\infty}$ by the
+preceding argument, proving Rademacher's theorem as a consequence.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{可微比 H\"older 更强}{Morrey 单独给出 $O(r^{1-n/p})$。减去候选线性项后，梯度的局部平均误差趋零，才把余项改善为 $o(r)$。}
+
+\subsection{Hardy's inequality (Evans \S5.8.4, Theorem 7)}
+\begin{theorem}
+If $n\geq3$ and $u\in H^1(B_r)$, then
+\[
+ \int_{B_r}\frac{|u|^2}{|x|^2}\,dx
+ \leq C_n\int_{B_r}\left(|Du|^2+r^{-2}|u|^2\right)\,dx.
+\]
+\end{theorem}
+\begin{expandedproof}
+Start with $u$ smooth on $\overline B_r$ and set
+$X=x/|x|^2$, so $\operatorname{div}X=(n-2)/|x|^2$.
+Apply the divergence theorem on $B_r\setminus\overline B_\varepsilon$.
+The inner boundary term is $O(\varepsilon^{n-2})$ and tends to zero.
+With $I=\int_{B_r}u^2/|x|^2$ and $A=\|Du\|_2$, the result is
+\[
+ (n-2)I=r^{-1}\int_{\partial B_r}u^2\,dS
+             -2\int_{B_r}u\,Du\cdot\frac{x}{|x|^2}.
+\]
+Cauchy--Schwarz and Young yield
+$I\leq C_n A^2+C_n r^{-1}\int_{\partial B_r}u^2$.
+To control the last term, apply divergence to $xu^2$:
+\[
+ r\int_{\partial B_r}u^2
+ =\int_{B_r}(nu^2+2u\,x\cdot Du)
+ \leq C_n\int_{B_r}(u^2+r^2|Du|^2).
+\]
+Combine the estimates. For general $u$, use smooth boundary
+approximation. Applying the estimate to differences shows $u_j/|x|$
+is Cauchy in $L^2$. An a.e. convergent subsequence identifies its limit
+with $u/|x|$, and the bound passes to the limit.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{奇点与边界都要处理}{不能直接在含原点的球上对奇异向量场用散度定理；先挖去小球再估内边界项。外边界项不为零，所以一般球域估计保留 $r^{-2}\|u\|_2^2$。}
+
+\subsection{Fourier characterization (Evans \S5.8.5, Theorem 8)}
+Use the unitary convention
+$\widehat u(\xi)=(2\pi)^{-n/2}\int e^{-ix\cdot\xi}u(x)\,dx$.
+For integer $k\geq0$,
+\[
+ u\in H^k(\R^n)\iff
+ (1+|\xi|^2)^{k/2}\widehat u\in L^2(\R^n),
+ \]
+ \[
+ \|u\|_{H^k}\asymp
+ \|(1+|\xi|^2)^{k/2}\widehat u\|_2 .
+\]
+\begin{expandedproof}
+For compactly supported smooth functions integration by parts gives
+$\widehat{D^\alpha u}=(i\xi)^\alpha\widehat u$.
+Whole-space cutoff and convolution approximate every $H^k$ function
+by such functions. Plancherel and passage to the $L^2$ limit preserve
+the identity. Also
+\[
+ c_{n,k}(1+|\xi|^2)^k
+ \leq\sum_{|\alpha|\leq k}|\xi^\alpha|^2
+ \leq C_{n,k}(1+|\xi|^2)^k.
+\]
+This follows by the multinomial expansion of
+$(1+\xi_1^2+\cdots+\xi_n^2)^k$ and comparison of its finitely many
+positive coefficients. It proves the forward bound.
+Conversely, the weighted condition makes
+$g_\alpha=\mathcal F^{-1}((i\xi)^\alpha\widehat u)$ an $L^2$ function.
+Plancherel against test functions gives the weak derivative identity,
+hence $g_\alpha=D^\alpha u$ and $u\in H^k$. The same polynomial
+comparison proves both norm bounds.
+\end{expandedproof}
+For real $s>0$ this suggests the definition
+\[
+ \|u\|_{H^s(\R^n)}
+ =\|(1+|\xi|^2)^{s/2}\widehat u\|_2.
+\]
+It is equivalent to the source weight $1+|\xi|^s$; equivalent norms
+describe the same space.
+\Needspace{45mm}
+\PDEAnnotation{频率中的光滑度}{求导变成乘以 $i\xi$。高频尾部越小，可承受的频率权重越高，意味着可积的导数越多；分数阶空间沿用同一机制。}

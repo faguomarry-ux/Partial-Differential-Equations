@@ -1,13 +1,99 @@
 % Evans second edition, section 5.4.
 % English source: printed p. 253; PDF page 270 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked against the chapter opening on PDF page 187; see docs/CHAPTER-05.md.
+% Status: editorial study draft; expanded proofs and Chinese mathematical annotations.
 \section{Extensions}
 \label{sec:5-4}
 
-\PDEPending
+\subsection{Reflection and flattening (Evans \S5.4, Theorem 1)}
+\begin{theorem}[Extension]\label{thm:5-extension}
+Let $U$ be bounded with $C^1$ boundary, and fix $V$ with $U\Subset V$.
+For $1\leq p\leq\infty$ there is a linear operator
+\[
+ E:W^{1,p}(U)\longrightarrow W^{1,p}(\R^n),\qquad Eu=u\text{ on }U,
+\]
+with support in a fixed compact subset of $V$ and
+$\|Eu\|_{W^{1,p}(\R^n)}\leq C\|u\|_{W^{1,p}(U)}$.
+The constant depends on $U,V,n,p$.
+\end{theorem}
+\Needspace{45mm}
+\PDEAnnotation{先比较两种延拓}{反射延拓在接口两侧保持同一函数值；补零只有在迹为零时才不会制造跳跃。延拓算子要同时控制函数和梯度，不能只保持 $L^p$ 范数。}
+\begin{expandedproof}
+\paragraph{1. A flat boundary.}
+On the upper half-space, for a smooth localized function define
+\[
+ \widetilde u(x',t)=u(x',|t|).
+\]
+For $t<0$, its tangential derivatives are
+$(\partial_i u)(x',-t)$ and its normal derivative is
+$-(\partial_n u)(x',-t)$. Integrating against a test function separately
+in $t>0$ and $t<0$, the interface terms cancel because the values at
+$t=0$ agree. Thus these piecewise derivatives are the weak derivatives.
+For finite $p$, reflection doubles both the $p$-th power of the $L^p$
+norm and the gradient integral; for $p=\infty$ it preserves their bounds.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\paragraph{2. Flatten a graph.}
+In a boundary chart let $U=\{x_n>g(x')\}$ and set
+\[
+ \Phi(y',y_n)=(y',y_n+g(y')).
+\]
+The map and its inverse have bounded first derivatives on the smaller
+chart, and $\det D\Phi=1$. For smooth $u$,
+$D(u\circ\Phi)=(D\Phi)^T(Du)\circ\Phi$, so
+$\|u\circ\Phi\|_{W^{1,p}}\leq C\|u\|_{W^{1,p}}$, with an analogous
+inverse bound. For Sobolev $u$, interior smooth approximation proves
+the same formula locally in the chart; the global integrability bounds
+then identify its weak derivatives on the entire chart.
+Reflect $u\circ\Phi$ and compose with $\Phi^{-1}$.
+
+\paragraph{3. Localize and assemble.}
+Take finitely many smaller boundary charts and an interior patch covering
+$\overline U$, with a smooth partition $(\zeta_j)$.
+Extend each $\zeta_j u$ by the preceding construction, multiplying by
+a fixed exterior cutoff supported in its chart. The interior term extends
+by zero. Sum the pieces. On $U$ the sum equals $u$, because
+$\sum_j\zeta_j=1$. The product rule and finitely many chart estimates
+give the asserted norm bound. Choose all exterior cutoffs inside $V$.
+This construction is linear and uses fixed charts and cutoffs.
+
+For finite $p$, one can also construct first on smooth functions and
+complete using Theorem~\ref{thm:5-boundary-density}. For $p=\infty$,
+apply the same reflection formula directly. Locally approximate in
+finite $W^{1,q}$ norms and pass to the weak identity; the candidate
+derivatives have the uniform $L^\infty$ bounds already calculated.
+No $W^{1,\infty}$ norm density is needed.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{边界正则性用在哪里}{$C^1$ 使边界可拉平，坐标变换及逆变换的一阶导数有界；这才保证 Sobolev 范数不被放大到无穷。尖裂缝域不能直接套用此结论。}
+
+
+\PDEBodyDiagram{5.2}{Reflection and zero extension treat the interface differently.}
+{Take $u(t)=1+t$ for $0<t<1$ and inspect only the interface at zero. Reflection matches values and preserves first-order Sobolev regularity locally. Zero extension inserts a jump and a Dirac mass in the first derivative. Even reflection still has a corner, so higher-order extensions need additional matching.}
+{ch05-reflection-zero}
+
+\subsection{Higher derivatives: match the jets}
+Ordinary even reflection need not preserve $W^{2,p}$: for $u(t)=t$ on
+$t>0$ it gives $|t|$, whose second derivative has a Dirac mass.
+For an integer $k\geq1$, on $t<0$ use instead
+\[
+ \widetilde u(x',t)=\sum_{j=1}^{k}a_j u(x',-jt),
+ \qquad
+ \sum_{j=1}^{k}a_j(-j)^\ell=1\quad(0\leq\ell<k).
+\]
+The Vandermonde matrix is invertible because $-1,\ldots,-k$ are distinct.
+The derivatives of normal order $0,\ldots,k-1$ match at zero, so repeated
+integration by parts has no interface distributions through order $k$.
+Each derivative on the lower side is bounded by a finite sum of scaled
+upper-side derivatives. This proves a $W^{k,p}$ bound on a sufficiently
+small strip. For $k=2$ the formula is $3u(x',-t)-2u(x',-2t)$.
+
+If $\partial U$ is $C^k$, flattening has bounded derivatives through
+order $k$ on the chosen compact charts. The higher chain rule and the
+same partition construction produce an operator bounded simultaneously
+on $W^{j,p}$ for $0\leq j\leq k$. For finite $p$, smooth boundary
+approximation passes the identities to the completion; for $p=\infty$,
+finite-exponent local convergence and the uniform derivative bounds
+give the same conclusion. We will use a single such operator on
+$L^2$ and $H^2$ in the time-dependent estimates.
+\Needspace{45mm}
+\PDEAnnotation{高阶延拓不能照抄偶反射}{一阶只需接口函数值匹配；二阶还需一阶导数匹配。系数 $3,-2$ 同时满足 $3-2=1$ 和 $-3+4=1$，正是为了消掉接口奇异项。}

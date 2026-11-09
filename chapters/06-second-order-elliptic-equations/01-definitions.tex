@@ -1,13 +1,91 @@
-% Evans second edition, section 6.1.
-% English source: printed p. 293; PDF page 310 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 6.1: English printed p.293 / PDF p.310; Chinese printed p.208 / PDF p.226.
 \section{Definitions}
 \label{sec:6-1}
+\subsection{Two forms of an elliptic operator}
+The divergence form and nondivergence form are, respectively,
+\begin{align}
+ Lu&=-\partial_j(a^{ij}\partial_i u)+b^i\partial_i u+cu,
+       \label{eq:6-div}\\
+ Ku&=-a^{ij}\partial_{ij}u+\widetilde b^i\partial_i u+cu.
+       \label{eq:6-nondiv}
+\end{align}
+Uniform ellipticity means
+\[
+ \theta|\xi|^2\leq a^{ij}(x)\xi_i\xi_j
+ \quad(x\in U,\ \xi\in\R^n).
+\]
+For measurable coefficients this is required almost everywhere.
+Boundedness of the entries gives an upper bound $\Lambda|\xi|^2$.
+It is the principal part, not the lower-order terms, that defines ellipticity.
 
-\PDEPending
+\Needspace{45mm}
+\PDEAnnotation{散度型与非散度型}{散度型可把一个导数移到测试函数上，因而适合弱解。只有系数足够可微时，才能展开散度并把系数导数并入漂移项。}
+If $A$ is $C^1$, the two formulas agree precisely when
+$\widetilde b^i=b^i-\partial_j a^{ij}$.
+If $A$ is merely bounded measurable, this conversion is not a
+pointwise identity between ordinary functions.
+Moreover, symmetry of $A$ does not imply symmetry of the full operator:
+the drift $b\cdot Du$ generally destroys self-adjointness.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+For example, $A=\operatorname{diag}(1,4)$ has
+$\theta=1$ and $\Lambda=4$; the principal quadratic form has elliptical
+level sets. In contrast, $u_{xx}-u_{yy}$ has a principal form of both
+signs and is not elliptic. If the smallest eigenvalue of $A(x)$ approaches
+zero, pointwise positive definiteness alone gives no uniform $\theta$.
+
+\Needspace{35mm}
+
+\PDEBodyDiagram{6.1}{Ellipticity bounds the shape of the principal quadratic form.}
+{Here $\theta=1$ and $\Lambda=4$. The sublevel ellipse contains the circle of radius $\Lambda^{-1/2}$ and lies inside the circle of radius $\theta^{-1/2}$. A uniform positive lower bound prevents this principal geometry from degenerating as the base point varies.}
+{ch06-ellipticity}
+
+\subsection{Weak solutions and the boundary condition}
+Assume $A,b,c\in L^\infty(U)$ and set
+\begin{equation}\label{eq:6-bilinear}
+ B[u,v]=\int_U\big(a^{ij}u_i v_j+b^i u_i v+cuv\big)\,dx,
+ \qquad u,v\in H^1_0(U).
+\end{equation}
+A weak solution of $Lu=f$, with zero Dirichlet boundary values, is
+$u\in H^1_0(U)$ such that
+\begin{equation}\label{eq:6-weak}
+ B[u,v]=\langle f,v\rangle\quad(v\in H^1_0(U)).
+\end{equation}
+Here $f\in H^{-1}(U)$; in particular $f\in L^2(U)$ is allowed.
+
+\Needspace{45mm}
+\PDEAnnotation{零边界的准确含义}{$H^1_0(U)$ 是紧支撑光滑函数在 $H^1$ 中的闭包。光滑边界上它等价于零迹；一般弱解没有逐点边界值，更不能先假设法向导数存在。}
+For smooth $u$ with $u=0$ on the boundary, integration by parts in the
+principal term gives \eqref{eq:6-weak}. Conversely, testing against
+$C^\infty_c(U)$ shows that \eqref{eq:6-weak} implies $Lu=f$ as a
+distribution. If $u$ subsequently belongs to $C^2(U)$ and the
+coefficients and $f$ are continuous in the relevant form, the
+distributional equation becomes the classical equation.
+
+A useful description of rough data is
+$f=f_0-\operatorname{div}F$, with $f_0,F_i\in L^2(U)$. Its action is
+\[
+ \langle f,v\rangle=\int_U(f_0v+F\cdot Dv)\,dx,
+ \qquad
+ |\langle f,v\rangle|\leq C(\|f_0\|_2+\|F\|_2)\|v\|_{H^1}.
+\]
+The plus sign in the second term comes from distributional differentiation.
+
+\Needspace{45mm}
+\PDEAnnotation{非齐次边界先做提升}{若边界数据是某个 $w\in H^1(U)$ 的迹，就写 $u=w+z$，再解 $z\in H^1_0(U)$。边界数据仅属于 $L^2(\partial U)$，并不自动保证存在这样的提升。}
+For prescribed trace $g=Tw$ with $w\in H^1(U)$, solve
+\[
+ B[z,v]=\langle f,v\rangle-B[w,v]\quad(v\in H^1_0(U)),
+ \qquad z=u-w\in H^1_0(U).
+\]
+Thus the homogeneous theory applies whenever a lift is available.
+The resulting $u$ is independent of the chosen lift whenever the
+homogeneous problem is unique.
+
+\paragraph{Adjoint and sign conventions.}
+Define $B^*[v,u]=B[u,v]$. For smooth coefficients, the formal adjoint is
+\begin{equation}\label{eq:6-adjoint}
+ L^*v=-\partial_i(a^{ij}\partial_jv)-\partial_i(b^i v)+cv.
+\end{equation}
+The adjoint drift differentiates the product $b^i v$.
+In particular, even if $c\geq0$, the expanded zeroth-order coefficient
+of $L^*$ can be negative. This matters in the nonsymmetric spectral theory.

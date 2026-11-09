@@ -1,0 +1,15 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=1cm,y=1cm]
+ \fill[LumenAccent!7] (1,0)--(4.5,3.5)--(8,0)--cycle;
+ \draw[pde axis] (0,0)--(9.7,0) node[right] {$y$};
+ \draw[pde axis] (.2,-.1)--(.2,4.15) node[above] {$s$};
+ \draw[pde curve] (1,0)--(4.5,3.5)--(8,0);
+ \draw[LumenWarm,line width=2pt] (1,0)--(8,0);
+ \fill[LumenAccent] (4.5,3.5) circle[radius=2pt];
+ \node[above right] at (4.5,3.5) {$(x,t)$};
+ \node[below] at (1,0) {$x-t$}; \node[below] at (8,0) {$x+t$};
+ \draw[LumenBlue,dashed] (2.25,1.25)--(6.75,1.25);
+ \node[fill=white,inner sep=2pt] at (4.5,1.25) {$|y-x|\leq t-s$};
+ \node[align=left,anchor=west] at (8.3,2.4)
+  {speed $1$\\past cone};
+\end{tikzpicture}

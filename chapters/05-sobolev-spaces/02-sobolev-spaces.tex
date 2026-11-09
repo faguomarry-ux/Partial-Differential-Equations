@@ -1,13 +1,160 @@
 % Evans second edition, section 5.2.
 % English source: printed p. 241; PDF page 258 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked against the chapter opening on PDF page 187; see docs/CHAPTER-05.md.
+% Status: editorial study draft; expanded proofs and Chinese mathematical annotations.
 \section{Sobolev Spaces}
 \label{sec:5-2}
 
-\PDEPending
+\subsection{Weak derivatives: transfer derivatives to test functions}
+\begin{definition}[Evans \S5.2.1]
+For $u,v\in L^1_{\mathrm{loc}}(U)$, write $D^\alpha u=v$ if
+\[
+ \int_U uD^\alpha\phi\,dx
+ =(-1)^{|\alpha|}\int_U v\phi\,dx
+ \qquad(\phi\in C_c^\infty(U)).
+\]
+The function $v$ is a weak derivative. A distributional derivative always
+exists as a functional; it need not be represented by a locally integrable
+function.
+\end{definition}
+\Needspace{45mm}
+\PDEAnnotation{为何没有边界项}{试验函数的支集紧含于 $U$，所以在边界附近恒为零。弱导数的定义不规定 $u$ 的边界值；边界条件要靠 $W^{1,p}_0$ 和迹来表达。}
+For a classical $C^{|\alpha|}$ function this identity follows by
+$|\alpha|$ integrations by parts, each contributing one minus sign.
+Thus the two notions agree whenever classical derivatives exist.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\begin{lemma}[Evans \S5.2.1: uniqueness]
+A weak derivative is unique up to equality almost everywhere.
+\end{lemma}
+\begin{expandedproof}
+If $v,w$ both work, $g=v-w$ satisfies $\int g\phi=0$ for every test
+function. Take a nonnegative smooth kernel $\rho$, supported in the unit
+ball with integral one, and set
+$\rho_\varepsilon(x)=\varepsilon^{-n}\rho(x/\varepsilon)$.
+On $V\Subset U$, for sufficiently small $\varepsilon$, testing with
+$\rho_\varepsilon(x-\cdot)$ gives $g*\rho_\varepsilon=0$.
+Approximate identities converge to $g$ in $L^1(V)$, so $g=0$ there.
+A countable exhaustion of $U$ proves the assertion.
+The approximate-identity fact follows from
+\[
+ \|\rho_\varepsilon*g-g\|_{L^1(V)}
+ \leq\int\rho(z)\|g(\cdot-\varepsilon z)-g\|_{L^1(V)}\,dz\to0,
+\]
+using a cutoff on a larger compact set, translation continuity in $L^1$,
+and domination by twice that cutoff's $L^1$ norm.
+\end{expandedproof}
+
+\paragraph{Corners, jumps, and singularities: editorial examples.}
+On $(-1,1)$, splitting the integral at zero gives
+\[
+ \int_{-1}^1|x|\phi'(x)\,dx
+ =-\int_{-1}^1\operatorname{sgn}(x)\phi(x)\,dx.
+\]
+The interface terms vanish because $|0|=0$. A corner therefore has a
+bounded weak first derivative. Its second distributional derivative is
+$2\delta_0$, which is not a locally integrable function.
+\Needspace{45mm}
+\PDEAnnotation{尖角与跳跃}{连续的分段光滑函数，其接口项可抵消；阶跃函数的跳跃留下 Dirac 质量。几乎处处有经典导数，不保证这个导数就是弱导数。}
+For $H=\mathbf1_{(0,1)}$ on $(-1,1)$,
+$-\int H\phi'=\phi(0)$. If some locally integrable $g$ represented this,
+choose $|\phi_\varepsilon|\leq1$, supported in
+$(-\varepsilon,\varepsilon)$, with $\phi_\varepsilon(0)=1$. Then
+$|\int g\phi_\varepsilon|\leq
+\int_{-\varepsilon}^{\varepsilon}|g|\to0$, a contradiction.
+
+On $B_1\subset\R^n$, $n\geq2$, put $u(x)=|x|^{-a}$, $a>0$.
+Away from zero, $|Du|=a|x|^{-a-1}$. For finite $p$,
+\[
+ \int_{B_1}|u|^p<\infty\iff ap<n,\qquad
+ \int_{B_1}|Du|^p<\infty\iff (a+1)p<n.
+\]
+Under the second condition, integration by parts outside $B_\varepsilon$
+leaves an inner boundary term at most
+$C\varepsilon^{n-1-a}\|\phi\|_\infty\to0$. This identifies the weak
+gradient. Equality of the exponent gives the divergent integral
+$\int_0^1dr/r$.
+
+
+\PDEBodyDiagram{5.1}{A corner and a jump have different distributional derivatives.}
+{The continuous corner has a bounded weak first derivative. The step has a Dirac mass, so it has a distributional derivative but no weak first derivative representable by an $L^p$ function. The vertical Dirac arrow denotes mass, not a graph of a finite-valued function.}
+{ch05-weak-cusp-jump}
+
+\subsection{Spaces, norms, and convergence (Evans \S5.2.2)}
+\begin{definition}
+For an integer $k\geq0$ and $1\leq p\leq\infty$, $W^{k,p}(U)$ is the
+space of $L^p$ functions whose weak derivatives through order $k$ are
+all in $L^p(U)$. Use the norms
+\[
+ \|u\|_{W^{k,p}}=
+ \left(\sum_{|\alpha|\leq k}\|D^\alpha u\|_p^p\right)^{1/p}
+ \quad(p<\infty),
+\]
+\[
+ \|u\|_{W^{k,\infty}}=\sum_{|\alpha|\leq k}\|D^\alpha u\|_\infty.
+\]
+Write $H^k=W^{k,2}$. Define $W^{k,p}_0(U)$ as the closure of
+$C_c^\infty(U)$ in $W^{k,p}(U)$. Local membership means membership on
+every $V\Subset U$. Functions equal almost everywhere are identified.
+\end{definition}
+Our $p=\infty$ norm is equivalent to the source's convention.
+Strong convergence means $L^p$ norm convergence of every derivative.
+For $1<p<\infty$, weak convergence means weak $L^p$ convergence of
+every component. The inner product on $H^k$ is
+$\sum_{|\alpha|\leq k}\int_U D^\alpha uD^\alpha v$.
+\Needspace{45mm}
+\PDEAnnotation{零下标是闭包}{先用紧支光滑逼近定义 $W^{1,p}_0$，不能提前把它解释成逐点边界值为零。有界 $C^1$ 域、$p<\infty$ 时，迹定理才证明两种表述等价。}
+
+\subsection{Calculus and completeness (Evans \S5.2.3)}
+\begin{theorem}[Source Theorem 1: weak calculus]
+Weak derivatives are linear, restrict to open subsets, and commute:
+$D^\beta D^\alpha u=D^{\alpha+\beta}u$ if the total order is at most $k$.
+For $\zeta\in C_c^\infty(U)$,
+\[
+ D^\alpha(\zeta u)=\sum_{\beta\leq\alpha}
+ {\alpha\choose\beta}D^\beta\zeta D^{\alpha-\beta}u.
+\]
+\end{theorem}
+\begin{expandedproof}
+Add the defining identities for linearity. A test function on an open
+subset extends by zero to one on $U$, proving locality. For commutation,
+\[
+ \int D^\alpha uD^\beta\phi
+ =(-1)^{|\alpha|}\int uD^{\alpha+\beta}\phi
+ =(-1)^{|\beta|}\int D^{\alpha+\beta}u\phi.
+\]
+For the product, test with $\zeta\phi$:
+\[
+ \int\zeta u\partial_i\phi
+ =\int u\partial_i(\zeta\phi)-\int u(\partial_i\zeta)\phi
+ =-\int(\zeta\partial_i u+u\partial_i\zeta)\phi.
+\]
+Iterate. The coefficients combine by the multiindex Pascal identity,
+giving the formula. All terms lie in $L^p$ because all cutoff derivatives
+are bounded.
+\end{expandedproof}
+
+\begin{theorem}[Source Theorem 2]\label{thm:5-completeness}
+$W^{k,p}(U)$ is complete, including $p=1$ and $p=\infty$.
+\end{theorem}
+\begin{expandedproof}
+The norm axioms follow from those of the finite product of $L^p$ spaces.
+If $(u_j)$ is Cauchy, completeness of $L^p$ gives
+$D^\alpha u_j\to g_\alpha$ in $L^p$ for every $|\alpha|\leq k$.
+Put $u=g_0$. For $\phi\in C_c^\infty(U)$,
+\[
+ \int uD^\alpha\phi
+ =\lim_j\int u_jD^\alpha\phi
+ =(-1)^{|\alpha|}\lim_j\int D^\alpha u_j\phi
+ =(-1)^{|\alpha|}\int g_\alpha\phi.
+\]
+H\"older justifies each limit on the test function's compact support;
+for $p=1$ use its $L^\infty$ norm, and for $p=\infty$ its $L^1$ norm.
+Thus $g_\alpha=D^\alpha u$ and the finite sum of component errors tends
+to zero.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{闭图思想}{把 $u$ 映到 $(u,Du,\ldots,D^ku)$，所得像是有限个 $L^p$ 的乘积中的闭子空间。闭性靠弱导数恒等式取极限，而不是对极限逐点求导。}
+For $1<p<\infty$, the product of $L^p$ spaces is reflexive, hence its
+closed Sobolev subspace is reflexive. Bounded sequences have weakly
+convergent subsequences. This uses reflexivity and weak compactness from
+functional analysis; strong convergence still requires additional work.

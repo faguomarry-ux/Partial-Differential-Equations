@@ -1,13 +1,76 @@
 % Evans second edition, section 5.1.
 % English source: printed p. 240; PDF page 257 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked against the chapter opening on PDF page 187; see docs/CHAPTER-05.md.
+% Status: editorial study draft; expanded proofs and Chinese mathematical annotations.
 \section{Hölder Spaces}
 \label{sec:5-1}
 
-\PDEPending
+\subsection{Definitions and a complete function space}
+\begin{definition}[Evans \S5.1]
+For $0<\gamma\leq1$, define
+\[
+ [u]_{C^{0,\gamma}(\overline U)}
+ =\sup_{x\ne y\in U}\frac{|u(x)-u(y)|}{|x-y|^\gamma}.
+\]
+The space $C^{k,\gamma}(\overline U)$ consists of $C^k$ functions on $U$
+whose derivatives through order $k$ extend continuously to $\overline U$
+and have finite norm
+\[
+ \|u\|_{C^{k,\gamma}}
+ =\sum_{|\alpha|\leq k}\|D^\alpha u\|_\infty
+ +\sum_{|\alpha|=k}[D^\alpha u]_{C^{0,\gamma}}.
+\]
+Here $C^{0,1}$ means Lipschitz continuous.
+\end{definition}
+\Needspace{45mm}
+\PDEAnnotation{半范数为何不够}{常数函数的 H\"older 半范数为零，故必须加上 $\|u\|_\infty$ 才成为范数。$\gamma$ 控制的是振荡速度，不是函数大小。}
+For $0<\gamma<1$, $|x|^\gamma$ on $[-1,1]$ is $\gamma$-H\"older
+but not Lipschitz at zero. Concavity gives
+$|a^\gamma-b^\gamma|\leq|a-b|^\gamma$ for $a,b\geq0$, whereas
+$|h|^\gamma/|h|\to\infty$. This distinguishes a quantitative modulus of
+continuity from differentiability.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\begin{theorem}[Evans \S5.1, Theorem 1]
+$C^{k,\gamma}(\overline U)$ is a Banach space.
+\end{theorem}
+\begin{expandedproof}[editorial; also source Problem 1]
+Let $(u_j)$ be Cauchy. Each $D^\alpha u_j$, $|\alpha|\leq k$, converges
+uniformly on $\overline U$ to a continuous bounded function $g_\alpha$.
+Put $u=g_0$. We must verify that these limits are its derivatives.
+
+Fix a closed ball contained in $U$. For a coordinate segment in the ball,
+\[
+ D^\alpha u_j(x+he_i)-D^\alpha u_j(x)
+ =\int_0^h D^{\alpha+e_i}u_j(x+te_i)\,dt
+ \quad (|\alpha|<k).
+\]
+Uniform convergence allows passage through the finite integral.
+The fundamental theorem of calculus yields
+$\partial_i g_\alpha=g_{\alpha+e_i}$. Induction in the derivative order
+proves $u\in C^k(U)$ with the required extensions.
+
+Given $\varepsilon>0$, choose $N$ with
+$\|u_j-u_l\|_{C^{k,\gamma}}\leq\varepsilon$ for $j,l\geq N$.
+Pass $l\to\infty$ in the difference quotients for each fixed pair $x,y$,
+then take suprema. Lower semicontinuity of the finite sum of norm
+components gives $\|u_j-u\|_{C^{k,\gamma}}\leq\varepsilon$.
+Thus $u$ belongs to the space and the convergence is in norm.
+The norm axioms follow from the triangle inequality and the included
+supremum norm.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{导数的极限要认领}{一致收敛保证候选导数连续；线段积分恒等式保证它确实是极限函数的导数。仅凭 $u_j\to u$ 一致，不能推出 $Du_j\to Du$。}
+\paragraph{Interpolation (source Problem 2).}
+For $0<\beta<\gamma<1$, set $\theta=(\gamma-\beta)/(1-\beta)$.
+For every $x\ne y$,
+\[
+ \frac{|u(x)-u(y)|}{|x-y|^\gamma}
+ =\left(\frac{|u(x)-u(y)|}{|x-y|^\beta}\right)^{1-\theta}
+  \left(\frac{|u(x)-u(y)|}{|x-y|}\right)^\theta.
+\]
+Hence $[u]_\gamma\leq[u]_\beta^{1-\theta}[u]_1^\theta$.
+The two-term H\"older inequality on the supremum and seminorm components
+also gives
+$\|u\|_{C^{0,\gamma}}\leq
+\|u\|_{C^{0,\beta}}^{1-\theta}\|u\|_{C^{0,1}}^\theta$.
+For $\gamma=1$ this is an identity.

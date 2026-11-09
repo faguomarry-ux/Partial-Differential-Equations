@@ -1,0 +1,156 @@
+\subsection{Mean-value formulas (Evans \S2.2.2, Theorems 2--3)}
+\label{sec:2-elliptic-mean}
+Write $\omega_n=|B_1|$ and $\sigma_{n-1}=|\partial B_1|=n\omega_n$.
+For $\overline B_r(x)\subset U$ define the \emph{normalized} means
+\[
+ S_u(x,r)=\frac1{n\omega_n r^{n-1}}\int_{\partial B_r(x)}u\,dS,
+ \qquad
+ A_u(x,r)=\frac1{\omega_n r^n}\int_{B_r(x)}u\,dy.
+\]
+The sphere is a boundary of dimension $n-1$; the ball has dimension $n$.
+These are two different averaging measures.
+\Needspace{45mm}
+\PDEAnnotation{平均不是积分本身}{球面平均除以面积，球体平均除以体积。对常数 $u=1$，两者都必须等于 $1$；漏掉 $r^{n-1}$ 或 $r^n$ 就会破坏这一检验。}
+
+\begin{theorem}[Mean-value identities]\label{thm:2-harmonic-mean}
+If $u\in C^2(U)$ and $\Delta u=0$, then
+\[
+ u(x)=S_u(x,r)=A_u(x,r)
+ \quad\text{whenever }\overline B_r(x)\subset U.
+\]
+More generally, for any $C^2$ function,
+\[
+ \partial_r S_u(x,r)
+ =\frac1{n\omega_n r^{n-1}}\int_{B_r(x)}\Delta u(y)\,dy .
+ \tag{M}
+\]
+\end{theorem}
+\begin{expandedproof}[all radius and surface factors]
+\paragraph{1. Remove the moving surface before differentiating.}
+Set $y=x+r\theta$ on the unit sphere. Its surface Jacobian is $r^{n-1}$,
+so
+\[
+ S_u(x,r)=\frac1{n\omega_n}\int_{\partial B_1}u(x+r\theta)\,dS_\theta.
+\]
+On a fixed compact range of radii, $Du$ is continuous and bounded.
+Differentiation under this fixed finite integral is legitimate:
+\[
+ \partial_r S_u(x,r)
+ =\frac1{n\omega_n}\int_{\partial B_1}Du(x+r\theta)\cdot\theta\,dS_\theta.
+\]
+Transforming back, $\theta=\nu(y)$ is the outward unit normal, giving
+\[
+ \partial_r S_u(x,r)
+ =\frac1{n\omega_n r^{n-1}}
+       \int_{\partial B_r(x)}Du\cdot\nu\,dS.
+\]
+The divergence theorem on the smooth ball changes the flux into
+$\int_{B_r(x)}\Delta u$. This proves (M).
+
+\paragraph{2. Identify the constant.}
+If $\Delta u=0$, the derivative in (M) vanishes for every admissible $r$.
+Hence the spherical mean is independent of radius.
+Continuity gives
+\[
+ |S_u(x,r)-u(x)|
+ \leq\sup_{|y-x|\leq r}|u(y)-u(x)|\longrightarrow0.
+\]
+The constant is therefore exactly $u(x)$, not an unspecified constant.
+
+
+\PDEMarginDiagram{2.M}{球体由球壳相加}
+{先对每个半径做球面平均，再乘球壳体积并积分。体积平均的径向权重不是均匀的。}
+{ch02-shell-margin}
+
+\paragraph{3. Recover the ball average by adding spherical shells.}
+Polar integration yields
+\[
+ \int_{B_r(x)}u
+ =\int_0^r\int_{\partial B_\rho(x)}u\,dS\,d\rho
+ =\int_0^r n\omega_n\rho^{n-1}u(x)\,d\rho
+ =\omega_n r^n u(x).
+\]
+Divide by the volume. This also proves, for general continuous $u$,
+\[
+ A_u(x,r)=\frac n{r^n}\int_0^r \rho^{n-1}S_u(x,\rho)\,d\rho.
+ \tag{SB}
+\]
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{方程如何变成平均}{关键中介是通量：$\Delta u=0$ 令每个球的总法向通量为零，通量又恰好是球面平均对半径的导数。故平均不随尺度变化。}
+
+\paragraph{Can one recover spheres from balls?}
+Yes. Differentiating $r^nA_u(x,r)$ in (SB) gives
+\[
+ S_u(x,r)=A_u(x,r)+\frac r n\partial_r A_u(x,r).
+\]
+Consequently a continuous function with the ball-mean identity for every
+small radius also has the sphere-mean identity. A single radius at a
+single center is not sufficient.
+
+\begin{theorem}[Converse, including a continuous version]
+If $u\in C^2(U)$ has either mean identity for every sufficiently small
+ball at each center, then $\Delta u=0$.
+If $u\in C(U)$ has this property at every center and all locally admissible
+small radii, it is smooth and harmonic.
+\end{theorem}
+\begin{expandedproof}
+For $C^2$ functions Taylor-expand at $x$ with a uniform $o(r^2)$ error.
+Symmetry of the sphere cancels linear and mixed terms; its normalized
+second moments are
+$\mathbb E(\theta_i\theta_j)=\delta_{ij}/n$.
+The ball has moments $\mathbb E(z_i z_j)=r^2\delta_{ij}/(n+2)$.
+Thus
+\[
+ S_u(x,r)=u(x)+\frac{r^2}{2n}\Delta u(x)+o(r^2),
+\]
+\[
+ A_u(x,r)=u(x)+\frac{r^2}{2(n+2)}\Delta u(x)+o(r^2).
+ \tag{T}
+\]
+An exact identity for arbitrarily small $r$ forces $\Delta u(x)=0$.
+
+For a merely continuous $u$, first turn ball means into sphere means
+using (SB), if necessary. Take a radial smooth mollifier of mass one,
+supported in $B_\varepsilon$. In polar coordinates,
+\[
+ (\rho_\varepsilon*u)(x)
+ =\int_0^\varepsilon \rho_\varepsilon(r)
+       \int_{\partial B_r(x)}u\,dS\,dr=u(x).
+\]
+The convolution is smooth on the smaller domain; hence $u$ is smooth
+there and throughout $U$. Now apply the $C^2$ converse.
+This proves the smoothness assertion without differentiating an
+initially nonsmooth function.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{二阶误差读出 Laplace}{普通函数的平均一般不等于中心值；首个对称性允许的误差就是 $r^2\Delta u$。调和性让这一误差及全部更高阶平均误差精确抵消。}
+
+\paragraph{Subharmonic and superharmonic functions.}
+If $\Delta v\geq0$, (M) implies $S_v(x,r)\geq v(x)$ and then
+$A_v(x,r)\geq v(x)$. If $\Delta v\leq0$, reverse both inequalities.
+For $-\Delta u=f$, integrating (M) and changing the order of integration
+gives, for $n\geq3$,
+\[
+ u(x)=S_u(x,r)+\int_{B_r(x)}
+ \frac{|y-x|^{2-n}-r^{2-n}}{n(n-2)\omega_n}f(y)\,dy.
+ \tag{P}
+\]
+Indeed $\int_{|y-x|}^r\rho^{1-n}\,d\rho
+=(|y-x|^{2-n}-r^{2-n})/(n-2)$.
+For $n=2$ replace the kernel by $(2\pi)^{-1}\log(r/|y-x|)$.
+The kernel is nonnegative: a positive source raises $u(x)$ above
+its boundary average under the convention $-\Delta u=f$.
+
+\paragraph{Concrete checks.}
+In two dimensions, $u(y)=y_1^2-y_2^2$ and $u(y)=y_1y_2$ have
+$\Delta u=0$, so both means reproduce $u(x)$ at every center.
+For $v(y)=|y|^2$,
+\[
+ S_v(0,r)=r^2,\qquad A_v(0,r)=\frac n{n+2}r^2,\qquad v(0)=0.
+\]
+For $n=1$, the sphere consists of two endpoints:
+$S_u(x,r)=[u(x-r)+u(x+r)]/2$. Harmonic functions are affine,
+and the same identities remain valid with $\omega_1=2$.
+\Needspace{45mm}
+\PDEAnnotation{别混同一元中值定理}{这里是积分平均精确重现中心值，不是声称“存在某个中间点”。后面的热球公式也保持中心值，但必须改变平均的几何区域和权重。}

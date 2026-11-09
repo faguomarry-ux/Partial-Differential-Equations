@@ -1,13 +1,229 @@
 % Evans second edition, section 5.6.
 % English source: printed p. 260; PDF page 277 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked against the chapter opening on PDF page 187; see docs/CHAPTER-05.md.
+% Status: editorial study draft; expanded proofs and Chinese mathematical annotations.
 \section{Sobolev Inequalities}
 \label{sec:5-6}
 
-\PDEPending
+\subsection{Scaling predicts the exponent}
+For $u_\lambda(x)=u(\lambda x)$ on $\R^n$,
+\[
+ \|u_\lambda\|_q=\lambda^{-n/q}\|u\|_q,\qquad
+ \|Du_\lambda\|_p=\lambda^{1-n/p}\|Du\|_p.
+\]
+An estimate $\|u\|_q\leq C\|Du\|_p$ with a constant independent of scale
+must therefore have $1/q=1/p-1/n$. For $p<n$ put $p^*=np/(n-p)$.
+\Needspace{45mm}
+\PDEAnnotation{先用缩放验算}{$1/p^*=1/p-1/n$ 是量纲平衡，不是记忆技巧。若估计两侧缩放次数不同，就必须出现域尺度、低阶项或其他约束。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+
+\PDEBodyDiagram{5.3}{The dimension separates three embedding regimes.}
+{The diagram records standard continuous embeddings on a bounded $C^1$ domain with $n\geq2$. At $p=n$, the conclusion is valid for each finite $q$, with constants that may depend on $q$. It does not provide a uniform estimate as $q\to\infty$. Compactness is a further question addressed in the next section.}
+{ch05-embedding-regimes}
+
+\subsection{Gagliardo--Nirenberg--Sobolev (Evans \S5.6.1)}
+We first give the integral inequality behind the endpoint $p=1$.
+For $n\geq2$ and nonnegative $f_i$ on $\R^{n-1}$, with
+$\widehat x_i$ denoting all coordinates except $x_i$,
+\[
+ \int_{\R^n}\prod_{i=1}^n f_i(\widehat x_i)^{1/(n-1)}\,dx
+ \leq\prod_{i=1}^n\left(\int_{\R^{n-1}}f_i\right)^{1/(n-1)}.
+ \tag{LW}
+\]
+\begin{expandedproof}[editorial integral lemma]
+For $n=2$ this is Fubini. Suppose it holds in dimension $n-1$.
+Integrate first in $x_n$ and apply H\"older with $n-1$ equal exponents
+to the factors $i<n$. Put
+$F_i=\int_{\R} f_i(\widehat x_i)\,dx_n$. What remains is
+\[
+ \int_{\R^{n-1}}f_n^{1/(n-1)}
+              \prod_{i<n}F_i^{1/(n-1)}\,dx'.
+\]
+Apply H\"older with exponents $n-1$ and $(n-1)/(n-2)$, obtaining
+\[
+ \left(\int f_n\right)^{1/(n-1)}
+ \left(\int_{\R^{n-1}}\prod_{i<n}F_i^{1/(n-2)}
+ \right)^{(n-2)/(n-1)}.
+\]
+The induction hypothesis on the last integral gives (LW).
+Tonelli justifies the order changes, first for finite integrals and
+then by monotone truncation in general.
+\end{expandedproof}
+
+\begin{theorem}[Evans \S5.6.1, Theorem 1]\label{thm:5-gns}
+For $1\leq p<n$ and $u\in C_c^1(\R^n)$,
+\[
+ \|u\|_{p^*}\leq C_{n,p}\|Du\|_p.
+\]
+\end{theorem}
+\begin{expandedproof}
+\paragraph{1. Start with $p=1$.}
+The fundamental theorem on the $i$th coordinate line gives
+\[
+ |u(x)|\leq\int_{\R}|\partial_i u(\widehat x_i,t)|\,dt
+ =:f_i(\widehat x_i).
+\]
+Multiply the $n$ inequalities and raise to the power $1/(n-1)$.
+By (LW),
+\[
+ \int|u|^{n/(n-1)}
+ \leq\prod_i\|\partial_i u\|_1^{1/(n-1)}
+ \leq\|Du\|_1^{n/(n-1)}.
+\]
+Taking the power $(n-1)/n$ proves the endpoint.
+
+\paragraph{2. Obtain $1<p<n$ by a power substitution.}
+Set $a=p(n-1)/(n-p)>1$. Apply the endpoint to $|u|^a$, a compactly
+supported $C^1$ function. H\"older with $p'=p/(p-1)$ yields
+\[
+ \left(\int|u|^{an/(n-1)}\right)^{(n-1)/n}
+ \leq Ca\int|u|^{a-1}|Du|
+ \leq Ca\|Du\|_p
+       \left(\int|u|^{(a-1)p'}\right)^{1/p'}.
+\]
+Both exponents $an/(n-1)$ and $(a-1)p'$ equal $p^*$.
+The left side is $\|u\|_{p^*}^a$ and the last factor is
+$\|u\|_{p^*}^{a-1}$. Cancel it if nonzero; if zero the conclusion
+is immediate.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{幂次为何这样选}{$a$ 同时满足 $an/(n-1)=p^*$ 与 $(a-1)p'=p^*$，所以最后能约去同一个函数范数。随便取幂次，两个积分指数就对不上。}
+
+\begin{corollary}[Evans \S5.6.1, Theorems 2--3]\label{thm:5-domain-gns}
+On a bounded $C^1$ domain,
+$\|u\|_{p^*}\leq C\|u\|_{W^{1,p}(U)}$.
+On any bounded open set, for $u\in W^{1,p}_0(U)$,
+\[
+ \|u\|_{p^*}\leq C_{n,p}\|Du\|_p,\qquad
+ \|u\|_p\leq C_{n,p}|U|^{1/n}\|Du\|_p .
+\]
+\end{corollary}
+\begin{expandedproof}
+For the first statement extend by Theorem~\ref{thm:5-extension},
+smooth on $\R^n$ with fixed compact support, and apply
+Theorem~\ref{thm:5-gns}. Applying it to differences shows the smooth
+sequence is Cauchy in $L^{p^*}$. Its $L^p$ limit identifies the
+$L^{p^*}$ limit with the extension, so the inequality passes to $u$.
+For zero boundary data use zero extensions of the defining compactly
+supported sequence instead. Finally H\"older gives
+$\|u\|_p\leq|U|^{1/p-1/p^*}\|u\|_{p^*}$ and
+$1/p-1/p^*=1/n$.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{为何一般域估计有低阶项}{常数 $u=1$ 满足 $Du=0$，所以对任意 $W^{1,p}$ 函数不能只有梯度控制。零迹排除非零常数，才可去掉右侧的 $\|u\|_p$。}
+
+\subsection{The critical case $p=n$}
+For $n\geq2$, bounded $C^1$ domains satisfy
+$W^{1,n}(U)\hookrightarrow L^q(U)$ for every finite $q$.
+Indeed choose $1\leq r<n$ so close to $n$ that $r^*\geq q$.
+Finite measure gives $W^{1,n}\subset W^{1,r}$, and the preceding
+inequality followed by H\"older proves the claim.
+The constant depends on $q$ and need not stay bounded as $q\to\infty$.
+
+A useful counterexample, equivalent in behavior to source Problem 14, is
+\[
+ u(x)=\log\log(e/|x|)\quad(0<|x|<1).
+\]
+It is unbounded, but $|Du|=1/(|x|\log(e/|x|))$ and
+\[
+ \int_{B_1}|Du|^n=C_n\int_0^1
+ \frac{dr}{r\log(e/r)^n}<\infty\quad(n>1).
+\]
+The function itself has finite $L^n$ norm. Its weak derivative is
+identified by integration outside $B_\varepsilon$; the interface term
+is $O(\varepsilon^{n-1}\log\log(e/\varepsilon))\to0$.
+In dimension one, by contrast, $W^{1,1}$ on an interval has an absolutely
+continuous, hence bounded, representative.
+\Needspace{45mm}
+\PDEAnnotation{临界点不是无穷大嵌入}{$p\uparrow n$ 时公式中的 $p^*$ 趋于无穷，但常数也可能发散，不能把极限直接代入。$\log\log(e/|x|)$ 给出明确反例。}
+
+\subsection{Morrey's inequality (Evans \S5.6.2, Theorems 4--5)}
+\begin{theorem}\label{thm:5-morrey}
+If $n<p<\infty$, then $W^{1,p}(\R^n)$ has a representative satisfying
+\[
+ |u(x)-u(y)|\leq C_{n,p}|x-y|^{1-n/p}\|Du\|_{L^p(\R^n)},
+ \qquad \|u\|_\infty\leq C_{n,p}\|u\|_{W^{1,p}}.
+\]
+On a bounded $C^1$ domain,
+$\|u\|_{C^{0,1-n/p}(\overline U)}\leq C\|u\|_{W^{1,p}(U)}$.
+For $p=\infty$, the corresponding exponent is $1$.
+\end{theorem}
+\begin{expandedproof}
+\paragraph{1. A local kernel estimate.}
+Let $D$ be a ball of radius $R$ and $x\in\overline D$. For smooth $u$,
+integrate the line identity
+$|u(x)-u(z)|\leq\int_0^{|z-x|}|Du(x+t\omega)|\,dt$
+over $z=x+s\omega\in D$. Convexity keeps each segment inside $D$.
+The $s$ integration after changing order contributes at most $C R^n$.
+Dividing by $|D|$ gives
+\[
+ |u(x)-u_D|\leq C_n\int_D\frac{|Du(z)|}{|x-z|^{n-1}}\,dz,
+ \qquad u_D=|D|^{-1}\int_Du.
+\]
+H\"older bounds the integral by
+\[
+ C\|Du\|_{L^p(D)}
+ \left(\int_0^{2R}t^{\,n-1-(n-1)p'}\,dt\right)^{1/p'}
+ \leq C R^{1-n/p}\|Du\|_{L^p(D)}.
+\]
+The radial integral is finite exactly when $p>n$ (for $n=1$, the
+same computation is simply the integral triangle inequality and H\"older).
+
+\paragraph{2. Compare two points.}
+For $r=|x-y|$, choose $D=B(x,2r)$ containing both.
+Bound $|u(x)-u_D|$ and $|u(y)-u_D|$ by step 1.
+This also yields the local estimate
+\[
+ |u(x)-u(y)|\leq C r^{1-n/p}\|Du\|_{L^p(B(x,2r))}
+\]
+whenever that ball lies in the domain.
+With a unit ball in step 1,
+$|u(x)|\leq|u_D|+C\|Du\|_p\leq C(\|u\|_p+\|Du\|_p)$.
+
+\paragraph{3. Pass to Sobolev functions.}
+Smooth approximation on $\R^n$ and the inequalities on differences
+give uniform convergence to a H\"older representative, agreeing almost
+everywhere with the $L^p$ limit. On $U$, use the extension operator.
+For $p=\infty$ on $\R^n$, local smoothing has gradient bounded by
+$\|Du\|_\infty$; the line identity gives a common Lipschitz constant.
+A locally uniform subsequential limit, identified by finite $L^q$
+convergence, proves the assertion. Extend first for the domain version.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{连续代表元的含义}{原先 $u$ 是几乎处处等价类。Morrey 证明其中存在连续函数；两个连续函数若几乎处处相同，便处处相同。因此此时谈逐点值才有唯一含义。}
+
+\subsection{Higher-order embeddings (Evans \S5.6.3, Theorem 6)}
+Let $U$ be bounded with $C^1$ boundary, $k\geq1$, and $1\leq p<\infty$.
+If $kp<n$,
+\[
+ W^{k,p}(U)\hookrightarrow L^q(U),\qquad
+ \frac1q=\frac1p-\frac{k}{n}.
+\]
+If $k>n/p$ and $n/p$ is not an integer, put
+$l=\lfloor n/p\rfloor$, $m=k-l-1$, and $\gamma=l+1-n/p$.
+Then $W^{k,p}\hookrightarrow C^{m,\gamma}(\overline U)$.
+If $n/p=j$ is an integer and $k>j$, the conclusion is
+$C^{k-j-1,\gamma}$ for every $0<\gamma<1$.
+Each embedding has a norm bound depending on $U,n,k,p$ and, where
+applicable, $\gamma$.
+\begin{expandedproof}
+Apply the first-order estimate to each derivative of order at most $k-1$.
+This improves $W^{k,p}$ to $W^{k-1,p_1}$ with
+$1/p_1=1/p-1/n$. Iterate while the input exponent is below $n$.
+If $kp<n$, exactly $k$ steps yield $L^q$.
+If $n/p$ is nonintegral, after $l$ steps the exponent $r$ satisfies
+$1/r=1/p-l/n$ and $r>n$. Apply Morrey to each derivative through
+order $k-l-1$; $1-n/r=l+1-n/p$.
+If $n/p=j$ is integral, after $j-1$ steps the exponent is $n$.
+The critical finite-$q$ estimate gives $W^{k-j,q}$ for arbitrary finite
+$q$. Choose $q>n$ and apply Morrey, obtaining
+$C^{k-j-1,1-n/q}$. Any $\gamma<1$ follows by choosing $q$ sufficiently
+large. Multiplying the finitely many estimate constants gives the bounds.
+The continuous weak derivatives obtained here are classical derivatives:
+mollify locally and pass to the coordinate-segment integral identity,
+as in the completeness proof in \S\ref{sec:5-1}.
+For $n=p=1$, interval absolute continuity gives the needed bounded
+derivatives directly and hence the stated weaker H\"older conclusions.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{高阶指数逐层算}{每使用一次一阶嵌入，导数阶数减一，$1/p$ 减去 $1/n$。到达临界指数时先转到任意有限 $q$，所以整数临界处不能擅自宣称 Lipschitz。}

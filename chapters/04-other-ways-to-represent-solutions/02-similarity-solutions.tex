@@ -1,13 +1,214 @@
-% Evans second edition, section 4.2.
-% English source: printed p. 167; PDF page 184 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{Similarity Solutions}
-\label{sec:4-2}
+% Evans 4.2, printed pp. 167--177; PDF pp. 184--194.
+\Needspace{65mm}
+\section{Similarity Solutions}\label{sec:4-2}
+\Needspace{35mm}
+\subsection{Plane waves, phase velocity and group velocity}
+For $u=e^{i(\xi\cdot x-\omega t)}$, direct substitution gives:
+\[
+\begin{array}{c|c}
+ \text{equation}&\text{dispersion relation}\\ \hline
+ u_t-\Delta u=0&\omega=-i|\xi|^2\\
+ u_{tt}-\Delta u=0&\omega=\pm|\xi|\\
+ u_{tt}-\Delta u+M^2u=0&\omega=\pm\sqrt{|\xi|^2+M^2}\\
+ iu_t+\Delta u=0&\omega=|\xi|^2\\
+ u_t+u_{xxx}=0&\omega=-\xi^3
+\end{array}
+\]
+For instance $\partial_{xxx}e^{i\xi x}=-i\xi^3e^{i\xi x}$,
+so the last sign is negative with this phase convention.
+A real $\omega$ gives oscillation; a negative imaginary part gives damping.
+For $\xi\ne0$, the signed phase speed in direction $\xi/|\xi|$
+is $\omega/|\xi|$.
 
-\PDEPending
+To explain group velocity, set $x=tv$ in a Fourier superposition:
+\[
+ u(tv,t)=\int e^{it(\xi\cdot v-\omega(\xi))}a(\xi)\,d\xi .
+\]
+Stationary points satisfy $v=D_\xi\omega$. The stationary-phase
+theorem below makes this observation precise for localized amplitudes
+and nondegenerate stationary points.
+\Needspace{45mm}
+\PDEAnnotation{相速不是信息传播速度}{Klein--Gordon 的正频相速为 $\sqrt{|\xi|^2+M^2}/|\xi|>1$，群速度的大小却小于一。单一相位面的移动不能直接当作信号速度或支集传播速度。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{35mm}
+\subsection{KdV solitary waves}
+For $u_t+6uu_x+u_{xxx}=0$, take $u=v(s)$, $s=x-ct$.
+The ODE is $-cv'+6vv'+v'''=0$.
+\begin{theorem}[The source solitary-wave calculation]
+For $c>0$ and $s_0\in\R$,
+\[
+ u(x,t)=\frac c2\operatorname{sech}^2
+             \left(\frac{\sqrt c}2(x-ct-s_0)\right)
+\]
+is a decaying traveling wave.
+\end{theorem}
+\begin{expandedproof}
+One integration gives $v''-cv+3v^2=A$.
+Multiply by $v'$ and integrate again:
+\[
+ \frac12(v')^2=\frac c2v^2-v^3+Av+B .
+\]
+The solitary-wave limits $v,v',v''\to0$ at both ends force $A=B=0$.
+A positive hump therefore has maximum $c/2$ and obeys
+$v'=-v\sqrt{c-2v}$ on its decreasing half.
+With $v=(c/2)\operatorname{sech}^2\theta$,
+\[
+ \frac{dv}{v\sqrt{c-2v}}=-\frac2{\sqrt c}\,d\theta
+ \quad(\theta>0).
+\]
+Thus $\theta=\sqrt c(s-s_0)/2$ on that half.
+Reflection supplies the other half.
+For a direct check use
+$(\operatorname{sech}^2 z)''=4\operatorname{sech}^2z
+-6\operatorname{sech}^4z$, which gives $v''=cv-3v^2$ everywhere.
+Differentiating verifies the original PDE, including the crest.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{不能把减号分支用在整个波峰两侧}{一阶能量式含正负两个分支。上升半支与下降半支要在 $v=c/2$ 处拼合；最后直接核验二阶 ODE，才能排除分支选择造成的假解。}
+A solitary-wave formula does not by itself prove the stronger
+scattering properties often associated with the word soliton.
+Also the KdV sign in Problems 11--12 is the opposite nonlinear sign;
+there $u\mapsto-u$ relates the conventions.
+
+\Needspace{35mm}
+\subsection{Bistable fronts: a detailed shooting argument}
+Assume $f(0)=f(a)=f(1)=0$, $0<a<1$,
+$f<0$ on $(0,a)$, $f>0$ on $(a,1)$,
+$f'(0),f'(1)<0$, and $\int_0^1f>0$.
+An increasing front from zero to one satisfies
+\[
+ \begin{gathered}
+ v'=w,\qquad w'=-cw-f(v),\\
+ (v,w)(-\infty)=(0,0),\quad(v,w)(+\infty)=(1,0).
+ \end{gathered}
+\]
+At each endpoint the linear eigenvalues are
+$(-c\pm\sqrt{c^2-4f'(j)})/2$, $j=0,1$.
+They have opposite signs.
+We use the standard local stable/unstable manifold theorem for these
+hyperbolic ODE equilibria, including continuous dependence on $c$.
+The following fills in the source's phase-plane shooting outline.
+
+Put $F(v)=\int_0^vf$ and $E=w^2/2+F(v)$.
+Then $dE/ds=-cw^2$. Since $F(1)>0$, a front must have $c<0$:
+\[
+ c\int_{\R}(v')^2\,ds=-\int_0^1f(v)\,dv .
+ \tag{BF4}
+\]
+Choose a fixed $b\in(a,1)$ so close to $a$ that $F(b)<0$.
+For $c=0$ the upper unstable branch from zero and upper stable
+branch into one meet the section $v=b$ at heights
+\[
+ w_L(b;0)=\sqrt{-2F(b)},\qquad
+ w_R(b;0)=\sqrt{2(F(1)-F(b))}.
+\]
+The first is smaller.
+
+\begin{expandedproof}[existence and uniqueness of the front speed]
+Where $w>0$, write each trajectory as a graph in $v$:
+\[
+ \frac{dw}{dv}=-c-\frac{f(v)}w .
+ \tag{SH4}
+\]
+The endpoint slopes are
+$w_L/v\to\lambda_0^+(c)$ and
+$w_R/(1-v)\to-\lambda_1^-(c)$.
+As $c$ decreases, the first slope strictly increases and the second
+strictly decreases. At a first contact between two left branches,
+their slope difference from (SH4) is the positive difference of $-c$;
+this prevents crossing. Integrating from the right reverses the
+comparison for right branches.
+Thus $w_L(b;c)$ increases strictly as $c$ decreases, while
+$w_R(b;c)$ decreases strictly.
+
+For $c\leq0$ the left branch stays above its $c=0$ graph up to $b$,
+so cannot stop by hitting zero.
+The right branch also reaches $b$: on $(b,1)$, $f>0$,
+and at a hypothetical earlier endpoint with $w=0$ the equation
+$w_s=-f<0$ would give negative $w$ immediately to its right in $v$,
+contradicting the positive branch.
+There is no finite-$v$ upward blowup in these intervals since (SH4)
+has bounded positive slope whenever $w$ is large.
+Along the right branch $E(v)\leq F(1)$, since energy is increasing
+in forward time; hence
+$w_R(b;c)\leq\sqrt{2(F(1)-F(b))}$.
+
+To force the left height arbitrarily large, fix $K>0$.
+The quantity $|f(v)/v|$ is bounded on $(0,b]$, say by $C$.
+On the line $w=Kv$,
+\[
+ \frac{dw}{dv}=-c-\frac{f(v)}{Kv}\geq-c-C/K>K
+\]
+when $-c$ is sufficiently large, and
+$\lambda_0^+(c)>K$ then.
+The left branch starts above this line and cannot cross downward;
+so $w_L(b;c)\geq Kb$.
+The two heights therefore exchange order for sufficiently negative $c$.
+Continuous dependence and the intermediate value theorem give a
+matching speed; strict comparison makes it unique.
+At the match, ODE uniqueness joins the two trajectories.
+The hyperbolic endpoint asymptotics take infinite $s$ to reach the
+endpoints, giving a front on all $\R$, unique up to translation.
+Integration of the energy identity proves (BF4).
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{速度符号取决于连接方向}{本稿取 $v(-\infty)=0$、$v(+\infty)=1$，故 $\int_0^1f>0$ 推出速度为负。若把波形左右反转，速度也反号，不能脱离行波坐标与端态单记正负。}
+
+\Needspace{35mm}
+\subsection{Scaling and the Barenblatt solution}\label{sec:4-barenblatt}
+For $u_t-\Delta(u^m)=0$, try $u=t^{-\alpha}V(y)$,
+$y=xt^{-\beta}$. The chain rule gives
+\[
+ u_t=t^{-\alpha-1}(-\alpha V-\beta y\cdot DV),\quad
+ \Delta u^m=t^{-\alpha m-2\beta}\Delta_yV^m .
+\]
+Balancing time powers requires $\alpha+1=\alpha m+2\beta$.
+Finite nonzero time-independent mass requires $\alpha=n\beta$,
+since $\int u=t^{-\alpha+n\beta}\int V$.
+Consequently
+\[
+ \beta=\frac1{n(m-1)+2},\qquad \alpha=n\beta.
+\]
+For a radial profile $V=W(r)$, the equation integrates to
+\[
+ [r^{n-1}(W^m)'+\beta r^nW]'=0 .
+\]
+Regularity and zero flux at $r=0$ set the integration constant to zero.
+For $m>1$, on the positive set,
+\[
+ (W^{m-1})'=-\frac{m-1}{m}\beta r,\quad
+ V(y)=(C-k|y|^2)_+^{1/(m-1)},\quad
+ k=\frac{(m-1)\beta}{2m}.
+\]
+\begin{theorem}[Barenblatt profile, source \S4.2.2]
+For $C>0$, $m>1$, the above formula defines a nonnegative
+distributional solution on $\R^n\times(0,\infty)$, with fixed finite mass.
+Its support radius is $\sqrt{C/k}\,t^\beta$.
+\end{theorem}
+\begin{expandedproof}[including the free-boundary check]
+Inside its positive set the preceding identities prove the PDE.
+At the moving interface $u$ tends to zero, and so the time derivative
+of the zero extension has no jump-mass term.
+Furthermore $V^m=(C-kr^2)_+^{m/(m-1)}$ has zero normal derivative
+at the interface because $m/(m-1)>1$.
+Thus the distributional Laplacian adds no surface delta.
+The interior time derivative and second spatial derivatives are
+locally integrable up to the interface: the worst boundary power
+is $d^{1/(m-1)-1}$, whose exponent is greater than $-1$.
+Integration by parts on interior truncated regions, followed by this
+integrability and the zero traces, proves the weak PDE across the boundary.
+Mass conservation follows by the change $x=t^\beta y$.
+Finally for compactly supported continuous $\phi$,
+\[
+ \int u(x,t)\phi(x)\,dx=\int V(y)\phi(t^\beta y)\,dy
+ \longrightarrow \phi(0)\int V .
+\]
+The initial datum is a point mass, not a fixed bounded function.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{自由边界处要检查通量}{只在正集内代入公式还不够。这里 $u=0$ 消去移动边界的时间接口项，$\partial_\nu(u^m)=0$ 消去空间接口项；扩展后的 PDE 才在分布意义下成立。}
+The radius grows sublinearly for $m>1$.
+Its derivative is finite for each $t>0$ but diverges as $t\downarrow0$;
+finite propagation here means compact support at each positive time,
+not a uniform speed bound down to the point-source initial time.
+The fast-diffusion counterpart in Problem 5 has algebraic tails.

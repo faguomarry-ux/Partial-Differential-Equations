@@ -1,0 +1,19 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=1.6cm,y=1cm]
+ \draw[pde axis] (-1.75,0)--(2.15,0) node[right] {$p$};
+ \draw[pde axis] (0,-.8)--(0,2.8) node[above] {$H(p)$};
+ \draw[pde curve] plot[domain=-1.65:2,samples=80] (\x,{.5*\x*\x});
+ \draw[pde warm] plot[domain=-.65:2.1,samples=2] (\x,{\x-.5});
+ \draw[LumenMuted,dashed] (1,0)--(1,.5);
+ \fill[LumenAccent] (1,.5) circle[radius=2pt];
+ \node[above left] at (-1.2,1.15) {$H(p)=p^2/2$};
+ \node[above,sloped,text=LumenWarm] at (1.5,1.0) {$vp-L(v)$};
+ \node[below] at (1,0) {$p=v=1$};
+ \draw[decorate,decoration={brace,mirror,amplitude=4pt},LumenBlue]
+  (-.09,-.5)--(-.09,0);
+ \node[left,text=LumenBlue] at (-.12,-.25) {$L(1)=1/2$};
+ \node[pde box,text width=39mm,anchor=west] at (2.5,1.0)
+  {$L(v)=\sup_p\{vp-H(p)\}$\\[5pt]
+   tangent slope $v$\\
+   intercept $-L(v)$};
+\end{tikzpicture}

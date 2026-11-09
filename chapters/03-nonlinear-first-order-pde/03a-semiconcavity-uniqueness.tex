@@ -1,0 +1,148 @@
+\subsection{Semiconcavity and uniqueness (Evans \S3.3.3)}
+\label{sec:3-semiconcavity}
+An a.e. PDE alone is insufficient for uniqueness.
+For $H(p)=p^2$ and $g=0$ in one dimension, both $u=0$ and
+\[
+ v(x,t)=\min\{0,|x|-t\}
+\]
+are Lipschitz and satisfy $v_t+v_x^2=0$ off the three lines
+$x=0,\pm t$. At the central upward corner,
+$v(h,t)+v(-h,t)-2v(0,t)=2|h|$ for $|h|<t$.
+This cannot be bounded by a constant times $h^2$.
+
+\begin{definition}
+A function $f$ is semiconcave with constant $C$ if
+\[
+ f(x+z)-2f(x)+f(x-z)\leq C|z|^2 .
+\]
+For continuous $f$ this is equivalent to concavity of
+$f(x)-C|x|^2/2$, by the midpoint criterion and continuity.
+For smooth $f$ it is equivalent to $D^2f\leq CI$.
+\end{definition}
+\Needspace{45mm}
+\PDEAnnotation{半凹只限制向上弯曲}{允许向下尖角，禁止二阶差分过大的向上尖角。它不是要求 Hessian 的绝对值有界，也不是要求函数本身凹；先减去一个二次函数后才凹。}
+
+\begin{theorem}[Source Lemmas 3--4]
+If $g$ is semiconcave with constant $C$, the Hopf--Lax function has
+the same spatial constant for all $t$.
+If instead $D^2H\geq\theta I$, $\theta>0$, it satisfies
+\[
+ u(x+z,t)-2u(x,t)+u(x-z,t)\leq\frac{|z|^2}{\theta t},
+\]
+even for initial $g$ that is merely Lipschitz.
+\end{theorem}
+\begin{expandedproof}[including the dual estimate of Problem 15]
+For the first assertion choose a minimizer $y$ at $(x,t)$.
+Use $y+z$ and $y-z$ as competitors at $x+z$ and $x-z$.
+All three velocities are equal, so their $L$ terms cancel.
+The remaining second difference is that of $g$ at $y$.
+
+For the second assertion, uniform convexity makes the maximizer $p(v)$
+in $L(v)=\max_p(v\cdot p-H(p))$ unique, with $v=DH(p(v))$.
+Strong monotonicity gives
+\[
+ \theta|p(v)-p(w)|^2
+ \leq (v-w)\cdot(p(v)-p(w)),
+\]
+so $|p(v)-p(w)|\leq|v-w|/\theta$.
+Comparing the optimizing expressions at $v$ and $v+h$ shows
+$DL(v)=p(v)$; equivalently, apply the implicit function theorem
+to $DH(p)=v$. Hence $DL$ is $1/\theta$-Lipschitz.
+Integrating its increment along a segment gives
+\[
+ L(v+h)\leq L(v)+DL(v)\cdot h+\frac{|h|^2}{2\theta}.
+\]
+Add the estimates for $h$ and $-h$:
+$L(v+h)+L(v-h)-2L(v)\leq|h|^2/\theta$.
+Now use the same minimizing $y$ at all three target points.
+The initial terms cancel and $h=z/t$ gives the claimed constant.
+
+In particular, taking $v=(v_1+v_2)/2$, $h=(v_1-v_2)/2$ proves
+\[
+ \tfrac12L(v_1)+\tfrac12L(v_2)
+ \leq L((v_1+v_2)/2)+\frac{|v_1-v_2|^2}{8\theta}.
+\]
+This is the dual inequality omitted from the source lemma's proof.
+\end{expandedproof}
+
+\begin{theorem}[Uniqueness in the source weak class; source Theorems 7--8]
+Let $H$ be smooth, convex and superlinear. Among globally Lipschitz
+functions with the same initial datum, satisfying the HJ equation a.e.
+and the spatial semiconcavity bound
+\[
+ u(x+z,t)-2u(x,t)+u(x-z,t)
+ \leq C(1+t^{-1})|z|^2,
+\]
+there is at most one solution.
+The Hopf--Lax function belongs to this class if $g$ is semiconcave
+or $H$ is uniformly convex.
+\end{theorem}
+\begin{expandedproof}[the source's regularized cone argument]
+Let $w=u-\widetilde u$. Subtract the a.e. PDE and integrate $DH$
+on the gradient segment:
+\[
+ w_t+b\cdot Dw=0,\qquad
+ b=\int_0^1 DH(\lambda Du+(1-\lambda)D\widetilde u)\,d\lambda .
+\]
+Both gradients lie in a fixed ball, so $|b|\leq R$ for a finite $R$.
+
+\paragraph{1. Smooth the coefficients, preserving a one-sided bound.}
+Locally convolve $u,\widetilde u$ in space-time and define $b_\varepsilon$
+by the same expression with their smoothed spatial gradients.
+For $t>2\varepsilon$, semiconcavity implies
+\[
+ D^2u_\varepsilon,\ D^2\widetilde u_\varepsilon
+      \leq C'(1+t^{-1})I .
+\]
+To check this, integrate their second-difference inequalities against
+the nonnegative smoothing kernel, bound $1/s$ by $2/t$ on its time
+support, then divide by the squared increment and let it tend to zero.
+The gradients remain bounded and converge a.e. to the original ones.
+
+Writing $A=D^2H\geq0$ and $B$ for the convex combination of smoothed
+Hessians gives $B\leq C'(1+t^{-1})I$.
+Thus $\operatorname{tr}(AB)\leq C'(1+t^{-1})\operatorname{tr}A$,
+by conjugating with $A^{1/2}$ and taking traces.
+Since $A$ is bounded on the gradient ball,
+$\operatorname{div}b_\varepsilon\leq C''(1+t^{-1})$.
+Also $|b_\varepsilon|\leq R$ and $b_\varepsilon\to b$ a.e.
+
+\Needspace{45mm}
+\PDEAnnotation{凸性把单边 Hessian 界传给速度}{两个半凹函数的 Hessian 只需有上界。因 $D^2H$ 半正定，迹运算仍给出 $\operatorname{div}b$ 的上界；若失去凸性，这一步的符号便没有保证。}
+\paragraph{2. Integrate a nonnegative transform in a shrinking cone.}
+Take a smooth nonnegative function $\phi$, and put $v=\phi(w)$.
+Weak Lipschitz calculus gives $v_t+b\cdot Dv=0$ a.e.
+On $B_{\rho(t)}(x_0)$, $\rho(t)=r+R(T-t)$ with $r>0$, set
+$e(t)=\int v$. The moving-boundary term and $|b_\varepsilon|\leq R$
+make its boundary flux nonpositive. For a.e. $t$ this yields
+\[
+ e'(t)\leq C''(1+t^{-1})e(t)
+       +\int_{B_{\rho(t)}}(b_\varepsilon-b)\cdot Dv.
+\]
+These integrations hold for Lipschitz $v$ by approximation, or its
+Sobolev integration formula on the smooth ball.
+For each fixed $\delta>0$, the error tends to zero in $L^1(\delta,T)$
+by dominated convergence on the compact cone.
+Integrate against a nonnegative time test function and let
+$\varepsilon\to0$, obtaining the same differential inequality without
+the error on $[\delta,T]$.
+
+\paragraph{3. Start Gronwall away from the singular time zero.}
+Let $M$ be the sum of the time Lipschitz constants.
+Since $w(\cdot,0)=0$, $|w(x,\delta)|\leq M\delta$.
+Choose $\phi=\phi_\delta$ zero on $[-M\delta,M\delta]$ and strictly
+positive outside. Then $e(\delta)=0$.
+Gronwall on $[\delta,T]$ has a finite coefficient integral, and gives
+$e(T)=0$. Hence $|w|\leq M\delta$ on $B_r(x_0)$ at time $T$,
+using continuity to pass from a.e. points.
+Let $\delta\downarrow0$. The ball and $T$ were arbitrary, so $w=0$.
+Existence in the stated class follows from the two semiconcavity
+estimates and the preceding Hopf--Lax theorem.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{不能从零时刻硬套 Gronwall}{$1/t$ 在零附近不可积。证明先用时间 Lipschitz 界把差值截掉，在正时刻 $\delta$ 得到零初始能量，再应用 Gronwall，最后令 $\delta\to0$。}
+
+This is the semiconcavity-based weak formulation used in this chapter.
+Viscosity solutions provide a broader comparison framework in Chapter 10;
+the a.e. equation and the present selection condition must not be
+silently interchanged.

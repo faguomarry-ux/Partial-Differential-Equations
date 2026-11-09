@@ -1,13 +1,238 @@
 % Evans second edition, section 3.4.
 % English source: printed p. 130; PDF page 147 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts: checked against the chapter-opening list, PDF p. 79.
+% Status: editorial study draft with detailed proofs and mathematical notes; no independent review.
+\Needspace{65mm}
 \section{Introduction to Conservation Laws}
 \label{sec:3-4}
 
-\PDEPending
+\subsection{Shocks and entropy (Evans \S3.4.1)}
+We now work in one space dimension:
+\[
+ u_t+f(u)_x=0,\qquad u(x,0)=g(x).
+\]
+The conservative form must be retained after smoothness breaks down.
+An integral solution is a locally bounded function satisfying
+\[
+ \int_0^\infty\!\!\int_{\R}[u\phi_t+f(u)\phi_x]\,dx\,dt
+       +\int_{\R}g(x)\phi(x,0)\,dx=0
+ \tag{CL}
+\]
+for every smooth compactly supported test function on $\R\times[0,\infty)$.
+For smooth $u$, integration by parts proves equivalence with the PDE.
+For discontinuous $u$, the expression $f'(u)u_x$ is not an ordinary
+product of functions and cannot replace (CL) without additional theory.
+\Needspace{45mm}
+\PDEAnnotation{先守恒后求导}{光滑时 $f(u)_x=f'(u)u_x$；跳跃时 $u_x$ 含集中测度。守恒形式能直接对 $f(u)$ 作分布求导，避免给不连续函数与 Dirac 的乘积随意赋值。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\begin{theorem}[Rankine--Hugoniot]\label{thm:3-rh}
+Across a smooth shock curve $x=\gamma(t)$ with traces $u_l,u_r$,
+an otherwise smooth integral solution must satisfy
+\[
+ \gamma'(t)(u_r-u_l)=f(u_r)-f(u_l).
+ \tag{RH}
+\]
+For unequal states, the speed is the secant slope of $f$.
+\end{theorem}
+\begin{expandedproof}
+Write locally $u=u_l+(u_r-u_l)\mathbf1_{\{x>\gamma(t)\}}$,
+with the smooth extensions on each side understood.
+The singular part of $u_t$ is $-\gamma'[u]\delta_{x=\gamma(t)}$;
+that of $f(u)_x$ is $[f]\delta_{x=\gamma(t)}$.
+Here $[u]=u_r-u_l$ and $[f]=f(u_r)-f(u_l)$.
+The regular parts vanish by the PDE on each side.
+The remaining distribution is zero precisely when (RH) holds.
+Equivalently, integrate each smooth side of (CL) and add their
+oppositely oriented interface fluxes.
+\end{expandedproof}
+
+For strictly convex $f$, an admissible shock has $u_l>u_r$.
+Its speed satisfies
+$f'(u_r)<\gamma'<f'(u_l)$, since secant slopes lie strictly between
+endpoint tangent slopes.
+Characteristics enter the shock from both sides.
+An upward jump also satisfies (RH) with its secant speed, but would
+send characteristics outward and is rejected by entropy.
+
+
+\PDEBodyDiagram{3.4}{Shock speed is a secant slope.}
+{For $f(u)=u^2/2$, the secant between $u_R=0.2$ and $u_L=1.4$ has slope $\sigma=0.8$. The tangent slopes satisfy $0.2<0.8<1.4$, so characteristics from both sides enter the shock. Reversing the spatial states keeps the secant slope but violates the compression direction.}
+{ch03-flux-chord}
+
+\paragraph{Why weak conservation alone is not unique.}
+For Burgers flux $f(u)=u^2/2$ and data $g=0$ on $x<0$, $g=1$ on $x>0$,
+both the upward step moving at speed $1/2$ and
+\[
+ u(x,t)=\begin{cases}
+ 0,&x\leq0,\\ x/t,&0<x<t,\\1,&x\geq t
+ \end{cases}
+\]
+satisfy (CL). In the fan the PDE is
+$-x/t^2+(x/t)(1/t)=0$, and both interfaces are continuous.
+Each candidate attains the same initial data in local $L^1$.
+Only the fan satisfies the one-sided bound derived below.
+\Needspace{45mm}
+\PDEAnnotation{跳跃条件不负责筛选方向}{Rankine--Hugoniot 只保证接口两侧通量守恒，上跳和下跳都可能满足。熵条件额外保留压缩型跳跃，排除向外散开的非物理解。}
+
+\paragraph{Convex entropy pairs: an editorial explanation.}
+For smooth convex $\eta$, define $q$ by $q'=\eta'f'$.
+A smooth solution satisfies $\eta(u)_t+q(u)_x=0$.
+For the viscous equation $u_t+f(u)_x=\varepsilon u_{xx}$,
+\[
+ \eta(u)_t+q(u)_x
+ =\varepsilon\partial_{xx}\eta(u)
+       -\varepsilon\eta''(u)|u_x|^2
+ \leq\varepsilon\partial_{xx}\eta(u).
+\]
+If bounded viscous solutions converge strongly locally, their limit
+therefore satisfies the distributional entropy inequality.
+This is a conditional explanation of the selection rule, not a proof
+of viscous existence or convergence.
+
+For a downward shock $l=u_l>u_r=r$ with secant speed $s$, let
+$C(v)=f(v)-f(r)-s(v-r)\leq0$ on $[r,l]$.
+The singular entropy coefficient is
+\[
+ [q]-s[\eta]=-\int_r^l\eta'(v)C'(v)\,dv
+            =\int_r^l\eta''(v)C(v)\,dv\leq0.
+\]
+Thus the convex entropy inequality selects the same direction.
+For general nonsmooth solutions this chapter uses the source's
+one-sided derivative condition as its explicit uniqueness class.
+
+\subsection{The Lax--Oleinik construction (Evans \S3.4.2)}
+\label{sec:3-laxoleinik}
+Assume $f$ smooth and $f''\geq\theta>0$ on $\R$, and $g\in L^\infty$.
+An additive constant in $f$ does not affect the PDE; take $f(0)=0$.
+Let
+\[
+ P(x)=\int_0^xg(y)\,dy,\qquad
+ L=f^*,\qquad G=(f')^{-1}=L'.
+\]
+The potential
+\[
+ W(x,t)=\min_y\{tL((x-y)/t)+P(y)\}
+ \tag{LOP}
+\]
+is a Hopf--Lax solution of $W_t+f(W_x)=0$.
+The candidate conservation-law solution is $u=W_x$ a.e.
+\Needspace{45mm}
+\PDEAnnotation{HJ 解是守恒律解的原函数}{$W_t+f(W_x)=0$ 对空间作分布求导，就得到 $u_t+f(u)_x=0$。给初始原函数 $P$ 加常数只会给 $W$ 加同一常数，不改变 $u$ 或最优起点。}
+Since $f'$ is strictly increasing and onto, $G$ exists and is
+$1/\theta$-Lipschitz. Differentiating the convex dual at its unique
+maximizer gives $L'=G$ and $L''=1/f''(G)>0$.
+
+\begin{theorem}[Source Theorem 1]\label{thm:3-lo}
+For each $t>0$, minimizing starting points in (LOP) are ordered with $x$.
+The minimizer is unique except at at most countably many $x$.
+At differentiability points of $W$,
+\[
+ \boxed{u(x,t)=G((x-y(x,t))/t).}
+ \tag{LO}
+\]
+\end{theorem}
+\begin{expandedproof}
+\paragraph{1. Ordering and countability.}
+Put $c(x,y)=tL((x-y)/t)$.
+Its mixed derivative is $c_{xy}=-L''((x-y)/t)/t<0$.
+If $x_1<x_2$ and proposed minimizers had $y_1>y_2$,
+integration of this mixed derivative on the rectangle gives
+\[
+ c(x_1,y_2)+c(x_2,y_1)<c(x_1,y_1)+c(x_2,y_2).
+\]
+Adding $P(y_1)+P(y_2)$ contradicts the sum of the two minimizing
+inequalities. Hence every minimizer at $x_1$ is at most every minimizer
+at $x_2$.
+The minimum sets are nonempty compact sets by coercivity.
+If a set has two distinct endpoints $y_-<y_+$, its interval
+$(y_-,y_+)$ is disjoint from the corresponding intervals for other $x$.
+Assigning a rational point to each nonempty interval proves there are
+at most countably many such $x$.
+
+\Needspace{45mm}
+\PDEAnnotation{可数例外指固定的时间切片}{每个多重最优点对应一个互不相交的起点开区间，再各选一个有理数，才得到可数性。这不表示整个时空只存在可数个激波点，也不等于全局光滑。}
+\paragraph{2. Differentiate the value without differentiating the optimizer.}
+For a fixed minimizing $y$, use that same point as a competitor at
+$x+h$. Then
+$W(x+h,t)-W(x,t)\leq c(x+h,y)-c(x,y)$.
+For positive and negative $h$, differentiability of $W$ gives
+$W_x=L'((x-y)/t)=G((x-y)/t)$.
+This works even if $P$ is not differentiable at the minimizing $y$.
+Strict monotonicity of $G$ also forces uniqueness of $y$ at such a point.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{最优起点的跳跃产生激波}{$y(x,t)$ 保持单调，但可发生跳跃。跨过竞争分支时，$(x-y)/t$ 随之下降，因此 $u=G((x-y)/t)$ 出现向下跳跃；这把变分选择和熵方向联系起来。}
+
+\begin{theorem}[Integral solution and initial trace; source Theorem 2]
+The construction gives a bounded integral solution of (CL).
+It satisfies $u(\cdot,t)\to g$ in $L^1_{\mathrm{loc}}$ as $t\downarrow0$.
+\end{theorem}
+\begin{expandedproof}
+First $W$ is spatially Lipschitz with constant $\|g\|_\infty$, hence
+$|u|\leq\|g\|_\infty$ a.e.
+The a.e. HJ equation $W_t+f(W_x)=0$ is an equality of locally integrable
+functions. Multiply it by $\phi_x$.
+Integration by parts first in time and then in space gives
+\[
+ \iint W_t\phi_x
+ =-\iint W\phi_{xt}-\int P\phi_x(\cdot,0)
+ =\iint W_x\phi_t+\int g\phi(\cdot,0).
+\]
+All supports are compact and $W$ is Lipschitz; thus these are valid
+weak integration identities. Substituting $u=W_x$ proves (CL).
+
+To strengthen initial recovery, fix a Lebesgue point $x$ of $g$,
+with value $g_0$. Then
+$P(x+h)=P(x)+g_0h+o(|h|)$.
+The coercive minimizer bound gives $|x-y|/t\leq R$ uniformly.
+Writing $y=x-tv$, the minimizing objective becomes
+\[
+ P(x)+t[L(v)-g_0v]+o(t)
+\]
+uniformly for $|v|\leq R$.
+The strictly convex function $L(v)-g_0v$ has unique minimizer
+$v_*=f'(g_0)$. Compactness implies every minimizing velocity tends
+to $v_*$: otherwise a convergent subsequence away from $v_*$ would
+minimize the limiting strictly convex objective.
+Formula (LO) therefore gives $u(x,t)\to G(v_*)=g_0$.
+The uniform $L^\infty$ bound and dominated convergence on compact
+intervals give the asserted local $L^1$ convergence.
+\end{expandedproof}
+
+\input{chapters/03-nonlinear-first-order-pde/04a-entropy-uniqueness}
+
+\subsection{Riemann's problem (Evans \S3.4.4, Theorem 4)}
+For $g=u_l$ on $x<0$ and $g=u_r$ on $x>0$, the entropy solution for
+a strictly convex flux is as follows.
+If $u_l>u_r$, it is a shock with speed
+$s=[f(u_l)-f(u_r)]/(u_l-u_r)$.
+If $u_l<u_r$, it is the rarefaction
+\[
+ u(x,t)=\begin{cases}
+ u_l,&x/t\leq f'(u_l),\\
+ G(x/t),&f'(u_l)<x/t<f'(u_r),\\
+ u_r,&x/t\geq f'(u_r).
+ \end{cases}
+ \tag{RF}
+\]
+Equal states give a constant solution.
+\begin{expandedproof}
+The shock satisfies the PDE off its interface, (RH) on it, and the
+downward entropy direction.
+In the fan, $u_t=-(x/t^2)G'(x/t)$ and
+$f'(u)u_x=(x/t)G'(x/t)/t$, which cancel.
+The fan joins continuously to both constant states and
+$u_x=G'(x/t)/t\leq1/(\theta t)$.
+Both candidates are integral solutions and approach their Riemann data
+locally in $L^1$; the transition region has width $O(t)$.
+The entropy uniqueness theorem just proved identifies them as the
+selected solutions.
+\end{expandedproof}
+\begin{center}
+\includegraphics[width=\linewidth]{output/figures/ch03-riemann-characteristics.pdf}
+\end{center}
+\noindent\textit{Editorial figure.} For Burgers flow, a downward step
+compresses characteristics into a shock; an upward step opens a
+rarefaction fan. Both geometries use the same flux, but different data.
+
+\input{chapters/03-nonlinear-first-order-pde/04b-long-time-behavior}

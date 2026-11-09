@@ -1,0 +1,23 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram]
+ \begin{scope}[x=2cm,y=1cm]
+  \draw[pde axis] (-1.2,0)--(1.3,0) node[right] {$z$};
+  \fill[LumenAccent!8] (-1,0) rectangle (1,1.8);
+  \draw[pde curve] (-1,0)--(-1,1.8)--(1,1.8)--(1,0);
+  \foreach \z in {-.9,-.7,-.5,-.3,.3,.5,.7,.9}
+   \draw[LumenWarm,line width=1.5pt] (\z,0)--(\z,{1.6*\z*\z});
+  \node[above] at (0,2.15) {\textbf{A fixed past slice}};
+  \node[below] at (-1,0) {$-R(\tau)$};
+  \node[below] at (1,0) {$R(\tau)$};
+  \node[align=center] at (0,-1.1) {$|z|<R(\tau)$\\weight vanishes at $z=0$};
+ \end{scope}
+ \begin{scope}[shift={(6.8,0)},x=1.65cm,y=1.5cm]
+  \draw[pde axis] (-1.2,0)--(1.4,0) node[right] {$z/R$};
+  \draw[pde axis] (0,0)--(0,1.75) node[above] {relative weight};
+  \draw[pde warm] plot[domain=-1:1,samples=70] (\x,{1.5*\x*\x});
+  \node[below] at (-1,0) {$-1$}; \node[below] at (1,0) {$1$};
+  \node[above] at (.2,2.3) {$w(z,\tau)=z^2/(4r\tau^2)$};
+  \node[align=center] at (0,-.85)
+   {same $\tau$, different $z$\\different contribution};
+ \end{scope}
+\end{tikzpicture}

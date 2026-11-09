@@ -1,13 +1,118 @@
 % Evans second edition, section 5.5.
 % English source: printed p. 256; PDF page 273 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Chinese section starts checked against the chapter opening on PDF page 187; see docs/CHAPTER-05.md.
+% Status: editorial study draft; expanded proofs and Chinese mathematical annotations.
 \section{Traces}
 \label{sec:5-5}
 
-\PDEPending
+\subsection{Boundary values as a continuous operator}
+\begin{theorem}[Evans \S5.5, Theorem 1]\label{thm:5-trace}
+If $U$ is bounded with $C^1$ boundary and $1\leq p<\infty$, there is a
+unique bounded linear map
+\[
+ T:W^{1,p}(U)\longrightarrow L^p(\partial U)
+\]
+agreeing with restriction for functions in $W^{1,p}(U)\cap C(\overline U)$.
+In particular, $\|Tu\|_{L^p(\partial U)}\leq C\|u\|_{W^{1,p}(U)}$.
+\end{theorem}
+\Needspace{45mm}
+\PDEAnnotation{边界不能随意赋值}{改变 $u$ 在零测集上的值不改变 Sobolev 元素；边界通常正是体积零测集。迹由域内逼近的极限决定，不能通过任意指定边界代表值来定义。}
+\begin{expandedproof}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\PDEMarginDiagram{5.M}{沿法向控制边界值}
+{先沿固定 $x'$ 的线段比较内部值与边界值，再对高度和切向变量积分。图中外法向朝下。}
+{ch05-trace-strip-margin}
+
+\paragraph{1. A flat strip estimate.}
+For smooth $v$ on a strip $Q'\times[0,a]$, the fundamental theorem gives
+\[
+ |v(x',0)|^p
+ \leq |v(x',t)|^p+
+ p\int_0^a|v|^{p-1}|\partial_n v|(x',s)\,ds.
+\]
+For $p=1$, use the absolutely continuous function $|v|$ and its
+derivative bound $|(|v|)'|\leq|v'|$.
+Average $t$ over $(0,a)$ and integrate $x'$.
+For $p>1$, Young's inequality bounds
+$p|v|^{p-1}|\partial_n v|$ by $C_p(|v|^p+|Dv|^p)$.
+Consequently
+\[
+ \int_{Q'}|v(x',0)|^p\,dx'
+ \leq C_{p,a}\int_{Q'\times(0,a)}(|v|^p+|Dv|^p)\,dx.
+\]
+Boundary flattening introduces only bounded Jacobian and derivative
+factors, including $\sqrt{1+|Dg|^2}$ for surface measure.
+A finite partition yields the global estimate for smooth $u$.
+
+\paragraph{2. Complete the restriction map.}
+Choose $u_j$ smooth near $\overline U$, with $u_j\to u$ in $W^{1,p}$.
+The estimate on $u_j-u_l$ shows that $u_j|_{\partial U}$ is Cauchy in
+$L^p(\partial U)$. Define $Tu$ to be its limit. The same estimate on
+two approximating sequences proves independence of choice and boundedness.
+Linearity and uniqueness follow from density.
+
+\paragraph{3. Agreement with continuous functions.}
+For $u$ continuous on $\overline U$, the inward-translation and smoothing
+construction in \S\ref{sec:5-3} can be chosen to converge uniformly as
+well as in $W^{1,p}$. Uniform continuity on the compact closure justifies
+this assertion for each localized piece. The boundary restrictions
+therefore converge to $u|_{\partial U}$ uniformly, identifying the trace.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{迹估计的实际用处}{只要 $u_j\to u$ 于 $W^{1,p}$，就自动有 $Tu_j\to Tu$ 于边界 $L^p$。边界条件因此可随强逼近传递，而不要求逐点追踪边界值。}
+
+\subsection{Zero trace and the closure definition}
+\begin{theorem}[Evans \S5.5, Theorem 2]\label{thm:5-zero-trace}
+Under the same hypotheses,
+\[
+ W^{1,p}_0(U)=\{u\in W^{1,p}(U):Tu=0\}.
+\]
+\end{theorem}
+\begin{expandedproof}
+If $u_j\in C_c^\infty(U)$ tends to $u$ in $W^{1,p}$, boundedness of $T$
+gives $Tu=\lim Tu_j=0$.
+
+For the reverse direction we supply the boundary-layer argument.
+In a flat chart the trace equals the value at $t=0$ of the absolutely
+continuous representative on almost every vertical line. To justify
+this, use smooth approximations, Fubini, and the one-dimensional estimate
+\[
+ |w(0)|\leq a^{-1}\|w\|_{L^1(0,a)}+\|w'\|_{L^1(0,a)}.
+\]
+A subsequence converges in $W^{1,p}$ on almost every line, and this
+estimate identifies the endpoint limit with the trace limit.
+
+Thus if $Tv=0$,
+$v(x',t)=\int_0^t\partial_n v(x',s)\,ds$ on almost every such line.
+H\"older (or the integral triangle inequality for $p=1$) gives
+\[
+ \int_{Q'}\int_0^{2\delta}|v(x',t)|^p\,dt\,dx'
+ \leq (2\delta)^p
+       \int_{Q'}\int_0^{2\delta}|\partial_n v(x',t)|^p\,dt\,dx'.
+\]
+Choose a smooth $\chi_\delta(t)$ equal to zero for $t<\delta$, one
+for $t>2\delta$, with $|\chi_\delta'|\leq C/\delta$. Then
+\[
+ D(\chi_\delta v)-Dv
+ =(\chi_\delta-1)Dv+vD\chi_\delta.
+\]
+The first term tends to zero by absolute continuity of the integral.
+The $p$-th power of the second norm is bounded by
+$C\int_{0<t<2\delta}|Dv|^p$, hence also tends to zero.
+The function error tends to zero in the same way.
+Flattening and a finite partition transfer this argument to $U$.
+It gives functions supported a positive distance from $\partial U$
+converging to $u$ in $W^{1,p}$. For each one, convolution with a smaller
+radius produces an element of $C_c^\infty(U)$ with arbitrarily small
+additional error. A diagonal choice completes the proof.
+\end{expandedproof}
+\Needspace{45mm}
+\PDEAnnotation{截断产生的危险项}{$D(\chi_\delta u)$ 中有 $uD\chi_\delta$，而 $D\chi_\delta$ 约为 $1/\delta$。零迹给出的法向积分公式补回一个 $\delta$ 因子，才使此项趋于零。}
+
+\paragraph{Zero extension.}
+If $u\in W^{1,p}_0(U)$, extend compactly supported approximations by
+zero. They are Cauchy in $W^{1,p}(\R^n)$ with exactly the same norms,
+so completeness gives a zero extension $\widetilde u$ satisfying
+$D\widetilde u=\widetilde{Du}$. This argument works without regularity
+of $U$ for finite $p$. A nonzero trace generally produces a boundary
+distribution instead.

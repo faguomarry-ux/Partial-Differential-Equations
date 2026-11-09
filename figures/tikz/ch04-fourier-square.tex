@@ -1,0 +1,14 @@
+% Original editorial TikZ study diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram]
+ \node[pde box,text width=21mm] (u) at (1.1,2.4) {$u(x)$};
+ \node[pde box,text width=27mm] (uh) at (9.4,2.4) {$\widehat u(\xi)$};
+ \node[pde box,text width=21mm] (lu) at (1.1,0) {$-\Delta u(x)$};
+ \node[pde box,text width=27mm] (luh) at (9.4,0) {$|\xi|^2\widehat u(\xi)$};
+ \draw[pde axis] (u)--node[above] {$\mathcal F$} (uh);
+ \draw[pde axis] (lu)--node[below] {$\mathcal F$} (luh);
+ \draw[pde axis] (u)--node[left] {differentiate} (lu);
+ \draw[pde axis] (uh)--node[right,align=left] {multiply\\by $|\xi|^2$} (luh);
+ \node[align=center] at (5.2,1.1)
+  {$\widehat{\partial_j u}=i\xi_j\widehat u$\\[5pt]
+   $\widehat{e^{t\Delta}u}=e^{-t|\xi|^2}\widehat u$};
+\end{tikzpicture}

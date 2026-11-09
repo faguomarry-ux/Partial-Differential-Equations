@@ -1,5 +1,9 @@
 % Project-specific interfaces. Keep the supplied lumen*.sty files unchanged.
 \RequirePackage{emptypage}
+\RequirePackage{needspace}
+% Use a mathematical topic as the heading, not a sentence-pattern label.
+\NewDocumentCommand{\PDEAnnotation}{m +m}{%
+  \mn{\marginheading{#1}#2}}
 % Ordinary notes float to avoid collisions; use optional offsets only after visual QA.
 \NewDocumentCommand{\PDEVocab}{m +m}{%
   \mn{\marginheading{Language / 词句}\textbf{#1}\par #2}}
@@ -14,7 +18,11 @@
   \par\noindent{\small\color{LumenMuted}%
     Outline only. Text, annotations, and proof details are pending.}\par}
 \NewDocumentEnvironment{expandedproof}{O{}}{%
-  \begin{proof}[Expanded proof\ifstrempty{#1}{}{ (#1)}]}{\end{proof}}
+  \begin{proof}[Expanded proof\ifstrempty{#1}{}{ (#1)}]%
+  \leavevmode\par\nobreak}{\end{proof}}
 % Put long explanations and derivations in the main text, not in a margin box.
 \NewDocumentEnvironment{proofdetails}{O{Proof details / 证明展开}}{%
   \begin{notebox}{#1}}{\end{notebox}}
+
+% Editable explanatory diagrams for Chapters 1--6.
+\input{config/pde-diagrams}

@@ -1117,5 +1117,46 @@
         }
       ]
     }
+  ],
+  "prefaces": [
+    {
+      "title": "Preface to the second edition",
+      "file": "frontmatter/preface-second-edition.tex",
+      "english_printed_pages": [
+        "xi",
+        "xii"
+      ],
+      "english_pdf_pages": [
+        12,
+        13
+      ],
+      "chinese_pdf_pages": [
+        9
+      ],
+      "status": "transcribed-and-annotated",
+      "annotation_count": 4,
+      "review": "Source text checked; no independent review."
+    },
+    {
+      "title": "Preface to the first edition",
+      "file": "frontmatter/preface-first-edition.tex",
+      "english_printed_pages": [
+        "xiii",
+        "xiv",
+        "xv"
+      ],
+      "english_pdf_pages": [
+        14,
+        15,
+        16
+      ],
+      "chinese_pdf_pages": [
+        11,
+        12
+      ],
+      "status": "transcribed-and-annotated",
+      "annotation_count": 8,
+      "review": "Source text checked; no independent review."
+    }
   ]
 }

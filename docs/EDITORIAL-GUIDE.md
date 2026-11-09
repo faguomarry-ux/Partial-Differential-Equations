@@ -50,7 +50,7 @@
 - `main.tex` 控制整书顺序；`parts/` 只负责分部及章节入口。
 - 每章/附录一个目录，每节一个文件，后续小节先在相应节文件中使用 `\subsection`。
 - 项目专用命令只放 `config/pde-macros.tex`，尽量不改 `lumenbook.cls` 和 `lumen-*.sty`。
-- 项目版式在 `config/pde-layout.tex`：默认 A4、右侧 38 mm 边注、6 mm 间隔与 132 mm 正文。`main.tex` 使用 `margin=right,12pt`；不使用可能被 geometry 识别为纸张尺寸的 `screen` 选项。
+- 项目版式在 `config/pde-layout.tex`：默认 A4、右侧 38 mm 边注、6 mm 间隔与 132 mm 正文。`main.tex` 使用 `margin=right,12pt` 基础类配置，实际正文字号通过 `fontsize` 宏包设为 **13pt**；边注固定为 10pt，目录使用独立字号。不使用可能被 geometry 识别为纸张尺寸的 `screen` 选项。
 - `\part` 与 `\part*` 使用标准书籍分部标题，分隔页临时取消边注栏并整页居中，随后自动恢复正文版式。
 - 页码以整张物理页面为基准，在底部居中；正文页、章首页、目录与 Part 页一致。
 - 目录临时取消边注栏，使用整页宽度；`\titlecontents` 在节编号前添加 `\S`（§），配合浅色点线。此符号仅用于目录排版，不改变原书节号、正文编号或 PDF 书签。

@@ -21,6 +21,7 @@ CTeX、fontspec、unicode-math、TikZ、tcolorbox 等外部宏包及发行版字
 ## 本项目阅读来源（2026-11-09）
 
 - 英文来源：Lawrence C. Evans, *Partial Differential Equations*, Second Edition, Graduate Studies in Mathematics 19, American Mathematical Society。文件夹内 PDF 共 730 页；版权页标示第二版及后续修订重印信息。
-- 中文参考：文件夹内《偏微分方程》第二版扫描件，共 524 页。当前只核对目录与章节起始页；逐节译文和证明尚未核对。
+- 中文参考：文件夹内《偏微分方程》第二版扫描件，共 524 页。已核对目录、章节起始页及两篇序言（PDF 第 9、11–12 页）；第 1–12 章及附录的逐节译文和证明尚未核对。
+- 已转写正文范围：英文原书的第二版序言（书内 xi–xii 页；PDF 第 12–13 页）与第一版序言（书内 xiii–xv 页；PDF 第 14–16 页）。原文中的第一人称、致谢与署名属于 Lawrence C. Evans；中文边注由整理者添加，详见 `docs/PREFACES.md`。
 - 原书章、节结构保留；阅读说明、中文边注接口、详细证明接口和英汉术语表入口为本札记新增。内容来源、整理者补充和未完成项须分别记录。
 - 此处来源说明不改变原著与译本的版权归属，也不将模板 LPPL 许可扩展到原书内容。

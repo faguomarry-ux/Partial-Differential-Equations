@@ -1,4 +1,12 @@
 % Project layout: wider main text, narrower notes, and full-width part pages.
+% Enlarge the body coherently beyond book's built-in 12pt maximum.
+\RequirePackage[fontsize=13pt]{fontsize}
+% Keep narrow annotations and navigation at their previous reading sizes.
+\renewcommand{\lumenmarginfont}{\normalfont\fontsize{10}{14}\selectfont
+  \color{LumenMuted}\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}\RaggedRight}
+\renewcommand{\marginheading}[1]{\par\noindent
+  {\color{LumenAccent}\rule{8mm}{0.7pt}}\par\vspace{2pt}
+  {\sffamily\bfseries\fontsize{9}{11}\selectfont\color{LumenAccent}#1\par}\vspace{2pt}}
 % With margin=right in main.tex, all margin notes stay on the right.
 % Explicit A4 avoids geometry's unrelated, global "screen" paper-size option.
 \geometry{a4paper,top=24mm,bottom=24mm,left=22mm,right=56mm,
@@ -10,7 +18,7 @@
 \newcommand{\PDECenteredFolio}{%
   \begin{tikzpicture}[remember picture,overlay]
     \node[anchor=base,inner sep=0pt,text=LumenMuted,
-      font=\normalfont\sffamily\small]
+      font=\normalfont\sffamily\fontsize{10}{12}\selectfont]
       at ([yshift=12mm]current page.south) {\thepage};
   \end{tikzpicture}}
 \fancyfoot{}
@@ -25,16 +33,16 @@
 % The section sign is decorative: source numbering and bookmarks stay intact.
 \contentsmargin{2.8em}
 \titlecontents{part}[0pt]
-  {\addvspace{17pt}\large\sffamily\bfseries\color{LumenAccent}}
+  {\addvspace{17pt}\fontsize{14.4}{18}\selectfont\sffamily\bfseries\color{LumenAccent}}
   {\thecontentslabel\enspace}{}
-  {\hfill\normalsize\contentspage}
+  {\hfill\fontsize{12}{15}\selectfont\contentspage}
   [\addvspace{4pt}]
 \titlecontents{chapter}[2.4em]
-  {\addvspace{10pt}\normalsize\bfseries\color{LumenInk}}
+  {\addvspace{10pt}\fontsize{12}{15}\selectfont\bfseries\color{LumenInk}}
   {\contentslabel[\textcolor{LumenAccent}{\thecontentslabel}]{2.4em}}{}
   {\hfill\textcolor{LumenAccent}{\contentspage}}
 \titlecontents{section}[5.3em]
-  {\addvspace{2pt}\small\color{LumenMuted}}
+  {\addvspace{2pt}\fontsize{11}{14}\selectfont\color{LumenMuted}}
   {\contentslabel[\textcolor{LumenAccent}{\S\enspace\thecontentslabel}]{3.8em}}{}
   {\titlerule*[.65em]{\textcolor{LumenRule}{.}}%
     \textcolor{LumenAccent}{\contentspage}}

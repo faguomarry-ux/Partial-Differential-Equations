@@ -1,0 +1,14 @@
+\begin{tikzpicture}[pde diagram,x=9cm,y=13cm]
+\draw[pde axis] (-.03,0)--(1.05,0) node[right] {$x$};
+\draw[pde axis] (0,-.015)--(0,.28);
+\draw[pde warm,dashed,domain=0:1,samples=81] plot (\x,{\x*(1-\x)});
+\draw[pde blue,domain=0:1,samples=81] plot (\x,{.25*(1-cosh(2*\x-1)/cosh(1))});
+\draw[pde curve,domain=0:1,samples=81] plot (\x,{.5*\x*(1-\x)});
+\draw[pde warm,domain=0:1,samples=81] plot (\x,{\x*(1-\x)-.25*(1-cosh(2*\x-1)/cosh(1))});
+\node[anchor=south,pde tiny] at (.50,.25) {$\overline u_0=x(1-x)$};
+\node[anchor=west,pde tiny] at (.61,.162) {$\overline u_1$};
+\node[anchor=west,pde tiny] at (.70,.105) {$u=x(1-x)/2$};
+\node[anchor=west,pde tiny] at (.57,.075) {$u_1$};
+\node[below,pde tiny] at (.5,0) {$u_0=0$};
+\node[below] at (1,0) {$1$};
+\end{tikzpicture}

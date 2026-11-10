@@ -1,6 +1,6 @@
 """Validate native TikZ diagrams, margin text and chapter/full-book agreement.
 
-Run after latexmk for main.tex and chapter-01.tex ... chapter-06.tex.
+Run after latexmk for main.tex and chapter-01.tex ... chapter-12.tex.
 Requires PyMuPDF. Validation does not replace mathematical or visual review.
 """
 from pathlib import Path
@@ -11,9 +11,9 @@ ROOT=Path(__file__).resolve().parents[1]
 REPORT=ROOT/"tmp/pdfs/tikz-qa"
 REPORT.mkdir(parents=True,exist_ok=True)
 items=json.loads((ROOT/"figures/tikz/manifest.json").read_text(encoding="utf-8"))
-assert len(items)==30
-assert len({i["id"] for i in items})==30
-for ch in range(1,7):
+assert len(items)==60
+assert len({i["id"] for i in items})==60
+for ch in range(1,13):
     group=[i for i in items if i["chapter"]==ch]
     assert len(group)==5
     assert sum(i["placement"]=="body" for i in group)==4
@@ -26,7 +26,7 @@ for i in items:
     macro="PDEMarginDiagram" if i["placement"]=="margin" else "PDEBodyDiagram"
     call="\\"+macro+"{"+i["id"][1:]+"}"
     assert (ROOT/i["source"]).read_text(encoding="utf-8").count(call)==1,i
-for stem in ["main"]+[f"chapter-{i:02d}" for i in range(1,7)]:
+for stem in ["main"]+[f"chapter-{i:02d}" for i in range(1,13)]:
     s=(ROOT/f"build/{stem}.log").read_text(encoding="utf-8",errors="replace")
     for bad in ["Overfull","Missing character","undefined","multiply defined","Missing diagram"]:
         assert bad not in s,(stem,bad)
@@ -110,7 +110,7 @@ assert not low,low
 
 titles={1:"1 Introduction",2:"2 Four Important Linear Partial Differential Equations",
         3:"3 Nonlinear First-Order PDE",4:"4 Other Ways to Represent Solutions",
-        5:"5 Sobolev Spaces",6:"6 Second-Order Elliptic Equations"}
+        5:"5 Sobolev Spaces",6:"6 Second-Order Elliptic Equations",7:"7 Linear Evolution Equations",8:"8 The Calculus of Variations",9:"9 Nonvariational Techniques",10:"10 Hamilton-Jacobi Equations",11:"11 Systems of Conservation Laws",12:"12 Nonlinear Wave Equations"}
 chapters=[]
 clip=fitz.Rect(0,0,595,785)
 for ch,title in titles.items():
@@ -125,14 +125,14 @@ for ch,title in titles.items():
     chapters.append(dict(chapter=ch,pages=len(study),bookmarks=len(study.get_toc()),
                          physical_range=[start+1,start+len(study)],
                          printed_range=[doc[start].get_label(),doc[start+len(study)-1].get_label()]))
-summary=dict(total_diagrams=30,body_diagrams=24,margin_diagrams=6,all_drawings_native_tikz=True,
+summary=dict(total_diagrams=60,body_diagrams=48,margin_diagrams=12,all_drawings_native_tikz=True,
              book_pages=len(doc),book_bookmarks=len(doc.get_toc()),
              book_links=sum(len(p.get_links()) for p in doc),
              reachable_tex=len(seen),static_labels=len(labels),
              diagram_labels=len(items),explicit_references=len(refs),
              existing_text_notes=note_count,missing_notes=missing,low_margins=low,
              maximum_margin_text_bottom=round(max(bottoms),2),
-             all_six_chapters_identical_to_full_book=True,
+             all_twelve_chapters_identical_to_full_book=True,
              chapters=chapters,diagram_positions=positions)
 (REPORT/"final-validation.json").write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding="utf-8")
 print(json.dumps(summary,ensure_ascii=True,indent=2))

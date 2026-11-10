@@ -1,13 +1,172 @@
-% Evans second edition, section 10.2.
-% English source: printed p. 550; PDF page 567 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 10.2: printed pp.550--554; English PDF pp.567--571.
+% Chinese section start: printed p.389 / scan p.407.
+\Needspace{80mm}
 \section{Uniqueness}
 \label{sec:10-2}
+\subsection{Tests at the upper time boundary}
+\Needspace{50mm}
+\begin{lemma}[Terminal extrema for an initial-value solution;
+source \S10.2 lemma]
+Let $u$ be a continuous viscosity subsolution on $0<t<T$.
+If $u-\phi$ has a local maximum at $(x_0,T)$ relative to $t\leq T$,
+then $\phi_t+H(D\phi,x_0)\leq0$ there. A supersolution has the
+reverse inequality at a relative local minimum.
+\end{lemma}
+\begin{expandedproof}[discard a positive penalty derivative]
+Strictify the maximum and restrict to a small closed backward cylinder.
+For $t<T$ set $\phi_\delta=\phi+\delta/(T-t)$.
+The quantity $u-\phi_\delta$ tends to $-\infty$ as $t\uparrow T$.
+A comparison at $(x_0,T-\sqrt\delta)$ shows its maximum tends to
+$(u-\phi)(x_0,T)$. The strict gap on the other cylinder boundaries
+therefore puts maximizing points $(x_\delta,t_\delta)$ in the open
+PDE domain, and all cluster points equal $(x_0,T)$. At those points,
+\[
+ \phi_t+{\delta\over(T-t_\delta)^2}+H(D\phi,x_\delta)\leq0.
+\]
+Discard the nonnegative middle term and pass to the limit. It need not
+tend to zero. For a lower contact use
+$\phi_\delta=\phi-\delta/(T-t)$, and discard its nonpositive derivative
+from the reverse inequality. This lemma does not reverse the viscosity
+convention: it only extends the initial-value convention to a one-sided
+contact at the top of its slab.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{终端接触与终值问题不同}{本引理研究初值解在 $t=T$ 的单侧接触，不改变不等式方向。下一节的终值控制问题采用反向时间演化，才会改变方向；这两个“终端”不能混用。}
 
-\PDEPending
+\Needspace{70mm}
+\subsection{Comparison by doubling space and time}
+Assume $H$ satisfies, with a single constant $C$,
+\begin{equation}\label{eq:10-H-lip}
+ \begin{split}
+ |H(p,x)-H(q,x)|&\leq C|p-q|,\\
+ |H(p,x)-H(p,y)|&\leq C|x-y|(1+|p|).
+ \end{split}
+\end{equation}
+\Needspace{55mm}
+\begin{theorem}[Comparison; source Theorem 1, strengthened to sub/supersolutions]
+Let $u,v\in\mathrm{BUC}(\R^n\times[0,T])$ be a subsolution and a
+supersolution respectively, with the initial-value convention.
+If $u(x,0)\leq v(x,0)$, then $u\leq v$ on the slab. In particular
+there is at most one BUC viscosity solution with prescribed initial data.
+More generally,
+\[
+ \sup_x(u(x,t)-v(x,t))\leq\sup_x(u(x,0)-v(x,0)).
+\]
+\end{theorem}
+\begin{expandedproof}[localization, small penalty, and two touching tests]
+\textit{1. A positive maximum after penalization.}
+Suppose $u(x_*,t_*)-v(x_*,t_*)=a>0$. Fix $\eta>0$ with
+$2\eta T<a/4$. For $\varepsilon>0$ maximize on
+$\R^{2n}\times[0,T]^2$
+\begin{equation}\label{eq:10-doubling}
+ \begin{split}
+ \Phi_\varepsilon(x,y,t,s)={}&u(x,t)-v(y,s)-\eta(t+s)\\
+ &-{|x-y|^2+|t-s|^2\over2\varepsilon}
+ -\varepsilon(|x|^2+|y|^2).
+ \end{split}
+\end{equation}
+Boundedness and the quadratic confinement make the maximum attained;
+call its point $(x_\varepsilon,y_\varepsilon,t_\varepsilon,s_\varepsilon)$.
+For small $\varepsilon$, testing on $(x_*,x_*,t_*,t_*)$ shows that
+this maximum is at least $a/2$. Below all variables refer to this point.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\textit{2. First bounds.}
+Comparing with a fixed point, and using boundedness of $u,v$, gives
+\[
+ r:=|x-y|=O(\sqrt\varepsilon),\quad
+ d:=|t-s|=O(\sqrt\varepsilon),\quad
+ \varepsilon(|x|+|y|)=O(\sqrt\varepsilon).
+\]
+These bounds allow $x,y$ to escape to infinity. This is why uniform
+continuity on the full slab, rather than just on compact sets, is used.
+
+\textit{3. The stronger small-penalty estimate.}
+Compare the maximum with $\Phi_\varepsilon(x,x,t,t)$.
+If $\omega_v$ is a modulus for $v$, then
+\[
+ {r^2+d^2\over2\varepsilon}
+ \leq\omega_v(r+d)+\eta d
+       +\varepsilon(|x|+|y|)r=o(1).
+\]
+In particular $r^2/\varepsilon\to0$. Merely knowing
+$r=O(\sqrt\varepsilon)$ would only bound this expression and would
+not complete the proof.
+
+\textit{4. Neither time is initial.}
+Since the penalty is nonnegative, $u(x,t)-v(y,s)\geq a/2$.
+If a subsequence had $t\to0$, then $s\to0$ as well, and initial
+ordering plus uniform continuity would give
+\[
+ u(x,t)-v(y,s)\leq\omega_u(t)+\omega_v(r+s)\longrightarrow0.
+\]
+This is a contradiction. The same reasoning excludes $s\to0$.
+Thus both contact times are positive for all small $\varepsilon$.
+They may equal $T$, in which case the preceding lemma applies.
+
+\textit{5. Freeze the other pair of variables.}
+At the maximum, the penalty with $(y,s)$ frozen is an upper test for
+$u$ after adding a constant. Its time derivative and spatial gradient are
+\[
+ b_u=\eta+{t-s\over\varepsilon},\qquad
+ p_u={x-y\over\varepsilon}+2\varepsilon x.
+\]
+The negative penalty with $(x,t)$ frozen is a lower test for $v$, with
+\[
+ b_v=-\eta+{t-s\over\varepsilon},\qquad
+ p_v={x-y\over\varepsilon}-2\varepsilon y.
+\]
+Consequently $b_u+H(p_u,x)\leq0$ and $b_v+H(p_v,y)\geq0$.
+Subtracting, the uncontrolled time difference cancels:
+\[
+ 2\eta\leq H(p_v,y)-H(p_u,x).
+\]
+
+\textit{6. Estimate the Hamiltonians.}
+By \eqref{eq:10-H-lip},
+\[
+ \begin{split}
+ 2\eta&\leq C|p_u-p_v|+Cr(1+|p_v|)\\
+ &\leq C\sqrt\varepsilon+Cr
+        +C{r^2\over\varepsilon}+Cr\sqrt\varepsilon\longrightarrow0.
+ \end{split}
+\]
+This contradicts the fixed $\eta>0$, proving $u\leq v$.
+Adding a constant to $v$ leaves its supersolution property unchanged;
+apply ordering to $v+\sup_x(u(x,0)-v(x,0))$ for the last assertion.
+Applying the result in both directions yields uniqueness and sup-norm
+contraction for solutions with different initial values.
+\end{expandedproof}
+\PDEBodyDiagram{10.2}{Doubling variables produces two independent smooth tests.}
+{The common vector $(x-y)/\varepsilon$ need not be bounded. Global Lipschitz control in momentum handles the small difference $p_u-p_v$, while $|x-y|^2/\varepsilon\to0$ handles the spatial dependence of $H$. The opposite strict time shifts leave the positive gap $2\eta$ after subtraction.}
+{ch10-doubling}
+\Needspace{42mm}
+\PDEAnnotation{小量必须足够强}{若只得到 $|x-y|=O(\sqrt\varepsilon)$，则 $|x-y|^2/\varepsilon$ 可能不趋零。对角比较给出整个罚项 $o(1)$，正好消除 Hamiltonian 的空间误差。}
+
+\Needspace{70mm}
+\subsection{A comparison extension for Hopf--Lax}
+The quadratic Hamiltonian $H(p)=|p|^2/2$ is not globally Lipschitz.
+The source's Hopf--Lax uniqueness statement therefore needs a separate
+comparison observation, supplied here.
+\Needspace{55mm}
+\begin{theorem}[One spatially Lipschitz competitor; editorial supplement]
+Suppose $H(p)$ is continuous and independent of $x$. The comparison
+conclusion above still holds if at least one of $u,v$ is uniformly
+Lipschitz in $x$ on the slab. The other function may be merely BUC.
+\end{theorem}
+\begin{expandedproof}[a contact bounds the momentum]
+If a $K$-Lipschitz function has a differentiable upper or lower touching
+test at a point, its spatial test gradient has norm at most $K$.
+Indeed restrict to increments $he$, use the touching inequality and the
+Lipschitz bound, divide by $h$ with both signs, and conclude
+$|D\phi\cdot e|\leq K$ for all unit $e$.
+
+Use the same doubled maximum and first four steps above. If $u$ is
+Lipschitz then $|p_u|\leq K$; if $v$ is Lipschitz then $|p_v|\leq K$.
+Since $|p_u-p_v|=O(\sqrt\varepsilon)$, both momenta lie in a fixed
+compact ball. Uniform continuity of $H$ on that ball gives
+$H(p_v)-H(p_u)\to0$, contradicting $2\eta>0$ exactly as before.
+No global Lipschitz bound on $H$, convexity, or boundedness of the
+other function's gradient is needed for this particular extension.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{超线性 Hamiltonian 的衔接}{$H(p)=|p|^2/2$ 的梯度无界，不能直接套用全局动量 Lipschitz 定理。若一方解在空间中为 $K$-Lipschitz，接触斜率被限制在有界球内，就只需该球上的一致连续性。}

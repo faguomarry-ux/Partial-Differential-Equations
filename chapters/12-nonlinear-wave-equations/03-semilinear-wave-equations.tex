@@ -1,13 +1,239 @@
-% Evans second edition, section 12.3.
-% English source: printed p. 627; PDF page 644 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 12.3, printed pp.627--636; English PDF pp.644--653.
+% Chinese start: printed p.444 / scan p.462.
 \section{Semilinear Wave Equations}
 \label{sec:12-3}
+\subsection{A sign condition gives weak existence}
+Assume $f$ is smooth and $zf(z)\ge0$. Then $F\ge0$.
+The resulting energy controls $Du,u_t$, but it does not directly
+control $\|u\|_2$ uniformly for all positive time.
+\PDEAnnotation{能量不控制全时间质量}{这里 $F$ 可为零，能量只控制
+$Du,u_t$。由 $u(t)=g+\int_0^t u_t$ 得到的是
+$\|u(t)\|_2\le\|g\|_2+t\sqrt{2E(0)}$。
+因此一般只能写每个有限时间条带上的 $L^\infty_tH^1_x$ 界。}
+\begin{theorem}[Sign condition; source \S12.3.1, Theorem 1]
+If $g\in H^1$, $h\in L^2$ and $F(g)\in L^1$, there is a global
+distributional solution with $f(u)\in L^1_{\rm loc}$ and
+\[
+ \|Du(t)\|_2^2+\|u_t(t)\|_2^2+2\int F(u(t))\le2E(0).
+\]
+One can choose $u\in C([0,\infty);L^2)$ with
+$\|u(t)\|_2\le\|g\|_2+t\sqrt{2E(0)}$, and $Du,u_t$ weakly
+continuous into $L^2$. The energy inequality holds at every time
+for these representatives. The initial energy traces are strong.
+No uniqueness or energy equality is asserted in this general class.
+\end{theorem}
+\begin{expandedproof}[truncation, uniform integrability, and time slices]
+Choose even smooth cutoffs $0\le\chi_j\le1$, equal to one on
+$[-j,j]$ and zero outside $[-2j,2j]$. Put $f_j=\chi_jf$ and
+$F_j(z)=\int_0^z f_j(a)da$. Then $f_j$ is globally Lipschitz,
+$zf_j(z)\ge0$, $0\le F_j\le F$, and $F_j=F$ on $[-j,j]$.
+The previous section gives an energy solution $u_j$.
+Conservation for this Lipschitz problem follows by approximating the
+data with smooth data in $H^1\times L^2$ and passing through the
+linear energy estimate; $F_j(z)\le C_jz^2$ makes the potential
+continuous in $L^1$ under $L^2$ convergence on bounded energy sets.
+Consequently $E_j(t)=E_j(0)\le E(0)$ and
+\[
+ \|Du_j(t)\|_2+\|(u_j)_t(t)\|_2\le C_E,\qquad
+ \|u_j(t)\|_2\le\|g\|_2+tC_E.
+\]
+Dominated convergence also gives $E_j(0)\to E(0)$.
+Rellich compactness on bounded balls and the equicontinuity
+$\|u_j(t)-u_j(s)\|_2\le C_E|t-s|$ give, by a diagonal
+Arzela--Ascoli argument,
+$u_j\to u$ in $C([0,T];L^2_{\rm loc})$ for every finite $T$,
+and a.e. in space-time along a subsequence. The first derivatives
+converge weak-star in $L^\infty_tL^2_x$.
 
-\PDEPending
+Multiplying the approximate PDE by $u_j$ and integrating yields
+\[
+ \int_0^T\!\int u_j f_j(u_j)
+ =\int_0^T\!\int((u_j)_t^2-|Du_j|^2)
+      -\left[\int u_j(u_j)_t\right]_0^T\le C_{E,g,T}.
+\]
+All terms are justified first for smooth data and then by the same
+energy approximation. The integrand on the left is nonnegative.
+For a measurable subset $A$ of a compact space-time cylinder and $M>0$,
+\[
+ \int_A|f_j(u_j)|\le C_{E,g,T}/M
+              +|A|\max_{|z|\le M}|f(z)|.
+\]
+The first term comes from $|u_j|>M$; the second uses $|f_j|\le|f|$.
+This is uniform integrability. Also $f_j(u_j)\to f(u)$ a.e., because
+at any point with finite limit $u$, eventually $|u_j|<j$.
+Egoroff on the compact cylinder, followed by the preceding small-set
+bound, proves $f_j(u_j)\to f(u)$ in $L^1$ there. This is a
+space-time $L^1_{\rm loc}$ statement, not a claim of convergence
+at every fixed time. The weak equation now passes to the limit.
+For a smooth test reaching $t=0$ its first-order form is
+\[
+ \iint\{-u_t\varphi_t+Du\cdot D\varphi+f(u)\varphi\}
+       =\int h\varphi(\cdot,0),\qquad u(0)=g.
+\]
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+To obtain time representatives, for each compactly supported smooth
+$\psi$ use
+$\frac d{dt}\int(u_j)_t\psi=\int u_j\Delta\psi-f_j(u_j)\psi$.
+Uniform integrability makes these scalar functions equicontinuous,
+including at zero. Diagonal extraction for a dense collection of
+$\psi$, and the uniform $L^2$ bounds, give weak $L^2$ convergence
+of the velocities at every time and weak time continuity of $u_t$.
+The gradients converge weakly at every time by the strong local
+convergence of $u_j$. At a fixed time, extract a further subsequence
+with a.e. spatial convergence on expanding balls. Fatou for $F_j(u_j)$
+and weak lower semicontinuity of the two quadratic terms give
+$E(t)\le E(0)$, independently of the chosen subsequence.
+Thus this inequality holds for the chosen representatives at all times.
+The identity $u(t)=g+\int_0^t u_t(s)ds$ gives the asserted global
+$L^2$ continuity and growth bound. As $t\downarrow0$, lower
+semicontinuity of the potential and weak convergence of $(Du,u_t)$,
+together with $E(t)\le E(0)$, force convergence of their squared
+norms; weak convergence plus convergence of Hilbert norms is strong.
+This proves both strong initial energy traces. A diagonal extraction
+in $T=1,2,\ldots$ completes global existence.
+\end{expandedproof}
+
+\subsection{Three-dimensional retarded potentials and continuation}
+For smooth compactly supported $g,h$ let $v$ be their free wave.
+In three dimensions Duhamel's formula is
+\begin{equation}\label{eq:12-retarded}
+ u(x,t)=v(x,t)-\frac1{4\pi}\int_{B(x,t)}
+ \frac{f(u(y,t-|y-x|))}{|y-x|}\,dy.
+\end{equation}
+\begin{theorem}[Source \S12.3.2, Theorem 2]
+If $f$ is smooth, $f(0)=0$, this problem has a unique local smooth
+solution. If its maximal smooth lifetime $T_*<\infty$, then
+\[
+ \sup_{0\le t<T_*}\|u(t)\|_\infty=\infty.
+\]
+Equivalently, a bound for $u$ on a finite strip permits continuation.
+We use this strip-bound criterion rather than infer a pointwise limit
+from the mere failure of a uniform bound.
+\end{theorem}
+\begin{expandedproof}[the kernel norm and derivative persistence]
+On $0\le t\le T\le1$, take the closed sup-norm ball
+$\|u-v\|_\infty\le1$ of bounded continuous functions with initial
+trace $g$. Its range is in $[-M,M]$ for a fixed $M$.
+The right side of \eqref{eq:12-retarded} defines a map with
+\[
+ \|A[u]-A[w]\|_\infty\le\tfrac12 L_MT^2\|u-w\|_\infty,
+ \qquad \|A[u]-v\|_\infty\le\tfrac12 T^2\max_{[-M,M]}|f|,
+\]
+because $(4\pi)^{-1}\int_{B(0,T)}|y|^{-1}dy=T^2/2$.
+It is a contraction of the ball for small $T$.
+
+The fixed point is smooth. For instance spatial difference quotients
+satisfy a linear retarded equation with coefficient
+$\int_0^1f'(\theta u(x+\varepsilon e_j,t)+(1-\theta)u(x,t))d\theta$.
+It is uniformly bounded on a bounded range. The retarded operator
+has the estimate
+$\|R[G](t)\|_\infty\le\int_0^t(t-s)\|G(s)\|_\infty ds$.
+Gronwall therefore bounds the first spatial derivatives. The time
+derivative satisfies the differentiated wave equation with initial
+data $(h,\Delta g-f(g))$ and is bounded in the same way. Successive
+differentiation gives an equation with leading term $f'(u)D^\alpha u$
+and forcing made from lower derivatives, already bounded by induction.
+Difference quotients justify each differentiation and convergence;
+the corresponding linear retarded equation has a unique continuous
+solution. This bounds every derivative on a finite strip if $u$ is
+bounded there. Finite propagation provides a common support ball.
+Uniform bounds on one further derivative give limiting smooth data
+at $T_*$; applying local existence to them extends the solution,
+a contradiction. Alternatively higher-order energy limits provide
+the same restart. Uniqueness follows either from contraction on
+successive short strips or the difference-cone energy estimate.
+\end{expandedproof}
+
+\subsection{Subcritical defocusing powers}
+Consider $f(u)=|u|^{p-1}u$, $1<p<5$, in $n=3$.
+\PDEAnnotation{实数幂与光滑性}{当 $p$ 不是正奇整数，
+$|z|^{p-1}z$ 在零点通常不是 $C^\infty$。
+下面对所有 $1<p<5$ 声称有限能量有界 mild 解；
+只有非线性本身光滑时，才由导数持续性得到光滑解。}
+\begin{lemma}[Cone-trace bounds; expanded source \S12.3.3]
+For a smooth defocusing solution and $t\le T_0<\infty$, put
+$w(y)=u(y,t-|y-x|)$ on $B(x,t)$. Then
+\begin{equation}\label{eq:12-cone-hardy}
+ \|Dw\|_2+t^{-1}\|w\|_2+\|w/|y-x|\|_2+\|w\|_6
+ \le C(E(0)^{1/2}+T_0^{1/2}\|g\|_\infty).
+\end{equation}
+Constants are independent of the apex and the cone radius.
+\end{lemma}
+\begin{expandedproof}[the nonzero boundary value in Hardy's inequality]
+The chain rule gives $Dw=Du-\nu u_t$ on the mantle.
+Thus \eqref{eq:12-cone-flux} gives $\int|Dw|^2\le2E(0)$.
+Let $\overline w$ be the ball average. Integrating $|u_t|$ along
+vertical lines in the cone gives
+\[
+ \int_{B(x,t)}|w|\le\int_{B(x,t)}|g|
+                        +\iint_{K_{0,t}}|u_t|.
+\]
+Indeed each vertical segment from time zero to $t-|y-x|$ lies in
+the cone. Since its space-time volume is $Ct^4$ and
+$\iint_Ku_t^2\le2tE(0)$,
+$|\overline w|\le C t^{-1/2}E(0)^{1/2}+\|g\|_\infty$.
+Poincare's inequality yields
+$t^{-2}\|w\|_2^2\le C\|Dw\|_2^2+Ct|\overline w|^2$.
+The scaled ball inequalities are
+\[
+ \|w\|_6+\|w/|y-x|\|_2
+ \le C(\|Dw\|_2+t^{-1}\|w\|_2).
+\]
+They follow by scaling the unit-ball Sobolev and Hardy inequalities.
+For the latter, extend the unit-ball function by a bounded $H^1$
+extension and cutoff to $\R^3$, then apply whole-space Hardy.
+One cannot apply the zero-trace version directly to this cone trace.
+These inequalities and the average bound prove the lemma.
+\end{expandedproof}
+
+\begin{theorem}[Subcritical existence; source \S12.3.3, Theorem 3]
+For compactly supported smooth data and $1<p<5$, there is a unique
+global finite-energy mild solution, bounded on each finite time
+strip, with $u\in C_tH^1$, $u_t\in C_tL^2$ and conserved energy.
+When the nonlinearity is smooth, the solution is smooth.
+\end{theorem}
+\begin{expandedproof}[the sublinear bootstrap and the power qualification]
+First work in a smooth regime. Formula \eqref{eq:12-retarded} and
+Cauchy--Schwarz give
+\[
+ |u(x,t)|\le\|v\|_\infty+C
+ \|w/|y-x|\|_2\left(\int_{B(x,t)}|w|^{2(p-1)}dy\right)^{1/2}.
+\]
+For $1<p\le4$, the last exponent is at most six. Holder on the ball
+and \eqref{eq:12-cone-hardy} give a uniform bound for $t\le T_0$;
+this uses integrals, not an invalid norm triangle inequality when
+$2(p-1)<1$. For $4<p<5$, put
+$M(\tau)=\sup_{x,0\le t\le\tau}|u(x,t)|$. Then
+\[
+ \left(\int|w|^{2(p-1)}\right)^{1/2}
+ \le M(\tau)^{p-4}\|w\|_6^3,
+ \quad M(\tau)\le C_0+C_1M(\tau)^{p-4}.
+\]
+Since $0<p-4<1$, Young's inequality absorbs the last term into
+$M/2$ plus a constant. Thus $M$ is bounded independently of the
+current smooth lifespan below $T_0$. The continuation theorem
+proves global smooth existence whenever $f$ is smooth.
+
+For an arbitrary real $p$, approximate $f$ by smooth sign-preserving
+nonlinearities, cut off at large amplitudes, converging in $C^1$
+on every bounded interval and with
+$|f_j(z)|\le C(|z|+|z|^p)$. For example smooth
+$z(z^2+\varepsilon_j^2)^{(p-1)/2}$ first and then truncate far out.
+Their nonnegative potentials and compact initial data have uniformly
+bounded energy. The preceding argument gives a uniform strip bound;
+the extra linear term is bounded by the same Hardy estimate times
+the square root of the ball volume. On this bounded range the
+nonlinearities have one uniform Lipschitz constant. Difference energy
+estimates, using uniform convergence of $f_j$ on that range and the
+common finite support ball, show Cauchy convergence in
+$C_tH^1\times C_tL^2$. The retarded Volterra difference estimate
+also gives Cauchy convergence in the supremum norm.
+The retarded formula passes to the limit,
+and its sup-norm contraction gives the same mild solution. The
+potentials converge uniformly on the bounded range, so their integrals
+converge and energy equality passes to the limit. The difference
+estimate also proves uniqueness among bounded energy solutions on
+each finite strip. Smoothness across zeros is not claimed for the
+noninteger powers. This supplies the regularity qualification absent
+from a literal all-power smoothness statement.
+\end{expandedproof}

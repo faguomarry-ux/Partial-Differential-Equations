@@ -1,13 +1,329 @@
-% Evans second edition, section 11.5.
-% English source: printed p. 613; PDF page 630 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 11.5, printed pp.613--616; English PDF pp.630--633.
+% Chinese start: printed p.433 / scan p.451.
 \section{Problems}
 \label{sec:11-5}
+The following are abbreviated descriptions of the 17 source problems.
+All solutions and additional qualifications are editorial reconstructions.
 
-\PDEPending
+\subsection*{1. Generalized elastic system}
+For $F=(-q(b),-p(a))$ with $p',q'>0$,
+\[
+ DF=\begin{pmatrix}0&-q'(b)\\-p'(a)&0\end{pmatrix},\qquad
+ \lambda_\pm=\pm\sqrt{p'(a)q'(b)}.
+\]
+They are real and distinct. Corresponding vectors are
+$(q'(b),-\lambda_\pm)$; substitution verifies the eigenvalue equation.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection*{2. Shallow water and a change of conserved variables}
+In $(h,q)$, $DF=\left(\begin{smallmatrix}0&1\\h-q^2/h^2&2q/h\end{smallmatrix}\right)$,
+whose characteristic polynomial is $(\lambda-v)^2-h$.
+For smooth $h>0$, expansion of $q=hv$ and use of
+$h_t+(hv)_x=0$ give $v_t+vv_x+h_x=0$.
+Hence the alternative smooth system has flux
+$\widetilde F(h,v)=(hv,v^2/2+h)$ and matrix
+$\left(\begin{smallmatrix}v&h\\1&v\end{smallmatrix}\right)$,
+again with speeds $v\pm\sqrt h$.
+This is equivalence for smooth solutions only. For example, the
+original jump from $(h,v)=(1,0)$ to $(2,\sqrt3/2)$ has speed
+$\sigma=\sqrt3$ and satisfies both original conservation laws.
+For the alternative velocity law its flux jump is $11/8$, whereas
+$\sigma[v]=3/2$; the jump fails. Nonlinear coordinate changes can
+therefore alter admissible weak solutions even when both resulting
+smooth systems happen to have conservation form.
+
+\subsection*{3. Smooth matrices with rotating eigenspaces}
+For $z\ne0$ put $\theta=1/z$ and
+\[
+ B(z)=e^{-1/z^2}\begin{pmatrix}\cos2\theta&\sin2\theta\\
+ \sin2\theta&-\cos2\theta\end{pmatrix},\qquad B(0)=0.
+\]
+Every derivative is a finite sum of a bounded sine or cosine times
+$z^{-N}e^{-1/z^2}$, which tends to zero. Induction proves $B\in C^\infty$.
+The eigenvalues are $\pm e^{-1/z^2}$ for $z\ne0$, but coincide at zero.
+The positive eigenline is spanned by $(\cos\theta,\sin\theta)$;
+the negative line is its perpendicular. Along sequences $\theta=n\pi$
+and $\theta=\pi/2+n\pi$, even the positive line has incompatible
+limits. Sign choices cannot repair this, so no continuous unit
+frame extends through zero. This failure concerns loss of strictness.
+
+\subsection*{4. Shallow-water rarefaction curves}
+In $(h,v)$ use $r_1=(1,-1/\sqrt h)$, $r_2=(1,1/\sqrt h)$.
+Integrating $dv/dh=\mp h^{-1/2}$ gives
+$2\sqrt h+v=C$ on $R_1$ and $2\sqrt h-v=C$ on $R_2$.
+The gradient of each displayed invariant annihilates its own vector.
+
+\subsection*{5. Shallow-water shock curves}
+Write the base state as $(h_0,h_0v_0)$. Eliminating $\sigma$ from
+$\sigma[h]=[hv]$, $\sigma[hv]=[hv^2+h^2/2]$ gives, for $h\ne h_0$,
+\begin{equation}\label{eq:11-sw-shocks}
+ v=v_0\pm(h-h_0)\sqrt{\frac{h+h_0}{2hh_0}},\qquad
+ q=hv_0\pm(h-h_0)\sqrt{\frac{h(h+h_0)}{2h_0}}.
+\end{equation}
+One way to see the elimination is to introduce the relative mass flux
+$j=h(v-\sigma)=h_0(v_0-\sigma)$; momentum gives
+$j^2=(h^2-h_0^2)/(2(1/h_0-1/h))=hh_0(h+h_0)/2$.
+The nontrivial branch speeds are
+$\sigma=v_0\pm\sqrt{h(h+h_0)/(2h_0)}$.
+If $h=h_0$, the mass jump forces $q=q_0$, so there is no missing
+nonzero jump. For $q_0=0$, the formula is exactly
+$q=\pm(h-h_0)h\sqrt{(1/h+1/h_0)/2}$.
+
+\subsection*{6. Dam-break Riemann data with positive depths}
+Let $h_l>h_r>0$ and both initial velocities be zero. The intermediate
+depth $H$ is the unique root in $(h_r,h_l)$ of
+\begin{equation}\label{eq:11-dambreak-root}
+ 2(\sqrt{h_l}-\sqrt H)
+ =(H-h_r)\sqrt{\frac{H+h_r}{2Hh_r}}=:V.
+\end{equation}
+The left member strictly decreases and the right strictly increases:
+for the latter square it and differentiate
+$(H-h_r)^2(H+h_r)/(2Hh_r)$, or note both positive factors
+$H-h_r$ and $\sqrt{1+h_r/H}$ have combined positive derivative.
+The endpoint signs are opposite, proving existence and uniqueness.
+Set $q_i=HV$, $\sigma=HV/(H-h_r)$. With $\xi=x/t$,
+\[
+ (h,v)=\begin{cases}
+ (h_l,0),&\xi\le-\sqrt{h_l},\\
+ ((2\sqrt{h_l}-\xi)^2/9,\ 2(\sqrt{h_l}+\xi)/3),
+       &-\sqrt{h_l}<\xi<V-\sqrt H,\\
+ (H,V),&V-\sqrt H\le\xi<\sigma,\\
+ (h_r,0),&\xi>\sigma.
+ \end{cases}
+\]
+The fan preserves $v+2\sqrt h=2\sqrt{h_l}$ and has
+$\xi=v-\sqrt h$. Its right edge precedes the shock. Indeed
+\[
+ \sigma^2=\frac{H(H+h_r)}{2h_r}>h_r,\qquad
+ (\sigma-V)^2=\frac{h_r(H+h_r)}{2H}<H.
+\]
+Thus $\sqrt{h_r}<\sigma<V+\sqrt H$, the Lax inequalities for a
+2-shock; also $V-\sqrt H<\sigma$. The fan is continuous, the shock
+satisfies both vector jumps, and the $O(t)$ disturbed interval proves
+the initial trace. For all smooth entropy pairs the shock inequality
+can also be checked without assuming small amplitude. Hold the left
+state $(H,HV)$ fixed and follow its 2-shock branch toward smaller
+$h$. Parameterize by $s=H-h>0$. Formula \eqref{eq:11-sw-shocks}
+gives $\sigma(s)=V+\sqrt{h(h+H)/(2H)}$, strictly decreasing in $s$.
+For $E(s)=[Q]-\sigma(s)[\eta]$, differentiated Rankine--Hugoniot gives
+\[
+ E'(s)=\sigma'(s)\{D\eta(u_r(s))\cdot(u_r(s)-u_l)
+                      -\eta(u_r(s))+\eta(u_l)\}\le0
+\]
+by convexity, and $E(0)=0$. Thus this is an entropy solution in the
+system sense, including for large positive depth ratios.
+\PDEAnnotation{水坝问题不必小振幅}{局部 Riemann 定理只保证邻近状态。
+本题通过单调求根、精确跳跃条件及沿激波支的熵耗散，
+单独处理任意 $h_l>h_r>0$；不把局部定理扩大到真空或任意大数据。}
+
+\subsection*{7. Barotropic invariants in the proper variables}
+For $z=(\rho,q)$, use $r_1=(1,v-c)$ and $r_2=(1,v+c)$.
+The gradients of \eqref{eq:11-gas-invariants} are
+\[
+ Dw_1=((c-v)/\rho,1/\rho),\qquad
+ Dw_2=((c+v)/\rho,-1/\rho).
+\]
+Their respective products with $r_1,r_2$ vanish. This verifies the
+source definition in conserved, rather than merely primitive, variables.
+
+\subsection*{8. Compatibility for the alternative shallow-water system}
+For $\widetilde F=(hv,v^2/2+h)$ the entropy relation reads
+$Q_h=v\eta_h+\eta_v$, $Q_v=h\eta_h+v\eta_v$.
+Equality of their cross derivatives gives
+$\eta_{vv}=h\eta_{hh}$. This is necessary for a flux; convexity of
+$\eta$ is a separate part of being an entropy pair.
+
+\subsection*{9. Mechanical entropy for barotropic gas}
+In conserved variables $(\rho,q)$ put
+$\eta=q^2/(2\rho)+P(\rho)$ with $P''=p'/\rho$.
+A compatible flux is
+\[
+ Q=\frac{q^3}{2\rho^2}+qP'(\rho).
+\]
+Direct differentiation gives $DQ=D\eta DF$. If the affine freedom
+in $P$ is chosen so $\rho P'-P=p$, this is
+$Q=v(\eta+p)$; without that normalization these expressions differ
+by a constant multiple of the mass flux $q$ and one must use the
+compatible expression above. In fact $\rho P'-P-p$ is a constant,
+so choosing the additive constant in $P$ removes it.
+The Hessian quadratic form is
+\[
+ D^2\eta[(a,b),(a,b)]
+ =\frac{p'(\rho)}\rho a^2+\frac1\rho(b-va)^2>0
+ \quad ((a,b)\ne0).
+\]
+Convexity here is in $(\rho,q)$, not asserted in $(\rho,v)$.
+
+\subsection*{10. Gradient flux}
+For $F=D\phi$ take $\eta=|z|^2/2$ and
+$Q=z\cdot D\phi-\phi$. The derivative of $z\cdot D\phi$ is
+$D\phi+z^TD^2\phi$; cancellation leaves $DQ=z^TD^2\phi=D\eta DF$.
+The Hessian of $\eta$ is $I$.
+
+\subsection*{11. Antigradient flux and the generalized elastic energy}
+For $F=(\phi_2,\phi_1)$ and convex $\phi$,
+$\eta=\phi$, $Q=\phi_1\phi_2$. Componentwise,
+$D\eta DF=(\phi_1\phi_{12}+\phi_2\phi_{11},
+\phi_1\phi_{22}+\phi_2\phi_{12})=DQ$.
+For Problem 1 set $P'=p$, $R'=q$, and use
+\[
+ \eta(a,b)=P(a)+R(b),\qquad Q(a,b)=-p(a)q(b).
+\]
+Then $D^2\eta=\operatorname{diag}(p',q')>0$ and the compatibility
+identity follows directly. This energy is obtained by calculation;
+the flux itself need not come from a convex antigradient potential
+with the same sign as in the first part.
+
+\subsection*{12. Several space dimensions}
+For $F=(F_1,\ldots,F_n)$ with $F_j:\Omega\to\R^m$, an entropy
+pair is a convex $\eta$ and $Q=(Q_1,\ldots,Q_n)$ such that
+$DQ_j=D\eta DF_j$ for each $j$.
+Smooth solutions obey $\eta(u)_t+\operatorname{div}Q(u)=0$;
+the entropy inequality for weak solutions is tested against every
+nonnegative compactly supported scalar space-time function.
+
+\subsection*{13. Nonlinear dielectric Maxwell energy}
+With $B_t=-\operatorname{curl}E$, $D_t=\operatorname{curl}H$,
+$E=D_D\eta$, $H=D_B\eta$, the chain rule gives
+\[
+ \eta_t=H\cdot(-\operatorname{curl}E)+E\cdot\operatorname{curl}H
+       =-\operatorname{div}(E\times H).
+\]
+The identity $\operatorname{div}(E\times H)
+=H\cdot\operatorname{curl}E-E\cdot\operatorname{curl}H$
+fixes the sign. To verify the algebraic entropy compatibility, the
+$j$th fluxes for the state $(B,D)$ have components
+$F^{B_i}_j=\epsilon_{ijk}E_k$ and
+$F^{D_i}_j=-\epsilon_{ijk}H_k$. Hence
+$D\eta\,dF_j=H_i\epsilon_{ijk}dE_k-E_i\epsilon_{ijk}dH_k
+=d(E\times H)_j$ (summation over $i,k$).
+Convexity of the given energy supplies the entropy condition.
+
+\subsection*{14. The entropy chord criterion for a scalar shock}
+Let $a=u_l$, $b=u_r$, $a\ne b$, and
+$\sigma=(f(b)-f(a))/(b-a)$. Write
+$\ell(k)=f(a)+\sigma(k-a)$.
+For $a<k<b$, the Kruzhkov jump defect is
+\[
+ [q_k]-\sigma[\eta_k]=2(\ell(k)-f(k)).
+\]
+For $b<k<a$, the defect is $2(f(k)-\ell(k))$.
+Outside the interval it is zero by Rankine--Hugoniot.
+Thus for an increasing jump entropy requires $f\ge\ell$ on $[a,b]$;
+for a decreasing jump it requires $f\le\ell$ on $[b,a]$.
+This also suffices for every smooth convex entropy: on a bounded
+interval any such entropy is an affine function plus a positive
+superposition of $|u-k|$, with weights $\eta''(k)/2$; integrate
+the corresponding jump inequalities. The affine part contributes
+zero by the vector jump identity. Diagram~\ref{fig:tikz-11.4}
+shows the increasing-jump geometry. A uniformly convex $f$ lies
+strictly below every nontrivial chord, so only decreasing shocks
+are allowed.
+
+\subsection*{15. Exact cubic-flux Riemann solution}
+For $f(u)=u^3-u$, $a=-1$, seek a shock to a positive state $b$
+whose speed equals the left edge of a rarefaction:
+\[
+ \frac{f(b)-f(-1)}{b+1}=b^2-b=3b^2-1=f'(b).
+\]
+The nontrivial root is $b=1/2$ and $\sigma=-1/4$.
+The entropy solution is
+\[
+ u(x,t)=\begin{cases}
+ -1,&x/t<-1/4,\\
+ \sqrt{(x/t+1)/3},&-1/4<x/t<2,\\
+ 1,&x/t\ge2.
+ \end{cases}
+\]
+On $[-1,1/2]$,
+$f(u)-\ell(u)=(u+1)(u-1/2)^2\ge0$.
+The shock satisfies the chord criterion and the fan is continuous
+at $x/t=2$. Rankine--Hugoniot and the $O(t)$ trace argument prove
+the weak initial problem. The local scalar contraction theorem
+proves uniqueness in the bounded entropy class with strong local traces;
+these Riemann states are not in $L^1(\R)$.
+
+\subsection*{16. The perturbed sonic shock is curved}
+Take $0<\lambda<1/4$. Label left characteristics by $\alpha<0$:
+\[
+ a(\alpha)=\begin{cases}-1+\lambda,&\alpha\le-1,\\
+ -1-\lambda\alpha,&-1<\alpha<0,
+ \end{cases}\qquad
+ x=\alpha+(3a(\alpha)^2-1)t.
+\]
+Their Jacobian in the sloping part is $1-6\lambda a t>0$, so this
+left region has no characteristic crossings. The initial shock from
+Problem 15 now encounters increasing left states. Let its position
+be $s(t)$, its left trace $a(t)<0$, and its right trace
+$b(t)=-a(t)/2$. Rankine--Hugoniot and tangency give
+\begin{equation}\label{eq:11-sonic-shock}
+ s'=3a^2/4-1=f'(b),\qquad
+ s=\alpha+(3a^2-1)t,\qquad a=-1-\lambda\alpha.
+\end{equation}
+Differentiating the second equation and substituting the first yields
+\[
+ \alpha'=-\frac{9a^2}{4(1-6\lambda a t)},\qquad
+ a'=\frac{9\lambda a^2}{4(1-6\lambda a t)}>0.
+\]
+Thus $s''=(3/2)aa'<0$: the shock bends to the left relative to
+its initial line. An explicit parameterization until it reaches the
+left plateau is, with $r=-a\in[1-\lambda,1]$,
+\[
+ t(r)=\frac4{15\lambda}(r^{-8/3}-r^{-1}),\quad
+ \alpha(r)=\frac{r-1}\lambda,\quad
+ s(r)=\alpha(r)+(3r^2-1)t(r).
+\]
+Indeed the linear ODE for $t(a)$ has integrating factor $(-a)^{8/3}$.
+The plateau is reached at $t_0=t(1-\lambda)$; after that
+$a=-1+\lambda$ and the shock continues linearly with speed
+$3(1-\lambda)^2/4-1$, matching its previous position and tangent.
+
+The right-hand fan is no longer entirely centered at the origin.
+For each emission time $0\le\theta\le\min(t,t_0)$, the tangent ray
+\[
+ x=s(\theta)+s'(\theta)(t-\theta),\qquad u=b(\theta)
+\]
+ fills the region from the shock to $x=-t/4$. Since
+$\partial_\theta x=s''(\theta)(t-\theta)<0$ before $t_0$, these
+rays do not cross in their domain and define the new fan uniquely.
+For $-t/4<x<2t$ retain the original centered fan of Problem 15;
+for $x>2t$ retain $u=1$. On the left use the noncrossing initial
+characteristics up to the shock. The match at $x=-t/4$ has $u=1/2$.
+Each shock jump $a\to-a/2$ obeys
+$f(u)-\ell(u)=(u-a)(u+a/2)^2\ge0$ on that interval,
+so it is admissible even though the fan derivative can be unbounded
+on the sonic boundary. The solution is continuous away from the
+shock, piecewise smooth away from fan edges, and its bounded fluxes
+permit exhaustion by such regions in the weak identity. Equivalently
+one may use the scalar characteristic construction and its continuous
+fan limit. The initial transition region is bounded with an $O(t)$
+perturbation near the origin, yielding the required local trace.
+For a quantitative early-time check,
+\[
+ s(t)=-\tfrac14t-\tfrac{27}{16}\lambda t^2+O(t^3).
+\]
+Keeping the old fan $\sqrt{(x/t+1)/3}$ directly against a curved
+shock would violate the entropy tangency condition. The emitted
+rays are an essential part of the perturbation.
+
+\subsection*{17. Smooth scalar contraction in several dimensions}
+Let $w=u-\widehat u$ and define the smooth vector field
+$b=\int_0^1F'(\widehat u+\theta w)\,d\theta$.
+Then $w_t+\operatorname{div}(bw)=0$.
+To avoid a discontinuous terminal adjoint, use
+$\eta_\delta(w)=\sqrt{w^2+\delta^2}-\delta$.
+The chain rule gives
+\[
+ \partial_t\eta_\delta(w)+\operatorname{div}(b\eta_\delta(w))
+ =\{\eta_\delta(w)-w\eta_\delta'(w)\}\operatorname{div}b.
+\]
+The expression in braces has absolute value at most $\delta$ and
+is zero where $w=0$. On a finite time strip with common compact
+spatial support and smooth bounded derivatives, integrate and use
+$\delta\int|\operatorname{div}b|$ on that compact set as an error.
+It tends to zero. Dominated convergence gives
+$\|w(t)\|_1=\|w(0)\|_1$, which is stronger than contraction as long
+as both solutions remain smooth. Uniform compact support on a finite
+strip follows from bounded speeds and initially compact support in
+the smooth regime, or may be assumed explicitly in this calculation.
+After shocks form the smooth renormalization argument no longer
+applies, and only entropy contraction remains available.

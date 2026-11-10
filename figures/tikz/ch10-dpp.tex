@@ -1,0 +1,20 @@
+\begin{tikzpicture}[pde diagram,x=1cm,y=1cm]
+\draw[pde axis] (-.2,-1.25)--(9,-1.25) node[right] {$s$};
+\draw[dashed,draw=LumenMuted] (0,-1.25)--(0,2);
+\draw[dashed,draw=LumenMuted] (4,-1.25)--(4,2);
+\draw[dashed,draw=LumenMuted] (8,-1.25)--(8,2);
+\node[below] at (0,-1.25) {$t$};
+\node[below] at (4,-1.25) {$t+h$};
+\node[below] at (8,-1.25) {$T$};
+\draw[pde curve] (0,0) .. controls (1.3,-.2) and (2.7,.9) .. (4,1);
+\draw[pde warm] (4,1) .. controls (5.4,1.2) and (6.5,-.7) .. (8,-.4);
+\node[pde dot] at (0,0) {};
+\node[pde dot] at (4,1) {};
+\node[pde dot] at (8,-.4) {};
+\node[above left] at (0,0) {$x$};
+\node[above left] at (4,1) {$z$};
+\node[above] at (2,1.6) {prefix $\alpha_1$};
+\node[above] at (6,1.6) {$\delta$-optimal tail $\alpha_2$};
+\node[pde tiny,align=center] at (2,-.6) {$\int_t^{t+h}r(X(s),\alpha_1(s))ds$};
+\node[pde tiny,align=center] at (6,-.8) {tail cost $\leq V(z,t+h)+\delta$};
+\end{tikzpicture}

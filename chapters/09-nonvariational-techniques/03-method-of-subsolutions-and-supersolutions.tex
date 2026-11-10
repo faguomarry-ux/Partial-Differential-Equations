@@ -1,13 +1,77 @@
-% Evans second edition, section 9.3.
-% English source: printed p. 510; PDF page 527 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{Method of Subsolutions and Supersolutions}
+% Evans 9.3: printed pp.510--514; English PDF pp.527--531.
+% Chinese: printed p.360 / scan p.378.
+\section[Method of Subsolutions and Supersolutions]{Method of Subsolutions\texorpdfstring{\\}{ }and Supersolutions}
 \label{sec:9-3}
+\Needspace{40mm}
+\subsection{Weak order and boundary traces}
+Let $f:\R\to\R$ be globally Lipschitz, with constant $L$. For
+$\underline u,\overline u\in H^1(U)$, call them a subsolution and a
+supersolution of $-\Delta u=f(u)$ when, for all nonnegative $v\in H^1_0(U)$,
+\[
+ \int D\underline u\cdot Dv\leq\int f(\underline u)v,\qquad
+ \int D\overline u\cdot Dv\geq\int f(\overline u)v.
+\]
+The boundary conditions required below are inequalities of Sobolev traces,
+not pointwise values of arbitrary representatives.
+\Needspace{50mm}
+\begin{theorem}[Ordered existence; source Theorem 1]
+If $\underline u\leq\overline u$ a.e. and
+$\underline u|_{\partial U}\leq0\leq\overline u|_{\partial U}$,
+there is a weak solution $u\in H^1_0(U)$ between them.
+The increasing and decreasing iterations give respectively the least and
+greatest weak solution in this order interval.
+\end{theorem}
+\begin{expandedproof}[comparison, domination, and strong convergence]
+Choose $\lambda\geq L$, $\lambda>0$, so $h(s)=f(s)+\lambda s$ is
+nondecreasing. Starting from $u_0=\underline u$, solve
+\begin{equation}\label{eq:9-order-iteration}
+ (-\Delta+\lambda)u_{k+1}=h(u_k),\qquad u_{k+1}\in H^1_0(U).
+\end{equation}
+The forcing is in $L^2$ and Lax--Milgram gives every iterate.
+Subtract the equation for $u_1$ from the subsolution inequality after
+adding the same $\lambda\underline u$ term. Test by
+$v=(\underline u-u_1)_+$. The trace inequality makes $v\in H^1_0$,
+and the Sobolev truncation rule gives
+$\|Dv\|_2^2+\lambda\|v\|_2^2\leq0$. Hence $u_0\leq u_1$.
 
-\PDEPending
+If $u_{k-1}\leq u_k$, subtract successive equations and test by
+$(u_k-u_{k+1})_+$. Since $h(u_{k-1})\leq h(u_k)$, the same reasoning
+gives $u_k\leq u_{k+1}$. Comparing with the supersolution using
+$(u_{k+1}-\overline u)_+$ gives $u_{k+1}\leq\overline u$ whenever
+$u_k\leq\overline u$. Thus
+\[
+ \underline u=u_0\leq u_1\leq\cdots\leq u_k\leq\overline u.
+\]
+The pointwise limit $u$ exists a.e. Also
+$|u_k|\leq|\underline u|+|\overline u|\in L^2$; dominated convergence
+gives $u_k\to u$ in $L^2$. The Lipschitz property gives
+$h(u_k)\to h(u)$ in $L^2$. The bounded inverse
+$(-\Delta+\lambda)^{-1}:L^2\to H^1_0$ now shows that
+$u_{k+1}\to(-\Delta+\lambda)^{-1}h(u)$ strongly in $H^1_0$.
+Its $L^2$ limit was $u$, hence $u$ is this inverse image and solves
+the nonlinear equation after cancellation of $\lambda u$.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+If $v$ is any solution in the interval, induction by the same comparison
+gives $u_k\leq v$, hence $u\leq v$. Starting instead at $\overline u$
+gives a decreasing sequence and the greatest solution. These extremal
+properties are editorial consequences; uniqueness is not asserted.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{正部测试的合法性}{当边界迹满足 $a\leq b$ 时，$(a-b)_+$ 的迹为零，因此属于 $H^1_0$。没有边界序，积分中的非负项不能用来推出全域比较。}
+\PDEBodyDiagram{9.2}{Two ordered iterations trap the solution.}
+{For $-u''=1$ on $(0,1)$ with zero endpoint data, take $u_0=0$, $\overline u_0=x(1-x)$ and shift $\lambda=4$. The curves show the exact first lower and upper iterates and the solution $u=x(1-x)/2$. Later lower iterates increase and upper iterates decrease in the pointwise order.}
+{ch09-order}
+\Needspace{40mm}
+\subsection{Local nonlinearities and the limits of comparison}
+If the barriers are bounded and $f$ is only Lipschitz on their common
+value interval $[a,b]$, extend $f|_{[a,b]}$ to a globally Lipschitz
+function (for example by constant continuation outside). The iteration
+stays between the barriers, so the resulting equation uses the original
+$f$. This is a useful editorial localization of the source's hypothesis.
+\Needspace{42mm}
+\PDEAnnotation{上下解不保证唯一}{对 $-\Delta u=\lambda_1u$，零解和任意倍数的第一特征函数都是解。顺序构造给出区间内极小、极大解；唯一性需要额外结构。}
+If $f$ is nonincreasing, two solutions with the same trace are identical:
+testing their difference gives
+$\|D(u-v)\|_2^2=\int(f(u)-f(v))(u-v)\leq0$.
+More generally uniqueness follows when $\operatorname{Lip}(f)C_P^2<1$.
+This uses a quantitative bound; mere smoothness is insufficient.

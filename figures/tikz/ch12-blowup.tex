@@ -1,0 +1,21 @@
+\begin{tikzpicture}[pde diagram]
+\begin{scope}[x=3.5cm,y=2cm]
+\draw[pde axis] (0,0)--(1.1,0) node[right] {$t$};
+\draw[pde axis] (0,-.28)--(0,1.2) node[above] {$J$};
+\draw[pde curve,domain=0:.8284,samples=60] plot (\x,{1-\x-.25*(\x)^2});
+\draw[pde curve,dashed,domain=.8284:1,samples=25] plot (\x,{1-\x-.25*(\x)^2});
+\draw[pde warm,dashed] (.1,.92)--(1,-.16);
+\node[pde dot] at (.4,.56) {};
+\node[pde tiny,align=center] at (.51,1.06) {tangent forces\\a zero in finite time};
+\end{scope}
+\begin{scope}[shift={(6,0)},x=1.65cm,y=.7cm]
+\draw[pde axis] (1,0)--(3.35,0) node[right] {$p$};
+\draw[pde axis] (1,0)--(1,4.6) node[above] {$\mu_0$};
+\draw[pde curve,domain=1:3,samples=70] plot (\x,{(\x-1)^2});
+\draw[pde warm,dashed] (1,2)--(3.1,2);
+\draw[dashed,draw=LumenMuted] (2.4142,0)--(2.4142,2);
+\node[pde tiny,left] at (1,2) {$2$};
+\node[pde tiny,below] at (2.4142,0) {$1+\sqrt2$};
+\node[pde tiny,fill=white] at (2.1,3.6) {$\mu_0=(p-1)^2$};
+\end{scope}
+\end{tikzpicture}

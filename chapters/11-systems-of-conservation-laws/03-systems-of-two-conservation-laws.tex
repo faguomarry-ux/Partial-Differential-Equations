@@ -1,13 +1,144 @@
-% Evans second edition, section 11.3.
-% English source: printed p. 595; PDF page 612 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 11.3, printed pp.595--601; English PDF pp.612--618.
+% Chinese start: printed p.421 / scan p.439.
 \section{Systems of Two Conservation Laws}
 \label{sec:11-3}
+\subsection{Local Riemann coordinates}
+In this section $m=2$. Evans calls $w_i$ an $i$th Riemann invariant
+when $Dw_i\cdot r_i=0$: it is constant on the state-space curve $R_i$.
+A useful coordinate must also have $Dw_i\ne0$.
+\begin{lemma}[Existence of local invariant coordinates; editorial detail]
+Near a strictly hyperbolic state there are smooth $w_1,w_2$ satisfying
+$Dw_i\cdot r_i=0$ and $\det D(w_1,w_2)\ne0$.
+\end{lemma}
+\begin{expandedproof}[flow-box construction]
+Choose a short curve $\Gamma(a)$ transverse to $r_i$ at the base
+point. Let $X(s,a)$ solve $X_s=r_i(X)$, $X(0,a)=\Gamma(a)$.
+At the base point the two columns $r_i,\Gamma'$ are independent,
+so the inverse function theorem makes $(s,a)$ local coordinates.
+Define $w_i(X(s,a))=a$. Then $Dw_i r_i=0$ and $Dw_i\ne0$.
+In two dimensions the annihilator of $r_i$ is spanned by $l_j$,
+$j\ne i$. Thus $Dw_1$ and $Dw_2$ are nonzero multiples of
+independent left eigenvectors. After intersecting their neighborhoods,
+the two functions together are coordinates.
+\end{expandedproof}
 
-\PDEPending
+\begin{theorem}[Diagonal form; source \S11.3.1, Theorem 1]
+For a smooth solution, set $v_i=w_i(u)$ and express $u=z(v_1,v_2)$.
+Then
+\begin{equation}\label{eq:11-diagonal}
+ (v_1)_t+\lambda_2(v)(v_1)_x=0,\qquad
+ (v_2)_t+\lambda_1(v)(v_2)_x=0.
+\end{equation}
+Here $\lambda_i(v)$ means $\lambda_i(z(v))$.
+\end{theorem}
+\begin{expandedproof}[why the indices cross]
+Because $Dw_i$ is parallel to $l_j$, $j\ne i$,
+$Dw_i(-DF+\lambda_jI)u_x=0$. The chain rule gives the displayed
+transport equation. Along a curve $X'=\lambda_j(u(X,t))$ its $v_i$
+value is constant. Also $z_{v_j}$ is a nonzero multiple of $r_i$
+for $i\ne j$: it lies in the kernel of $Dw_i$ and cannot be zero
+since $Dz$ is invertible. Therefore genuine nonlinearity of family
+$i$ is equivalent to $\partial_{v_j}\lambda_i\ne0$. The transport
+speeds still depend on both invariants, so the diagonal equations
+are coupled, not independent scalar equations.
+\end{expandedproof}
+\PDEAnnotation{两种“不变”曲线}{按 Evans 的编号，$w_1$ 在状态空间
+沿 $R_1$ 不变，但 $w_1(u(x,t))$ 沿时空的 $\lambda_2$ 特征线不变。
+这两个陈述分别使用右特征向量与另一族左特征向量，并不矛盾。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+For barotropic gas in conserved variables $(\rho,q)$,
+\[
+ F=(q,q^2/\rho+p(\rho)),\qquad \rho>0,\quad p'>0.
+\]
+In primitive variables $(\rho,v)$, $v=q/\rho$, the matrix is
+$\left(\begin{smallmatrix}v&\rho\\p'/\rho&v\end{smallmatrix}\right)$,
+with speeds $v\mp c$, $c=\sqrt{p'}$. Put
+\begin{equation}\label{eq:11-gas-invariants}
+ I(\rho)=\int_{\rho_*}^{\rho}\frac{c(s)}s\,ds,\qquad
+ w_1=I(\rho)+v,\quad w_2=I(\rho)-v.
+\end{equation}
+The Jacobian determinant in $(\rho,v)$ is $-2c/\rho\ne0$.
+Direct substitution of
+$\rho_t+v\rho_x+\rho v_x=0$ and
+$v_t+vv_x+(c^2/\rho)\rho_x=0$ proves
+$D_+w_1=0$, $D_-w_2=0$, where $D_\pm=\partial_t+(v\pm c)\partial_x$.
+These equations use only the barotropic mass--momentum model.
+It is not necessary to impose the full Euler energy equation with
+constant internal energy.
+\PDEAnnotation{远离真空的条件}{当 $\rho\downarrow0$，$c/\rho$
+可能发散，特征间隙也可能消失。局部坐标可逆不保证整个解的值域
+始终留在同一张坐标图中；下面的爆破定理显式规定紧矩形值域。}
+
+\subsection{Compression and a weighted Riccati equation}
+We give a version of source \S11.3.2, Theorem 2 with its uniformity
+assumptions explicit. Suppose the characteristic variables exist on
+an open set containing the closed rectangle
+$K=[A_1,B_1]\times[A_2,B_2]$. Assume the coefficients are $C^2$ there,
+\begin{equation}\label{eq:11-blowup-assumptions}
+ \lambda_2-\lambda_1\ge d>0,\qquad
+ \partial_{v_1}\lambda_2\ge c_0>0,\qquad
+ \partial_{v_2}\lambda_1\ge c_0>0 \quad\hbox{on }K.
+\end{equation}
+The signs can be obtained from genuine nonlinearity by suitable
+orientations of the two invariant coordinates on a connected chart.
+\begin{theorem}[Finite-time loss of smoothness]
+Suppose the smooth initial invariants range in $K$, and a classical
+solution remains in this chart with range in $K$ while it exists.
+If either initial derivative $(v_1)_x$ or $(v_2)_x$ is negative
+somewhere, it cannot remain a classical solution for all positive time.
+More precisely a weighted derivative diverges to $-\infty$ in a
+finite bounded time unless the assumed smooth regime ends sooner.
+\end{theorem}
+\PDEAnnotation{爆破的是梯度}{输运使 $v_i$ 保持初值范围，
+而 $e^H(v_1)_x$ 满足负二次 ODE。
+证明使用的是系数的一致正下界；只有逐点正性而没有紧值域控制，
+不能据此断言积分必在有限时刻达到临界值。}
+\begin{expandedproof}[removing the mixed derivative term]
+Set $a=(v_1)_x$, $b=(v_2)_x$ and $D_2=\partial_t+\lambda_2\partial_x$.
+Differentiating the first equation in \eqref{eq:11-diagonal} gives
+\[
+ D_2a=-(\partial_1\lambda_2)a^2-(\partial_2\lambda_2)ab,
+ \qquad D_2v_2=(\lambda_2-\lambda_1)b.
+\]
+Choose $H$ with
+\[
+ H(v_1,v_2)=\int_{A_2}^{v_2}
+ \frac{\partial_2\lambda_2(v_1,s)}{\lambda_2(v_1,s)-\lambda_1(v_1,s)}\,ds.
+\]
+Along a $\lambda_2$ characteristic, $v_1$ is constant, so
+$D_2H=(\partial_2\lambda_2)b$. For $y=e^H a$ the mixed term cancels:
+\begin{equation}\label{eq:11-riccati}
+ \frac{dy}{dt}=-k(t)y^2,\qquad
+ k=e^{-H}\partial_1\lambda_2\ge\kappa>0.
+\end{equation}
+The lower bound follows from compactness of $K$ and
+\eqref{eq:11-blowup-assumptions}, not merely pointwise positivity.
+If $y(0)<0$, uniqueness preserves its sign before blow-up, and
+\[
+ \frac1{y(t)}=\frac1{y(0)}+\int_0^t k(s)\,ds.
+\]
+The denominator reaches zero no later than
+$T_*=-1/(\kappa y(0))$. Thus a globally finite derivative is impossible.
+For $b$, use $D_1=\partial_t+\lambda_1\partial_x$ and a weight
+$J$ satisfying $\partial_1J=\partial_1\lambda_1/(\lambda_1-\lambda_2)$;
+then $D_1(e^Jb)=-e^{-J}\partial_2\lambda_1(e^Jb)^2$.
+
+On a smooth solution confined to the chart, the characteristic speeds
+are bounded and locally Lipschitz in space, so the characteristics
+exist on every finite smooth time strip. Each invariant is transported
+from its initial range; this explains invariance of the rectangle
+provided the chart covers that entire rectangle. It does not supply
+a missing global inverse chart. Smooth compactly supported perturbations
+of a constant state have bounded invariant ranges. Any nonconstant
+one of these invariants, with equal limits at $\pm\infty$, has a
+negative derivative somewhere, so the criterion applies under the
+stated chart and uniformity assumptions.
+\end{expandedproof}
+\PDEBodyDiagram{11.3}{Compression reaches a vertical slope}
+{An exact simple-wave example is the scalar Burgers characteristic map
+$x=\alpha+t\,g(\alpha)$ for $g(\alpha)=-\alpha$ on a local interval.
+Its Jacobian is $1-t$, and $u_x=-1/(1-t)$ until $t=1$.
+The second panel plots this derivative. For two-field systems, the
+weight in \eqref{eq:11-riccati} removes the mixed interaction and
+recovers the same Riccati mechanism; the drawn map is the scalar model.}
+{ch11-compression}

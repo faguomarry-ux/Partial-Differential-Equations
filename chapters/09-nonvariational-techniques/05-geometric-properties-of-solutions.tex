@@ -1,13 +1,132 @@
-% Evans second edition, section 9.5.
-% English source: printed p. 521; PDF page 538 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 9.5: printed pp.521--526; English PDF pp.538--543.
+% Chinese: printed p.367 / scan p.385.
 \section{Geometric Properties of Solutions}
 \label{sec:9-5}
+\Needspace{40mm}
+\subsection{Dilation derivatives and star-shaped level sets}
+Let $V\Subset W$ be smooth bounded star-shaped domains about $0$, with
+$0\in V$, and assume $U=W\setminus\overline V$ is connected. Suppose
+$u$ is harmonic in $U$, smooth up to the boundary, equal to $1$ on
+$\partial V$ and $0$ on $\partial W$.
+\Needspace{50mm}
+\begin{theorem}[Source \S9.5.1, Theorem 1]
+For $0<\ell<1$, the level surface $\{u=\ell\}$ is smooth and bounds
+a star-shaped set. In fact $x\cdot Du<0$ throughout $U$.
+\end{theorem}
+\begin{expandedproof}[the sign on the inner boundary]
+The maximum principle gives $0<u<1$. Set $v=x\cdot Du$.
+The commutator formula
+$\Delta(x\cdot Du)=2\Delta u+x\cdot D\Delta u$ shows that $v$ is harmonic.
+On the outer boundary $Du$ is a negative multiple of the outward normal
+of $W$, and $x\cdot\nu_W\geq0$, so $v\leq0$.
+On the inner boundary $Du$ points into $V$, hence is a negative multiple
+of its outward normal $\nu_V$; once more $v\leq0$.
+The strong maximum principle gives either $v<0$ or $v\equiv0$ in the
+connected shell. The latter is impossible: on each ray joining the two
+boundaries it would make $u$ constant, contrary to the values $1,0$.
+Thus $v<0$, so $Du\ne0$ in $U$ and the implicit function theorem makes
+every intermediate level smooth.
 
-\PDEPending
+Extend $u=1$ inside $V$. On a ray $r\omega$, star-shapedness of the two
+domains makes their intersections initial radial intervals. In the shell,
+$\partial_r u(r\omega)=v(r\omega)/r<0$. Therefore each ray crosses an
+intermediate level exactly once, and its superlevel set contains every
+segment from $0$ to one of its points. This proves star-shapedness
+directly, including the global radial geometry.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{内边界法向易混}{相对于壳域 $U$，内边界外法向指向 $V$；相对于 $V$ 则方向相反。证明中用 $\nu_V$，于是 $Du$ 为其负倍数，两层边界都给 $x\cdot Du\leq0$。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{40mm}
+\subsection{Maximum principles on a small set}
+For moving planes the zero-order coefficient need not have a sign.
+We record two precise substitutes for an unrestricted maximum principle.
+\Needspace{50mm}
+\begin{lemma}[Nonnegative supersolutions; source \S9.5.2, Lemma 1]
+Let $D$ be connected, $c\in L^\infty(D)$, and $v\geq0$, $v\not\equiv0$
+satisfy $-\Delta v+cv\geq0$ classically. Then $v>0$ in $D$.
+At a zero boundary point with an interior tangent ball and $C^1$
+regularity, $\partial_\nu v<0$.
+\end{lemma}
+\begin{expandedproof}[remove the zero-order term]
+Put $v=e^{kx_1}w$ with $k^2\geq\|c\|_\infty$.
+Then $w\geq0$ and
+$-\Delta w-2kw_{x_1}\geq(k^2-c)w\geq0$.
+The strong maximum principle and Hopf's lemma for this operator, whose
+zero-order coefficient is zero, apply. At a zero of $v$,
+$\partial_\nu w=e^{-kx_1}\partial_\nu v$, giving the asserted sign.
+\end{expandedproof}
+\Needspace{50mm}
+\begin{lemma}[Small-support comparison; editorial supplement]
+Fix a ball $B$ and $L\geq0$. There is $\delta>0$ such that if
+$D\subset B$, $w_-\in H^1_0(D)$, $-\Delta w=c(x)w$,
+$|c|\leq L$, and $|\{w<0\}|<\delta$, then $w\geq0$.
+\end{lemma}
+\begin{expandedproof}[the quantitative continuation step]
+Choose $q>2$ for which $\|z\|_{L^q(B)}\leq C_B\|Dz\|_2$ on
+$H^1_0(B)$ (take $q=2n/(n-2)$ if $n\geq3$, and $q=4$ if $n=1,2$).
+Extend $w_-$ by zero. Testing the equation with $-w_-$ gives
+\[
+ \|Dw_-\|_2^2\leq L\|w_-\|_2^2
+ \leq LC_B^2|\{w<0\}|^{1-2/q}\|Dw_-\|_2^2.
+\]
+Choose $LC_B^2\delta^{1-2/q}<1$ and absorb. Poincar\'e gives $w_-=0$.
+The constant depends on the containing ball, not on the shape of $D$.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{小区域替代系数符号}{比较差满足 $-\Delta w=cw$，$c$ 可正可负。负部支集足够小时，Sobolev 与 H\"older 给出小因子，才能吸收 $L\|w_-\|_2^2$；普通最大值原理不能直接套用。}
+
+\Needspace{40mm}
+\subsection{Moving planes and radial symmetry}
+Let $B=B_1(0)$, let $f$ be Lipschitz on $[0,\max u]$, and suppose
+$u\in C^2(\overline B)$, $-\Delta u=f(u)$, $u>0$ in $B$, $u=0$ on
+$\partial B$. For $0\leq\lambda<1$, set
+\[
+ \Sigma_\lambda=B\cap\{x_n>\lambda\},\quad
+ x^\lambda=(x',2\lambda-x_n),\quad
+ w_\lambda(x)=u(x^\lambda)-u(x).
+\]
+Reflection keeps the cap inside the ball. The difference satisfies
+$-\Delta w_\lambda=c_\lambda w_\lambda$ with $|c_\lambda|\leq L$,
+using the difference quotient of $f$ (set it to zero where the two values
+agree). On the plane $w_\lambda=0$; on the spherical cap it is
+nonnegative, and strictly positive away from the rim when $\lambda>0$.
+\Needspace{50mm}
+\begin{theorem}[Radial symmetry; source Theorem 2]
+There is a radial profile $u(x)=v(|x|)$ and $v'(r)<0$ for $0<r<1$.
+\end{theorem}
+\begin{expandedproof}[start, stop, and continue the plane]
+For $\lambda$ close to $1$ the cap has measure less than $\delta$ from
+the small-support lemma. Its boundary values imply
+$(w_\lambda)_-\in H^1_0(\Sigma_\lambda)$; the lemma gives
+$w_\lambda\geq0$. The previous strong principle gives $w_\lambda>0$.
+Let $\lambda_0$ be the infimum of positions such that all planes further
+out have this comparison. Continuity gives $w_{\lambda_0}\geq0$.
+
+If $\lambda_0>0$, the spherical boundary values exclude
+$w_{\lambda_0}\equiv0$, hence $w_{\lambda_0}>0$ in the cap. Choose a
+compact set $K\Subset\Sigma_{\lambda_0}$ whose complement in the cap
+has measure less than $\delta/2$. On $K$ the minimum of
+$w_{\lambda_0}$ is positive. Uniform continuity therefore gives
+$w_\lambda>0$ on $K$ for all $\lambda$ slightly below $\lambda_0$.
+The extra thin slice of the cap has measure less than $\delta/2$.
+Thus any negative set of $w_\lambda$ has measure less than $\delta$;
+the small-support lemma excludes it. The strong principle restores strict
+positivity, contradicting the stopping definition. Hence $\lambda_0=0$.
+
+At $\lambda=0$ one inequality follows. Repeating from the opposite pole
+gives the reverse inequality, so $u$ is symmetric in the central plane.
+Rotate the argument to every direction: invariance under all reflections
+through $0$ makes $u$ radial. For $0<\lambda<1$, Hopf at an interior
+point of the flat face gives $\partial_\nu w_\lambda<0$ with
+$\nu=-e_n$. Since $(w_\lambda)_{x_n}=-2u_{x_n}$ there,
+$u_{x_n}<0$ on that face. Taking $x=re_n$, $\lambda=r$, proves
+$v'(r)<0$. At the center the gradient is zero by symmetry.
+This proof replaces the source's boundary-derivative continuation with a
+fully quantified small-support argument; it covers the same positive ball problem.
+\end{expandedproof}
+\PDEBodyDiagram{9.3}{Reflection and the region available for continuation.}
+{The cap $\Sigma_\lambda$ reflects inside the unit ball. At a proposed positive stopping position, comparison is uniformly strict on a compact core $K$. Any negative part for a nearby plane must lie in the thin remainder, where the small-support estimate excludes it. Geometry is schematic; the equation is scalar and $u>0$ is essential.}
+{ch09-moving-plane}
+\Needspace{42mm}
+\PDEAnnotation{正性和球形的用途}{球形保证反射帽仍在定义域内；正性给球面边界上的严格比较，从而排除正停止位置。一般区域或变号解不能据此推出径向对称。}

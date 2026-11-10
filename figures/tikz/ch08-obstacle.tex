@@ -1,0 +1,23 @@
+% Exact one-dimensional obstacle solution, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=4.4cm,y=2.3cm]
+ \fill[LumenAccent!8] (-.5,-.34) rectangle (.5,1.12);
+ \draw[pde axis] (-1.18,0)--(1.25,0) node[right] {$x$};
+ \draw[pde axis] (0,-.45)--(0,1.35);
+ \draw[LumenWarm,dashed,domain=-1:1,samples=80] plot(\x,{1-4*\x*\x/3});
+ \draw[pde curve] (-1,0)--(-.5,2/3);
+ \draw[pde curve,domain=-.5:.5,samples=60] plot(\x,{1-4*\x*\x/3});
+ \draw[pde curve] (.5,2/3)--(1,0);
+ \foreach \a in {-.5,.5}{
+  \draw[LumenMuted,dotted] (\a,0)--(\a,2/3);
+  \fill[LumenAccent] (\a,2/3) circle[radius=2pt];
+ }
+ \node[below,pde tiny] at (-1,0) {$-1$};
+ \node[below,pde tiny] at (1,0) {$1$};
+ \node[below,pde tiny] at (-.5,0) {$-1/2$};
+ \node[below,pde tiny] at (.5,0) {$1/2$};
+ \node[above,pde tiny] at (.12,1.1) {contact: $u=h$};
+ \node[above,pde tiny] at (.82,.32) {$u$};
+ \node[below right,pde tiny,text=LumenWarm] at (.9,-.12) {$h$};
+ \node[pde tiny] at (-.75,.82) {$-u''=0$};
+ \node[pde tiny] at (.75,.82) {$-u''=0$};
+\end{tikzpicture}

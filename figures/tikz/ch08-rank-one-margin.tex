@@ -1,0 +1,9 @@
+% Original editorial matrix-direction diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,pde tiny,x=1cm,y=1cm]
+ \node[pde box,text width=2.6cm] at (1.35,2.1)
+ {$P+t\,a\otimes b$\\$\det$: affine in $t$};
+ \draw[pde axis] (0,0)--(2.8,0) node[right] {$t$};
+ \draw[pde axis] (1.35,-.1)--(1.35,1.3);
+ \draw[pde warm,domain=-1:1,samples=40] plot ({1.35+\x},{\x*\x});
+ \node[above,pde tiny] at (1.35,1.15) {$\det(tI)=t^2$};
+\end{tikzpicture}

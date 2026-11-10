@@ -1,0 +1,11 @@
+% Standalone: latexmk -xelatex -halt-on-error chapter-10.tex
+\documentclass[cover=pde,margin=right,12pt,fonts=tex,fontset=fandol,language=english]{lumenbook}
+\input{book-info}
+\input{config/pde-macros}
+\input{config/pde-layout}
+\setcounter{tocdepth}{1}
+\begin{document}
+\mainmatter
+\setcounter{chapter}{9}
+\input{chapters/10-hamilton-jacobi-equations/chapter}
+\end{document}

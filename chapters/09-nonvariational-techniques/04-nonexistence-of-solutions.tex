@@ -1,13 +1,131 @@
-% Evans second edition, section 9.4.
-% English source: printed p. 514; PDF page 531 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 9.4: printed pp.514--521; English PDF pp.531--538.
+% Chinese: printed p.363 / scan p.381.
 \section{Nonexistence of Solutions}
 \label{sec:9-4}
+\Needspace{40mm}
+\subsection{Large data: a weighted moment becomes infinite}
+Assume $U$ is connected and let $\phi_1>0$ be the first Dirichlet
+eigenfunction, $-\Delta\phi_1=\lambda_1\phi_1$, normalized by
+$\int_U\phi_1=1$. For the problem $u_t-\Delta u=u^2$,
+$u|_{\partial U}=0$, $u(0)=g\geq0$, take a classical solution with enough
+boundary regularity for Green's identity. The maximum principle gives
+$u\geq0$ as long as it exists.
+\Needspace{50mm}
+\begin{theorem}[Large-data obstruction; source \S9.4.1, Theorem 1]
+If $\eta_0=\int g\phi_1>\lambda_1$, a classical solution cannot persist
+through the time
+\[
+ T_*={1\over\lambda_1}\log{\eta_0\over\eta_0-\lambda_1}.
+\]
+This is an upper bound for its lifespan, not necessarily its actual blow-up time.
+\end{theorem}
+\begin{expandedproof}[normalization gives Jensen's inequality]
+Set $\eta(t)=\int u(t)\phi_1$. Both $u$ and $\phi_1$ vanish on the
+boundary, so the two boundary terms in Green's second identity vanish.
+Consequently
+\[
+ \eta'=-\lambda_1\eta+\int u^2\phi_1
+ \geq-\lambda_1\eta+\eta^2.
+\]
+The last step uses the probability measure $\phi_1dx$. Comparison with
+the scalar ODE, or integration of $\xi=e^{\lambda_1t}\eta$, gives
+\[
+ \eta(t)\geq {\lambda_1\eta_0e^{-\lambda_1t}
+ \over\lambda_1-\eta_0(1-e^{-\lambda_1t})}\qquad(0\leq t<T_*).
+\]
+The denominator stays positive until $T_*$ and tends to zero there.
+If the PDE solution existed smoothly through that time, its finite moment
+would contradict this bound. It might cease to exist earlier. Moreover
+$\eta(t)\leq\|u(t)\|_\infty$, so moment divergence implies amplitude
+divergence when the solution persists up to the comparison time.
+\end{expandedproof}
+\PDEMarginDiagram{9.M}{反应与扩散的阈值}
+{归一化为 $\lambda_1=1$ 后，比较 ODE 为 $y'=y(y-1)$。箭头只表示这个 ODE 的相线；$y_0\leq1$ 时不能据此断言 PDE 全局存在。}
+{ch09-blowup-margin}
 
-\PDEPending
+\Needspace{40mm}
+\subsection{Subcritical Fujita blow-up in all of space}
+\Needspace{50mm}
+\begin{theorem}[Small-data obstruction; source Theorem 2]
+Let $g\in C_c^\infty(\R^n)$ be nonnegative and nonzero. If
+$1<p<1+2/n$, there is no global nonnegative classical solution of
+$u_t-\Delta u=u^p$ in the class $C([0,T];L^1\cap L^\infty)$ for every
+finite $T$. This class supplies the decay and integrability for the calculation.
+\end{theorem}
+\begin{expandedproof}[a scale selected after the initial datum]
+Fix $s>0$, put $\Phi_s(x)=(4\pi s)^{-n/2}e^{-|x|^2/(4s)}$, and set
+$\eta(t)=\int u(t)\Phi_s$. Since
+\[
+ \Delta\Phi_s=\left({|x|^2\over4s^2}-{n\over2s}\right)\Phi_s,
+ \qquad \int\Phi_s=1,
+\]
+Green's identity and Jensen give
+$\eta'\geq-\lambda\eta+\eta^p$ with $\lambda=n/(2s)$.
+To justify the identity on $\R^n$, test first with $\chi_R\Phi_s$.
+After integrating by parts onto this compactly supported test, the errors
+$u(2D\chi_R\cdot D\Phi_s+\Phi_s\Delta\chi_R)$ tend to zero.
+On each finite time interval, the assumed $L^1,L^\infty$ bounds also
+control $u^p$; dominated convergence gives the integral differential
+identity. Thus no unproved decay of $Du$ is required.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+The comparison ODE blows up if $\eta(0)^{p-1}>\lambda$.
+This condition is equivalent to
+\[
+ (4\pi)^{-n/2}\int g(x)e^{-|x|^2/(4s)}dx
+ > (n/2)^{1/(p-1)}s^{\,n/2-1/(p-1)}.
+\]
+As $s\to\infty$, the left side tends to a positive constant and the right
+side tends to zero, since $p<1+2/n$. Choose one such finite $s$; the
+ODE comparison then forbids a global solution. At $p=1+2/n$ the right
+side is constant: this argument does not establish the endpoint.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{两个临界指数}{热方程这里出现 $1+2/n$，来自质量与扩散尺度；椭圆 Pohozaev 中出现 $(n+2)/(n-2)$，来自 Dirichlet 能量与幂次能量的尺度。两者不能混同。}
+
+\Needspace{40mm}
+\subsection{The full Derrick--Pohozaev identity}
+Let $n\geq3$, $f\in C(\R)$, $F(s)=\int_0^sf(r)dr$, and
+$u\in C^2(\overline U)$ solve $-\Delta u=f(u)$ with zero boundary data.
+\Needspace{50mm}
+\begin{theorem}[Identity and nonexistence; source \S9.4.2, Theorem 3]
+One has
+\begin{equation}\label{eq:9-pohozaev}
+ {n-2\over2}\int_U|Du|^2
+ +{1\over2}\int_{\partial U}(x\cdot\nu)(\partial_\nu u)^2
+ =n\int_U F(u).
+\end{equation}
+If $U$ is star-shaped about $0$ and $f(u)=|u|^{p-1}u$ with
+$p>(n+2)/(n-2)$, then $u\equiv0$.
+\end{theorem}
+\begin{expandedproof}[every boundary term retained]
+Introduce the vector field
+$Q=(x\cdot Du)Du-x|Du|^2/2$. Direct differentiation cancels the Hessian
+cross terms and yields
+\[
+ \operatorname{div}Q=(x\cdot Du)\Delta u+{2-n\over2}|Du|^2.
+\]
+On $\partial U$, all tangential derivatives of $u$ vanish, so
+$Du=(\partial_\nu u)\nu$ and
+$Q\cdot\nu=(x\cdot\nu)(\partial_\nu u)^2/2$.
+Also $f(u)x\cdot Du=x\cdot DF(u)$, and
+$\int x\cdot DF(u)=-n\int F(u)$ since $F(0)=0$ on the boundary.
+The divergence theorem gives \eqref{eq:9-pohozaev} with the displayed signs.
+
+For a $C^1$ star-shaped boundary, choose a local defining function
+$\rho$ with $U=\{\rho<0\}$. Since $(1-t)x\in\overline U$ for small
+$t>0$, $\rho((1-t)x)\leq0=\rho(x)$, so
+$-D\rho(x)\cdot x\leq0$; hence $x\cdot\nu\geq0$.
+Testing the PDE by $u$ gives
+$\int|Du|^2=\int|u|^{p+1}$. Substitution in the identity implies
+\[
+ \left({n-2\over2}-{n\over p+1}\right)\int|u|^{p+1}\leq0.
+\]
+The coefficient is strictly positive at a supercritical exponent, so
+$u=0$. At equality of the exponents it is zero: the displayed inequality
+alone gives no conclusion. On a strictly star-shaped domain a positive
+nonzero solution at the critical exponent is also ruled out by the
+boundary term and Hopf's lemma, but this is a separate argument and does
+not extend the stated theorem to arbitrary sign-changing critical solutions.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{边界几何进入哪一步}{星形性只用来保证 $x\cdot\nu\geq0$。Pohozaev 恒等式本身对一般光滑区域成立；若区域不是星形，不能直接丢掉边界积分。}

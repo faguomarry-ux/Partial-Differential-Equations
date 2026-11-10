@@ -1,13 +1,118 @@
-% Evans second edition, section 12.1.
-% English source: printed p. 617; PDF page 634 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 12.1, printed pp.617--620; English PDF pp.634--637.
+% Chinese section start: printed p.437 / scan p.455.
 \section{Introduction}
 \label{sec:12-1}
+\subsection{The equation and its conserved energy}
+Write $\PDEWave=\partial_t^2-\Delta_x$. The main equation is
+\begin{equation}\label{eq:12-semi}
+ \PDEWave u+f(u)=0,\qquad u(0)=g,\quad u_t(0)=h
+ \quad\hbox{on }\R^n.
+\end{equation}
+We also study $\PDEWave u+N(Du,u_t,u)=0$, with $N(0,0,0)=0$.
+Its highest-order part is still the constant wave operator.
+Although Evans calls it mildly quasilinear, its nonlinearity involves
+only lower derivatives; equations with solution-dependent principal
+coefficients require additional analysis. Throughout $D=D_x$.
+For a scalar $f$ set $F(z)=\int_0^z f(a)\,da$, so $F(0)=0$.
+\PDEAnnotation{非线性项的符号}{本章把 $f$ 放在左侧。
+$f(u)=|u|^{p-1}u$ 给非负势能，$f(u)=-|u|^{p-1}u$ 给负势能。
+后者才可能满足负能量爆破条件；不能只比较幂次而忽略符号。}
 
-\PDEPending
+\begin{theorem}[Energy; source \S12.1.1, Theorem 1]
+For a smooth solution with support in one common compact spatial
+set on each finite time strip, or sufficient decay to justify the
+same integrations,
+\begin{equation}\label{eq:12-energy}
+ E(t)=\int_{\R^n}\left\{\frac12(u_t^2+|Du|^2)+F(u)\right\}dx=E(0).
+\end{equation}
+\end{theorem}
+\begin{expandedproof}[local identity before integration]
+Put $e=\frac12(u_t^2+|Du|^2)+F(u)$. The product rule gives
+\[
+ e_t-\operatorname{div}(u_tDu)=u_t(\PDEWave u+f(u))=0.
+\]
+Integrate on a ball containing the support over a fixed time strip;
+its boundary term is zero. Under decay hypotheses use cutoffs with
+radius tending to infinity and check that $u_tDu$ is integrable.
+This also explains why control of both kinetic and gradient energy
+is sufficient to eliminate the flux at infinity. For weak solutions
+the product $u_t\PDEWave u$ may be undefined; conservation must then be
+established by approximation, not by this formal multiplication.
+\end{expandedproof}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection{Backward cones and the exact flux}
+For apex $(x_0,T)$ put
+\[
+ \begin{aligned}
+ B_t&=B(x_0,T-t),\\
+ K_{s,\tau}&=\{(x,t):s<t<\tau,\ x\in B_t\},\\
+ \Gamma_{s,\tau}&=\{(x,t):s<t<\tau,\ |x-x_0|=T-t\}.
+ \end{aligned}
+\]
+On the mantle let $\nu=(x-x_0)/|x-x_0|$. Write
+$E_K(t)=\int_{B_t}e(x,t)\,dx$.
+\PDEAnnotation{锥面上的两种测度}{锥面 $t=T-|x-x_0|$ 的诱导测度
+为 $\sqrt2\,dx$，分时切片则为 $\sqrt2\,dS_xdt$。
+因此式中的 $1/\sqrt2$ 是几何因子。
+临界点可能奇异时，顶端剩余能量不能预先设为零。}
+\begin{theorem}[Cone flux; source \S12.1.2, Theorem 2]
+For a solution smooth up to every truncated cone,
+\begin{equation}\label{eq:12-cone-flux}
+ E_K(s)-E_K(\tau)=\frac1{\sqrt2}\int_{\Gamma_{s,\tau}}
+ \left\{\tfrac12|u_t\nu-Du|^2+F(u)\right\}dS.
+\end{equation}
+If $F\ge0$, the local cone energy is nonincreasing. If its initial
+section has $g=h=0$, then $u=0$ in that cone.
+\end{theorem}
+\begin{expandedproof}[moving boundary and the surface factor]
+Reynolds' formula for the ball shrinking at unit speed gives
+\[
+ E_K'(t)=\int_{\partial B_t}(u_t\partial_\nu u-e)\,dS_x
+ =-\int_{\partial B_t}\{\tfrac12|u_t\nu-Du|^2+F(u)\}\,dS_x.
+\]
+The square is $u_t^2+|Du|^2-2u_t\partial_\nu u$; its tangential
+part must not be dropped. Integrating in time proves the result,
+because the space-time mantle measure satisfies
+$dS=\sqrt2\,dS_xdt$. If the initial local energy is zero, positivity
+forces $u_t=Du=0$ in every smaller section. Integrating along vertical
+segments from the zero initial data gives $u=0$ there, even if $F$
+has other zeroes. When $u$ is smooth at the apex, $E_K(\tau)\to0$
+as $\tau\uparrow T$. We retain this term whenever the apex might
+be singular: smoothness only for $t<T$ does not justify dropping it.
+\end{expandedproof}
+\PDEBodyDiagram{12.1}{The shrinking sections and the null flux}
+{A spatial section of the backward unit-speed cone has radius $T-t$.
+Energy leaves through the mantle with density
+$\frac12|u_t\nu-Du|^2+F(u)$, measured using $dS/\sqrt2$.
+The top section at $\tau<T$ is retained. The drawing is a one-space-dimensional
+section of the $n$-dimensional cone, not a reduction of the PDE.}
+{ch12-cone-flux}
+
+\subsection{Finite propagation without a positive potential}
+\begin{theorem}[Domain of dependence; source \S12.1.2, Theorem 3]
+Let $N$ be locally Lipschitz, $N(0)=0$, and let two classical solutions
+of $\PDEWave u+N(Du,u_t,u)=0$ have bounded first-order state on a compact
+backward cone. If their two initial data agree on its base, they
+agree inside the cone. In particular compactly supported data yield
+support in $B(0,R+t)$ while a classical solution exists.
+\end{theorem}
+\begin{expandedproof}[difference energy and local Lipschitz constants]
+For $w=u-v$, write $Z_u=(Du,u_t,u)$ and define $Z_v$ similarly.
+The local Lipschitz bound is
+\[
+ |N(Z_u)-N(Z_v)|\le L(|Dw|+|w_t|+|w|),
+\]
+where $L$ depends only on a bound for the two states in this cone.
+Add $w^2/2$ to the usual wave energy and integrate on its shrinking
+sections. The lateral boundary contribution is
+$-\frac12|w_t\nu-Dw|^2-w^2/2\le0$.
+The interior contribution is $w_t\{w-(N(u)-N(v))\}$ and is at most
+$C_L(w_t^2+|Dw|^2+w^2)$. Thus $Y'(t)\le C_LY(t)$ and $Y(0)=0$;
+Gronwall gives $Y=0$. Comparison with zero uses $N(0)=0$.
+For energy solutions with globally Lipschitz $N$, the same inequality
+is obtained by time/spatial regularization and smooth cone cutoffs,
+then passage to the limit in $L^2$. Thus it is also available for the
+local-data gluing in the next section. A cone is characteristic for
+the fixed principal wave operator; adding lower-order derivative
+terms does not change its speed.
+\end{expandedproof}

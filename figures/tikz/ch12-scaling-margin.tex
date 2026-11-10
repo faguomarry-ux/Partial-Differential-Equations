@@ -1,0 +1,10 @@
+\begin{tikzpicture}[pde diagram,x=.42cm,y=.6cm]
+\draw[pde axis] (1.7,0)--(8.5,0) node[right] {$p$};
+\draw[pde axis] (2,-.65)--(2,3.6) node[above] {$a(p)$};
+\draw[pde curve,domain=2:8,samples=90] plot (\x,{4/(\x-1)-1});
+\draw[dashed,draw=LumenWarm] (5,-.55)--(5,1.65);
+\node[pde dot] at (5,0) {};
+\node[pde tiny,below] at (5,-.08) {$5$};
+\node[pde tiny,left] at (2,3) {$3$};
+\node[pde tiny,align=center] at (5,2.3) {energy critical\\$a(5)=0$};
+\end{tikzpicture}

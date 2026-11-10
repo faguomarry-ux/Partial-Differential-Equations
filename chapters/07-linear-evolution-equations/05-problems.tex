@@ -1,13 +1,286 @@
-% Evans second edition, section 7.5.
-% English source: printed p. 420; PDF page 437 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{Problems}
+% Evans 7.5: printed pp.420--423 / English PDF pp.437--440.
+% Chinese: printed pp.297--299 / scan pp.315--317.
+\Needspace{60mm}
+\Needspace{55mm}
+\section{Problems and Worked Solutions}
 \label{sec:7-5}
+The following are concise restatements of all 16 source exercises, with
+editorial solutions. Unless specified otherwise, $U$ is bounded with smooth
+boundary and all classical solutions have enough regularity for the indicated
+integrations. The source problem numbers are retained in the paragraph labels.
 
-\PDEPending
+\Needspace{30mm}
+\paragraph{1. Neumann heat uniqueness.}
+Prove uniqueness for $u_t-\Delta u=f$, $\partial_\nu u=0$, $u(0)=g$.
+\begin{proof}[Solution]
+A difference $w$ has zero initial value and homogeneous equation and boundary
+data. Multiplication by $w$ yields
+$\frac12\frac d{dt}\|w\|_2^2+\|Dw\|_2^2=0$; the boundary term is
+$\int_{\partial U}w\partial_\nu w=0$. Thus $w=0$. Neumann constants do
+not obstruct evolutionary uniqueness once the initial value is fixed.
+\end{proof}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{30mm}
+\paragraph{2. Sharp Dirichlet heat decay.}
+Show $\|u(t)\|_2\leq e^{-\lambda_1t}\|g\|_2$ for homogeneous heat flow.
+\begin{proof}[Solution]
+The energy identity and the Rayleigh characterization from
+\S6.5 give
+$\frac d{dt}\|u\|_2^2=-2\|Du\|_2^2\leq-2\lambda_1\|u\|_2^2$.
+Multiply by $e^{2\lambda_1t}$, integrate, then take square roots.
+Equality holds for a first Dirichlet eigenfunction; this fixes the factor two.
+\end{proof}
+\Needspace{55mm}
+\PDEAnnotation{平方范数的衰减率}{$\|u\|_2^2$ 以 $2\lambda_1$ 衰减，而 $\|u\|_2$ 以 $\lambda_1$ 衰减。Neumann 问题有常数模态，不能直接使用正的 Dirichlet 谱隙。}
+
+\Needspace{30mm}
+\paragraph{3. Adjoint dynamics.}
+For $u_t+Lu=0$, $u(0)=g$, and $v_t-L^*v=0$, $v(T)=h$, both with
+zero Dirichlet data, prove $(v(0),g)=(u(T),h)$.
+\begin{proof}[Solution]
+The formal adjoint is defined by $(Lu,v)=(u,L^*v)$ on the zero-boundary
+smooth functions, including the coefficient derivative in the adjoint drift.
+Therefore $\frac d{dt}(u,v)=-(Lu,v)+(u,L^*v)=0$.
+Evaluate at $0,T$. The backward adjoint problem is prescribed terminal data;
+it is not a forward heat problem with the diffusion sign reversed arbitrarily.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{4. Galerkin approximation for Poisson's equation.}
+For nested spans of a complete $V$-orthogonal basis, let
+$\int Du_m\cdot Dw_k=\int fw_k$ for $k\leq m$. Show weak convergence
+to the zero-Dirichlet Poisson solution.
+\begin{proof}[Solution]
+Testing with $u_m$ and Poincar\'e bound $\|u_m\|_V$ uniformly.
+Each weak subsequential limit satisfies the equation on every fixed span,
+hence on $V$ by density. Uniqueness identifies every subsequence.
+In fact one has stronger convergence: if $u$ is the weak solution,
+$\int D(u-u_m)\cdot Dv_m=0$, so
+\[
+ \|D(u-u_m)\|_2\leq\inf_{v_m\in V_m}\|D(u-v_m)\|_2\longrightarrow0.
+\]
+The finite systems are invertible since their gradient Gram matrices are
+positive definite. No $L^2$ orthonormality of this exercise's basis is needed.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{5. Identifying a weak time derivative.}
+If $u_k\rightharpoonup u$ in $L^2V$ and $u_k'\rightharpoonup z$ in
+$L^2V'$, show $z=u'$.
+\begin{proof}[Solution]
+For $\phi\in C_c^1(0,T)$, $w\in V$,
+$\int\langle u_k',w\rangle\phi=-\int(u_k,w)\phi'$.
+Both sides converge by the stipulated weak convergences. The resulting
+identity is exactly the definition of the $V'$-valued distributional derivative.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{6. The essential supremum survives a weak limit.}
+If $u_k\rightharpoonup u$ in $L^2(0,T;H)$ and
+$\|u_k(t)\|_H\leq C$ a.e., show $\|u(t)\|_H\leq C$ a.e.
+\begin{proof}[Solution]
+For any measurable $E\subset(0,T)$, $\mathbf1_Eu\in L^2(0,T;H)$ is a
+valid fixed weak test. Thus
+\[
+ \int_E\|u\|_H^2=\lim_k\int_E(u_k,u)\leq C\int_E\|u\|_H.
+\]
+Choosing $E=\{\|u\|_H>C+\delta\}$ makes its integrand difference at least
+$\delta\|u\|_H$, so $E$ has measure zero. Take $\delta=1/j$.
+This argument works even without assuming $H$ separable.
+\end{proof}
+\Needspace{55mm}
+\PDEAnnotation{一致上界与弱极限}{逐时刻弱收敛并非已知。用固定测试函数 $\mathbf1_Eu$ 把问题化为每个时间集合上的积分不等式，直接得到极限的本质上确界。}
+
+\Needspace{30mm}
+\paragraph{7. Pointwise decay from a positive potential.}
+For $u_t-\Delta u+cu=0$, zero Dirichlet data and $c\geq\gamma>0$, prove
+$|u(x,t)|\leq C e^{-\gamma t}$.
+\begin{proof}[Solution]
+Set $z=e^{\gamma t}u$. Then $z_t-\Delta z+(c-\gamma)z=0$ and the
+potential is nonnegative. Comparison with the constants
+$\pm\|g\|_\infty$ yields $|z|\leq\|g\|_\infty$ on every finite cylinder.
+The constant is independent of its final time, proving the assertion.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{8. Positivity with a bounded signed potential.}
+For the same equation, $g\geq0$ and bounded $c$, show $u\geq0$.
+\begin{proof}[Solution]
+Choose $\lambda\geq\max(0,-\inf c)$ and $z=e^{-\lambda t}u$.
+Then $z_t-\Delta z+(c+\lambda)z=0$. The minimum principle gives $z\geq0$,
+and multiplication by $e^{\lambda t}>0$ proves the claim.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{9. The second-order coercive estimate, including its boundary terms.}
+Prove the source inequalities (54) in \S7.1.3 and (59) in \S7.2.3:
+\begin{equation}\label{eq:7-h2-coercive}
+ \beta\|u\|_{H^2}^2\leq(Lu,-\Delta u)+\gamma\|u\|_2^2
+ \qquad(u\in H^2(U)\cap V).
+\end{equation}
+\begin{proof}[Solution]
+Take first smooth $u=0$ on $\partial U$ and smooth symmetric $A$.
+Expand the divergence operator as $Lu=-a^{ij}u_{ij}+\widetilde b^iu_i+cu$.
+For the principal term put $I=\int_Ua^{ij}u_{ij}u_{kk}$. Integrate first
+in $k$ and then in $j$:
+\[
+ \begin{split}
+ I={}&\int_U a^{ij}u_{ik}u_{jk}
+ +\int_U\big((\partial_j a^{ij})u_{ik}u_k
+                 -(\partial_k a^{ij})u_{ij}u_k\big)\\
+ &+\int_{\partial U}\big((A:D^2u)\partial_\nu u
+                         -(D^2u\,A\nu)\cdot Du\big).
+ \end{split}
+\]
+The volume errors are bounded by
+$\delta\|D^2u\|_2^2+C_\delta\|Du\|_2^2$.
+The first volume term is at least $\theta\|D^2u\|_2^2$.
+The boundary expression must not be discarded.
+
+Write $q=\partial_\nu u$, $\Pi=I-\nu\otimes\nu$, and
+$a_\tau=\Pi A\nu$. Since the tangential derivatives of $u$ vanish,
+$Du=q\nu$, $\Pi D^2u\,\nu=\nabla_\tau q$, and the tangential Hessian
+is $q\mathcal S$, where $\mathcal S=D_\tau\nu$ is the shape operator
+with this sign convention. Cancellation of the pure normal second
+ derivative leaves precisely
+\[
+ (A:D^2u)q-q\nu\cdot D^2u A\nu
+ =q^2\operatorname{tr}(\Pi A\Pi\mathcal S)
+    +q\,a_\tau\cdot\nabla_\tau q.
+\]
+Tangential integration by parts on the closed boundary turns its integral into
+\[
+ \int_{\partial U}q^2
+ \left(\operatorname{tr}(\Pi A\Pi\mathcal S)
+              -\tfrac12\operatorname{div}_\tau a_\tau\right).
+\]
+The coefficient is bounded by the $C^1$ norm of $A$ and boundary curvature.
+A tubular-neighborhood trace estimate gives, for any $\delta>0$,
+\[
+ \|Du\|_{L^2(\partial U)}^2
+ \leq\delta\|D^2u\|_2^2+C_\delta\|Du\|_2^2.
+\]
+For completeness this follows by writing the boundary value of $|Du|^2$
+as its value at an interior normal offset plus the normal integral of its
+derivative, averaging offsets, and applying Young to $|Du||D^2u|$;
+a finite collar cover has bounded Jacobians. Thus the boundary term costs
+only the same small highest-order norm and a lower-order norm.
+The drift and potential paired with $-\Delta u$ cost
+$\delta\|D^2u\|_2^2+C_\delta\|u\|_{H^1}^2$.
+It follows that
+\[
+ (Lu,-\Delta u)\geq c_1\|D^2u\|_2^2-C_1\|u\|_{H^1}^2.
+\]
+Finally $\|Du\|_2^2=-(u,\Delta u)$, so
+$\|Du\|_2^2\leq\delta\|D^2u\|_2^2+C_\delta\|u\|_2^2$.
+Absorb this term and add a sufficiently large multiple of $\|u\|_2^2$
+to get \eqref{eq:7-h2-coercive}. Smooth zero-trace functions are dense
+in $H^2\cap V$ on a smooth domain; all final volume pairings are continuous
+in $H^2$, extending the estimate. Both source inequalities are the same
+estimate. Our earlier reconstruction proofs avoid needing it inside the
+Galerkin regularity passage, but it remains a useful independent result.
+\end{proof}
+\Needspace{55mm}
+\PDEAnnotation{零边界不消去全部边界项}{$u=0$ 只消去切向一阶导数，法向导数 $q$ 可不为零。纯法向二阶项抵消后，仍有曲率项和 $q\nabla_\tau q$；须切向分部积分并用带小常数的迹估计吸收。}
+
+\Needspace{30mm}
+\paragraph{10. Telegraph equation uniqueness.}
+For $u_{tt}+du_t-u_{xx}=f$ on $(0,1)$, with zero endpoint values and
+two prescribed initial data, prove uniqueness for any real constant $d$.
+\begin{proof}[Solution]
+For a difference $w$ let $E=\frac12\int_0^1(w_t^2+w_x^2)$.
+The endpoint term vanishes since $w_t=0$ there. Then
+$E'=-d\int w_t^2\leq2|d|E$. Zero initial energy and Gronwall imply
+$E=0$; zero endpoint values give $w=0$. For $d<0$ energy can grow,
+but uniqueness still holds.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{11. Clamped beam uniqueness.}
+For $u_{tt}+u_{xxxx}=0$, $u=u_x=0$ at $0,1$, prove uniqueness.
+\begin{proof}[Solution]
+For a difference let $E=\frac12\int_0^1(w_t^2+w_{xx}^2)$.
+Twice integrating gives
+$\int w_{xxxx}w_t=\int w_{xx}w_{txx}$: the boundary terms are
+$[w_{xxx}w_t-w_{xx}w_{tx}]_0^1=0$ since both clamped data are constant
+in time. Thus $E'=0$, $E(0)=0$, and $w_{xx}=0$.
+An affine function with zero clamped data is zero.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{12. Resolvent identities.}
+Establish the source identities (12)--(13) in \S7.4.1.
+\begin{proof}[Solution]
+On $D(G)$ the difference of the two operators is
+$(\mu I-G)-(\lambda I-G)=(\mu-\lambda)I$.
+Multiplication on the left by $R_\lambda$ and on the right by $R_\mu$
+gives $R_\lambda-R_\mu=(\mu-\lambda)R_\lambda R_\mu$.
+Interchange parameters to get commutation when they differ; equality
+of parameters is automatic. The intermediate vectors are in $D(G)$,
+so no multiplication of an undefined unbounded expression occurs.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{13. Passing a closed generator through an integral.}
+For $x\in D(G)$ justify
+$G\int_0^\infty e^{-\lambda t}S(t)x\,dt
+=\int_0^\infty e^{-\lambda t}GS(t)x\,dt$, $\lambda>0$.
+\begin{proof}[Solution]
+Equip $D(G)$ with $\|y\|_G=\|y\|+\|Gy\|$; closedness makes this a Banach
+space. The integrand is graph-norm continuous because
+$GS(t)x=S(t)Gx$, and its graph norm is at most
+$e^{-\lambda t}(\|x\|+\|Gx\|)$.
+Riemann sums on finite intervals therefore converge in graph norm, and
+the tails converge there as well. Applying the continuous map
+$G:(D(G),\|\cdot\|_G)\to X$ proves the identity.
+\end{proof}
+\Needspace{55mm}
+\PDEAnnotation{图范数使积分合法}{只知道被积函数在 $X$ 中可积不足以交换无界算子。同时控制函数及其 $G$ 像，等于在完备图范数空间中积分。}
+
+\Needspace{30mm}
+\paragraph{14. Heat convolution on two different spaces.}
+Let $S(t)g=\Phi_t*g$, $S(0)=I$. Show it is a contraction semigroup on
+$L^2(\R^n)$, but not a strongly continuous semigroup on $L^\infty(\R^n)$.
+\begin{proof}[Solution]
+The Gaussian is nonnegative of mass one, so Young's inequality gives
+$\|S(t)\|_{2\to2}\leq1$. Gaussian convolution gives
+$S(t+s)=S(t)S(s)$. On $C_c^\infty$, approximate identities give
+$S(t)g\to g$ in $L^2$; density and contraction extend this to all $L^2$.
+On $L^\infty$ the same convolution still contracts the norm.
+The failed axiom is strong continuity: take
+$g=\mathbf1_{\{x_1>0\}}$. Its smoothed value tends to $1/2$ as
+$x_1\downarrow0$, so for every $t>0$,
+$\|S(t)g-g\|_\infty=1/2$ (in the essential-supremum sense).
+The source's phrase ``not a contraction semigroup'' refers to this
+continuity failure, not to failure of the norm inequality.
+\end{proof}
+\Needspace{55mm}
+\PDEAnnotation{同一公式依赖所选空间}{热卷积在 $L^\infty$ 仍满足 $\|S(t)\|\leq1$，但阶跃函数阻止强连续。不能仅核对卷积律与范数，就宣布得到 $C_0$ 半群。}
+
+\Needspace{30mm}
+\paragraph{15. Invariance of powers of the generator domain.}
+Define $D(G^k)=\{x\in D(G^{k-1}):G^{k-1}x\in D(G)\}$.
+Show $S(t)D(G^k)\subset D(G^k)$.
+\begin{proof}[Solution]
+For $k=1$ this is Theorem~\ref{thm:7-generator}. Inductively, for
+$x\in D(G^k)$, one has $S(t)x\in D(G^{k-1})$ and
+$G^{k-1}S(t)x=S(t)G^{k-1}x\in D(G)$ by the $k=1$ case.
+This proves invariance and also $G^kS(t)x=S(t)G^kx$.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{16. Smooth spatial heat orbits from compactly supported data.}
+For the Dirichlet heat semigroup and $g\in C_c^\infty(U)$, show
+$S(t)g\in C^\infty(U)$ for every $t\geq0$.
+\begin{proof}[Solution]
+Here $G=\Delta$, $D(G)=H^2\cap V$.
+Every $\Delta^jg$ is again compactly supported smooth, so
+$g\in\bigcap_{k\geq1}D(G^k)$. Problem 15 preserves these domains.
+Repeated elliptic regularity gives
+$D(G^k)\subset H^{2k}(U)$: apply the elliptic estimate to
+$Gu\in D(G^{k-1})$ inductively. For any spatial derivative order $r$,
+choose $2k>r+n/2$ and use Sobolev embedding.
+This proves the claim, including $t=0$. Abstract domain invariance alone
+would not prove smoothing of arbitrary $L^2$ data; that stronger heat
+property needs additional estimates.
+\end{proof}

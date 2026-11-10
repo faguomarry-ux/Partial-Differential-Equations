@@ -1,13 +1,298 @@
-% Evans second edition, section 11.4.
-% English source: printed p. 601; PDF page 618 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 11.4, printed pp.601--613; English PDF pp.618--630.
+% Chinese start: printed p.425 / scan p.443.
 \section{Entropy Criteria}
 \label{sec:11-4}
+\subsection{Viscous profiles and the limits of dimension counting}
+For identity viscosity,
+$u_t^\varepsilon+F(u^\varepsilon)_x=\varepsilon u_{xx}^\varepsilon$.
+The ansatz $u^\varepsilon=V((x-\sigma t)/\varepsilon)$ gives
+\begin{equation}\label{eq:11-profile}
+ \begin{split}
+ V'&=F(V)-F(u_l)-\sigma(V-u_l)=G(V;\sigma),\\
+ V(-\infty)&=u_l,\qquad V(+\infty)=u_r.
+ \end{split}
+\end{equation}
+Here integration used $V'(-\infty)=0$; the right limit then forces
+Rankine--Hugoniot. For an autonomous smooth ODE, convergence of $V$
+to an equilibrium also implies $V'\to0$.
+\PDEAnnotation{稳定维数不等于轨道存在}{线性化特征值是
+$\lambda_j(u_l)-\sigma$。某个方向不稳定只说明允许离开平衡点，
+不能单凭维数判断一条轨道必到达指定的右状态；一般系统须另用中心流形等工具。}
 
-\PDEPending
+We use the following \emph{external finite-dimensional theorem}, not
+proved here: a sufficiently smooth autonomous vector field with a
+spectral splitting into center, stable, and unstable subspaces has a
+local center manifold of any fixed finite differentiability allowed
+by the field. It is tangent to the center space and contains every
+complete orbit staying in a sufficiently small neighborhood, in
+particular all nearby equilibria. Parameters can be included as
+variables with zero derivative. The conclusion is local; it does not
+assert that a distant excursion lies on the manifold.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\begin{theorem}[Small local viscous profiles]
+This is a local version of source \S11.4.1, Theorem 1.
+Assume $F$ is smooth and the $k$-field is genuinely nonlinear near
+$u_l$. For a sufficiently small nonzero $k$-shock state $u_r$, a
+profile whose entire image stays near $u_l$ exists if and only if
+it is on the compressive branch $S_k^-(u_l)$. The proof below uses
+the stated external center-manifold theorem.
+\end{theorem}
+\begin{expandedproof}[center-manifold reduction]
+Fix $u_l$, orient $r=r_k(u_l)$ so $\gamma=D\lambda_k(u_l)r>0$,
+and write $\beta=\sigma-\lambda_k(u_l)$. Adjoin $\beta'=0$ to
+\eqref{eq:11-profile}. At $(V,\beta)=(u_l,0)$ the center space has
+dimension two, spanned by $(r,0)$ and $(0,1)$; all other eigenvalues
+are separated from zero by strict hyperbolicity. A local center
+manifold can be parameterized by $a=l_k(u_l)(V-u_l)$ and $\beta$:
+\[
+ V=u_l+ar+W(a,\beta),\quad l_kW=0,\quad
+ W(0,\beta)=0,\quad W=O(a^2+|a\beta|).
+\]
+The equality $W(0,\beta)=0$ follows because $V=u_l$ is an equilibrium
+for every small $\beta$. Project the vector field by $l_k$.
+Taylor expansion, $l_k(DF-\lambda_kI)=0$, and $l_kr=1$ give
+\[
+ a'=g(a,\beta)=-\beta a+\tfrac12\gamma a^2
+       +O\bigl(|a|(|a|+|\beta|)^2\bigr).
+\]
+The coefficient identity $l_kD^2F[r,r]=\gamma$ follows by
+differentiating the eigenvalue equation. The nearby right equilibrium
+lies on the manifold. Write its coordinate $a_r\ne0$; by the shock
+speed expansion, $\beta=\gamma a_r/2+O(a_r^2)$.
+For this fixed $\beta$, both $0$ and $a_r$ are roots of $g$.
+Divide smoothly first by $a$ and then by $a-a_r$, using the integral
+form of the mean value theorem. Uniformly for $a$ between the roots,
+\[
+ g(a,\beta)=a(a-a_r)h(a,\beta),\qquad
+ h=\gamma/2+O(|a_r|)>0.
+\]
+If $a_r<0$, the vector field is negative between $a_r$ and $0$.
+The solution through any interior point decreases, stays between
+the equilibria, and converges to $0$ as $s\to-\infty$ and to $a_r$
+as $s\to+\infty$. The simple roots make the times to both endpoints
+infinite (the separated integral has logarithmic divergences).
+Lifting gives the desired profile, with its full image small.
+If $a_r>0$, the field is negative on $(0,a_r)$ and cannot connect
+$0$ to $a_r$ forward in $s$. Every complete sufficiently small
+profile lies on the center manifold, so this also proves the local
+necessity. The equivalence $a_r<0\iff u_r\in S_k^-(u_l)$ follows
+from \eqref{eq:11-shock-expansion}. No assertion about profiles
+making large excursions is obtained from this local argument.
+\end{expandedproof}
+
+For a non-genuinely nonlinear branch, the Liu criterion compares
+shock speeds along the full intervening Hugoniot arc:
+\[
+ \sigma(z,u_l)\ge\sigma(u_r,u_l)
+ \quad\hbox{for intermediate states }z\in S_k(u_l).
+\]
+The source writes a strict version for nontrivial intermediate states.
+The local general existence theory requires additional hypotheses and
+is not proved by the preceding genuinely nonlinear reduction.
+In the scalar profile calculation below, strictness has a precise
+meaning: it excludes an extra equilibrium that would block passage.
+
+\subsection{A complete profile test for the viscous elastic system}
+Use viscosity only in the velocity equation:
+$a_t-b_x=0$, $b_t-p(a)_x=\varepsilon b_{xx}$.
+For end strains $a_l<a_r$ choose
+\[
+ \sigma=\sqrt{\frac{p(a_r)-p(a_l)}{a_r-a_l}}>0,\qquad
+ b_r=b_l-\sigma(a_r-a_l),\qquad p'>0.
+\]
+\begin{theorem}[Source \S11.4.1, elastic example]
+A traveling profile joining these states exists if and only if
+\begin{equation}\label{eq:11-p-liu}
+ p(a)-p(a_l)>\sigma^2(a-a_l),\qquad a_l<a<a_r.
+\end{equation}
+It is unique up to translation among such monotone profiles.
+\end{theorem}
+\begin{expandedproof}[separation and infinite endpoint time]
+The first integrated equation gives $B=b_l-\sigma(A-a_l)$.
+The second yields
+\[
+ A'=g(A)=\frac{p(A)-p(a_l)-\sigma^2(A-a_l)}\sigma.
+\]
+Thus $g(a_l)=g(a_r)=0$. If $g>0$ in the open interval, the inverse
+of $s-s_0=\int_{A_0}^{A}d\zeta/g(\zeta)$ is a strictly increasing
+profile. Since $g$ is $C^1$ and vanishes at each endpoint,
+$|g(a)|\le C|a-a_l|$ near $a_l$ and similarly near $a_r$;
+the endpoint integrals diverge, even if the roots are not simple.
+The inverse is defined for all real $s$ with the required limits.
+Conversely any connecting scalar orbit must pass every intermediate
+value. Uniqueness for a scalar Lipschitz ODE prevents passage through
+an interior zero and prevents a change of direction. Hence $g>0$
+throughout the interval. Separation also proves translation uniqueness.
+Condition \eqref{eq:11-p-liu} is precisely strict decrease of the
+secant speed from $a_l$ to an intermediate point relative to the
+final positive speed. This proof concerns the stated partial viscosity,
+not an unmentioned change of viscosity matrix.
+\end{expandedproof}
+
+\subsection{Entropy pairs, symmetrizers, and viscous limits}
+\begin{definition}[Source \S11.4.2]
+An entropy pair $(\eta,Q)$ consists of $C^2$ functions with $\eta$
+convex and $DQ=D\eta\,DF$. An integral solution is an entropy solution
+if for every such pair and $0\le\varphi\in C_c^\infty(\R\times(0,\infty))$,
+\begin{equation}\label{eq:11-entropy}
+ \iint[\eta(u)\varphi_t+Q(u)\varphi_x]\,dx\,dt\ge0.
+\end{equation}
+Thus the distribution $\eta(u)_t+Q(u)_x$ is nonpositive.
+\end{definition}
+For a smooth solution the entropy balance is equality. At a shock it
+reduces to $[Q]-\sigma[\eta]\le0$ by the same interface calculation
+as before. The sign refers to convex mathematical entropy, often
+the negative of physical entropy.
+\PDEAnnotation{系统熵对的相容性}{标量情形每个凸 $\eta$ 都能积分得到
+$Q$；系统须满足超定条件 $D^2\eta\,DF$ 对称。并不是任意凸函数
+都可充当某个系统的熵，更不能由一个能量不等式直接得到所有解的唯一性。}
+
+\begin{lemma}[Entropy compatibility; editorial supplement]
+Locally, $D\eta\,DF$ is the gradient of a flux if and only if
+$D^2\eta\,DF$ is symmetric. If $D^2\eta$ is positive definite,
+$DF$ is similar to a symmetric matrix and has real eigenvalues.
+This does not force distinctness.
+\end{lemma}
+\begin{expandedproof}[integrability and symmetrization]
+For $b_j=\sum_a\eta_a F^a_j$, differentiate with respect to $z_i$.
+In $\partial_i b_j-\partial_j b_i$ the terms involving $F^a_{ij}$
+cancel. The remaining expression is the skew part of $D^2\eta DF$.
+A closed $C^1$ one-form has a potential on a small ball: integrate
+along radial segments and differentiate, using equality of the cross
+partials. This proves local sufficiency; global sufficiency requires,
+for example, a simply connected domain. If $S=D^2\eta>0$, then
+$S^{1/2}DF S^{-1/2}$ is symmetric because $SDF=(DF)^TS$.
+It is similar to $DF$ and hence has the same real spectrum.
+\end{expandedproof}
+For the elastic system, a strictly convex pair is
+$\eta(a,b)=b^2/2+P(a)$, $P'=p$, and $Q=-bp(a)$.
+Indeed $D^2\eta=\operatorname{diag}(p',1)>0$.
+
+\begin{theorem}[Viscous limit; source \S11.4.2, Theorem 2]
+Suppose smooth identity-viscosity solutions with initial data $g$
+are uniformly bounded with range in a fixed compact state set and
+converge a.e. to $u$ on $\R\times(0,\infty)$. Then $u$ is an
+integral solution and satisfies \eqref{eq:11-entropy} for all smooth
+convex entropy pairs. This is conditional on the convergence; it
+is not a compactness or existence theorem for general systems.
+\end{theorem}
+\begin{expandedproof}[moving derivatives onto the compact test]
+The chain rule yields
+\[
+ \eta(u^\varepsilon)_t+Q(u^\varepsilon)_x
+ =\varepsilon\eta(u^\varepsilon)_{xx}
+ -\varepsilon (u_x^\varepsilon)^TD^2\eta(u^\varepsilon)u_x^\varepsilon.
+\]
+The last term is nonpositive. Multiply by $\varphi\ge0$ and integrate:
+\[
+ \iint(\eta(u^\varepsilon)\varphi_t+Q(u^\varepsilon)\varphi_x)
+ \ge-\varepsilon\iint\eta(u^\varepsilon)\varphi_{xx}.
+\]
+The error is $O(\varepsilon)$ because the test support and the range
+are compact. Dominated convergence handles the other terms. For the
+weak PDE, test the viscous equation directly, including $t=0$:
+\[
+ \iint(u^\varepsilon\cdot\varphi_t+F(u^\varepsilon)\cdot\varphi_x
+ +\varepsilon u^\varepsilon\cdot\varphi_{xx})
+ +\int g\cdot\varphi(\cdot,0)=0.
+\]
+The same argument proves \eqref{eq:11-weak}. No integration over
+spatial infinity, energy decay assumption, or gradient bound is
+needed for these compactly supported tests. An arbitrary nonsmooth
+system entropy is not automatically covered by scalar convolution:
+that convolution need not preserve the system flux compatibility.
+\end{expandedproof}
+
+\subsection{Scalar entropy and the full contraction argument}
+Let $m=1$, $f\in C^2(\R)$, and work in
+$u\in C([0,\infty);L^1(\R))\cap L^\infty$ with initial trace $g$.
+For each $k\in\R$, the Kruzhkov pair is
+\[
+ \eta_k(u)=|u-k|,\qquad
+ q_k(u)=\operatorname{sgn}(u-k)(f(u)-f(k)).
+\]
+It follows from the smooth pairs by replacing $|s-k|$ by
+$\sqrt{(s-k)^2+\delta^2}$ and taking
+$Q_\delta(s)=\int_k^s\eta_\delta'(r)f'(r)\,dr$.
+On a bounded range both components converge uniformly, so entropy
+inequalities pass to the limit.
+
+\begin{theorem}[Scalar contraction; source \S11.4.3, Theorem 3]
+If $u,v$ are scalar entropy solutions in this class with data $g,h$,
+then for all $0\le s\le t$,
+\begin{equation}\label{eq:11-contraction}
+ \|u(\cdot,t)-v(\cdot,t)\|_1
+ \le\|u(\cdot,s)-v(\cdot,s)\|_1.
+\end{equation}
+In particular, the solution with a prescribed initial trace is unique.
+No convexity of $f$ is required.
+\end{theorem}
+\begin{expandedproof}[doubling, diagonal limit, and endpoint times]
+For fixed $(y,s)$ use $k=v(y,s)$ in the entropy inequality for $u$,
+and for fixed $(x,t)$ use $k=u(x,t)$ in that for $v$. The pair
+$q(a,b)=\operatorname{sgn}(a-b)(f(a)-f(b))$ is symmetric in $a,b$.
+Add and integrate the inequalities to get, for nonnegative smooth
+compactly supported $\zeta(x,t,y,s)$ away from $t=0,s=0$,
+\[
+ \iiiint \bigl\{|u-v|(\partial_t+\partial_s)\zeta
+       +q(u,v)(\partial_x+\partial_y)\zeta\bigr\}\ge0.
+\]
+Fubini is legitimate because all variables are bounded on the compact
+support; the inequalities hold for every constant $k$ and smooth test.
+Take
+\[
+ \zeta=\rho_\delta(x-y)\rho_\delta(t-s)
+ \phi\bigl((x+y)/2,(t+s)/2\bigr),\qquad \phi\ge0.
+\]
+For small $\delta$ the support remains away from both initial times.
+The difference-kernel derivatives cancel under the summed derivatives;
+the derivatives of $\phi$ have coefficient one.
+Use mean and difference variables; their constant positive Jacobian
+can be divided out. Translations are continuous in $L^1$ on compact
+space-time sets. The functions $|a-b|$ and $q(a,b)$ are jointly
+Lipschitz on any bounded square: for fixed $b$, the piecewise derivative
+of $q$ is $\pm f'(a)$ and the two pieces meet continuously at $a=b$;
+then repeat in $b$. Thus the diagonal limit gives
+\begin{equation}\label{eq:11-kato}
+ \iint(A\phi_t+B\phi_x)\ge0,\quad
+ A=|u-v|,\quad B=q(u,v),\quad |B|\le LA,
+\end{equation}
+where $L=\max_{|r|\le M}|f'(r)|$ and $M$ bounds both solutions.
+
+Choose $\phi=\alpha_R(x)\beta(\tau)$, with $0\le\alpha_R\le1$,
+$\alpha_R=1$ on $[-R,R]$, zero outside $[-2R,2R]$,
+$|\alpha_R'|\le C/R$, and $\beta\ge0$ compact in positive time.
+The flux contribution tends to zero, since its absolute value is
+at most $(CL/R)\|\beta\|_\infty\int\|u-v\|_1d\tau$.
+The time integral is finite by $L^1$ continuity on compact intervals.
+Dominated convergence yields
+$\int\|u-v\|_1\beta'\ge0$. Hence the distributional time derivative
+of this continuous function is nonpositive. Equivalently, approximate
+the indicator of $[s,t]$ by trapezoidal Lipschitz functions and then
+mollify; the two end averages tend to the values at $s,t$ by
+continuity. This proves contraction first for $s>0$, then for $s=0$
+by the strong initial traces. Continuity also upgrades an a.e.-time
+inequality to every time.
+\end{expandedproof}
+\PDEAnnotation{初始迹与全时刻唯一性}{消黏的分布初值不自动给强
+$L^1$ 连续性。本定理把 $C_tL^1_x$ 与强初始迹作为解类条件，
+再把几乎处处时刻的收缩提升到每个时刻。一般系统没有相同的序结构。}
+The same Kato inequality gives a local finite-speed estimate:
+\[
+ \int_{|x|\le R}|u(x,t)-v(x,t)|\,dx
+ \le\int_{|x|\le R+Lt}|g(x)-h(x)|\,dx.
+\]
+To verify it, use cutoffs of the backward interval
+$|x|<R+L(t-\tau)$ in \eqref{eq:11-kato}; they satisfy
+$\phi_\tau+L|\phi_x|\le0$ between the two time cutoffs.
+The bound $|B|\le LA$ makes the lateral flux nonpositive.
+Smooth approximation and the strong local traces supply the two
+end sections. This local version also proves uniqueness for bounded
+nonintegrable Riemann data with $L^1_{\rm loc}$ time continuity.
+\PDEBodyDiagram{11.4}{The entropy chord for a nonconvex flux}
+{For $f(u)=u^3-u$, the chord from $u_l=-1$ to $u_*=1/2$ has slope
+$-1/4=f'(1/2)$ and lies below $f$ on that interval. The entropy
+solution for right state $1$ joins this shock to a rarefaction
+$u=\sqrt{(x/t+1)/3}$ for $-1/4<x/t<2$.
+A single jump from $-1$ to $1$ violates the chord criterion.
+The exact states and speeds are derived in Problems 14--15.}{ch11-entropy-chord}

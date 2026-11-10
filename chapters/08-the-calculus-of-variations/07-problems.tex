@@ -1,13 +1,368 @@
-% Evans second edition, section 8.7.
-% English source: printed p. 489; PDF page 506 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{Problems}
+% Evans 8.7: printed pp.489--493 / English PDF pp.506--510.
+% Chinese: printed pp.345--349 / scan pp.363--367.
+\Needspace{55mm}
+\section{Problems and Worked Solutions}
 \label{sec:8-7}
+These are concise restatements of all 20 source exercises, with editorial
+solutions. Source problem numbers are retained. Smoothness and boundary
+assumptions are stated where they affect a conclusion; in Problem 17
+connectedness is essential.
 
-\PDEPending
+\Needspace{30mm}
+\paragraph{1. Oscillatory weak limits.}
+Show $\sin(kx)\rightharpoonup0$ in $L^2(0,1)$, and that a periodic
+mixture with proportions $\lambda,1-\lambda$ and values $a,b$ converges
+weakly to $\lambda a+(1-\lambda)b$.
+\begin{proof}[Solution]
+For a $C^1$ test $\phi$, integration by parts bounds
+$|\int\sin(kx)\phi|\leq C_\phi/k$. Uniform $L^2$ boundedness and density
+extend convergence to all $L^2$ tests.
+For the mixture, its integral over each cell $[j/k,(j+1)/k)$ is its mean
+divided by $k$. Subtract the value $\phi(j/k)$ in each cell; uniform
+continuity bounds the resulting error by
+$C\sup_{|x-y|\leq1/k}|\phi(x)-\phi(y)|\to0$.
+Again use density and uniform boundedness.
+Neither result gives strong convergence unless the oscillatory variance vanishes.
+\end{proof}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{30mm}
+\paragraph{2. A drift with a variational weight.}
+Find a Lagrangian for $-\Delta u+D\varphi\cdot Du=f$.
+\begin{proof}[Solution]
+Take $L(p,z,x)=e^{-\varphi(x)}(\frac12|p|^2-f(x)z)$.
+Its equation is $-\operatorname{div}(e^{-\varphi}Du)=e^{-\varphi}f$.
+Division by the positive weight gives the stated equation.
+The positive exponential factor and its sign are fixed by the drift.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{3. Elliptic regularization of heat flow.}
+Find an energy for $u_t-\Delta_xu-\varepsilon u_{tt}=0$.
+\begin{proof}[Solution]
+Use the space--time Lagrangian
+$L_\varepsilon(p,s,z,x,t)=\frac12e^{-t/\varepsilon}(|p|^2+\varepsilon s^2)$.
+Its equation is
+$-\operatorname{div}_x(e^{-t/\varepsilon}Du)
+-\partial_t(\varepsilon e^{-t/\varepsilon}u_t)=0$.
+Canceling the weight gives precisely the asserted equation.
+This is a variational identity for fixed endpoint variations; a choice of
+temporal boundary conditions is additional data, not determined by the PDE alone.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{4. Weighted null Lagrangians.}
+Show $L(P,z)=\eta(z)\det P$ is null and its integral depends only on the trace.
+\begin{proof}[Solution]
+By Piola,
+\[
+ \partial_i[\eta(u)(\operatorname{cof}Du)_{\alpha i}]
+ =\eta_{z_\beta}(u)u_i^\beta(\operatorname{cof}Du)_{\alpha i}
+ =\eta_{z_\alpha}(u)\det Du=L_{z_\alpha}.
+\]
+Thus the Euler--Lagrange expression vanishes. The homotopy argument in
+\S\ref{sec:8-1} proves boundary dependence. The calculation needs no
+invertibility or fixed sign of $\det Du$.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{5. The degree is an integer.}
+Let $B=B(x_0,r)$ avoid $u(\partial U)$ and let $\eta$ be supported in $B$
+with integral one. Show $\int_U\eta(u)\det Du\in\mathbb Z$.
+\begin{proof}[Solution]
+Define the distribution $\nu(\psi)=\int_U\psi(u)\det Du$ on $B$.
+For $\psi\in C_c^\infty(B)$, the preceding cofactor identity gives
+\[
+ \int_U(\partial_\alpha\psi)(u)\det Du
+ =\int_U\partial_i[\psi(u)(\operatorname{cof}Du)_{\alpha i}]=0,
+\]
+because $\psi(u)$ vanishes near $\partial U$.
+Thus all distributional derivatives of $\nu$ vanish. A distribution with
+zero derivatives on a connected ball is constant: mollification makes it
+a constant smooth function on each smaller ball, and overlapping balls
+identify the constants. Therefore $\nu(\psi)=d\int_B\psi$.
+
+Use Sard's theorem (an external finite-dimensional theorem) to choose a
+regular value $y\in B$; a value outside the image is permitted.
+Its preimages in $U$ form a finite set, since they are isolated by the
+inverse function theorem and lie in a compact set away from the boundary.
+For a sufficiently small neighborhood of $y$, all preimages lie on these
+finitely many inverse branches; compactness excludes extra branches.
+Signed change of variables gives
+$d=\sum_{x\in u^{-1}(y)}\operatorname{sgn}\det Du(x)\in\mathbb Z$.
+Hence $\nu(\eta)=d$. Approximation extends the formula to the stated
+$C^1$ density. This proof also shows independence from the chosen normalized
+$\eta$ within the same ball.
+\end{proof}
+\Needspace{55mm}
+\PDEAnnotation{度数是带符号计数}{正负 Jacobian 的原像分别计 $+1$ 与 $-1$。先证推前分布在避开边界像的球上为常数，再在正则值附近换元；不能对可能多对一的映射直接套全局一一换元。}
+
+\Needspace{30mm}
+\paragraph{6. The curvature integral is a boundary quantity.}
+Show $\int_U(1+|Du|^2)^{-3/2}\det D^2u$ depends only on $Du|_{\partial U}$.
+\begin{proof}[Solution]
+Apply Problem 4 to the map $v=Du:U\subset\R^2\to\R^2$ and
+$\eta(z)=(1+|z|^2)^{-3/2}$. The resulting weighted determinant integral
+is exactly the displayed expression. The relevant boundary datum is the
+full gradient of $u$, not merely $u$ itself.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{7. A quadratic null Lagrangian.}
+Show $L(P)=\operatorname{tr}(P^2)-(\operatorname{tr}P)^2$ is null.
+\begin{proof}[Solution]
+$L_{P_{\alpha i}}=2P_{i\alpha}-2(\operatorname{tr}P)\delta_{\alpha i}$.
+With $P=Du$, its row divergence is
+$2\sum_i\partial_i\partial_\alpha u^i
+-2\partial_\alpha\sum_i\partial_i u^i=0$.
+Notice $\operatorname{tr}(P^2)$ is not the Frobenius norm squared for
+an arbitrary nonsymmetric matrix.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{8. Why the area functional escapes this direct method.}
+Explain the obstruction for $I[u]=\int\sqrt{1+|Du|^2}$ in $W^{1,q}$.
+\begin{proof}[Solution]
+For $q>1$ there is no coercive lower bound $\alpha|p|^q-\beta$ because
+the density grows only linearly as $|p|\to\infty$.
+For $q=1$, $W^{1,1}$ is not reflexive and an energy bound gives no
+automatic weakly convergent $W^{1,1}$ subsequence: gradients may concentrate.
+The functional is convex, so the missing step is compactness/coercivity,
+not gradient convexity. A $BV$ relaxation and its boundary terms belong
+to a different theory, not to the $q>1$ theorem above.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{9. Legendre--Hadamard condition for systems.}
+Derive the rank-one second-variation condition, and exhibit a nonconvex example.
+\begin{proof}[Solution]
+Use $\phi_\varepsilon=\varepsilon a\rho(x\cdot b/\varepsilon)\zeta(x)$,
+so $D\phi_\varepsilon=\rho'(a\otimes b)\zeta+O(\varepsilon)$.
+The scalar triangular-wave proof gives
+\[
+ L_{P_{\alpha i}P_{\beta j}}(Du,u,x)a_\alpha a_\beta b_i b_j\geq0.
+\]
+For $2\times2$ matrices, $L(P)=\det P$ is affine on every rank-one line,
+so this expression is identically zero. Yet with
+$P=\operatorname{diag}(1,-1)$ and $Q=-P$, one has
+$L(P)=L(Q)=-1$ and $L((P+Q)/2)=0$, violating convexity.
+For larger dimensions use a fixed $2\times2$ minor.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{10. A nonzero semilinear solution by constrained minimization.}
+For $n>2$ and $1<q<(n+2)/(n-2)$, solve $-\Delta v=|v|^{q-1}v$ with zero trace.
+\begin{proof}[Solution]
+Minimize $\frac12\|Du\|_2^2$ with $\int|u|^{q+1}=1$.
+The class is nonempty, and compact $H^1_0\hookrightarrow L^{q+1}$
+preserves its constraint under a minimizing sequence. The first derivative
+of the constraint evaluated on $u$ equals $q+1\ne0$, so the implicit-curve
+argument gives $-\Delta u=\lambda|u|^{q-1}u$.
+Testing by $u$ gives $\lambda=\|Du\|_2^2>0$.
+Then $v=\lambda^{1/(q-1)}u$ is the desired nonzero solution.
+The constraint is superquadratic, so here its differentiability and compactness
+use the subcritical embedding rather than the linear-growth hypothesis
+of \S8.4.1.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{11. A monotone nonlinear Robin condition.}
+Assume $0<a\leq\beta'(s)\leq b$ and $f\in L^2(U)$. Prove weak existence
+and uniqueness for $-\Delta u=f$, $\partial_\nu u+\beta(u)=0$.
+\begin{proof}[Solution]
+Let $B(s)=\int_0^s\beta(t)dt$ and minimize on $H^1(U)$
+\[
+ E[u]=\tfrac12\|Du\|_2^2+\int_{\partial U}B(Tu)\,dS-\int_Ufu.
+\]
+The trace map is continuous to $L^2(\partial U)$ and $B$ has quadratic
+growth, so the energy is finite. Also
+$B(s)\geq a s^2/4-C$, and
+$\|u\|_{H^1}^2\leq C(\|Du\|_2^2+\|Tu\|_{L^2(\partial U)}^2)$.
+The latter follows by a compactness contradiction: a normalized sequence
+with vanishing gradient tends to a constant on each connected component,
+and vanishing trace makes every such constant zero.
+Thus $E$ is coercive. Its convex gradient and boundary terms are weakly
+lower semicontinuous (a continuous convex functional is weakly lower
+semicontinuous by separation), giving a minimizer.
+The weak equation is
+\[
+ \int_U Du\cdot D\phi+\int_{\partial U}\beta(Tu)T\phi=\int_Uf\phi
+ \quad(\phi\in H^1(U)).
+\]
+For two solutions test their difference; monotonicity gives
+$\|D(u-v)\|_2^2+a\|T(u-v)\|_2^2\leq0$, hence uniqueness.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{12. Fixed volume gives constant mean curvature.}
+For a smooth area minimizer with fixed trace and $\int_Uu=1$, show its
+graph has constant mean curvature.
+\begin{proof}[Solution]
+The integral constraint has nonzero derivative, so the same implicit-curve
+argument yields
+$\int Du\cdot D\phi/\sqrt{1+|Du|^2}=\lambda\int\phi$.
+Thus
+\[
+ -\operatorname{div}\left(\frac{Du}{\sqrt{1+|Du|^2}}\right)=\lambda.
+\]
+With $nH=\operatorname{div}N$, where $N=Du/\sqrt{1+|Du|^2}$,
+$H=-\lambda/n$ is constant. Reversing normal orientation reverses $H$.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{13. The dual Dirichlet principle.}
+Prove the minimum of $\frac12\|Dw\|_2^2-(f,w)$ over $H^1_0$ equals
+$\max_{\operatorname{div}\xi=f}-\frac12\|\xi\|_2^2$ over $L^2(U;\R^n)$.
+\begin{proof}[Solution]
+Distributional divergence and zero trace give $(f,w)=-\int\xi\cdot Dw$.
+Consequently
+\[
+ \tfrac12\|Dw\|_2^2-(f,w)
+ =\tfrac12\|Dw+\xi\|_2^2-\tfrac12\|\xi\|_2^2
+ \geq-\tfrac12\|\xi\|_2^2.
+\]
+For the Poisson solution $u$, take $\xi=-Du$. It is feasible since
+$\operatorname{div}\xi=f$ and the square vanishes. Thus both extrema
+are attained and equal; the dual sign is fixed by this choice of $\xi$.
+\end{proof}
+\Needspace{55mm}
+\PDEAnnotation{对偶通量的正负}{原方程 $-\Delta u=f$ 配合对偶约束 $\operatorname{div}\xi=f$，最优通量应取 $\xi=-Du$。完成平方是 $|Dw+\xi|^2$，不是减号。}
+
+\Needspace{30mm}
+\paragraph{14. A multivalued obstacle equation.}
+Relate the variational inequality to $-\Delta u+\beta(u-h)\ni f$, where
+$\beta(s)=0$ for $s>0$, $\beta(0)=(-\infty,0]$, and $\beta(s)=\varnothing$ for $s<0$.
+\begin{proof}[Solution]
+Under the local $H^2$ and continuity regularity described in \S8.4.2,
+let $\mu=-\Delta u-f\geq0$, supported on $\{u=h\}$.
+Then $\eta=-\mu\in\beta(u-h)$ and $-\Delta u+\eta=f$ a.e.
+Conversely these relations give
+$\int Du\cdot D(w-u)-f(w-u)=\int\mu(w-u)\geq0$ for feasible $w$,
+whenever these function pairings are justified; globally $H^2$ and
+$\mu\in L^2$ suffice. For the bare $H^1$ formulation the precise equivalent
+is $0\in -\Delta u-f+N_K(u)$ in $H^{-1}$, where
+$\langle\eta,w-u\rangle\leq0$ defines the dual normal cone.
+A pointwise multiplier is not asserted for a general distributional reaction.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{15. A gradient constraint.}
+Minimize the obstacle-type quadratic energy on
+$K=\{u\in H^1_0(U):|Du|\leq1\text{ a.e.}\}$ and derive its inequality.
+\begin{proof}[Solution]
+This nonempty set is convex and norm closed: strong $H^1$ convergence
+has an a.e. convergent gradient subsequence. Hence it is weakly closed.
+The quadratic energy is coercive and weakly lower semicontinuous, so it
+has a unique minimizer by strict convexity. Its segment variations give
+$\int Du\cdot D(w-u)\geq\int f(w-u)$ for all $w\in K$,
+with the same converse by completing the energy difference.
+Pointwise gradient bounds are preserved by convex weak closure, not by
+assuming weak gradients converge pointwise.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{16. A singular harmonic map.}
+For $n\geq3$ show $u=x/|x|\in H^1(U;\R^n)$ is a weak harmonic map into the sphere.
+\begin{proof}[Solution]
+Away from zero,
+$Du=(I-u\otimes u)/r$, $|Du|^2=(n-1)/r^2$, and
+$-\Delta u=(n-1)u/r^2$. The integral
+$\int_0^\varepsilon r^{n-3}dr$ is finite exactly for $n>2$.
+Deleting a small ball and passing to the limit proves these are the weak
+first derivatives; its boundary error is $O(\varepsilon^{n-1})$.
+For the equation, the new spherical normal derivative is zero because
+$u$ is independent of $r$. Thus integration by parts has no inner flux,
+and the integrable right side converges, proving the distributional equation.
+Uniformly bounded smooth approximations to a bounded $H^1_0$ test extend
+the identity to the weak class in \eqref{eq:8-harmonic-map}.
+No energy-minimizing property has been claimed merely from this equation.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{17. Uniqueness of a positive normalized ground state.}
+On connected $U$, let positive $u,v\in H^1_0$ both minimize
+$\int|Dw|^2$ with $\int w^2=1$. Show $u=v$.
+\begin{proof}[Solution]
+The Lipschitz composition $w=\sqrt{(u^2+v^2)/2}$ belongs to $H^1_0$
+and is normalized. In the interior positivity permits
+$s=u^2/(u^2+v^2)$ and
+\[
+ |Dw|^2=\frac{u^2+v^2}{2}
+ \left|s\frac{Du}{u}+(1-s)\frac{Dv}{v}\right|^2
+ \leq\tfrac12(|Du|^2+|Dv|^2).
+\]
+Both endpoint energies are minimal, so equality holds a.e.
+Strict convexity of the square gives $Du/u=Dv/v$ a.e.
+The minimizers solve the first-eigenvalue equation and are smooth and
+strictly positive locally, so $D\log(u/v)=0$ and $u/v$ is constant on
+connected $U$. Normalization fixes that constant at one.
+Without connectedness the conclusion fails: two identical disjoint
+components allow different positive masses on their ground states.
+\end{proof}
+\Needspace{55mm}
+\PDEAnnotation{正特征函数的单性与连通性}{对数比值梯度为零只保证每个连通分支上为常数。不连通区域的多个分支若有相同最低特征值，可重新分配归一化质量，不能推出全域唯一。}
+
+\Needspace{30mm}
+\paragraph{18. Ordered conductivities and identical Cauchy data.}
+Assume $0<a_1\leq a_2$, $\operatorname{div}(a_iDu_i)=0$, and on the
+boundary $u_1=u_2$, $\partial_\nu u_1=\partial_\nu u_2$, $a_1=a_2$.
+If $Du_2\ne0$ a.e., show both coefficients and solutions agree.
+\begin{proof}[Solution]
+Boundary integration gives $\int a_1|Du_1|^2=\int a_2|Du_2|^2$.
+Each $u_i$ minimizes its strictly convex weighted Dirichlet energy with
+the common trace. Hence
+\[
+ \int a_1|Du_1|^2\leq\int a_1|Du_2|^2
+ \leq\int a_2|Du_2|^2=\int a_1|Du_1|^2.
+\]
+Equality gives $\int(a_2-a_1)|Du_2|^2=0$. The integrand is nonnegative
+and $Du_2\ne0$ a.e., so $a_1=a_2$ a.e., then everywhere by continuity.
+Uniqueness for the common Dirichlet problem gives $u_1=u_2$.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{19. Wave momentum.}
+For $u_{tt}-\Delta u+f(u)=0$, find $p^k,j^k$ with
+$(p^k)_t-\operatorname{div}j^k=0$.
+\begin{proof}[Solution]
+Use the space--time Lagrangian
+$\mathcal L=\frac12u_t^2-\frac12|Du|^2-F(u)$.
+Spatial translation in direction $k$ gives multiplier $u_k$.
+The time component of its Noether current is $p^k=u_tu_k$;
+the spatial component is $-j^k$, where
+\[
+ j^k=u_kDu+\mathcal L e_k.
+\]
+Thus Noether's space--time divergence identity gives the desired law.
+As a direct check, differentiating and substituting the wave equation
+cancels $u_tu_{tk}$, the spatial Hessian terms and $f(u)u_k$.
+\end{proof}
+
+\Needspace{30mm}
+\paragraph{20. Almgren's frequency formula.}
+Let $u$ be harmonic on a neighborhood of $\overline{B_R}$, nonzero on
+$B_R$, and $u(0)=0$. Set
+$H(r)=\int_{\partial B_r}u^2$, $D(r)=\int_{B_r}|Du|^2$,
+$a=r^{1-n}H$, $b=r^{2-n}D$, $N=b/a$.
+\begin{proof}[Solution]
+First $a(r)>0$: if $u=0$ on a sphere, the Dirichlet principle makes it
+zero inside; analyticity of harmonic functions then makes it zero on
+$B_R$, a contradiction. Differentiating surface integrals and using
+$D=\int_{\partial B_r}uu_r$ gives
+\[
+ a'=2r^{1-n}\int_{\partial B_r}uu_r=2b/r.
+\]
+The $p=2$ formula \eqref{eq:8-monotonicity} gives
+$b'=2r^{2-n}\int_{\partial B_r}u_r^2$.
+Cauchy--Schwarz gives $b^2\leq(r/2)ab'$, hence
+\[
+ N'=\frac{ab'-ba'}{a^2}
+     =\frac{ab'-2b^2/r}{a^2}\geq0.
+\]
+Let $\beta=2N(R)$ and $\gamma=a(R)/R^\beta$.
+Then $a'/a=2N(r)/r\leq\beta/r$; integration from $r$ to $R$ yields
+$a(r)\geq\gamma r^\beta$.
+For a homogeneous harmonic polynomial of degree $\ell$, $N=\ell$ and
+$a(r)$ is a constant times $r^{2\ell}$, checking the normalization.
+We explicitly assume harmonicity beyond $\overline{B_R}$ so all endpoint
+quantities at $R$ are defined; one may instead use any smaller radius.
+\end{proof}

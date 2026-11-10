@@ -1,0 +1,12 @@
+\begin{tikzpicture}[pde diagram]
+\node[pde box,text width=27mm] (a) at (0,0) {iterates $u_j$\\$\|u_j\|_{\mathcal E_k}\le R$};
+\node[pde box,text width=27mm] (b) at (4,0) {Cauchy in\\$\mathcal E_1$};
+\node[pde box,text width=27mm] (c) at (8,0) {one limit $u$\\$\|u\|_{\mathcal E_k}\le R$};
+\draw[pde axis] (a)--node[above=6mm,pde tiny] {contraction}(b);
+\draw[pde axis] (b)--node[above=6mm,pde tiny] {closure}(c);
+\node[pde box,text width=100mm] (d) at (4,-2)
+ {weak-star compactness identifies the strong-ball limit\\
+ linear Duhamel then gives $C_tH^k\times C_tH^{k-1}$};
+\draw[pde axis] (a.south)--(d.north -| a.south);
+\draw[pde axis] (c.south)--(d.north -| c.south);
+\end{tikzpicture}

@@ -1,0 +1,18 @@
+\begin{tikzpicture}[pde diagram]
+\begin{scope}[x=1.35cm,y=1.2cm]
+\draw[pde axis] (-1.2,0)--(1.25,0) node[right] {$x$};
+\draw[pde axis] (0,-.15)--(0,1.4);
+\draw[pde curve] (-1,0)--(0,1)--(1,0);
+\draw[pde warm,dashed,domain=-1:1,samples=41] plot (\x,{1-.5*(\x)^2});
+\node[pde tiny] at (0,1.5) {upper test: $|p|\leq1$};
+\node[pde tiny] at (0,-.4) {$u=1-|x|$};
+\end{scope}
+\begin{scope}[shift={(5.8,0)},x=1.35cm,y=1.2cm]
+\draw[pde axis] (-1.2,0)--(1.25,0) node[right] {$x$};
+\draw[pde axis] (0,-1.4)--(0,.2);
+\draw[pde blue] (-1,0)--(0,-1)--(1,0);
+\draw[pde warm,dashed,domain=-1:1,samples=41] plot (\x,{-1+.5*(\x)^2});
+\node[pde tiny] at (0,.6) {lower test: $p=0$ fails};
+\node[pde tiny] at (0,-1.7) {$\widetilde u=|x|-1$};
+\end{scope}
+\end{tikzpicture}

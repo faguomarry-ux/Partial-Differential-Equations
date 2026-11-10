@@ -1,0 +1,24 @@
+\begin{tikzpicture}[pde diagram]
+\begin{scope}[x=.9cm,y=1.35cm]
+\draw[pde axis] (-2.4,0)--(2.5,0) node[right] {$x$};
+\draw[pde axis] (0,-.12)--(0,1.65);
+\draw[draw=LumenMuted,dashed,domain=-2.2:2.2,samples=181] plot (\x,{min(abs(abs(\x)-1),2)});
+\draw[pde curve,domain=-2.2:2.2,samples=181] plot (\x,{min(ifthenelse(abs(abs(\x)-1)<=.5,(abs(abs(\x)-1))^2,abs(abs(\x)-1)-.25),2)});
+\node[pde tiny] at (-1.8,1.55) {$g$ dashed};
+\node[pde tiny] at (1.6,1.55) {$Q_{1/2}g$ solid};
+\node[below] at (-1,0) {$-1$};
+\node[below] at (1,0) {$1$};
+\end{scope}
+\begin{scope}[shift={(6.2,0)},x=1.25cm,y=1.05cm]
+\draw[pde axis] (-1.6,0)--(1.65,0) node[right] {$y$};
+\draw[pde axis] (0,-.15)--(0,2.9);
+\draw[pde warm,domain=-1.4:1.4,samples=181] plot (\x,{(\x)^2+min(abs(abs(\x)-1),2)});
+\node[pde dot] at (-.5,.75) {};
+\node[pde dot] at (.5,.75) {};
+\draw[dashed,draw=LumenMuted] (-1.4,.75)--(1.4,.75);
+\node[pde tiny,above] at (0,2.8) {$y^2+g(y)$ at $x=0$};
+\node[below] at (-.5,0) {$-1/2$};
+\node[below] at (.5,0) {$1/2$};
+\node[pde tiny,fill=white] at (0,.5) {$\min=3/4$};
+\end{scope}
+\end{tikzpicture}

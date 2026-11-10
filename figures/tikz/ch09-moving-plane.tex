@@ -1,0 +1,23 @@
+\begin{tikzpicture}[pde diagram,scale=1.1]
+\begin{scope}
+\clip (0,0) circle (2);
+\fill[LumenBlue!8] (1,-2) rectangle (2,2);
+\fill[LumenWarm!14] (1,-1.73205) arc[start angle=240,end angle=120,radius=2] -- cycle;
+\fill[LumenAccent!25] (1.40,0) ellipse (.24 and .66);
+\end{scope}
+\draw (0,0) circle (2);
+\draw[pde axis] (-2.3,0)--(2.5,0) node[right] {$x_n$};
+\draw[pde blue] (1,-1.9)--(1,1.9) node[above] {$P_\lambda$};
+\draw[pde warm,dashed] (.82,-1.9)--(.82,1.9);
+\node[pde tiny] at (1.45,0) {$K$};
+\node[pde tiny,align=left] at (3.25,1.1) {$\Sigma_\lambda$\\thin remainder\\outside $K$};
+\draw[pde axis] (2.7,.9)--(1.85,.9);
+\node[pde dot] (x) at (1.65,.8) {};
+\node[pde dot] (r) at (.35,.8) {};
+\draw[pde axis,dashed] (x)--(r);
+\node[above right] at (x) {$x$};
+\node[above left] at (r) {$x^\lambda$};
+\node[below left] at (0,0) {$0$};
+\node[pde tiny] at (-.8,-1.1) {$w_\lambda=u(x^\lambda)-u(x)$};
+\node[pde tiny] at (3.1,-1.1) {$\lambda-\varepsilon\ \leftarrow\ \lambda$};
+\end{tikzpicture}

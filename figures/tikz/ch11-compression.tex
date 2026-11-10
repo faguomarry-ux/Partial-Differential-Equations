@@ -1,0 +1,20 @@
+\begin{tikzpicture}[pde diagram,scale=.97,transform shape]
+\begin{scope}[x=2cm,y=2.5cm]
+\draw[pde axis] (-1.15,0)--(1.2,0) node[right] {$x$};
+\draw[pde axis] (0,-.08)--(0,1.18) node[above] {$t$};
+\foreach \a in {-1,-.6,-.2,.2,.6,1}
+ \draw[pde curve] (\a,0)--({.04*\a},.96);
+\draw[dashed,draw=LumenWarm] (-1.05,1)--(1.05,1);
+\node[pde tiny,fill=white] at (.65,1.06) {$t_*=1$};
+\node[pde tiny,below] at (0,-.15) {$x=(1-t)\alpha$};
+\end{scope}
+\begin{scope}[shift={(6,0)},x=4cm,y=.29cm]
+\draw[pde axis] (0,0)--(1.14,0) node[right] {$t$};
+\draw[pde axis] (0,-9.3)--(0,.8) node[above] {$u_x$};
+\draw[pde warm,domain=0:.88,samples=70] plot (\x,{-1/(1-\x)});
+\draw[dashed,draw=LumenMuted] (1,0)--(1,-9.1);
+\node[pde tiny,above] at (1,0) {$1$};
+\node[pde tiny,left] at (0,-1) {$-1$};
+\node[pde tiny] at (.42,-5.5) {$-1/(1-t)$};
+\end{scope}
+\end{tikzpicture}

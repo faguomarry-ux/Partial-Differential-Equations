@@ -1,13 +1,144 @@
-% Evans second edition, section 10.1.
-% English source: printed p. 543; PDF page 560 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 10.1: printed pp.543--550; English PDF pp.560--567.
+% Chinese section start: printed p.384 / scan p.402.
 \section{Introduction, Viscosity Solutions}
 \label{sec:10-1}
+\subsection{Touching replaces integration by parts}
+We study
+\begin{equation}\label{eq:10-hj}
+ u_t+H(D_xu,x)=0,\qquad u(x,0)=g(x),
+\end{equation}
+where $H:\R^n\times\R^n\to\R$ is continuous. Characteristics may
+intersect, so a globally smooth solution is generally unavailable.
+The nonlinear expression $H(Du,x)$ has no general distributional
+interpretation for merely continuous $u$. At a local extremum of
+$u-\phi$, however, the derivative of a smooth test function can replace
+that of $u$. This is a pointwise contact argument, not integration by parts.
+Write $\mathrm{BUC}(\R^n\times[0,T])$ for bounded uniformly continuous
+functions on the whole closed slab; the uniformity includes spatial infinity.
+\Needspace{55mm}
+\begin{definition}[Initial-value viscosity convention; source \S10.1.1]
+A continuous $u$ is a viscosity subsolution in $\R^n\times(0,T)$ if,
+whenever $\phi\in C^\infty$ and $u-\phi$ has a local maximum at $(x,t)$,
+\[
+ \phi_t(x,t)+H(D\phi(x,t),x)\leq0.
+\]
+A supersolution uses a local minimum and the reverse inequality.
+A solution is both. For the source's initial-value class we additionally
+require $u\in\mathrm{BUC}$ on each finite slab and $u(\cdot,0)=g$.
+The contact need not be strict and its value need not be zero, since a
+constant can be added to $\phi$. All contacts in this definition have $t>0$.
+\end{definition}
+\Needspace{42mm}
+\PDEAnnotation{测试方向与极值}{局部最大点对应测试函数从上接触，要求残差不大于零；局部最小点从下接触，要求残差不小于零。导数放在测试函数上，定义不要求 $Du$ 处处存在。}
+\Needspace{55mm}
+\begin{lemma}[Persistence of strict contacts; editorial detail for \S10.1.1]
+Suppose $u_j\to u$ uniformly on a closed ball $B$ in space--time,
+$u-\phi$ has a strict maximum at its center $z_0$, and $B$ lies in the
+open PDE domain. Maximizers $z_j$ of $u_j-\phi$ on $B$ lie in its
+interior eventually and converge to $z_0$.
+\end{lemma}
+\begin{expandedproof}[the boundary gap and all cluster points]
+Continuity and compactness give a positive gap between the central value
+and the maximum over $\partial B$. Uniform convergence preserves half
+that gap, so $z_j\notin\partial B$. Any convergent subsequence of $z_j$
+has a limit maximizing $u-\phi$ on $B$, by uniform convergence.
+Strictness makes this limit $z_0$. Compactness then gives convergence of
+the entire sequence. The minimum version follows by changing signs.
+For a nonstrict maximum, replace $\phi$ by
+$\phi+\delta|z-z_0|^2$: the contact is strict and the first derivatives at
+$z_0$ are unchanged. For second-order equations one can instead use
+$\delta|z-z_0|^4$ to preserve the Hessian as well.
+\end{expandedproof}
+\Needspace{55mm}
+\begin{theorem}[Vanishing viscosity; source motivation, made conditional]
+Let $\varepsilon_j\downarrow0$ and let smooth $u_j$ satisfy
+$(u_j)_t+H(Du_j,x)-\varepsilon_j\Delta u_j=0$.
+If $u_j\to u$ locally uniformly, then $u$ solves the first-order equation
+in the viscosity sense in the open domain. If the convergence includes
+$t=0$, the initial values converge to $g$, and $u$ is in the BUC class,
+then it is a viscosity solution of the initial-value problem.
+\end{theorem}
+\begin{expandedproof}[the sign of the positive diffusion]
+At a strict upper contact, choose $z_j\to z_0$ by the lemma. There
+$D u_j=D\phi$, $(u_j)_t=\phi_t$, and
+$D_x^2u_j\leq D_x^2\phi$ as symmetric matrices. Hence
+\[
+ \phi_t(z_j)+H(D\phi(z_j),x_j)
+ =\varepsilon_j\Delta u_j(z_j)
+ \leq\varepsilon_j\Delta\phi(z_j).
+\]
+The right side tends to zero because the test Hessian is bounded near
+$z_0$. Continuity of $H$ gives the subsolution inequality. At a lower
+contact the Hessian order reverses and gives the supersolution inequality.
+Strictification treats arbitrary contacts. Convergence at $t=0$ gives the
+trace. Local uniform convergence by itself does not prove global boundedness
+or uniform continuity, and this theorem assumes the smooth approximants;
+it does not construct them or establish their uniform estimates.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{消黏法的条件式结论}{不必控制 $D^2u_j$ 本身：在接触点只需用 $D^2\phi$ 的单侧界。但要得到存在性，还须另证正则化方程可解及紧性，不能由这个极限论证直接宣布一般 $H$ 的存在性。}
 
-\PDEPending
-
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{70mm}
+\subsection{Smooth tests, differentiability, and consistency}
+\Needspace{50mm}
+\begin{lemma}[$C^1$ tests suffice; editorial expansion of source Theorem 1]
+The first-order definition is unchanged if $C^\infty$ test functions
+are replaced by $C^1$ test functions.
+\end{lemma}
+\begin{expandedproof}[mollify the test, not the unknown]
+Only one implication needs proof. Strictify a $C^1$ upper contact,
+choose a ball compactly inside the PDE domain, and mollify an extension
+of $\phi$ on a slightly larger ball. Then $\phi_j\to\phi$ in $C^1$
+on the contact ball. Maxima of $u-\phi_j$ are interior and converge
+to the contact point by the boundary-gap argument. Apply the smooth-test
+inequality and pass to the limit in the first derivatives and $H$.
+For a lower contact repeat with minima. A smooth cutoff extends each
+local test to the ambient domain without changing it near the contact.
+\end{expandedproof}
+\Needspace{50mm}
+\begin{lemma}[A differentiable function has a $C^1$ touching function;
+source \S10.1.2 lemma]
+If continuous $u$ is differentiable at $z_0$, it has a $C^1$ strict
+upper test and a $C^1$ strict lower test there, both with derivative $Du(z_0)$.
+\end{lemma}
+\begin{expandedproof}[a radial majorant of the differentiability error]
+Subtract the tangent affine function and translate so $z_0=0$,
+$u(0)=0$, $Du(0)=0$. On a small ball write
+$|u(z)|\leq |z|\rho(|z|)$, where $\rho$ is continuous,
+nondecreasing and $\rho(0)=0$. One choice is the maximum over $|w|\leq r$
+of $|u(w)|/|w|$, extending that quotient by zero at $w=0$.
+Set for $r=|z|$
+\[
+ \psi(z)=\int_r^{2r}\rho(s)\,ds+r^2.
+\]
+Then $\psi(z)\geq r\rho(r)+r^2>u(z)$ for $z\ne0$.
+For $z\ne0$ its radial derivative is
+$2\rho(2r)-\rho(r)+2r\to0$, while $\psi(z)/|z|\to0$.
+Thus $\psi$ extends as a $C^1$ function with $D\psi(0)=0$.
+It is a strict upper test. The same construction applied to $-u$
+gives a lower test for $u$. Add back the affine function and use a cutoff
+if a test on the whole ambient domain is desired.
+\end{expandedproof}
+\Needspace{55mm}
+\begin{theorem}[Consistency; source Theorem 1]
+A $C^1$ classical solution is a viscosity solution locally. Conversely,
+a viscosity solution differentiable at $(x_0,t_0)$ satisfies
+$u_t+H(Du,x_0)=0$ at that point. A locally Lipschitz viscosity solution
+therefore solves the equation a.e.
+\end{theorem}
+\begin{expandedproof}[two contacts recover equality]
+For a classical solution, derivatives of $u$ and its test agree at any
+interior contact, so both test inequalities follow with equality.
+Conversely, apply the preceding lemma in all $n+1$ variables.
+The $C^1$ test equivalence gives the PDE residual at most zero from
+the upper test, and at least zero from the lower test. Their derivatives
+are those of $u$, proving equality. Rademacher's theorem supplies a.e.
+differentiability of a locally Lipschitz function. The converse implication
+from a.e. solvability to viscosity solvability is false: corners carry
+additional information, as the next diagram and Problem 5 demonstrate.
+\end{expandedproof}
+\PDEBodyDiagram{10.1}{A corner distinguishes a.e. and viscosity solutions.}
+{On $(-1,1)$ both $1-|x|$ and $|x|-1$ solve $|u'|=1$ away from zero and vanish at the endpoints. The upper test $1-x^2/2$ is allowed for the downward corner, with slope zero and residual $-1\leq0$. For the upward corner, the lower test $-1+x^2/2$ has the same residual and violates the required supersolution inequality. No smooth lower test exists at the downward corner.}
+{ch10-contact}
+\Needspace{42mm}
+\PDEAnnotation{几乎处处满足还不够}{尖点集合可以只有一个点、测度为零，却决定可接受的解。黏性定义在尖点也检查所有可能接触斜率；只在可微点代入方程会漏掉这个选择机制。}

@@ -1,13 +1,40 @@
-% Evans second edition, section 9.8.
-% English source: printed p. 541; PDF page 558 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 9.8: printed pp.541--542; English PDF pp.558--559.
+% Chinese: printed p.383 / scan p.401.
 \section{References}
 \label{sec:9-8}
+\subsection*{Source directions}
+Evans's \S9.8 points to J.-L. Lions [L2] and Zeidler [Zd, Vol.~2] for
+monotonicity, and to [E1] for nonlinear weak-convergence methods.
+For fixed points the source recommends Zeidler [Zd, Vol.~1] and
+Gilbarg--Trudinger [G-T, Chapter~11]; for ordered methods, Smoller
+[S, Chapter~10]. The blow-up discussion follows Payne [Pa, \S9]; the
+small-data theorem is attributed there to H.~Fujita, J.~Fac.~Sci.~U.~Tokyo
+Sect.~I 13 (1966), 109--124. The radial symmetry result is attributed to
+Gidas, Ni and Nirenberg, Comm.~Math.~Phys.~68 (1979), 209--243.
+The convex-flow material follows Brezis [Br2]; Barbu [Ba] and Zeidler
+[Zd, Vol.~2] are further directions for nonlinear semigroups.
+These are the source's attributions and bibliography keys, not a claim
+that all of those works have been independently consulted for this draft.
 
-\PDEPending
+\subsection*{Proof dependencies and scope of this reconstruction}
+The finite-dimensional input is Brouwer from \S8.1. Functional analysis
+inputs include weak compactness of bounded Hilbert-space sequences,
+Hahn--Banach separation, Sobolev and Rellich embeddings, and the
+Hilbert-space Picard theorem. PDE inputs are the linear elliptic and
+parabolic theories of Chapters 6--7, Sobolev truncation and time chain
+rules from Chapter 5, and convex integral lower semicontinuity from
+Chapter 8. The global boundary $H^2$ step in \S9.1 explicitly uses the
+boundary difference-quotient argument of Chapters 6 and 8.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+Editorial changes include a bounded-Jacobian hypothesis for that $H^2$
+claim, an $L^2$ restart formulation for reaction--diffusion, a complete
+compact-convex-hull argument in Schaefer, extremal ordered solutions,
+a quantified small-support proof of moving-plane continuation, and a
+space--time resolvent test identifying the gradient-flow limit.
+The critical Fujita endpoint, general critical sign-changing Pohozaev
+nonexistence, arbitrary-data $H^2$ bounds down to time zero, general
+BV contraction, and reconstruction of a sandpile flux are not proved.
+English exposition, proofs, Chinese mathematical annotations, solutions,
+and TikZ diagrams are editorial reconstructions or additions.
+Compilation and explicit model checks do not constitute independent
+mathematical review.

@@ -1,13 +1,261 @@
-% Evans second edition, section 7.4.
-% English source: printed p. 409; PDF page 426 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 7.4: printed pp.409--420 / English PDF pp.426--437.
+% Chinese: printed pp.289--296 / scan pp.307--314.
+\Needspace{55mm}
 \section{Semigroup Theory}
 \label{sec:7-4}
+\Needspace{55mm}
+\subsection{Strong continuity, the generator, and its domain}
+Let $X$ be a real Banach space. A strongly continuous semigroup is a family
+$S(t)\in\mathcal L(X)$, $t\geq0$, satisfying
+\[
+ S(0)=I,\quad S(t+s)=S(t)S(s),\quad S(t)x\longrightarrow x
+ \text{ in }X\text{ as }t\downarrow0.
+\]
+We first assume $\|S(t)\|\leq1$ (a contraction semigroup).
+Its generator is the generally unbounded operator
+\[
+ D(G)=\left\{x:\lim_{h\downarrow0}\frac{S(h)x-x}{h}
+          \text{ exists in }X\right\},\qquad
+ Gx=\lim_{h\downarrow0}\frac{S(h)x-x}{h}.
+\]
+We use $G$ instead of the source's $A$, to distinguish it from the principal
+coefficient matrix. For $u_t+Lu=0$, the generator is $G=-L$.
+\Needspace{55mm}
+\PDEAnnotation{强连续不等于范数连续}{要求每个固定 $x$ 的 $\|S(t)x-x\|\to0$。若要求 $\|S(t)-I\|\to0$，就排除了许多无界生成元，例如 $L^2$ 上的热半群。}
 
-\PDEPending
+\Needspace{55mm}
+\begin{theorem}[Generator properties; source \S7.4.1, Theorems 1--2]
+\label{thm:7-generator}
+The domain $D(G)$ is dense, and $G$ is closed. For $x\in D(G)$,
+$S(t)x\in D(G)$, $GS(t)x=S(t)Gx$, and
+\[
+ \frac d{dt}S(t)x=GS(t)x=S(t)Gx.
+\]
+At $t=0$ this is a right derivative. In particular
+$S(t)x-x=\int_0^tS(s)Gx\,ds$.
+\end{theorem}
+\begin{expandedproof}[domain invariance, density, and graph closure]
+Commuting $S(t)$ with $S(h)$ and passing to the defining difference quotient
+proves invariance and commutation. The right derivative follows likewise;
+for the left derivative at $t>0$ use
+\[
+ \frac{S(t)x-S(t-h)x}{h}=S(t-h)\frac{S(h)x-x}{h}
+ \longrightarrow S(t)Gx.
+\]
+Strong continuity and the contraction bound justify the last limit.
+For arbitrary $x\in X$, let $x_t=t^{-1}\int_0^tS(s)x\,ds$.
+A change of integration interval gives
+\[
+ x_t\in D(G),\qquad Gx_t=\frac{S(t)x-x}{t},\qquad x_t\to x.
+\]
+Thus the domain is dense. To prove closedness, take $x_k\to x$,
+$Gx_k\to y$ in $X$ and pass to the limit in
+$S(t)x_k-x_k=\int_0^tS(s)Gx_k\,ds$.
+The contraction bound makes convergence of the integrals uniform on
+bounded time intervals. Divide the limit identity by $t$ and let
+$t\downarrow0$: its right side tends to $y$. Hence $x\in D(G)$ and $Gx=y$.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{闭算子与有界算子的区别}{闭性是 $x_k\to x$ 且 $Gx_k\to y$ 时才推出 $Gx=y$，不表示 $\|Gx\|\leq C\|x\|$。热方程的高频特征函数说明后一不等式不成立。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{55mm}
+\subsection{Resolvents as Laplace transforms}
+For a closed densely defined operator $G$, let $\rho(G)$ be the set of
+real $\lambda$ for which $\lambda I-G:D(G)\to X$ is bijective, and
+$R_\lambda=(\lambda I-G)^{-1}$. The closed graph theorem makes
+$R_\lambda:X\to X$ bounded. Its range is $D(G)$.
+\Needspace{55mm}
+\begin{theorem}[Resolvent identities and representation; source Theorem 3]
+\label{thm:7-resolvent}
+For $\lambda,\mu\in\rho(G)$,
+\begin{equation}\label{eq:7-resolvent-id}
+ R_\lambda-R_\mu=(\mu-\lambda)R_\lambda R_\mu,\qquad
+ R_\lambda R_\mu=R_\mu R_\lambda.
+\end{equation}
+For a contraction generator every $\lambda>0$ is in $\rho(G)$, and
+\begin{equation}\label{eq:7-resolvent-laplace}
+ R_\lambda x=\int_0^\infty e^{-\lambda t}S(t)x\,dt,
+ \qquad\|R_\lambda\|\leq\lambda^{-1}.
+\end{equation}
+The integral is a norm-convergent Bochner integral.
+\end{theorem}
+\begin{expandedproof}[the inverse on both sides]
+For the first identity insert
+$(\mu I-G)-(\lambda I-G)=(\mu-\lambda)I$ between $R_\lambda$ and
+$R_\mu$. These compositions are defined because each resolvent maps into
+$D(G)$. Interchanging $\lambda,\mu$ gives commutation (equal parameters
+are immediate).
+Let $J_\lambda x$ denote the integral in \eqref{eq:7-resolvent-laplace}.
+It converges since its integrand has norm at most $e^{-\lambda t}\|x\|$.
+Changing variables gives
+\[
+ \frac{S(h)J_\lambda x-J_\lambda x}{h}
+ =\frac{e^{\lambda h}-1}{h}J_\lambda x
+ -\frac{e^{\lambda h}}h\int_0^he^{-\lambda t}S(t)x\,dt.
+\]
+The limit is $\lambda J_\lambda x-x$. Thus $J_\lambda x\in D(G)$ and
+$(\lambda I-G)J_\lambda x=x$.
+For $x\in D(G)$, differentiate $e^{-\lambda t}S(t)x$ and integrate:
+\[
+ \int_0^\infty e^{-\lambda t}S(t)(\lambda x-Gx)\,dt=x.
+\]
+The endpoint at infinity vanishes by the contraction bound. Therefore
+$J_\lambda$ is also a left inverse, proving bijectivity and the formula.
+The norm bound follows by integration. This proof never passes an
+unbounded operator through an integral without a domain argument;
+Problem 13 gives the equivalent graph-norm justification.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{预解算子的符号}{$G=-L$ 时 $R_\lambda=(\lambda I+L)^{-1}$。椭圆能量估计给出的正参数正好对应发展方程的稳定方向；若误写成 $L-\lambda I$，会引入不应出现的共振。}
+
+\PDEMarginDiagram{7.M}{同一模态的两种衰减}
+{热方程取 $E=\frac12\|u\|_2^2$，图示 $k=1$ 模态。波动方程取 $E=\frac12(\|u_t\|_2^2+\|u_x\|_2^2)$，同一模态总能量守恒。}
+{ch07-energy-margin}
+
+\Needspace{55mm}
+\subsection{Constructing the semigroup from resolvent bounds}
+\Needspace{55mm}
+\begin{theorem}[Hille--Yosida, contraction case; source \S7.4.2, Theorem 4]
+\label{thm:7-hille-yosida}
+A closed densely defined linear $G$ generates a contraction semigroup if
+and only if
+\[
+ (0,\infty)\subset\rho(G),\qquad\|R_\lambda\|\leq\lambda^{-1}
+ \quad(\lambda>0).
+\]
+\end{theorem}
+\begin{expandedproof}[Yosida approximation]
+Necessity is Theorem~\ref{thm:7-resolvent}. Conversely define the bounded
+operators
+\[
+ G_\lambda=\lambda^2R_\lambda-\lambda I=\lambda GR_\lambda.
+\]
+For $x\in D(G)$,
+$\lambda R_\lambda x-x=R_\lambda Gx\to0$.
+The bound $\|\lambda R_\lambda\|\leq1$ and density extend this convergence
+to every $x\in X$. Consequently $G_\lambda x=\lambda R_\lambda Gx\to Gx$
+for $x\in D(G)$.
+Put $S_\lambda(t)=e^{tG_\lambda}$. Its power series gives
+\[
+ \|S_\lambda(t)\|\leq
+ e^{-\lambda t}\sum_{k=0}^\infty
+       \frac{(\lambda^2t)^k\|R_\lambda\|^k}{k!}\leq1.
+\]
+The resolvent identity shows that all $G_\lambda$ commute. Differentiate
+$S_\mu(t-s)S_\lambda(s)x$ in $s$ and integrate to obtain
+\[
+ \|S_\lambda(t)x-S_\mu(t)x\|
+ \leq t\|(G_\lambda-G_\mu)x\|\longrightarrow0
+ \quad(x\in D(G)).
+\]
+Thus $S_\lambda(t)x$ converges uniformly on bounded time intervals.
+Approximation of any $x\in X$ by points of $D(G)$ extends this convergence
+to all $X$. The limit $S(t)$ is a contraction, is strongly continuous,
+and satisfies the semigroup law: in the product limit use the uniform
+operator bound to control one factor and strong convergence for the other.
+
+Let $K$ be its generator. For $x\in D(G)$ pass to the limit in
+\[
+ S_\lambda(t)x-x=\int_0^tS_\lambda(s)G_\lambda x\,ds
+\]
+to get $S(t)x-x=\int_0^tS(s)Gx\,ds$. Dividing by $t$ proves
+$G\subset K$. This inclusion alone is insufficient.
+Fix $\lambda>0$ and $y\in D(K)$, and define
+$x=R_\lambda(\lambda I-K)y\in D(G)$. Since $Kx=Gx$,
+$(\lambda I-K)x=(\lambda I-K)y$. The operator $\lambda I-K$ is
+injective by Theorem~\ref{thm:7-resolvent}, so $y=x\in D(G)$.
+Thus $D(K)=D(G)$ and $K=G$.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{不能只证生成元的包含关系}{极限积分公式只给出 $G\subset K$。再用共同正参数下的预解算子满射和单射，才能排除 $K$ 有更大定义域，完成 $G=K$。}
+For $\|S(t)\|\leq e^{\omega t}$, apply the theorem to $G-\omega I$.
+The resolvent condition becomes
+$\|R_\lambda\|\leq(\lambda-\omega)^{-1}$ for $\lambda>\omega$.
+The theorem here has leading constant one; a general bound
+$M e^{\omega t}$ requires the corresponding bounds on all resolvent powers.
+
+\Needspace{55mm}
+\subsection{Parabolic and wave generators}
+Assume again smooth time-independent elliptic coefficients and smooth
+bounded $U$. Set $D(G)=H^2(U)\cap V$, $Gu=-Lu$ on $H$.
+\Needspace{55mm}
+\begin{theorem}[Parabolic semigroup; source \S7.4.3, Theorem 5]
+This $G$ generates a semigroup on $H$ with $\|S(t)\|\leq e^{\gamma t}$,
+where $B[u,u]\geq\alpha\|u\|_V^2-\gamma\|u\|_H^2$.
+\end{theorem}
+\begin{expandedproof}[the elliptic resolvent and graph estimate]
+Density follows from $C_c^\infty(U)\subset D(G)$.
+If $u_k\to u$ and $Gu_k\to z$ in $H$, the elliptic estimate
+\[
+ \|u_k-u_\ell\|_{H^2}\leq C(\|G(u_k-u_\ell)\|_H+\|u_k-u_\ell\|_H)
+\]
+shows convergence in $H^2$. The trace is still zero and $Gu=z$; thus
+$G$ is closed. For $\lambda>\gamma$, Lax--Milgram solves
+$B[u,v]+\lambda(u,v)=(f,v)$, and elliptic regularity puts $u$ in $D(G)$.
+Testing with $u$ gives
+$(\lambda-\gamma)\|u\|_H^2\leq\|f\|_H\|u\|_H$.
+Therefore $\|R_\lambda\|\leq(\lambda-\gamma)^{-1}$, and the shifted
+Hille--Yosida theorem applies.
+For $g\in D(G)$ the orbit is a classical $H$-valued solution. For $g\in H$
+approximate by $D(G)$ data and use the energy estimate; the semigroup
+orbit agrees with the weak parabolic solution. Domain regularity is not
+claimed at $t=0$ for arbitrary $H$ data.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{自主与非自主发展}{单参数半群依赖系数不含时间。$L=L(t)$ 时通常要用双参数传播族 $U(t,s)$；不能把 $e^{-tL(t)}$ 当成解算子。Galerkin 法仍可直接处理此情形。}
+
+For the wave application require $b=0$, $A=A^T$, $c\geq0$.
+The symmetric form $B$ is coercive on $V$. On
+$X=V\times H$ use
+\[
+ \|(u,v)\|_X^2=B[u,u]+\|v\|_H^2,\qquad
+ \mathcal G(u,v)=(v,-Lu),
+\]
+with $D(\mathcal G)=(H^2(U)\cap V)\times V$.
+\Needspace{55mm}
+\begin{theorem}[Wave semigroup; source Theorem 6]
+The operator $\mathcal G$ generates a contraction semigroup on $X$.
+In fact it extends to an isometric group.
+\end{theorem}
+\begin{expandedproof}[wave resolvent]
+The domain is dense. Closedness follows as above: convergence of
+$(u_k,v_k)$ and $(v_k,-Lu_k)$ in $V\times H$ implies $v\in V$ and
+$u\in H^2\cap V$, with the correct graph limit.
+For $\lambda>0$, solving $(\lambda I-\mathcal G)(u,v)=(F,H_0)$ is
+ equivalent to
+\[
+ (L+\lambda^2)u=H_0+\lambda F,\qquad v=\lambda u-F.
+\]
+Lax--Milgram and elliptic regularity give the unique domain solution.
+Moreover $\langle\mathcal G(u,v),(u,v)\rangle_X
+=B[v,u]-(Lu,v)=0$ by symmetry. Hence
+\[
+ \lambda\|(u,v)\|_X^2
+ =\langle(F,H_0),(u,v)\rangle_X,
+\]
+which proves $\|R_\lambda\|\leq\lambda^{-1}$.
+Hille--Yosida gives the contraction semigroup.
+The same argument works for $-\mathcal G$. The two semigroups are
+inverses: on domain data differentiate their product, then use density.
+Both are contractions, so each preserves the norm. This proves the group
+assertion as an editorial supplement, and explains energy conservation.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{波动的压缩实际是等距}{无阻尼、对称且时间独立时，反向演化也压缩，因此正向演化只能保持能量。不能由“压缩半群”一词推断波的能量严格衰减。}
+
+\Needspace{55mm}
+\subsection{Forcing and mild solutions: an editorial bridge}
+For $f\in L^1(0,T;X)$ the variation-of-constants formula is
+\[
+ u(t)=S(t)g+\int_0^tS(t-s)f(s)\,ds.
+\]
+It defines a continuous $X$-valued mild solution; continuity follows from
+strong continuity and the integrable norm bound.
+For domain-valued data with continuous graph-norm forcing,
+differentiation and Theorem~\ref{thm:7-generator} verify $u'=Gu+f$.
+Approximation extends the formula as a mild solution for general $g,f$.
+Uniqueness for classical domain-valued solutions follows by differentiating
+$S(t-s)u(s)$. For parabolic forcing in $L^2(0,T;H)$ the energy estimate
+and approximation identify this formula with the weak solution. A general
+mild orbit is not asserted to be differentiable for arbitrary Banach-space
+forcing.

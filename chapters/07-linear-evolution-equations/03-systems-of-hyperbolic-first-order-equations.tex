@@ -1,13 +1,172 @@
-% Evans second edition, section 7.3.
-% English source: printed p. 396; PDF page 413 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 7.3: printed pp.396--408 / English PDF pp.413--425.
+% Chinese: printed pp.280--288 / scan pp.298--306.
+\Needspace{55mm}
 \section[Systems of Hyperbolic First-Order Equations]{Systems of Hyperbolic\\First-Order Equations}
 \label{sec:7-3}
+\Needspace{55mm}
+\subsection{The symbol and the meaning of hyperbolicity}
+For vector-valued $u:\R^n\times[0,T]\to\R^m$ study
+\begin{equation}\label{eq:7-system}
+ u_t+\sum_{j=1}^n B^j(x,t)u_{x_j}=f,\qquad u(0)=g.
+\end{equation}
+Its spatial symbol is $B(x,t;\xi)=\sum_j\xi_jB^j(x,t)$.
+Following the source, the system is hyperbolic if this matrix has a basis
+of real eigenvectors and real eigenvalues for each nonzero $\xi$;
+strictly hyperbolic means all eigenvalues are real and distinct.
+It is symmetric hyperbolic if every $B^j$ is real symmetric.
+A plane wave $u=r\,F(\xi\cdot x-\sigma t)$ solves the constant coefficient
+homogeneous equation if $B(\xi)r=\sigma r$. For $|\xi|=1$, $\sigma$ is
+its signed speed. Repeated eigenvalues are permitted in symmetric systems.
+\Needspace{55mm}
+\PDEAnnotation{实谱与一致对角化}{每个方向可对角化，并不自动给出方向上一致有界的对角化矩阵。$L^2$ 适定性需要额外的一致控制；对称矩阵可用正交对角化，条件数恒为 1。}
 
-\PDEPending
+More generally, $B^0u_t+\sum B^ju_{x_j}=f$ is symmetrizable in this
+energy argument when all $B^j$, including $B^0$, are symmetric and
+$B^0$ is uniformly positive. Its energy is $\int u\cdot B^0u$.
+For $v_{tt}-a^{ij}v_{ij}=0$ set $u=(Dv,v_t)$,
+$B^0=\operatorname{diag}(A,1)$, and
+\[
+ B^j=\begin{pmatrix}0&-Ae_j\\-e_j^TA&0\end{pmatrix}.
+\]
+This gives a symmetric first-order system, since
+$(Dv)_t=Dv_t$ and $v_{tt}=a^{ij}v_{ij}$.
+Recovering $v$ also requires the initial gradient constraint; arbitrary
+first-order data need not be gradients.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{55mm}
+\subsection{Symmetry, energy, and vanishing viscosity}
+Assume $B^j\in C_b^2(\R^n\times[0,T];\R^{m\times m})$ are symmetric,
+$g\in H^1(\R^n;\R^m)$, and $f\in H^1(\R^n\times(0,T);\R^m)$.
+Here $C_b^2$ means that the matrices and all derivatives through order
+two are bounded. For smooth functions, spatial integration by parts yields
+\begin{equation}\label{eq:7-system-energy}
+ \frac12\frac d{dt}\|u\|_2^2
+ =(f,u)+\frac12\int_{\R^n}u\cdot\Big(\sum_j\partial_jB^j\Big)u.
+\end{equation}
+The identity follows from
+$2u\cdot B^ju_j=\partial_j(u\cdot B^ju)-u\cdot(\partial_jB^j)u$.
+For Sobolev functions on $\R^n$, insert expanding compact cutoffs;
+the errors vanish by $L^2$ integrability and bounded coefficients.
+\Needspace{55mm}
+\PDEAnnotation{对称性的精确用途}{对称性把 $u\cdot B^ju_j$ 写成通量散度加零阶项。若 $B^j$ 不对称，会留下含 $Du$ 的项，无法仅靠 $\|u\|_2$ 封闭估计。}
+
+\Needspace{55mm}
+\begin{theorem}[Symmetric hyperbolic well-posedness; source Theorems 1--4]
+\label{thm:7-system-existence}
+There is a unique solution of \eqref{eq:7-system} with
+$u\in L^2(0,T;H^1)$, $u_t\in L^2(0,T;L^2)$, $u(0)=g$ in $L^2$.
+It satisfies
+\[
+ \|u\|_{L^\infty H^1}+\|u_t\|_{L^2L^2}
+ \leq C(\|g\|_{H^1}+\|f\|_{H^1(\R^n\times(0,T))}).
+\]
+The weak identity uses $H^1$ tests and the ordinary $L^2$ inner product.
+\end{theorem}
+\begin{expandedproof}[viscosity construction]
+For $0<\varepsilon\leq1$ solve
+\[
+ u_t^\varepsilon-\varepsilon\Delta u^\varepsilon
+ +\sum_j B^j u_j^\varepsilon=f,\qquad
+ u^\varepsilon(0)=g_\varepsilon=\rho_\varepsilon*g.
+\]
+For fixed $\varepsilon$, Duhamel's formula with the heat semigroup gives
+an elementary construction. The estimate
+$\|D e^{\varepsilon r\Delta}h\|_2\leq C(\varepsilon r)^{-1/2}\|h\|_2$
+follows from its Fourier multiplier. Thus the integral operator is a
+contraction on $C([0,\delta];H^1)$ when
+$C(\delta+\sqrt{\delta/\varepsilon})<1$. Iterate finitely many intervals;
+the forcing term is continuous in $H^1$ because $f\in L^1(0,T;H^1)$.
+Smooth approximations to coefficients and data justify the following
+computations; their bounds depend only on the indicated norms.
+
+Testing with $u^\varepsilon$ gives \eqref{eq:7-system-energy} with the
+additional positive term $\varepsilon\|Du^\varepsilon\|_2^2$ on the left.
+Differentiate in $x_k$. The new forcing is
+$f_k-\sum_j(\partial_kB^j)u_j^\varepsilon$, bounded by
+$\|Df\|_2+C\|Du^\varepsilon\|_2$.
+Summing the energy estimates and applying Gronwall yields
+\[
+ \sup_t\|u^\varepsilon(t)\|_{H^1}^2
+ +\varepsilon\int_0^T\|D^2u^\varepsilon\|_2^2\,dt
+ \leq C(\|g\|_{H^1}^2+\|f\|_{L^2H^1}^2).
+\]
+The equation then gives
+\[
+ \|u_t^\varepsilon\|_{L^2L^2}
+ \leq\varepsilon\|\Delta u^\varepsilon\|_{L^2L^2}
+ +C\|u^\varepsilon\|_{L^2H^1}+\|f\|_{L^2L^2}\leq C.
+\]
+In fact the viscosity term tends to zero in $L^2L^2$ at rate at most
+$C\sqrt\varepsilon$ by the previous bound. Weak compactness now yields
+$u^\varepsilon\rightharpoonup u$ in $L^2H^1$ and
+$u_t^\varepsilon\rightharpoonup u_t$ in $L^2L^2$.
+All terms pass to the limit in integrated tests. Taking tests vanishing
+at $T$ and integrating the time derivative recovers $u(0)=g$;
+$H^1(0,T;L^2)$ supplies a continuous $L^2$ representative.
+Finally use \eqref{eq:7-system-energy} for a difference of two solutions.
+The identity is legal at this regularity by spatial approximation and
+the Hilbert-valued chain rule. Gronwall proves uniqueness and continuous dependence.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{黏性极限的统一常数}{固定 $\varepsilon$ 的抛物正则性常数可能随 $\varepsilon\downarrow0$ 发散。这里另证一致 $H^1$ 估计，并由 $\varepsilon\int\|D^2u^\varepsilon\|_2^2\leq C$ 得到黏性项消失。}
+
+\Needspace{55mm}
+\subsection{Constant coefficients: real spectrum and derivative loss}
+Assume now constant real matrices and only that $B(\xi)$ has real
+spectrum; it may have Jordan blocks. Fourier transformation in space gives
+\begin{equation}\label{eq:7-system-fourier}
+ \widehat u(\xi,t)=e^{-itB(\xi)}\widehat g(\xi).
+\end{equation}
+This is a weaker hypothesis than the hyperbolicity definition above.
+\begin{lemma}[Polynomial multiplier bound; source proof of Theorem 5]
+For each finite $T$, $\|e^{-itB(\xi)}\|\leq C_T(1+|\xi|^{m-1})$ for
+$0\leq t\leq T$.
+\end{lemma}
+\begin{expandedproof}[triangular multiplier bound]
+By complex Schur triangularization choose a unitary matrix $Q$ such that
+$Q^*B(\xi)Q=D+N$, where $D$ is real diagonal and $N$ strictly upper
+triangular. Both have norm at most $C|\xi|$, uniformly in direction.
+Variation of constants around $D$ expresses the matrix exponential as an
+ordered integral series. A product with $r$ factors of $N$, interspersed
+with diagonal exponentials, has zero entries below the $r$th upper
+diagonal; it therefore vanishes for $r\geq m$.
+Diagonal exponentials have norm one, and the time simplex has volume
+$t^r/r!$. Consequently
+\[
+ \|e^{-itB(\xi)}\|\leq\sum_{r=0}^{m-1}\frac{(C t|\xi|)^r}{r!}.
+\]
+Unitary conjugation preserves the norm. This proves a direction-uniform
+bound without assuming uniformly conditioned eigenvectors.
+\end{expandedproof}
+\Needspace{55mm}
+\begin{theorem}[Fourier solution; source Theorem 5, specified uniqueness class]
+If $g\in H^s(\R^n;\R^m)$, $s>n/2+m$, the inverse transform of
+\eqref{eq:7-system-fourier} is $C^1$ in $(x,t)$ on every finite time strip
+and solves the homogeneous system with initial data $g$.
+It belongs to $C([0,T];H^{s-m+1})$, with time derivative in
+$C([0,T];H^{s-m})$, and is unique among solutions with these properties.
+\end{theorem}
+\begin{expandedproof}[integrability, differentiation, and uniqueness]
+The multiplier bound gives the two asserted Sobolev bounds.
+For pointwise differentiation, both space and time derivatives add at most
+one factor $C|\xi|$. Cauchy--Schwarz shows
+\[
+ \int_{\R^n}(1+|\xi|)^m|\widehat g(\xi)|\,d\xi
+ \leq C\|g\|_{H^s}
+ \left(\int_{\R^n}(1+|\xi|)^{-2(s-m)}d\xi\right)^{1/2}<\infty.
+\]
+Thus dominated convergence proves $C^1$ regularity and justifies
+substitution into the equation. Continuity in the stated Sobolev spaces
+follows from the same multiplier bound. For uniqueness, Fourier localize
+a difference to a compact frequency set; multiplication by $B(\xi)$
+is then a bounded operator on $L^2$ of that set. The resulting Banach-space
+ODE with zero initial value is zero. An increasing sequence of compact
+frequency cutoffs proves uniqueness. No unrestricted uniqueness assertion
+for arbitrary classical solutions with unspecified growth is needed.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{Jordan 块造成导数损失}{对 $B=\left(\begin{smallmatrix}0&1\\0&0\end{smallmatrix}\right)$，$u_2=g_2$、$u_1=g_1-tg_2'$。谱全为实数，仍需要多一个空间导数；实谱本身不保证 $L^2\to L^2$ 有界。}
+
+\PDEBodyDiagram{7.4}{A Jordan block amplifies high frequencies.}
+{For $B=\left(\begin{smallmatrix}0&1\\0&0\end{smallmatrix}\right)$ and input $g=(0,\sin(kx))$ on a periodic line, $u=(-tk\cos(kx),\sin(kx))$. At $t=0.5$ the first component has amplitude $0.5k$. This exact periodic model illustrates the Fourier multiplier mechanism; the whole-space theorem above uses Sobolev data on $\R^n$.}
+{ch07-jordan}

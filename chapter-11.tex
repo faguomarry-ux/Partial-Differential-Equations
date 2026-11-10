@@ -1,0 +1,11 @@
+% Standalone: latexmk -xelatex -halt-on-error chapter-11.tex
+\documentclass[cover=pde,margin=right,12pt,fonts=tex,fontset=fandol,language=english]{lumenbook}
+\input{book-info}
+\input{config/pde-macros}
+\input{config/pde-layout}
+\setcounter{tocdepth}{1}
+\begin{document}
+\mainmatter
+\setcounter{chapter}{10}
+\input{chapters/11-systems-of-conservation-laws/chapter}
+\end{document}

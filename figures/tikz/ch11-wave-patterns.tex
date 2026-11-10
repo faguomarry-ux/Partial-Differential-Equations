@@ -1,0 +1,35 @@
+\begin{tikzpicture}[pde diagram,x=1cm,y=1cm]
+\begin{scope}
+\draw[pde axis] (-1.65,0)--(1.7,0) node[right] {$x$};
+\draw[pde axis] (0,-.1)--(0,2.9) node[above] {$t$};
+\fill[LumenAccent!9] (0,0)--(-1.25,2.45)--(1.25,2.45)--cycle;
+\foreach \a in {-1.25,-.83,-.42,.42,.83,1.25}
+ \draw[pde curve] (0,0)--(\a,2.45);
+\node[pde tiny,below] at (-1.15,0) {$u_l$};
+\node[pde tiny,below] at (1.15,0) {$u_r$};
+\node[pde tiny,fill=white] at (-1.1,2.7) {$\lambda_l$};
+\node[pde tiny,fill=white] at (1.1,2.7) {$\lambda_r$};
+\node at (0,-.65) {rarefaction};
+\end{scope}
+\begin{scope}[shift={(4.3,0)}]
+\draw[pde axis] (-1.65,0)--(1.7,0) node[right] {$x$};
+\draw[pde axis] (0,-.1)--(0,2.9) node[above] {$t$};
+\draw[pde warm,line width=1.8pt] (0,0)--(0,2.5);
+\foreach \v in {.6,1.2,1.8,2.4} {
+ \draw[pde curve,-{Latex[length=1.5mm]}] (-.7,\v- .5)--(0,\v);
+ \draw[pde curve,-{Latex[length=1.5mm]}] (.7,\v- .5)--(0,\v);
+}
+\node[pde tiny,fill=white] at (-1.05,2.7) {$\lambda_l>0$};
+\node[pde tiny,fill=white] at (1.05,2.7) {$\lambda_r<0$};
+\node[pde tiny,below] at (0,0) {$\sigma=0$};
+\node at (0,-.65) {shock};
+\end{scope}
+\begin{scope}[shift={(8.6,0)}]
+\draw[pde axis] (-1.65,0)--(1.7,0) node[right] {$x$};
+\draw[pde axis] (0,-.1)--(0,2.9) node[above] {$t$};
+\foreach \a in {-1.2,-.6,.6,1.2} \draw[pde curve] (\a,0)--(\a,2.4);
+\draw[pde warm,line width=1.8pt] (0,0)--(0,2.5);
+\node[pde tiny,fill=white] at (0,2.7) {$\lambda_l=\sigma=\lambda_r=0$};
+\node at (0,-.65) {contact};
+\end{scope}
+\end{tikzpicture}

@@ -1,0 +1,22 @@
+% Original editorial TikZ oscillation example, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=1cm,y=1cm]
+ \begin{scope}[shift={(2.7,0)},x=1.5cm,y=.8cm]
+  \draw[pde axis] (-1.7,0)--(1.8,0) node[right] {$p$};
+  \draw[pde axis] (0,-.1)--(0,2.65) node[above,pde tiny] {$W(p)$};
+  \draw[pde curve,domain=-1.5:1.5,samples=100] plot(\x,{(\x*\x-1)^2});
+  \foreach \a in {-1,1}{\fill[LumenWarm] (\a,0) circle[radius=2pt];\node[below] at (\a,0) {$\a$};}
+  \fill[LumenBlue] (0,1) circle[radius=2pt];
+  \node[above right,pde tiny] at (0,1) {$W(0)=1$};
+ \end{scope}
+ \begin{scope}[shift={(6.6,0)},x=3.6cm,y=3.6cm]
+  \draw[pde axis] (0,0)--(1.15,0) node[right,pde tiny] {$s$};
+  \draw[pde axis] (0,0)--(0,.7);
+  \draw[pde warm] (0,0)--(.5,.5)--(1,0);
+  \node[below,pde tiny] at (0,0) {$0$};
+  \node[below,pde tiny] at (1,0) {$1$};
+  \node[above,pde tiny] at (.5,.5) {$\rho(s)$};
+  \node[above left,pde tiny] at (.25,.25) {$\rho'=1$};
+  \node[above right,pde tiny] at (.75,.25) {$\rho'=-1$};
+ \end{scope}
+ \node[pde tiny] at (7.9,-.85) {$u_k(x)=k^{-1}\rho(kx)$};
+\end{tikzpicture}

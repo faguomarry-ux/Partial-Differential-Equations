@@ -1,13 +1,260 @@
-% Evans second edition, section 12.4.
-% English source: printed p. 636; PDF page 653 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 12.4, printed pp.636--642; English PDF pp.653--659.
+% Chinese start: printed p.451 / scan p.469.
 \section{Critical Power Nonlinearity}
 \label{sec:12-4}
+\subsection{Scaling and the external linear estimate}
+In $\R^3$ the defocusing equation
+\begin{equation}\label{eq:12-quintic}
+ \PDEWave u+u^5=0,\qquad
+ E=\int\{(u_t^2+|Du|^2)/2+u^6/6\}
+\end{equation}
+is energy critical. For the general power,
+$u_\lambda(x,t)=\lambda^{2/(p-1)}u(\lambda x,\lambda t)$ solves
+the same equation, while its energy scales by
+$\lambda^{4/(p-1)-1}$. At $p=5$ this factor is one: a small spatial
+scale cannot be excluded by total energy alone.
+\PDEMarginDiagram{12.M}{能量临界的缩放指数}
+{图中 $a(p)=4/(p-1)-1$，且 $E[u_\lambda]=\lambda^{a(p)}E[u]$。
+$p=5$ 是三维退聚焦波方程的能量临界指数；
+它与后面聚焦小数据爆破的 $1+\sqrt2$ 阈值属于不同问题。}
+{ch12-scaling-margin}
 
-\PDEPending
+\begin{theorem}[Linear estimate; source \S12.4, Theorem 1]
+For $\PDEWave v=G$ on a time interval $I=[s,\tau]$ in $\R^3$,
+assume $v(s)\in\dot H^1$, $v_t(s)\in L^2$, and
+$G\in L^1(I;L^2)$. Then
+\begin{equation}\label{eq:12-strichartz}
+ \begin{split}
+ &\|Dv,v_t\|_{L^\infty(I;L^2)}+\|v\|_{L^\infty(I;L^6)}
+       +\|v\|_{L^4(I;L^{12})}\\
+ &\hspace{4mm}\le C\{\|Dv(s)\|_2+\|v_t(s)\|_2
+                               +\|G\|_{L^1(I;L^2)}\}.
+ \end{split}
+\end{equation}
+We explicitly use the homogeneous three-dimensional Strichartz
+estimate for the $(4,12)$ pair as an \emph{external theorem}, with
+constant independent of the interval. It is not proved here.
+\end{theorem}
+\begin{expandedproof}[the proved energy part and the external input]
+The energy argument of \S\ref{sec:12-2}, without the $L^2$ position
+term, gives the first norm on the left. The homogeneous Sobolev
+inequality $\|v\|_6\le C\|Dv\|_2$ gives the second. The external
+homogeneous estimate bounds the third norm for free waves by their
+$\dot H^1\times L^2$ data. Apply this to the free evolution starting
+at each forcing time and use Minkowski in Duhamel's integral. Its
+$\dot H^1\times L^2$ size is $\|G(t)\|_2$, giving the forcing term
+in \eqref{eq:12-strichartz}. Restriction of the homogeneous estimate
+on the whole time line explains uniformity under interval shortening.
+The dispersive proof of that homogeneous estimate remains external;
+energy conservation alone does not imply an $L^4_tL^{12}_x$ bound.
+\end{expandedproof}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection{Morawetz identity and potential nonconcentration}
+Fix an apex $(x_0,T)$ before which $u$ is smooth and has finite
+conserved energy. Set $x_0=0$ by translation and $r=|x|$.
+The local energy $E_K(t)$ decreases, so it has a limit $E_*\ge0$
+as $t\uparrow T$. Define the tail flux
+\begin{equation}\label{eq:12-tail-flux}
+ \phi(s)=E_K(s)-E_*
+ =\frac1{\sqrt2}\int_{\Gamma_{s,T}}
+       \{\tfrac12|u_t\nu-Du|^2+u^6/6\}\,dS.
+\end{equation}
+Monotone convergence in the truncated flux identity gives this
+formula and $\phi(s)\to0$. At this stage $E_*=0$ is \emph{not} known.
+
+\begin{lemma}[Multiplier identity; source equations (6)--(8)]
+Put $\theta=t-T$, $m=\theta u_t+x\cdot Du+u$ and
+\[
+ P=\theta\{(u_t^2+|Du|^2)/2+u^6/6\}+(x\cdot Du+u)u_t,
+\]
+\[
+ Q=mDu+x\{(u_t^2-|Du|^2)/2-u^6/6\}.
+\]
+Then $P_t-\operatorname{div}Q=m(\PDEWave u+u^5)-u^6/3$.
+\end{lemma}
+\PDEAnnotation{先证明通量尾部趋零}{正确的关系是
+$\phi(s)=E_K(s)-\lim_{t\uparrow T}E_K(t)$。
+单调性保证尾部趋零，不要求顶端剩余能量预先为零。
+后面通过线性 Duhamel 的强能量极限再证明全部能量不集中。}
+\begin{expandedproof}[an identity also valid off solutions]
+Use $\theta_t=1$, $\operatorname{div}x=3$ and
+$D(x\cdot Du)=Du+D^2u\,x$.
+The mixed terms $\theta Du\cdot Du_t$ cancel, as do
+$x\cdot D(u_t)u_t$ and $x\cdot D^2u\,Du$ after differentiation.
+The remaining second derivatives form $m(u_{tt}-\Delta u)$.
+The potential terms are $m u^5-u^6/3$: their residual coefficient
+is $1/6+3/6-1=-1/3$. The coefficients of $u_t^2$ and $|Du|^2$
+are both zero. This proves the identity without presupposing the PDE.
+\end{expandedproof}
+
+\begin{theorem}[Potential nonconcentration; source \S12.4, Theorem 2]
+For $R=T-s$,
+\begin{equation}\label{eq:12-nonconcentration}
+ \int_{B(x_0,R)}|u(x,s)|^6dx
+       \le C\{\phi(s)+\phi(s)^{1/3}\}\longrightarrow0.
+\end{equation}
+Since $\phi\le E$, the right side can also be written
+$C_E\phi(s)^{1/3}$, making its energy dependence explicit.
+\end{theorem}
+\begin{expandedproof}[top term, boundary cancellation, and the endpoint]
+Translate $s$ to zero, so $R$ replaces $T$. Integrate the multiplier
+identity on $K_{0,\tau}$ and let $\tau\uparrow R$.
+The top integral tends to zero even if the apex is singular:
+with $\rho=R-\tau$,
+\[
+ \left|\int_{B(0,\rho)}P(x,\tau)dx\right|
+ \le C\rho E+C\|u\|_{L^2(B_\rho)}\|u_t\|_2
+ \le C\rho(E+E^{2/3}).
+\]
+Here Holder gives $\|u\|_{L^2(B_\rho)}\le C\rho\|u\|_6$.
+Thus, putting
+$A=\frac1{\sqrt2}\int_\Gamma(P-Q\cdot\nu)dS$ and
+$B=\int_{B_R}P(x,0)dx$, we obtain $A-B=-\iint_Ku^6/3\le0$.
+
+On the mantle $r=R-t$,
+$P-Q\cdot\nu=-r(u_t-u_r)^2+u(u_t-u_r)$.
+Set $w(y)=u(y,R-|y|)$. Then $w_r=u_r-u_t$ and
+\begin{equation}\label{eq:12-mantle-square}
+ A=-\int_{B_R}r\left(w_r+\frac wr\right)^2dy
+                      +\frac12\int_{\partial B_R}u(x,0)^2dS_x.
+\end{equation}
+Indeed $A=-\int(rw_r^2+ww_r)$ and
+$\int(w^2/r+ww_r)=\frac12\int_{\partial B_R}w^2$, from
+$\operatorname{div}(y/r)=2/r$.
+This calculation is valid for the possibly singular cone trace:
+flux gives $Dw\in L^2$ and $w\in L^6$, so $w\in H^1(B_R)$
+(the point at zero is removable for $H^1$ in dimension three).
+The weighted term $w^2/r$ is integrable by Holder. Approximate in
+$H^1$ with the outer smooth trace fixed, or use radial cutoffs and
+a vanishing inner-boundary subsequence, to justify the integration.
+
+For the bottom term use Young's inequality and $r\le R$:
+\[
+ \begin{split}
+ B&\le-\frac R6\int_{B_R}u^6
+       +\frac R2\int_{B_R}(|Du+xu/r^2|^2-|Du|^2)\\
+  &=-\frac R6\int_{B_R}u^6+\frac12\int_{\partial B_R}u^2.
+ \end{split}
+\]
+The last equality follows from $\operatorname{div}(x/r^2)=1/r^2$;
+the origin contributes no boundary term for the smooth bottom data.
+The boundary terms cancel between this bound and
+\eqref{eq:12-mantle-square}. Therefore
+\[
+ R\int_{B_R}u(x,0)^6dx
+ \le C\int_{B_R}r(w_r+w/r)^2
+ \le CR\phi(0)+C\int_{B_R}w^2/r.
+\]
+Finally
+\[
+ \int_{B_R}w^2/r
+ \le\left(\int_{B_R}w^6\right)^{1/3}
+      \left(\int_{B_R}r^{-3/2}\right)^{2/3}
+ \le CR\phi(0)^{1/3}.
+\]
+Divide by $R$ and undo the time translation. Every estimate is on
+truncated smooth cones before a justified limit, so no regularity
+at the candidate blow-up point has been assumed.
+\end{expandedproof}
+
+\subsection{Localizing Strichartz and closing the global proof}
+\begin{lemma}[Localized estimate and the bootstrap barrier]
+Let $C=\{s<t<\tau,\ |x-x_0|<R-(t-s)\}$ be a backward cone.
+For a smooth quintic solution set
+$X(\tau)=\|u\|_{L^4(s,\tau;L^{12}(C_t))}$.
+Then
+\begin{equation}\label{eq:12-cone-strichartz}
+ X(\tau)\le C_0+C\sup_{s<t<\tau}\|u(t)\|_{L^6(C_t)}X(\tau)^4,
+ \qquad C_0\le C\sqrt E.
+\end{equation}
+If the displayed $L^6$ coefficient is sufficiently small depending
+only on $E$, then $X(\tau)$ stays bounded up to the cone apex.
+\end{lemma}
+\begin{expandedproof}[no unsupported restriction of a global estimate]
+Solve the linear equation with data $(u(s),u_t(s))$ on all space
+and forcing $-\mathbf1_Cu^5$, zero outside $C$. Finite propagation
+for the linear equation implies its solution equals $u$ inside $C$:
+the backward cone of any point of $C$ remains inside $C$ down to $s$.
+Apply \eqref{eq:12-strichartz} to this linear solution. Holder in
+space and time gives
+\[
+ \|u^5\|_{L^1L^2(C)}
+ \le\sup_t\|u(t)\|_{L^6(C_t)}
+                 \int_s^\tau\|u(t)\|_{L^{12}(C_t)}^4dt.
+\]
+This proves the estimate using a globally defined forcing and data;
+no boundary Strichartz theorem is being assumed.
+Choose $B=2\max(C_0,1)$ and require the nonlinear coefficient to be
+less than $1/(4B^3)$. The continuous function $X$ starts at zero.
+At a first crossing of $B$, the inequality would give
+$B\le C_0+B/4\le3B/4$, impossible. It therefore remains below $B$.
+The small coefficient alone is insufficient unless this continuity
+argument excludes the large branch of $X\le C_0+\varepsilon X^4$.
+\end{expandedproof}
+
+\begin{theorem}[Global smooth quintic solution; source \S12.4, Theorem 3]
+For $g,h\in C_c^\infty(\R^3)$, the defocusing quintic problem has
+a unique global smooth solution. The proof uses the stated external
+homogeneous Strichartz estimate.
+\end{theorem}
+\begin{expandedproof}[from potential flux to an actual continuation bound]
+Assume a finite maximal time $T$. For each $x_0$, potential
+nonconcentration makes the $L^6$ coefficient in
+\eqref{eq:12-cone-strichartz} small on a sufficiently short tail of
+the cone with apex $(x_0,T)$. Thus $X(T)<\infty$ on that cone, and
+$G=-\mathbf1_Ku^5\in L^1(s,T;L^2)$.
+The linear solution with this forcing and full data at $s$ agrees
+with $u$ inside the cone, as in the lemma. Because its forcing is
+integrable in time, Duhamel gives a strong
+$\dot H^1\times L^2$ limit at $T$.
+Strong $L^2$ convergence of its gradient and velocity, together with
+absolute continuity of their squared integrals at the limiting time,
+now implies
+\[
+ \int_{B(x_0,T-t)}(|Du|^2+u_t^2)dx\longrightarrow0.
+\]
+Together with \eqref{eq:12-nonconcentration} this proves
+$E_K(t)\to0$. This argument replaces an unproved differentiation
+estimate on a cone with a characteristic boundary.
+
+Fix $x_0$. Choose $s<T$ so its local energy is smaller than a chosen
+$\varepsilon>0$. At this fixed smooth time, absolute continuity in
+the radius allows a $\delta>0$ such that the energy on
+$B(x_0,T-s+\delta)$ is less than $2\varepsilon$.
+Positive cone flux propagates this bound into the enlarged cone
+$|x-x_0|<T-t+\delta$. Its $L^6$ norm is at most
+$(12\varepsilon)^{1/6}$. The localized lemma, still using the full
+initial energy $E$ for $C_0$, gives a finite $L^4L^{12}$ norm on this
+enlarged cone. Choose $\varepsilon$ small enough for the fixed barrier.
+
+Finite propagation bounds all supports for $t<T$ by the fixed closed
+ball $\overline B(0,R_0+T)$. Cover that ball by finitely many of the
+balls $B(x_j,\delta_j/2)$ just constructed. These balls lie inside
+the corresponding enlarged sections for every $t<T$. Start after
+the largest of their finitely many start times, and use the triangle
+inequality in $L^{12}$ and then $L^4$. Adding the earlier smooth
+strip proves $u\in L^4(0,T;L^{12}(\R^3))$.
+No object $\operatorname{spt}u(\cdot,T)$ is needed before existence
+at $T$ is known.
+
+Finally $v=D_ju$ solves $\PDEWave v=-5u^4v$. The homogeneous energy
+estimate and Sobolev give, for
+$A_j(t)=\|Dv(t)\|_2+\|v_t(t)\|_2$,
+\[
+ A_j(t)\le C_j+C\int_0^t\|u(s)\|_{12}^4 A_j(s)ds,
+ \qquad \|u^4v\|_2\le\|u\|_{12}^4\|v\|_6.
+\]
+Gronwall bounds $A_j$ up to $T$. Thus $Du$ is bounded in $L^6$;
+energy already bounds $u$ in $L^6$. The embedding
+$W^{1,6}(\R^3)\hookrightarrow L^\infty$ supplies a uniform amplitude
+bound. The continuation theorem of \S\ref{sec:12-3} contradicts
+maximality. Local uniqueness extends to all time.
+\end{expandedproof}
+\PDEBodyDiagram{12.3}{Why the cone must be enlarged}
+{The flux tail first makes the potential energy small on shrinking cones.
+Localized Strichartz and a linear Duhamel limit then exclude concentration
+of the kinetic and gradient energy. At a fixed time $s$, the small-energy
+ball can be enlarged by $\delta>0$. The enlarged sections retain a ball
+of radius $\delta$ near $T$, allowing a finite cover of the fixed possible
+support. A cone with zero terminal radius alone would not provide that cover.}
+{ch12-nonconcentration}

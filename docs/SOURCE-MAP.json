@@ -5,7 +5,7 @@
   "english_pages": 730,
   "chinese_pages": 524,
   "page_convention": "All PDF pages are 1-based physical pages. Printed pages are separate.",
-  "evidence": "English PDF bookmarks checked against printed Contents (PDF 8-11). Chinese chapter starts read from scanned Contents (PDF 13-18). Chinese section correspondence remains pending outside the completed chapter logs. Chapter 1 English text/formulas checked against PDF 18-30; Chinese section starts and terminology checked against scanned PDF 19-27 on 2026-11-09. Chapter 5: English PDF 256-309 consulted; Chinese PDF 187-188 visually checked, section starts from chapter-opening list; full Chinese proof comparison remains pending (2026-11-09). Chapter 2: English PDF 34-104 consulted; Chinese PDF 31, 36-37, 53-55 visually checked; section starts from chapter-opening list (2026-11-09). Chapter 3: English PDF 106-175 consulted; Chinese PDF 79, 88-90, 99-101, 110-112 visually checked, section starts from the chapter-opening list; full Chinese line-by-line comparison remains pending (2026-11-09). Chapter 4: English PDF 176-253 consulted; Chinese PDF 129, 154-155, 168-171, 176-179 visually checked; section starts from chapter opening. Full line-by-line Chinese comparison remains pending (2026-11-09). Chapter 6: English PDF 310-365 consulted; Chinese PDF 226,237,239,242,245,249,251,252,258,260 visually checked, with section starts from chapter opening. No full Chinese line-by-line review (2026-11-10).",
+  "evidence": "English PDF bookmarks checked against printed Contents (PDF 8-11). Chinese chapter starts read from scanned Contents (PDF 13-18). Chinese section correspondence remains pending outside the completed chapter logs. Chapter 1 English text/formulas checked against PDF 18-30; Chinese section starts and terminology checked against scanned PDF 19-27 on 2026-11-09. Chapter 5: English PDF 256-309 consulted; Chinese PDF 187-188 visually checked, section starts from chapter-opening list; full Chinese proof comparison remains pending (2026-11-09). Chapter 2: English PDF 34-104 consulted; Chinese PDF 31, 36-37, 53-55 visually checked; section starts from chapter-opening list (2026-11-09). Chapter 3: English PDF 106-175 consulted; Chinese PDF 79, 88-90, 99-101, 110-112 visually checked, section starts from the chapter-opening list; full Chinese line-by-line comparison remains pending (2026-11-09). Chapter 4: English PDF 176-253 consulted; Chinese PDF 129, 154-155, 168-171, 176-179 visually checked; section starts from chapter opening. Full line-by-line Chinese comparison remains pending (2026-11-09). Chapter 6: English PDF 310-365 consulted; Chinese PDF 226,237,239,242,245,249,251,252,258,260 visually checked, with section starts from chapter opening. No full Chinese line-by-line review (2026-11-10). Chapter 7: English PDF 366-440 consulted; Chinese scan PDF 266,267,273,277,282,287,293,300,304,309,311,315,317 visually checked; section starts from chapter opening, no full line-by-line comparison (2026-11-10). Chapter 8: English PDF 444-511 consulted; Chinese scan PDF 321,324,326,329,334,338,340,342,344,347,351,355,357,360,362,364,367 visually checked; section starts from chapter opening, no full line-by-line comparison (2026-11-10). Chapter 9: English PDF 512-559 consulted; Chinese scan PDF 368,372,378,381,384,385,387,389,390,392,394,396,398,400,401 visually checked; no full line-by-line comparison (2026-11-10). Chapter 10: English PDF 560-587 extracted and consulted; exposition and proofs reconstructed, not verbatim. Scan PDF 402-409,411-421 visually checked; section starts from chapter-opening list; no full line-by-line review. (2026-11-10). Chapter 11: English PDF 588-633 extracted and consulted for theorem/proof structure, all 17 problems and attributions. Chinese scan PDF 422,426,430,432,435,438-440,442-453 selectively viewed; section starts from opening list, no full line-by-line review (2026-11-10). Chapter 12: English PDF 634-668 extracted and consulted for theorem/proof structure, all 18 problems and source attributions. Chinese scan PDF 455,457,460,464,465,469,470,472-475,477-480 selectively viewed; section starts from opening list; no full line-by-line comparison (2026-11-10).",
   "english_printed_to_pdf_offset": 17,
   "units": [
     {
@@ -844,7 +844,7 @@
       "english_pdf_start": 366,
       "chinese_printed_start": 248,
       "chinese_title": "线性发展方程",
-      "status": "outline-only",
+      "status": "editorial-study-draft",
       "sections": [
         {
           "number": "7.1",
@@ -852,7 +852,9 @@
           "file": "chapters/07-linear-evolution-equations/01-second-order-parabolic-equations.tex",
           "english_printed_start": 349,
           "english_pdf_start": 366,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 248,
+          "chinese_pdf_start": 266
         },
         {
           "number": "7.2",
@@ -860,7 +862,9 @@
           "file": "chapters/07-linear-evolution-equations/02-second-order-hyperbolic-equations.tex",
           "english_printed_start": 375,
           "english_pdf_start": 392,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 266,
+          "chinese_pdf_start": 284
         },
         {
           "number": "7.3",
@@ -868,7 +872,9 @@
           "file": "chapters/07-linear-evolution-equations/03-systems-of-hyperbolic-first-order-equations.tex",
           "english_printed_start": 396,
           "english_pdf_start": 413,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 280,
+          "chinese_pdf_start": 298
         },
         {
           "number": "7.4",
@@ -876,7 +882,9 @@
           "file": "chapters/07-linear-evolution-equations/04-semigroup-theory.tex",
           "english_printed_start": 409,
           "english_pdf_start": 426,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 289,
+          "chinese_pdf_start": 307
         },
         {
           "number": "7.5",
@@ -884,7 +892,9 @@
           "file": "chapters/07-linear-evolution-equations/05-problems.tex",
           "english_printed_start": 420,
           "english_pdf_start": 437,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 297,
+          "chinese_pdf_start": 315
         },
         {
           "number": "7.6",
@@ -892,8 +902,54 @@
           "file": "chapters/07-linear-evolution-equations/06-references.tex",
           "english_printed_start": 423,
           "english_pdf_start": 440,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 299,
+          "chinese_pdf_start": 317
         }
+      ],
+      "english_printed_end": 423,
+      "english_pdf_end": 440,
+      "chinese_pdf_start": 266,
+      "chinese_printed_end": 299,
+      "chinese_pdf_end": 317,
+      "annotation_count": 28,
+      "expanded_proof_count": 21,
+      "source_problem_solutions": 16,
+      "independent_math_review": false,
+      "native_tikz_diagram_count": 5,
+      "source_comparison": "English PDF 366-440 extracted and consulted; exposition and proofs reconstructed, not verbatim.",
+      "chinese_evidence": "Scan PDF 266,267,273,277,282,287,293,300,304,309,311,315,317 visually checked. Section starts from chapter-opening list. No full line-by-line Chinese review.",
+      "tikz_diagrams": [
+        {
+          "id": "T7.1",
+          "file": "figures/tikz/ch07-galerkin.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T7.2",
+          "file": "figures/tikz/ch07-parabolic-boundary.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T7.3",
+          "file": "figures/tikz/ch07-anisotropic-cone.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T7.4",
+          "file": "figures/tikz/ch07-jordan.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T7.M",
+          "file": "figures/tikz/ch07-energy-margin.tex",
+          "placement": "margin"
+        }
+      ],
+      "current_standalone_pages": 27,
+      "current_book_physical_range": [
+        204,
+        230
       ]
     },
     {
@@ -905,7 +961,7 @@
       "english_pdf_start": 444,
       "chinese_printed_start": 303,
       "chinese_title": "变分法",
-      "status": "outline-only",
+      "status": "editorial-study-draft",
       "sections": [
         {
           "number": "8.1",
@@ -913,7 +969,9 @@
           "file": "chapters/08-the-calculus-of-variations/01-introduction.tex",
           "english_printed_start": 427,
           "english_pdf_start": 444,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 303,
+          "chinese_pdf_start": 321
         },
         {
           "number": "8.2",
@@ -921,7 +979,9 @@
           "file": "chapters/08-the-calculus-of-variations/02-existence-of-minimizers.tex",
           "english_printed_start": 437,
           "english_pdf_start": 454,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 310,
+          "chinese_pdf_start": 328
         },
         {
           "number": "8.3",
@@ -929,7 +989,9 @@
           "file": "chapters/08-the-calculus-of-variations/03-regularity.tex",
           "english_printed_start": 454,
           "english_pdf_start": 471,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 320,
+          "chinese_pdf_start": 338
         },
         {
           "number": "8.4",
@@ -937,7 +999,9 @@
           "file": "chapters/08-the-calculus-of-variations/04-constraints.tex",
           "english_printed_start": 458,
           "english_pdf_start": 475,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 323,
+          "chinese_pdf_start": 341
         },
         {
           "number": "8.5",
@@ -945,7 +1009,9 @@
           "file": "chapters/08-the-calculus-of-variations/05-critical-points.tex",
           "english_printed_start": 471,
           "english_pdf_start": 488,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 332,
+          "chinese_pdf_start": 350
         },
         {
           "number": "8.6",
@@ -953,7 +1019,9 @@
           "file": "chapters/08-the-calculus-of-variations/06-invariance-noethers-theorem.tex",
           "english_printed_start": 481,
           "english_pdf_start": 498,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 339,
+          "chinese_pdf_start": 357
         },
         {
           "number": "8.7",
@@ -961,7 +1029,9 @@
           "file": "chapters/08-the-calculus-of-variations/07-problems.tex",
           "english_printed_start": 489,
           "english_pdf_start": 506,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 345,
+          "chinese_pdf_start": 363
         },
         {
           "number": "8.8",
@@ -969,8 +1039,54 @@
           "file": "chapters/08-the-calculus-of-variations/08-references.tex",
           "english_printed_start": 494,
           "english_pdf_start": 511,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 349,
+          "chinese_pdf_start": 367
         }
+      ],
+      "english_printed_end": 494,
+      "english_pdf_end": 511,
+      "chinese_pdf_start": 321,
+      "chinese_printed_end": 349,
+      "chinese_pdf_end": 367,
+      "annotation_count": 23,
+      "expanded_proof_count": 25,
+      "source_problem_solutions": 20,
+      "independent_math_review": false,
+      "native_tikz_diagram_count": 5,
+      "source_comparison": "English PDF 444-511 extracted and consulted; exposition and proofs reconstructed, not verbatim.",
+      "chinese_evidence": "Scan PDF 321,324,326,329,334,338,340,342,344,347,351,355,357,360,362,364,367 visually checked. Section starts from chapter-opening list. No full line-by-line Chinese review.",
+      "tikz_diagrams": [
+        {
+          "id": "T8.1",
+          "file": "figures/tikz/ch08-direct-method.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T8.2",
+          "file": "figures/tikz/ch08-oscillation.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T8.M",
+          "file": "figures/tikz/ch08-rank-one-margin.tex",
+          "placement": "margin"
+        },
+        {
+          "id": "T8.3",
+          "file": "figures/tikz/ch08-obstacle.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T8.4",
+          "file": "figures/tikz/ch08-mountain-pass.tex",
+          "placement": "body"
+        }
+      ],
+      "current_standalone_pages": 31,
+      "current_book_physical_range": [
+        232,
+        262
       ]
     },
     {
@@ -982,7 +1098,7 @@
       "english_pdf_start": 512,
       "chinese_printed_start": 350,
       "chinese_title": "非变分技术",
-      "status": "outline-only",
+      "status": "editorial-study-draft",
       "sections": [
         {
           "number": "9.1",
@@ -990,7 +1106,9 @@
           "file": "chapters/09-nonvariational-techniques/01-monotonicity-methods.tex",
           "english_printed_start": 495,
           "english_pdf_start": 512,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 350,
+          "chinese_pdf_start": 368
         },
         {
           "number": "9.2",
@@ -998,7 +1116,9 @@
           "file": "chapters/09-nonvariational-techniques/02-fixed-point-methods.tex",
           "english_printed_start": 501,
           "english_pdf_start": 518,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 354,
+          "chinese_pdf_start": 372
         },
         {
           "number": "9.3",
@@ -1006,7 +1126,9 @@
           "file": "chapters/09-nonvariational-techniques/03-method-of-subsolutions-and-supersolutions.tex",
           "english_printed_start": 510,
           "english_pdf_start": 527,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 360,
+          "chinese_pdf_start": 378
         },
         {
           "number": "9.4",
@@ -1014,7 +1136,9 @@
           "file": "chapters/09-nonvariational-techniques/04-nonexistence-of-solutions.tex",
           "english_printed_start": 514,
           "english_pdf_start": 531,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 363,
+          "chinese_pdf_start": 381
         },
         {
           "number": "9.5",
@@ -1022,7 +1146,9 @@
           "file": "chapters/09-nonvariational-techniques/05-geometric-properties-of-solutions.tex",
           "english_printed_start": 521,
           "english_pdf_start": 538,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 367,
+          "chinese_pdf_start": 385
         },
         {
           "number": "9.6",
@@ -1030,7 +1156,9 @@
           "file": "chapters/09-nonvariational-techniques/06-gradient-flows.tex",
           "english_printed_start": 526,
           "english_pdf_start": 543,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 371,
+          "chinese_pdf_start": 389
         },
         {
           "number": "9.7",
@@ -1038,7 +1166,9 @@
           "file": "chapters/09-nonvariational-techniques/07-problems.tex",
           "english_printed_start": 538,
           "english_pdf_start": 555,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 380,
+          "chinese_pdf_start": 398
         },
         {
           "number": "9.8",
@@ -1046,7 +1176,48 @@
           "file": "chapters/09-nonvariational-techniques/08-references.tex",
           "english_printed_start": 541,
           "english_pdf_start": 558,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 383,
+          "chinese_pdf_start": 401
+        }
+      ],
+      "english_printed_end": 542,
+      "english_pdf_end": 559,
+      "chinese_pdf_start": 368,
+      "chinese_printed_end": 383,
+      "chinese_pdf_end": 401,
+      "annotation_count": 19,
+      "expanded_proof_count": 24,
+      "source_problem_solutions": 14,
+      "independent_math_review": false,
+      "native_tikz_diagram_count": 5,
+      "source_comparison": "English PDF 512-559 extracted and consulted; exposition and proofs reconstructed, not verbatim.",
+      "chinese_evidence": "Scan PDF 368,372,378,381,384,385,387,389,390,392,394,396,398,400,401 visually checked. Section starts from chapter-opening list. No full line-by-line review.",
+      "tikz_diagrams": [
+        {
+          "id": "T9.1",
+          "file": "figures/tikz/ch09-minty.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T9.2",
+          "file": "figures/tikz/ch09-order.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T9.M",
+          "file": "figures/tikz/ch09-blowup-margin.tex",
+          "placement": "margin"
+        },
+        {
+          "id": "T9.3",
+          "file": "figures/tikz/ch09-moving-plane.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T9.4",
+          "file": "figures/tikz/ch09-subgradient.tex",
+          "placement": "body"
         }
       ]
     },
@@ -1059,7 +1230,7 @@
       "english_pdf_start": 560,
       "chinese_printed_start": 384,
       "chinese_title": "Hamilton--Jacobi 方程",
-      "status": "outline-only",
+      "status": "editorial-study-draft",
       "sections": [
         {
           "number": "10.1",
@@ -1067,7 +1238,9 @@
           "file": "chapters/10-hamilton-jacobi-equations/01-introduction-viscosity-solutions.tex",
           "english_printed_start": 543,
           "english_pdf_start": 560,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 384,
+          "chinese_pdf_start": 402
         },
         {
           "number": "10.2",
@@ -1075,7 +1248,9 @@
           "file": "chapters/10-hamilton-jacobi-equations/02-uniqueness.tex",
           "english_printed_start": 550,
           "english_pdf_start": 567,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 389,
+          "chinese_pdf_start": 407
         },
         {
           "number": "10.3",
@@ -1083,7 +1258,9 @@
           "file": "chapters/10-hamilton-jacobi-equations/03-control-theory-dynamic-programming.tex",
           "english_printed_start": 554,
           "english_pdf_start": 571,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 391,
+          "chinese_pdf_start": 409
         },
         {
           "number": "10.4",
@@ -1091,7 +1268,9 @@
           "file": "chapters/10-hamilton-jacobi-equations/04-problems.tex",
           "english_printed_start": 566,
           "english_pdf_start": 583,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 400,
+          "chinese_pdf_start": 418
         },
         {
           "number": "10.5",
@@ -1099,7 +1278,48 @@
           "file": "chapters/10-hamilton-jacobi-equations/05-references.tex",
           "english_printed_start": 569,
           "english_pdf_start": 586,
-          "status": "outline-only"
+          "status": "editorial-study-draft",
+          "chinese_printed_start": 403,
+          "chinese_pdf_start": 421
+        }
+      ],
+      "english_printed_end": 570,
+      "english_pdf_end": 587,
+      "chinese_pdf_start": 402,
+      "chinese_printed_end": 403,
+      "chinese_pdf_end": 421,
+      "annotation_count": 13,
+      "expanded_proof_count": 16,
+      "source_problem_solutions": 14,
+      "independent_math_review": false,
+      "native_tikz_diagram_count": 5,
+      "source_comparison": "English PDF 560-587 extracted and consulted; exposition and proofs reconstructed, not verbatim.",
+      "chinese_evidence": "Scan PDF 402-409,411-421 visually checked; section starts from chapter-opening list; no full line-by-line review.",
+      "tikz_diagrams": [
+        {
+          "id": "T10.1",
+          "file": "figures/tikz/ch10-contact.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T10.2",
+          "file": "figures/tikz/ch10-doubling.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T10.3",
+          "file": "figures/tikz/ch10-dpp.tex",
+          "placement": "body"
+        },
+        {
+          "id": "T10.M",
+          "file": "figures/tikz/ch10-time-margin.tex",
+          "placement": "margin"
+        },
+        {
+          "id": "T10.4",
+          "file": "figures/tikz/ch10-hopf-lax.tex",
+          "placement": "body"
         }
       ]
     },
@@ -1112,7 +1332,7 @@
       "english_pdf_start": 588,
       "chinese_printed_start": 404,
       "chinese_title": "守恒律组",
-      "status": "outline-only",
+      "status": "annotated-draft",
       "sections": [
         {
           "number": "11.1",
@@ -1120,7 +1340,9 @@
           "file": "chapters/11-systems-of-conservation-laws/01-introduction.tex",
           "english_printed_start": 571,
           "english_pdf_start": 588,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 404,
+          "chinese_pdf_start": 422
         },
         {
           "number": "11.2",
@@ -1128,7 +1350,9 @@
           "file": "chapters/11-systems-of-conservation-laws/02-riemanns-problem.tex",
           "english_printed_start": 582,
           "english_pdf_start": 599,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 412,
+          "chinese_pdf_start": 430
         },
         {
           "number": "11.3",
@@ -1136,7 +1360,9 @@
           "file": "chapters/11-systems-of-conservation-laws/03-systems-of-two-conservation-laws.tex",
           "english_printed_start": 595,
           "english_pdf_start": 612,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 421,
+          "chinese_pdf_start": 439
         },
         {
           "number": "11.4",
@@ -1144,7 +1370,9 @@
           "file": "chapters/11-systems-of-conservation-laws/04-entropy-criteria.tex",
           "english_printed_start": 601,
           "english_pdf_start": 618,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 425,
+          "chinese_pdf_start": 443
         },
         {
           "number": "11.5",
@@ -1152,7 +1380,9 @@
           "file": "chapters/11-systems-of-conservation-laws/05-problems.tex",
           "english_printed_start": 613,
           "english_pdf_start": 630,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 433,
+          "chinese_pdf_start": 451
         },
         {
           "number": "11.6",
@@ -1160,9 +1390,12 @@
           "file": "chapters/11-systems-of-conservation-laws/06-references.tex",
           "english_printed_start": 616,
           "english_pdf_start": 633,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 435,
+          "chinese_pdf_start": 453
         }
-      ]
+      ],
+      "chinese_pdf_start": 422
     },
     {
       "number": "12",
@@ -1173,7 +1406,7 @@
       "english_pdf_start": 634,
       "chinese_printed_start": 437,
       "chinese_title": "非线性波动方程",
-      "status": "outline-only",
+      "status": "annotated-draft",
       "sections": [
         {
           "number": "12.1",
@@ -1181,7 +1414,9 @@
           "file": "chapters/12-nonlinear-wave-equations/01-introduction.tex",
           "english_printed_start": 617,
           "english_pdf_start": 634,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 437,
+          "chinese_pdf_start": 455
         },
         {
           "number": "12.2",
@@ -1189,7 +1424,9 @@
           "file": "chapters/12-nonlinear-wave-equations/02-existence-of-solutions.tex",
           "english_printed_start": 620,
           "english_pdf_start": 637,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 439,
+          "chinese_pdf_start": 457
         },
         {
           "number": "12.3",
@@ -1197,7 +1434,9 @@
           "file": "chapters/12-nonlinear-wave-equations/03-semilinear-wave-equations.tex",
           "english_printed_start": 627,
           "english_pdf_start": 644,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 444,
+          "chinese_pdf_start": 462
         },
         {
           "number": "12.4",
@@ -1205,7 +1444,9 @@
           "file": "chapters/12-nonlinear-wave-equations/04-critical-power-nonlinearity.tex",
           "english_printed_start": 636,
           "english_pdf_start": 653,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 451,
+          "chinese_pdf_start": 469
         },
         {
           "number": "12.5",
@@ -1213,7 +1454,9 @@
           "file": "chapters/12-nonlinear-wave-equations/05-nonexistence-of-solutions.tex",
           "english_printed_start": 642,
           "english_pdf_start": 659,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 456,
+          "chinese_pdf_start": 474
         },
         {
           "number": "12.6",
@@ -1221,7 +1464,9 @@
           "file": "chapters/12-nonlinear-wave-equations/06-problems.tex",
           "english_printed_start": 647,
           "english_pdf_start": 664,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 459,
+          "chinese_pdf_start": 477
         },
         {
           "number": "12.7",
@@ -1229,9 +1474,12 @@
           "file": "chapters/12-nonlinear-wave-equations/07-references.tex",
           "english_printed_start": 651,
           "english_pdf_start": 668,
-          "status": "outline-only"
+          "status": "annotated-draft",
+          "chinese_printed_start": 462,
+          "chinese_pdf_start": 480
         }
-      ]
+      ],
+      "chinese_pdf_start": 455
     },
     {
       "number": "A",

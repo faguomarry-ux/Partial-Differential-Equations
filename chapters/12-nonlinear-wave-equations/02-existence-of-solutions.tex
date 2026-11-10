@@ -1,13 +1,184 @@
-% Evans second edition, section 12.2.
-% English source: printed p. 620; PDF page 637 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 12.2, printed pp.620--627; English PDF pp.637--644.
+% Chinese start: printed p.439 / scan p.457.
+\Needspace{45mm}
 \section{Existence of Solutions}
 \label{sec:12-2}
+\subsection{The linear estimate and the energy solution class}
+For an integer $k\ge1$, write
+\[
+ \|(u,u_t)\|_{\mathcal E_k(I)}
+ =\sup_{t\in I}\{\|u(t)\|_{H^k}+\|u_t(t)\|_{H^{k-1}}\}.
+\]
+The inhomogeneous $H^k$ norm includes the low-frequency $L^2$ term.
+We use the whole-space linear wave construction from Chapters 2 and 7:
+Fourier multipliers $\cos(t|D|)$ and $\sin(t|D|)/|D|$ give, for
+$u_{tt}-\Delta u=G$,
+\begin{equation}\label{eq:12-linear-energy}
+ \|(u,u_t)\|_{\mathcal E_k([0,T])}
+ \le C_T\left(\|g\|_{H^k}+\|h\|_{H^{k-1}}
+                    +\|G\|_{L^1(0,T;H^{k-1})}\right).
+\end{equation}
+Here $C_T$ is bounded for $T\le1$.
+\begin{expandedproof}[the energy estimate with its missing low mode]
+For smooth data apply $D^\alpha$, $|\alpha|\le k-1$, and multiply
+by $D^\alpha u_t$. The square root of
+$\|D^\alpha u_t\|_2^2+\|DD^\alpha u\|_2^2$ grows at most by
+$\|D^\alpha G\|_2$. Replace this square root by
+$\sqrt{\varepsilon+\cdots}$ if it vanishes, then let $\varepsilon\downarrow0$.
+The remaining $\|u(t)\|_2$ is bounded by
+$\|g\|_2+\int_0^t\|u_t(s)\|_2ds$.
+Summing gives \eqref{eq:12-linear-energy}; density gives a solution
+in $C_tH^k\cap C_t^1H^{k-1}$. Duhamel's formula gives continuity
+also for $G\in L^1_tH^{k-1}$. Thus no Poincare constant depending
+on an expanding spatial ball is needed.
+\end{expandedproof}
 
-\PDEPending
+An energy solution below has $u\in C([0,T];H^1)$,
+$u_t\in C([0,T];L^2)$ and satisfies the PDE in distributions.
+If $N(Du,u_t,u)\in L^2_{\rm loc}$, then
+$u_{tt}\in L^2_{\rm loc}(0,T;H^{-1}_{\rm loc})$ and the usual
+weak formulation against compactly supported $H^1$ tests follows.
+The two time traces specify $g,h$ separately.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection{Globally Lipschitz nonlinearities}
+\begin{theorem}[Source \S12.2.1, Theorem 1]
+Assume $N:\R^{n+2}\to\R$ is globally Lipschitz, $N(0)=0$.
+For $g\in H^1$, $h\in L^2$ there is a unique global energy solution
+of $\PDEWave u+N(Du,u_t,u)=0$. For $g\in H^2$, $h\in H^1$ it also has
+$u\in L^\infty(0,T;H^2)$, $u_t\in L^\infty(0,T;H^1)$,
+$u_{tt}\in L^\infty(0,T;L^2)$ on every finite strip.
+With $H^1_{\rm loc},L^2_{\rm loc}$ data the corresponding statements
+hold locally in space, with uniqueness in the local energy class.
+\end{theorem}
+\begin{expandedproof}[contraction, restart, and local gluing]
+On the complete space $C_tH^1\cap C_t^1L^2$ with the prescribed
+initial traces, define $A[v]$ by the linear equation with forcing
+$-N(Dv,v_t,v)$. Since $N(0)=0$, this forcing belongs to $C_tL^2$.
+For two inputs, \eqref{eq:12-linear-energy} gives
+\[
+ \|A[v]-A[w]\|_{\mathcal E_1}
+ \le C_1LT\|v-w\|_{\mathcal E_1}.
+\]
+The homogeneous solution makes the affine space nonempty. Choose
+$T\le1$ so $C_1LT<1/2$ and apply Banach's theorem.
+The same step size works for every new initial state, so repeated
+restart constructs a solution on every finite interval. Its norm is
+finite there, for example by the integral estimate and Gronwall;
+no finite accumulation of restart times occurs.
+
+For the additional derivative, apply the spatial difference quotient
+$\delta_\varepsilon$ to the PDE. Pointwise Lipschitz continuity gives
+\[
+ |\delta_\varepsilon N(Du,u_t,u)|
+ \le L(|D\delta_\varepsilon u|+|\delta_\varepsilon u_t|
+                                  +|\delta_\varepsilon u|).
+\]
+The difference energy and Gronwall bound the quotient in
+$L^\infty_tH^1$ and its time derivative in $L^\infty_tL^2$,
+uniformly in $\varepsilon$, by the $H^2\times H^1$ initial norm.
+Weak compactness and the difference-quotient characterization give
+$D^2u,Du_t\in L^\infty_tL^2$; the equation then gives the asserted
+bound for $u_{tt}$. Differentiability of a merely Lipschitz $N$ is
+not needed for this argument.
+
+For local data, cut them off outside $B(0,j)$ and solve the global
+problem. Two cutoff solutions coincide in the backward domains where
+their data agree, by the regularized difference-cone estimate from
+\S\ref{sec:12-1}. For every fixed compact space-time cylinder they
+therefore agree for all sufficiently large $j$. Their common values
+define a solution independent of the cutoff. The same cone argument
+proves uniqueness and localizes the higher-regularity estimates.
+\end{expandedproof}
+\PDEAnnotation{原点条件与全空间}{若 $N(0)\ne0$，零状态也会受到常量
+强迫，$N(Dv,v_t,v)$ 不一定在 $L^2(\R^n)$。
+$N(0)=0$ 同时保证零解、有限传播中的比较基准与全空间能量构造。}
+
+\subsection{Sobolev products and composition}
+\begin{theorem}[Source \S12.2.2, Theorem 2; Problem 12]
+Let $r>n/2$ be an integer, $u_1,\ldots,u_m\in H^r(\R^n)$.
+For multiindices with $\sum_j|\beta_j|\le r$,
+\begin{equation}\label{eq:12-product}
+ \left\|\prod_jD^{\beta_j}u_j\right\|_2
+ \le C_{n,r,m}\prod_j\|u_j\|_{H^r}.
+\end{equation}
+If $P:\R^m\to\R$ is smooth and $P(0)=0$, then $P(u)\in H^r$,
+with a bound depending on the $H^r$ norms and derivatives of $P$
+on the resulting bounded range.
+\end{theorem}
+\begin{expandedproof}[including the exponent allocation]
+Put $b_j=|\beta_j|$. Sobolev embedding gives
+$D^{\beta_j}u_j\in L^{2r/b_j}$ for $0<b_j\le r$ and $u_j\in L^\infty$
+for $b_j=0$. Indeed for $b_j<r$ the choice $1/p=b_j/(2r)$ lies
+strictly above $1/2-(r-b_j)/n$, since $2r>n$; $b_j=r$ gives $p=2$.
+Each derivative also lies in $L^2$. By interpolation choose
+$1/p_j\in[b_j/(2r),1/2]$ so that $\sum_j1/p_j=1/2$.
+This is possible because the sum of the lower endpoints is at most
+$1/2$ and that of the upper endpoints is at least $1/2$.
+Holder's inequality proves \eqref{eq:12-product}. On the infinite
+measure space one must make this sum exact, rather than infer an
+$L^2$ estimate from a product lying only in a larger $L^p$ space.
+
+For $0<|\alpha|\le r$, the chain rule expresses $D^\alpha P(u)$
+as a finite sum of bounded coefficients $D^jP(u)$ times products
+of derivatives of the $u_i$ with total order $|\alpha|$.
+Apply \eqref{eq:12-product}. For the undifferentiated term use
+$P(0)=0$ and $|P(u)|\le C|u|$ on the bounded range.
+Approximation by smooth functions proves the Sobolev chain rule
+and the assertion for all $H^r$ inputs. The same estimates applied
+to $P(u)-P(v)=\int_0^1DP(v+\theta(u-v))(u-v)d\theta$ show local
+Lipschitz dependence in $H^r$; subtract the constant $DP(0)$ before
+using the algebra estimate on its coefficient.
+\end{expandedproof}
+
+\subsection{Local existence and the role of the two norms}
+\begin{theorem}[Source \S12.2.2, Theorem 3]
+Assume $N$ is smooth with $N(0)=0$, and $k>n/2+1$ is an integer.
+For $g\in H^k$, $h\in H^{k-1}$ there are $T>0$ and a unique solution
+\[
+ u\in C([0,T];H^k),\qquad u_t\in C([0,T];H^{k-1}).
+\]
+The lifetime depends on these norms and the nonlinearity on a bounded
+state range. Classical $C^2$ regularity follows if $k>n/2+2$.
+\end{theorem}
+\PDEAnnotation{两个范数各做什么}{高阶界使 $(Du,u_t,u)$ 的值域有界，
+从而给出 $N$ 的局部 Lipschitz 常数。低阶能量范数用于收缩。
+只说迭代在弱范数收敛，还需证明强范数球在该度量下闭合。}
+\begin{expandedproof}[closed strong ball with the weaker metric]
+Fix $T\le1$ and let $Y_R$ consist of pairs $(v,v_t)$ continuous in
+$H^1\times L^2$, with the prescribed traces, and with
+$\|(v,v_t)\|_{\mathcal E_k}\le R$ in the essential-supremum sense.
+Use the $\mathcal E_1$ metric. This space is complete: a Cauchy
+sequence has a strong low-norm limit; the high-norm bounded sequence
+has a weak-star subsequence in $L^\infty(H^k\times H^{k-1})$.
+Both limits agree as distributions. Weak lower semicontinuity gives
+the bound $R$, and low-norm convergence preserves the derivative
+relation and both initial traces. The uniform high bound can also
+be assigned at each time by weak limits of nearby good time slices.
+
+For $A[v]$ as above, composition at order $k-1>n/2$ gives
+\[
+ \|N(Dv,v_t,v)\|_{H^{k-1}}\le\Phi(R).
+\]
+Take $R>2C_1(\|g\|_{H^k}+\|h\|_{H^{k-1}})+1$.
+The free wave belongs to $Y_R$, and
+\[
+ \|A[v]\|_{\mathcal E_k}\le C_1D_0+C_1T\Phi(R)\le R
+\]
+for small $T$. Sobolev embedding bounds all first-order states by
+$C R$, so the local Lipschitz constant $L_R$ gives
+$\|A[v]-A[w]\|_{\mathcal E_1}\le C_1TL_R\|v-w\|_{\mathcal E_1}$.
+Shorten $T$ to make this less than one half of the input distance.
+Banach's theorem gives a fixed point in the closed space $Y_R$.
+The resulting forcing is in $L^1_tH^{k-1}$; linear uniqueness and
+\eqref{eq:12-linear-energy} then upgrade the solution to the asserted
+strong time continuity. Differences of two bounded high-regularity
+solutions obey the same low-energy Gronwall estimate, proving uniqueness
+without restricting them to one preselected ball. If $k>n/2+2$,
+$D^2u,Du_t,u_{tt}$ are continuous by embedding and the PDE.
+\end{expandedproof}
+\PDEBodyDiagram{12.2}{A complete ball for the weak-metric iteration}
+{Every iterate stays in a bounded high Sobolev ball. Contraction is measured
+in the lower energy norm; weak-star compactness identifies its limit with
+the low-norm limit, preserving the high bound. The final linear equation
+restores strong time continuity. The arrows describe a proof, not a
+numerical convergence rate in the high norm.}{ch12-two-norms}

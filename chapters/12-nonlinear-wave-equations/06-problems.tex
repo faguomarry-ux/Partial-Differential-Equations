@@ -1,13 +1,317 @@
-% Evans second edition, section 12.6.
-% English source: printed p. 647; PDF page 664 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 12.6, printed pp.647--651; English PDF pp.664--668.
+% Chinese start: printed p.459 / scan p.477.
 \section{Problems}
 \label{sec:12-6}
+These are abbreviated descriptions of all 18 source problems, followed
+by reconstructed solutions. Regularity, decay, and parameter
+qualifications are included where the source wording suppresses them.
 
-\PDEPending
+\subsection*{1. Energy for a gradient-dependent principal part}
+For $u_{tt}-\operatorname{div}DL(Du)=0$, use
+\[
+ E_L(t)=\int\{u_t^2/2+L(Du)-L(0)\}dx.
+\]
+The subtraction makes the integral finite for compactly supported $u$.
+Its derivative is $\int u_tu_{tt}+DL(Du)\cdot Du_t
+=\int u_t\{u_{tt}-\operatorname{div}DL(Du)\}=0$.
+This needs no convexity of $L$ for the identity; positivity or
+hyperbolicity would require further assumptions.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection*{2. Klein--Gordon energy and equipartition}
+For $\PDEWave u+m^2u=0$, take $m\ge0$ and
+$E=\frac12\int(u_t^2+|Du|^2+m^2u^2)$. Multiplication by $u_t$
+proves conservation. For finite-energy data let
+$\omega(\xi)=\sqrt{|\xi|^2+m^2}$ and use a unitary Fourier transform:
+\[
+ \widehat u=\widehat g\cos(\omega t)
+                   +\widehat h\sin(\omega t)/\omega.
+\]
+The difference between potential and kinetic terms is
+\[
+ \begin{split}
+ D(t)&=\int(\omega^2|\widehat u|^2-|\widehat u_t|^2)d\xi\\
+ &=\int(\omega^2|\widehat g|^2-|\widehat h|^2)\cos(2\omega t)
+       +2\omega\operatorname{Re}(\widehat g\overline{\widehat h})
+                                      \sin(2\omega t)\,d\xi.
+ \end{split}
+\]
+Both amplitudes are $L^1$ by Cauchy--Schwarz and finite energy.
+In polar coordinates change the radial variable from $r$ to
+$\omega=\sqrt{r^2+m^2}$. The resulting amplitudes are $L^1$ on
+$(m,\infty)$; the possible critical point $r=0$ has no atom.
+Riemann--Lebesgue gives $D(t)\to0$. Since potential plus kinetic
+is $2E$, each tends to $E$, including the claimed
+$\int(|Du|^2+m^2u^2)\to E$. A finite-energy approximation removes
+any auxiliary smoothness used for the Fourier calculation.
+
+\subsection*{3. Descent and the one-dimensional massive kernel}
+Put $\overline u(x,y,t)=u(x,t)\cos(my)$. Then
+$(\partial_t^2-\Delta_x-\partial_y^2)\overline u
+=\cos(my)(\PDEWave u+m^2u)=0$.
+For $n=1$, apply the two-dimensional Poisson formula and integrate
+out the additional variable. With
+$J_0(z)=\pi^{-1}\int_0^\pi\cos(z\sin\theta)d\theta$, the result is
+\[
+ \begin{split}
+ u(x,t)={}&\frac12\partial_t\int_{x-t}^{x+t}
+       g(y)J_0\!\left(m\sqrt{t^2-(x-y)^2}\right)dy\\
+ &+\frac12\int_{x-t}^{x+t}
+       h(y)J_0\!\left(m\sqrt{t^2-(x-y)^2}\right)dy.
+ \end{split}
+\]
+The integrated kernel identity is
+$\int_{-a}^a\cos(my)(a^2-y^2)^{-1/2}dy=\pi J_0(ma)$,
+obtained by $y=a\sin\theta$.
+If desired, differentiating the first integral gives endpoint term
+$\{g(x+t)+g(x-t)\}/2$ and interior kernel
+$-mtJ_1(m\sqrt{t^2-(x-y)^2})/(2\sqrt{t^2-(x-y)^2})$.
+Its endpoint limit is finite because $J_1(z)\sim z/2$.
+At $m=0$ this reduces exactly to d'Alembert's formula.
+
+\subsection*{4. Removing constant damping}
+For $\PDEWave u+du_t=0$, put $v=e^{dt/2}u$.
+Direct substitution gives $\PDEWave v-(d^2/4)v=0$.
+Thus the constant zero-order coefficient is negative when $d>0$;
+the damping has not turned into a positive Klein--Gordon mass.
+
+\subsection*{5. Phase speed and the domain of dependence}
+The plane wave $e^{i(x\cdot\xi-\omega t)}$ has dispersion
+$\omega^2=|\xi|^2+m^2$. For $m>0$ its phase speed is
+$\omega/|\xi|>1$, but its group velocity is
+$D_\xi\omega=\xi/\omega$, of magnitude less than one.
+A plane wave has no compact support and carries no newly created
+front. Causal propagation of a localized disturbance is the cone
+statement of \S\ref{sec:12-1}, which remains true for the massive
+lower-order term. Group velocity describes narrow-band packets;
+the finite propagation proof is what controls an actual front.
+For $m=0$ both speeds have magnitude one.
+
+\subsection*{6. Uniform three-dimensional decay}
+Kirchhoff gives
+\[
+ u(x,t)=\frac1{4\pi}\int_{S^2}
+ [g(x+t\omega)+tDg(x+t\omega)\cdot\omega+th(x+t\omega)]d\omega.
+\]
+If the data are supported in $B(0,R)$ and $t\ge2R$, the part of
+$S^2$ where $x+t\omega\in B(0,R)$ has area at most $C R^2/t^2$.
+This follows by intersecting the sphere of radius $t$ centered at
+$x$ with that fixed ball and using the spherical-cap area formula;
+if there is no intersection the integral is zero.
+The displayed formula is therefore bounded by $C/t$ uniformly in
+$x$. For $t\le2R$, the same formula with the full sphere bounds
+$u$ by a fixed constant, which is also at most a larger $C/t$.
+
+\subsection*{7. Uniform two-dimensional decay}
+Differentiate the rescaled Poisson formula to write
+\[
+ u(x,t)=\frac1{2\pi}\int_{|x-y|<t}
+ \frac{h(y)+\{g(y)+(y-x)\cdot Dg(y)\}/t}
+                       {\sqrt{t^2-|x-y|^2}}dy.
+\]
+For $t$ larger than a fixed multiple of the support radius, its
+absolute value is bounded by a data constant times
+$J=\int_{B_R\cap B(x,t)}(t^2-|x-y|^2)^{-1/2}dy$.
+On $|x-y|\le t/2$ the contribution is $C_R/t$.
+For the remaining radii use coarea about $x$. The length of a circle
+of radius $r>t/2$ intersected with $B_R$ is at most $C R$;
+the possible radii form an interval of length at most $2R$.
+Since the kernel increases toward $r=t$, this contribution is at most
+\[
+ C R\int_{\max(t-2R,t/2)}^t\frac{dr}{\sqrt{t^2-r^2}}
+ \le C_Rt^{-1/2}.
+\]
+The bounded small-time strip follows directly from the rescaled
+Poisson formula and the smooth data. Hence $|u(x,t)|\le Ct^{-1/2}$
+for all $x,t>0$. Unlike the three-dimensional case, the interior
+of the light cone generally carries a tail.
+
+\subsection*{8. Bounded displacement data can amplify}
+For the given radial $g^\varepsilon$, $0\le g^\varepsilon\le1$
+and $g^\varepsilon(r)\to\mathbf1_{(1,3)}(r)$ a.e. as
+$\varepsilon\downarrow0$. At $x=0$ and fixed $t>3$, Poisson gives
+\[
+ u^\varepsilon(0,t)=-t\int_1^3
+        \frac{r g^\varepsilon(r)}{(t^2-r^2)^{3/2}}dr
+ \longrightarrow t\left\{\frac1{\sqrt{t^2-1}}
+                         -\frac1{\sqrt{t^2-9}}\right\}.
+\]
+Dominated convergence is valid for each such fixed $t$.
+The limit tends to $-\infty$ as $t\downarrow3$.
+Given any $M$, first choose $3<t<4$ making its magnitude exceed
+$2M$, then take $\varepsilon$ small enough. This proves that the
+supremum in the problem tends to infinity. No maximum principle
+for wave displacement follows from a bound on $g$ alone.
+
+\subsection*{9. Hyperbolic Kelvin transform}
+Let $d=n+1$, $X=(x,t)$, $q=|x|^2-t^2\ne0$,
+$Y=X/q$, $a=(d-2)/2$ and $w(X)=|q|^{-a}$.
+For the Lorentz matrix $G=\operatorname{diag}(-1,\ldots,-1,1)$,
+direct differentiation gives
+\[
+ DY\,G\,(DY)^T=q^{-2}G,\qquad \PDEWave w=0,
+ \qquad w\PDEWave Y^j+2\langle Dw,DY^j\rangle_G=0.
+\]
+For example $\PDEWave q=-2d$, $\langle Dq,Dq\rangle_G=-4q$,
+$\PDEWave Y^j=2(d-2)X^j/q^2$, and
+$\langle Dw,DY^j\rangle_G=-2awX^j/q^2$.
+The product and chain rules therefore cancel every first-derivative
+term and leave
+\[
+ \PDEWave\{w\,u(Y)\}=|q|^{-(d+2)/2}(\PDEWave u)(Y).
+\]
+It follows that the transform preserves free waves on each region
+where $q\ne0$. Absolute values allow both signs of $q$;
+no extension through the characteristic cone is asserted.
+
+\subsection*{10. Compatibility of the sine--Gordon system}
+Set $A=(u+v)/2$, $B=(u-v)/2$. The given equations are
+$B_t=a\sin A$, $A_x=a^{-1}\sin B$.
+Differentiating gives $B_{xt}=\cos A\sin B$ and
+$A_{xt}=\cos B\sin A$. Adding and subtracting yield
+$u_{xt}=\sin(A+B)=\sin u$ and
+$v_{xt}=\sin(A-B)=\sin v$.
+These $x,t$ are characteristic coordinates. With new variables
+$T=x+t$, $X=x-t$, the mixed derivative becomes
+$\partial_x\partial_t=\partial_T^2-\partial_X^2$.
+Thus the equation has the usual wave-operator form in $(X,T)$,
+with no missing factor when these summed coordinates are used.
+
+\subsection*{11. A B\"acklund kink from the zero solution}
+With $v=0$, the equations become
+$u_t=2a\sin(u/2)$, $u_x=2a^{-1}\sin(u/2)$.
+They imply $u=U(s)$, $s=at+x/a$, and $U'=2\sin(U/2)$.
+Since $(\tan(U/4))'=\tan(U/4)$, nonconstant solutions are
+\[
+ u(x,t)=4\arctan(Ce^{at+x/a}),\qquad C\ne0,
+\]
+with compatible $4\pi$ shifts; the constant solutions $u=2\pi k$
+are included separately. Differentiation gives $U''=\sin U$, so
+$u_{xt}=U''=\sin u$. For $a>0,C>0$ the profile connects $0$ to
+$2\pi$ as $s$ increases. The parameter $C$ translates the kink.
+
+\subsection*{12. The Sobolev product estimate}
+For $b_j=|\beta_j|$, the proof of \eqref{eq:12-product} gives
+$D^{\beta_j}u_j\in L^{p_j}$ for every inverse exponent between
+$b_j/(2k)$ and $1/2$, when $k>n/2$.
+Choose these inverse exponents with sum exactly $1/2$; the endpoint
+sums bracket $1/2$ because $\sum b_j\le k$.
+Holder then gives
+$\|\prod D^{\beta_j}u_j\|_2\le C\prod\|u_j\|_{H^k}$.
+This handles also zero multiindices and the case of a derivative
+of order exactly $k$, without using the false endpoint embedding
+$H^{n/2}\hookrightarrow L^\infty$.
+
+\subsection*{13. Sphere-valued wave maps}
+Since $|u|^2=1$, differentiation gives
+$u\cdot u_{tt}=-|u_t|^2$ and $u\cdot\Delta u=-|Du|^2$.
+The normal space of the sphere is spanned by $u$ itself. Thus
+$\PDEWave u=\gamma u$ with
+$\gamma=u\cdot\PDEWave u=|Du|^2-|u_t|^2$, as asserted.
+This is a genuine derivative nonlinearity, so the scalar potential
+energy theory is not directly applicable.
+
+\subsection*{14. Wave-map energy and a support correction}
+A unit-length map cannot itself vanish outside a compact set.
+Interpret the source's support wording as $u$ equal to a fixed unit
+vector outside a compact set, or impose decay on $Du,u_t$ sufficient
+for integration by parts. Then
+\[
+ \frac d{dt}\frac12\int(|u_t|^2+|Du|^2)
+ =\int u_t\cdot\PDEWave u
+ =\int(|Du|^2-|u_t|^2)u_t\cdot u=0,
+\]
+because $u_t\cdot u=0$. This states the nonvacuous finite-energy
+version of the exercise.
+\PDEAnnotation{球面值映射不能紧支为零}{若 $|u|=1$，则
+$u\not\equiv0$ 于任何外部区域。题 14 的紧支应理解成
+$u-u_\infty$ 紧支或导数充分衰减。能量只积分 $Du,u_t$，
+不积分处处为 1 的 $|u|^2$。}
+
+\subsection*{15. An elementary small-energy quintic proof}
+Modify the average estimate in \eqref{eq:12-cone-hardy} using
+$\int_{B_t}|g|\le Ct^{5/2}\|g\|_6$. Then
+\[
+ |\overline w|\le Ct^{-1/2}(E^{1/2}+\|g\|_6),\qquad
+ \|w/r\|_2\le C(E^{1/2}+E^{1/6}),
+\]
+since $\|g\|_6^6\le6E$. Cone flux also gives $\int w^6\le6E$.
+For $M(\tau)=\sup_{t\le\tau,x}|u(x,t)|$,
+\[
+ \int\frac{|w|^5}{r}
+ \le\|w/r\|_2\left(\int|w|^8\right)^{1/2}
+ \le C(E+E^{2/3})M(\tau).
+\]
+The retarded formula gives
+$M(\tau)\le\|v\|_\infty+C(E+E^{2/3})M(\tau)$.
+Choose a universal small initial-energy threshold making the last
+coefficient at most $1/2$. On every finite strip the free wave is
+bounded, so the amplitude is bounded and the smooth solution
+continues globally. This argument needs neither the Morawetz identity
+nor Strichartz, and makes no smallness assumption on a high Sobolev
+norm of the data.
+
+\subsection*{16. Galilean invariance for NLS}
+For $iu_t+\Delta u=f(|u|^2)u$, set
+$\theta=\xi\cdot x/2-|\xi|^2t/4$, $y=x-\xi t$,
+$w=e^{i\theta}u(y,t)$. Then
+\[
+ \begin{split}
+ iw_t&=e^{i\theta}(|\xi|^2u/4+iu_t-i\xi\cdot Du),\\
+ \Delta w&=e^{i\theta}(\Delta u+i\xi\cdot Du-|\xi|^2u/4).
+ \end{split}
+\]
+The extra terms cancel, and $|w|=|u(y,t)|$ makes the nonlinear
+term transform with the same phase. This proves the stated invariance.
+
+\subsection*{17. NLS mass, energy, and momentum}
+Assume the solution and the needed derivatives decay rapidly.
+Let $\rho=|u|^2$, $F(0)=0$, $F'=f$, with $f$ real. The mass
+identity follows from
+$\rho_t=-2\operatorname{div}\operatorname{Im}(\overline uDu)$.
+For the energy $\mathcal H=\int(|Du|^2+F(\rho))$,
+\[
+ \mathcal H'=2\operatorname{Re}\int
+ (-\Delta\overline u+f(\rho)\overline u)u_t
+ =2\operatorname{Re}\int(-i\overline u_t)u_t=0.
+\]
+For $P_j=\operatorname{Im}\int\overline u\,u_{x_j}$, integration
+by parts in one of the two time-derivative terms gives
+\[
+ P_j'=2\operatorname{Im}\int\overline u_tu_{x_j}
+ =-2\operatorname{Re}\int\Delta\overline u\,u_{x_j}
+       +2\operatorname{Re}\int f(\rho)\overline u\,u_{x_j}=0.
+\]
+The last two integrals are respectively integrals of
+$\partial_j|Du|^2$ and $\partial_jF(\rho)$, hence vanish.
+This agrees with the source's momentum integrand
+$(\overline uDu-uD\overline u)/(2i)$.
+
+\subsection*{18. NLS virial identity and focusing cubic blow-up}
+In addition assume finite variance $V(t)=\int|x|^2|u|^2$ and
+sufficient decay for the weighted integrations. The mass continuity
+identity gives
+$V'=4\operatorname{Im}\int x\cdot\overline uDu$.
+Differentiate this expression, substitute
+$u_t=i\Delta u-if(\rho)u$, and integrate twice in the Laplacian
+terms. They give $2\int|Du|^2$ in the derivative of $V'/4$.
+The nonlinear terms give
+\[
+ -\int x\cdot\rho Df(\rho)
+ =-\int x\cdot D\{\rho f(\rho)-F(\rho)\}
+ =n\int\{\rho f(\rho)-F(\rho)\}.
+\]
+Thus
+\begin{equation}\label{eq:12-nls-virial}
+ V''=8\int|Du|^2+4n\int\{\rho f(\rho)-F(\rho)\}.
+\end{equation}
+For focusing cubic NLS, $f(\rho)=-\rho$, $F=-\rho^2/2$ and
+$\mathcal H=K-P/2$, with $K=\int|Du|^2$, $P=\int|u|^4$.
+Hence $V''=8K-2nP=8\mathcal H+(4-2n)P\le8\mathcal H(0)<0$
+when $n\ge2$ and the initial energy is negative.
+Integrating gives
+$0\le V(t)\le V(0)+V'(0)t+4\mathcal H(0)t^2$,
+which fails at a finite time. This proves nonexistence of a global
+solution in the stated regularity and finite-variance class.
+The variance hypothesis is essential to this particular proof;
+negative energy alone is not a license to differentiate an infinite
+weighted integral.

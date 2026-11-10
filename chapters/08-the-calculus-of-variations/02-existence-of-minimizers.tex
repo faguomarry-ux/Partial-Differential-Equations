@@ -1,13 +1,247 @@
-% Evans second edition, section 8.2.
-% English source: printed p. 437; PDF page 454 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 8.2: printed pp.437--454 / English PDF pp.454--471.
+% Chinese: printed pp.310--320 / scan pp.328--338.
+\Needspace{55mm}
 \section{Existence of Minimizers}
 \label{sec:8-2}
+\Needspace{45mm}
+\subsection{Coercivity and the direct method}
+Fix $g\in W^{1,q}(U;\R^m)$ and the affine class
+$\mathcal A=g+W^{1,q}_0(U;\R^m)$, $1<q<\infty$.
+The direct method separates three tasks: boundedness of minimizing
+sequences, closure of the admissible class under the chosen convergence,
+and a lower bound for the energy at the limit.
+Suppose
+\begin{equation}\label{eq:8-coercivity}
+ L(P,z,x)\geq\alpha|P|^q-\beta,\qquad\alpha>0,\ \beta\geq0.
+\end{equation}
+A bounded energy sequence then has bounded $Du_k$ in $L^q$.
+Poincar\'e applied to $u_k-g$ bounds $u_k$ in $W^{1,q}$.
+Reflexivity gives a weakly convergent subsequence. The affine class is
+weakly closed: the continuous trace map has weakly closed kernel, or use
+that a norm-closed linear subspace is weakly closed by Hahn--Banach.
+The missing issue is weak lower semicontinuity:
+\[
+ u_k\rightharpoonup u\text{ in }W^{1,q}
+ \quad\Longrightarrow\quad I[u]\leq\liminf_kI[u_k].
+\]
+Strong norm continuity alone does not imply this inequality.
+\Needspace{55mm}
+\PDEAnnotation{三个条件各做什么}{强制性给出有界极小化序列；反射性给出弱子列；弱闭性保住边界和约束；弱下半连续性才保证极限达到下确界。四步不能互相替代。}
 
-\PDEPending
+\PDEBodyDiagram{8.1}{The direct method keeps feasibility and energy in the limit.}
+{The arrows represent separate arguments. A finite-energy competitor makes the infimum meaningful; coercivity and Poincare give boundedness. Weak closure preserves constraints, while lower semicontinuity supplies the minimizing inequality.}
+{ch08-direct-method}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{45mm}
+\subsection{Convexity in the gradient and weak lower semicontinuity}
+\Needspace{55mm}
+\begin{theorem}[Lower semicontinuity; source \S8.2.2, Theorem 1]
+\label{thm:8-lsc}
+Let $L$ be smooth on gradient and value space times $\overline U$, bounded
+below, and convex in $P$ for each $(z,x)$. Then $I$ is sequentially weakly
+lower semicontinuous on $W^{1,q}(U;\R^m)$.
+No convexity in $z$ is required. The scalar case is the source Theorem 1;
+the vector version is used in Theorem 5.
+\end{theorem}
+\begin{expandedproof}[linearizing only the weakly convergent variable]
+Add a constant so $L\geq0$. Pass to a subsequence realizing the liminf;
+if it is infinite there is nothing to prove. Compact embedding gives
+$u_k\to u$ strongly in $L^q$, and a further subsequence converges a.e.
+For $\varepsilon>0$, Egoroff gives a set $E_\varepsilon$ where this
+convergence is uniform, with $|U\setminus E_\varepsilon|<\varepsilon$.
+Intersect it with $\{|u|+|Du|\leq\varepsilon^{-1}\}$ to obtain
+$G_\varepsilon$, whose complement has measure tending to zero.
+Convexity gives
+\[
+ \begin{split}
+ I[u_k]\geq{}&\int_{G_\varepsilon}L(Du,u_k,x)\\
+ &+\int_{G_\varepsilon}L_P(Du,u_k,x):(Du_k-Du).
+ \end{split}
+\]
+On this set all arguments except $Du_k$ lie in a fixed compact range.
+The first integral converges uniformly in its integrand. In the second,
+$L_P(Du,u_k,x)$ converges uniformly to $L_P(Du,u,x)$.
+Its difference pairs with a uniformly bounded $L^q$ sequence and tends
+to zero by H\"older; its fixed limit pairs to zero by weak convergence.
+Thus $\liminf I[u_k]\geq\int_{G_\varepsilon}L(Du,u,x)$.
+To exhaust $U$ without assuming these sets are nested, fix $R<\infty$:
+\[
+ \int_{G_\varepsilon}L(Du,u,x)
+ \geq\int_U\min\{L(Du,u,x),R\}-R|U\setminus G_\varepsilon|.
+\]
+Let $\varepsilon\downarrow0$, then $R\uparrow\infty$ by monotone
+convergence. This also covers an infinite limit energy.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{为什么只对梯度要求凸}{Rellich 给出 $u_k$ 的强收敛，而 $Du_k$ 通常只有弱收敛。支撑超平面把 $Du_k$ 变成线性出现，正好能使用弱收敛；不能假定梯度有逐点收敛子列。}
+
+\Needspace{55mm}
+\begin{theorem}[Existence and uniqueness; source Theorems 2--3, 5--6]
+\label{thm:8-direct}
+Under \eqref{eq:8-coercivity} and Theorem~\ref{thm:8-lsc}, if
+$\mathcal A$ contains $w_0$ with $I[w_0]<\infty$, then $I$ has a
+finite minimizer in $\mathcal A$.
+If $L=L(P,x)$ is independent of $z$ and uniformly convex in $P$, this
+minimizer is unique. These statements apply to scalar and vector maps.
+\end{theorem}
+\begin{expandedproof}[the limit, and the midpoint deficit]
+Choose $I[u_k]\downarrow\inf_{\mathcal A}I$, bounded above by
+$I[w_0]+1$ and below by $-\beta|U|$. Coercivity and Poincar\'e give a
+weakly convergent subsequence, with limit in $\mathcal A$.
+Lower semicontinuity gives $I[u]\leq\inf_{\mathcal A}I$; the reverse
+inequality follows from feasibility. This proves existence.
+For two minimizers $u,v$, uniform convexity with constant $\theta>0$ gives
+\[
+ I[(u+v)/2]+\frac\theta8\int_U|Du-Dv|^2
+ \leq\frac12(I[u]+I[v]).
+\]
+This follows by applying the supporting quadratic inequality at the
+midpoint and adding the two endpoint inequalities; the linear terms
+cancel. Since the midpoint is feasible, minimality forces $Du=Dv$.
+Poincar\'e for $u-v\in W^{1,q}_0$ then gives $u=v$.
+A merely convex dependence on $P$ with arbitrary $z$ dependence need
+not give uniqueness: the value variable may introduce several wells.
+\end{expandedproof}
+The finite-competitor condition is stated explicitly here; otherwise a
+formal minimizer with energy $+\infty$ says nothing about the PDE.
+
+\PDEBodyDiagram{8.2}{Gradient oscillations test the need for convexity.}
+{The left graph is $W(p)=(p^2-1)^2$. A zero-trace triangular profile on $(0,1)$ can have slopes $+1,-1$ while its amplitude tends to zero. Its energy is zero, whereas the limit profile has energy $W(0)=1$. The right profile is one exact period, before multiplying its horizontal and vertical scales by $1/k$.}
+{ch08-oscillation}
+
+\Needspace{45mm}
+\subsection{A Sobolev minimizer solves the Euler--Lagrange equation}
+Assume the additional growth bounds, with $q'=q/(q-1)$,
+\begin{equation}\label{eq:8-growth}
+ \begin{split}
+ |L(P,z,x)|&\leq C(1+|P|^q+|z|^q),\\
+ |L_P|+|L_z|&\leq C(1+|P|^{q-1}+|z|^{q-1}).
+ \end{split}
+\end{equation}
+\Needspace{55mm}
+\begin{theorem}[Weak Euler--Lagrange equation; source Theorems 4 and 7]
+A minimizer $u\in\mathcal A$ satisfies
+\[
+ \int_U L_P(Du,u,x):D\phi+L_z(Du,u,x)\cdot\phi=0
+ \quad(\phi\in W^{1,q}_0(U;\R^m)).
+\]
+\end{theorem}
+\begin{expandedproof}[a difference quotient under an integrable bound]
+For $|s|\leq1$, the fundamental theorem of calculus expresses
+$[L(Du+sD\phi,u+s\phi,x)-L(Du,u,x)]/s$ as an average of derivatives
+paired with $(D\phi,\phi)$. Its absolute value is bounded by
+\[
+ C(1+|Du|^{q-1}+|u|^{q-1}+|D\phi|^{q-1}+|\phi|^{q-1})
+                 (|D\phi|+|\phi|),
+\]
+which lies in $L^1$ by H\"older. Dominated convergence proves the first
+variation formula for every admissible $\phi$. Both signs of $s$ are
+allowed, so minimality makes the derivative zero. The coefficients
+$L_P(Du,u,x),L_z(Du,u,x)$ belong to $L^{q'}$, making this a continuous
+weak identity. Without the growth bound, differentiability of the energy
+on the whole Sobolev class has not been justified.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{解方程与达到极小}{一阶变分为零只给临界点。若 $L$ 对 $(P,z)$ 联合凸，则支撑不等式配合弱方程可推出全局极小；仅对 $P$ 凸而对 $z$ 非凸时，这个逆命题会失败。}
+
+\Needspace{45mm}
+\subsection{Weak continuity of minors and polyconvexity}
+\Needspace{55mm}
+\begin{lemma}[Weak determinant continuity; source \S8.2.4]
+\label{lem:8-det-weak}
+If $q>n$ and $u_k\rightharpoonup u$ in $W^{1,q}(U;\R^n)$, then
+$\det Du_k\rightharpoonup\det Du$ in $L^{q/n}(U)$.
+More generally every $r$-minor converges weakly in $L^{q/r}$, $1\leq r\leq n$.
+\end{lemma}
+\begin{expandedproof}[induction on minor order]
+The gradients are bounded in $L^q$ and Morrey plus compact embedding gives
+$u_k\to u$ uniformly after extraction. An $r$-minor is bounded in
+$L^{q/r}$ by the polynomial estimate $|M_r(Du_k)|\leq C|Du_k|^r$.
+Its Laplace expansion along one fixed component can be written in
+ divergence form, with that component undifferentiated and its
+$(r-1)$-cofactors inside the flux. The other derivative terms cancel by
+the same alternating-index argument as Piola.
+For a compactly supported smooth scalar test $\psi$, integration by parts
+therefore pairs $u_k^\alpha D\psi$, converging uniformly, with
+$(r-1)$-minors. By induction the latter converge weakly in
+$L^{q/(r-1)}$. Thus the $r$-minors converge in distributions; the base
+$r=1$ is weak gradient convergence. Since $q/r>1$, weak compactness
+and density of smooth tests identify every weak subsequential limit
+with $M_r(Du)$. This identifies the limit of the original sequence as well.
+The same divergence identity extends to Sobolev maps by local smoothing
+and H\"older, so it has not been used outside its legitimate class.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{非线性行列式的弱连续}{一般弱收敛不能交换非线性映射。行列式的散度结构把一个因子变为强收敛的 $u_k$，剩余余子式逐阶归纳；$q>n$ 还保证 $L^{q/n}$ 反射。}
+
+The source uses the restricted polyconvex form
+\[
+ L(P,z,x)=F(P,\det P,z,x),\qquad (P,r)\mapsto F(P,r,z,x)
+ \text{ convex}.
+\]
+The standard broader definition permits all minors. We use the displayed
+restricted form, not an unmentioned change of definition in higher dimensions.
+\Needspace{55mm}
+\begin{theorem}[Polyconvex direct method; source Theorems 8--9]
+If $q>n$, $L$ is bounded below, and the smooth representation above holds,
+then $I$ is weakly lower semicontinuous. If also
+\eqref{eq:8-coercivity} holds and a finite competitor exists, there is a minimizer.
+\end{theorem}
+\begin{expandedproof}[a supporting plane in an enlarged space]
+Use Lemma~\ref{lem:8-det-weak} to get simultaneous weak convergence
+of $Du_k$ in $L^q$ and $\det Du_k$ in $L^{q/n}$, and uniform convergence
+of $u_k$ along a subsequence. On a good set where $|u|+|Du|$ is bounded,
+apply the convex supporting inequality to $F$ in the independent variables
+$(P,r)$ at $(Du,\det Du)$. The two linear errors pair with the respective
+weakly convergent sequences; the coefficients converge uniformly and
+are bounded there. The argument of Theorem~\ref{thm:8-lsc}, including
+its truncated exhaustion of the domain, proves the inequality.
+Coercivity and weak closure finish the direct method.
+For example, $L(P)=|P|^4+(\det P)^2$ for $2\times2$ matrices is of this
+form with $q=4$. Polyconvexity does not mean convexity of the nonlinear
+map $P\mapsto(P,\det P)$.
+\end{expandedproof}
+
+\PDEMarginDiagram{8.M}{秩一方向与全矩阵方向}
+{对 $2\times2$ 矩阵，$t\mapsto\det(P+t\,a\otimes b)$ 是仿射函数，但 $t\mapsto\det(tI)=t^2$。秩一方向上的条件不等于整个矩阵空间中的凸性。}
+{ch08-rank-one-margin}
+
+\Needspace{45mm}
+\subsection{Local minimizers embedded in a field of extremals}
+Assume a smooth family $u(x,\lambda)$ solves the scalar Euler--Lagrange
+equation for each $\lambda$ in an interval containing zero, with
+$u(x,0)=u_0(x)$. Suppose $L$ is convex in $p$. For a smooth
+$\vartheta:\overline U\to\R$ taking values in that interval, with
+$\vartheta=0$ on $\partial U$, put $w(x)=u(x,\vartheta(x))$.
+\Needspace{55mm}
+\begin{theorem}[Field of extremals; source \S8.2.5, Theorem 10]
+For every such $w$, $I[w]\geq I[u_0]$.
+If $u_\lambda$ is bounded away from zero near $\lambda=0$, the inverse
+function theorem represents all sufficiently $C^0$-close smooth competitors
+with the same trace in this form.
+\end{theorem}
+\begin{expandedproof}[a calibration flux]
+Here $D_xu$ denotes differentiation with $\lambda$ fixed. The chain rule
+gives $Dw=D_xu+u_\lambda D\vartheta$ at $\lambda=\vartheta(x)$.
+Convexity bounds $L(Dw,w,x)$ below by
+$L(D_xu,w,x)+u_\lambda L_p(D_xu,w,x)\cdot D\vartheta$.
+Define the vector field
+\[
+ b_i(x)=\int_0^{\vartheta(x)}
+ u_\lambda(x,s)L_{p_i}(D_xu(x,s),u(x,s),x)\,ds.
+\]
+Differentiating the upper endpoint and using the Euler--Lagrange equation
+inside the integral gives
+\[
+ \begin{split}
+ \operatorname{div}b={}&u_\lambda L_p\cdot D\vartheta
+ +\int_0^{\vartheta}(L_p\cdot D_xu_\lambda+L_z u_\lambda)\,ds\\
+ ={}&u_\lambda L_p\cdot D\vartheta
+ +L(D_xu(x,\vartheta),w,x)-L(Du_0,u_0,x).
+ \end{split}
+\]
+Thus $I[w]\geq I[u_0]+\int_U\operatorname{div}b=I[u_0]$, since
+$b=0$ on the boundary. The last assertion follows by a uniform local
+inverse in $\lambda$ on the compact closed domain. Without that
+transversality, the theorem compares only competitors of the stated form.
+\end{expandedproof}

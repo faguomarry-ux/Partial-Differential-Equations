@@ -1,0 +1,10 @@
+\begin{tikzpicture}[pde diagram,node distance=8mm]
+\node[pde box,text width=44mm] (u) {$u_m\rightharpoonup u$ in $H^1_0$\\$a(Du_m)\rightharpoonup\xi$ in $L^2$};
+\node[pde box,text width=47mm,right=9mm of u] (e) {$\int a(Du_m)\cdot Du_m$\\$=\int fu_m\longrightarrow\int fu$};
+\node[pde box,text width=100mm,below=12mm of $(u.south)!.5!(e.south)$] (m) {$\int(\xi-a(Dw))\cdot(Du-Dw)\geq0$ for all $w$};
+\node[pde box,text width=100mm,below=9mm of m] (f) {$w=u-tv$, $t\downarrow0$, then $v\mapsto-v$\\$\int a(Du)\cdot Dv=\int fv$};
+\draw[pde axis] (u)--(e);
+\draw[pde axis] (u.south)--(m.north -| u.south);
+\draw[pde axis] (e.south)--(m.north -| e.south);
+\draw[pde axis] (m)--(f);
+\end{tikzpicture}

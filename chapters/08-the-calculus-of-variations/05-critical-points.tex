@@ -1,13 +1,148 @@
-% Evans second edition, section 8.5.
-% English source: printed p. 471; PDF page 488 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 8.5: printed pp.471--481 / English PDF pp.488--498.
+% Chinese: printed pp.332--339 / scan pp.350--357.
+\Needspace{55mm}
 \section{Critical Points}
 \label{sec:8-5}
+\Needspace{45mm}
+\subsection{Palais--Smale compactness and a deformation}
+Let $H$ be a real Hilbert space and $I\in C^1(H;\R)$.
+Write $\nabla I(u)\in H$ for the Riesz representative of $DI(u)$;
+the source writes this representative as $I'[u]$.
+Assume $\nabla I$ is Lipschitz on bounded subsets, the source's class
+$\mathcal C$. A critical point has $\nabla I(u)=0$.
+The Palais--Smale condition says that every sequence with bounded
+$I(u_k)$ and $\nabla I(u_k)\to0$ has a strongly convergent subsequence in $H$.
+Boundedness of the sequence alone would not suffice in infinite dimension.
+\Needspace{55mm}
+\begin{theorem}[Deformation theorem; source \S8.5.1, Theorem 1]
+\label{thm:8-deform}
+Suppose $I\in\mathcal C$ satisfies Palais--Smale and has no critical point
+at level $c$. For sufficiently small $\varepsilon>0$ there are
+$0<\delta<\varepsilon$ and a continuous flow
+$\eta:[0,1]\times H\to H$ with $\eta(0,u)=u$, fixing points outside
+$\{|I-c|<\varepsilon\}$, not increasing $I$, and satisfying
+\[
+ \eta(1,\{I\leq c+\delta\})\subset\{I\leq c-\delta\}.
+\]
+\end{theorem}
+\begin{expandedproof}[a bounded descending vector field]
+There exist $\varepsilon_0>0$, $0<\sigma\leq1$ such that
+$\|\nabla I(u)\|\geq\sigma$ whenever $|I(u)-c|\leq\varepsilon_0$.
+Otherwise choose $|I(u_k)-c|\leq1/k$ and $\|\nabla I(u_k)\|\leq1/k$;
+Palais--Smale and continuity give a critical point at $c$, a contradiction.
+Choose $0<\varepsilon\leq\varepsilon_0$, a Lipschitz scalar cutoff $\chi$
+equal to one on $[c-\varepsilon/2,c+\varepsilon/2]$ and zero outside
+$(c-\varepsilon,c+\varepsilon)$, and define
+\[
+ V(u)=-\chi(I(u))\frac{\nabla I(u)}{\max\{1,\|\nabla I(u)\|\}}.
+\]
+It is Lipschitz on bounded sets and has norm at most one.
+The Banach-space ODE $\dot\eta=V(\eta)$ has unique global solutions:
+Picard iteration gives local existence, and bounded speed makes trajectories
+Cauchy at a finite endpoint, allowing continuation.
+Continuous dependence gives the required continuous flow, and $V=0$
+outside the energy band fixes those points.
+The Hilbert chain rule gives
+\[
+ \frac d{dt}I(\eta)=-\chi(I(\eta))
+ \frac{\|\nabla I(\eta)\|^2}{\max\{1,\|\nabla I(\eta)\|\}}\leq0.
+\]
+Choose $0<\delta<\varepsilon/2$ with $2\delta<\sigma^2$.
+An orbit starting at energy at most $c+\delta$ is already below
+$c-\delta$, exits the narrow band downward, or stays in it for time one.
+In the last case $\chi=1$ and the derivative is at most $-\sigma^2$,
+so it too ends below $c-\delta$. This proves every asserted property.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{Palais--Smale 的用途}{若临界层附近不存在梯度下界，就能构造能量趋于 $c$、梯度趋零的序列。PS 将它变为强收敛子列，从而得到被假设排除的临界点。}
 
-\PDEPending
+\Needspace{45mm}
+\subsection{The mountain pass level}
+\Needspace{55mm}
+\begin{theorem}[Mountain pass; source Theorem 2]
+\label{thm:8-mountain}
+Let $I\in\mathcal C$ satisfy Palais--Smale, $I(0)=0$, and suppose
+$I(u)\geq a>0$ when $\|u\|=r$, while some $e$ satisfies
+$\|e\|>r$, $I(e)\leq0$. For
+\[
+ \begin{split}
+ \Gamma&=\{\gamma\in C([0,1];H):\gamma(0)=0,\ \gamma(1)=e\},\\
+ c&=\inf_{\gamma\in\Gamma}\max_{s\in[0,1]}I(\gamma(s)),
+ \end{split}
+\]
+there is $u\in H$ with $I(u)=c\geq a$ and $\nabla I(u)=0$.
+\end{theorem}
+\begin{expandedproof}[deforming a nearly optimal path]
+Every path crosses the radius-$r$ sphere by continuity of its norm, so
+$c\geq a$. The straight path shows $c$ is finite.
+If $c$ were not critical, use Theorem~\ref{thm:8-deform} with
+$\varepsilon<a/2$. Choose a path with maximum at most $c+\delta$.
+The deformed path has maximum at most $c-\delta$; its endpoints remain
+$0,e$, because their energies lie below $c-\varepsilon$.
+It still belongs to $\Gamma$, contradicting the definition of $c$.
+The conclusion is existence at a minimax level; it does not assert
+nondegeneracy, a particular Morse index, or uniqueness of the critical point.
+\end{expandedproof}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\PDEBodyDiagram{8.4}{A minimax path must cross an energy barrier.}
+{This is an exact two-dimensional model, $I(x,y)=(x^2-1)^2+y^2-1$, connecting $(1,0)$ to $(-1,0)$. Both endpoints have energy $-1$ and every path crosses $x=0$, where $I\geq0$. The horizontal path attains maximum zero at the saddle $(0,0)$. Translation and addition of a constant put the first endpoint at the theorem's $0$ with energy zero.}
+{ch08-mountain-pass}
+
+\Needspace{45mm}
+\subsection{A nonzero solution of a semilinear Dirichlet equation}
+Let $n\geq3$, $1<p<(n+2)/(n-2)$, $f\in C^1(\R)$, and
+$F(s)=\int_0^sf(\tau)d\tau$. Assume for some $a,A>0$ and $\mu>2$,
+\begin{equation}\label{eq:8-mp-growth}
+ \begin{split}
+ |f(s)|&\leq C(1+|s|^p),\quad |f'(s)|\leq C(1+|s|^{p-1}),\\
+ a|s|^{p+1}&\leq F(s)\leq A|s|^{p+1},\qquad \mu F(s)\leq s f(s).
+ \end{split}
+\end{equation}
+These are the source assumptions with $\mu=1/\gamma>2$.
+\Needspace{55mm}
+\begin{theorem}[Semilinear application; source \S8.5.2, Theorem 3]
+The problem $-\Delta u=f(u)$, $u\in H^1_0(U)$, has a nonzero weak solution.
+\end{theorem}
+\begin{expandedproof}[differentiability and compactness]
+Use $H=H^1_0(U)$ with $\|u\|_H=\|Du\|_2$ and define
+$I(u)=\frac12\|u\|_H^2-\int F(u)$.
+Sobolev embedding into $L^{p+1}$ makes $I$ finite.
+The mean value bound on $f'$ gives
+\[
+ \|f(u)-f(v)\|_{L^{(p+1)/p}}
+ \leq C(1+\|u\|_{p+1}^{p-1}+\|v\|_{p+1}^{p-1})\|u-v\|_{p+1}.
+\]
+Together with the quadratic Taylor remainder for $F$, this proves
+Fr\'echet differentiability and a gradient Lipschitz on bounded $H$ sets.
+If $K:H^{-1}\to H^1_0$ is the inverse Dirichlet Laplacian, Riesz
+representation gives $\nabla I(u)=u-Kf(u)$.
+The nonlinear functional $v\mapsto\int f(u)v$ is in $H^{-1}$ by H\"older
+and the $L^{p+1}$ embedding; no pointwise identification of the Hilbert
+gradient with $-\Delta u-f(u)$ is made.
+
+For a Palais--Smale sequence, write $\epsilon_k=\|\nabla I(u_k)\|\to0$.
+The superquadratic inequality yields
+\[
+ \left(\tfrac12-\tfrac1\mu\right)\|u_k\|_H^2
+ \leq I(u_k)-\tfrac1\mu DI(u_k)[u_k]
+ \leq C+\tfrac1\mu\epsilon_k\|u_k\|_H.
+\]
+Thus $u_k$ is bounded in $H$. Since $p+1<2^*=2n/(n-2)$, a subsequence
+converges strongly in $L^{p+1}$; the preceding estimate gives
+$f(u_k)\to f(u)$ in $H^{-1}$.
+Then $u_k=Kf(u_k)+o_H(1)$ converges strongly in $H$.
+This verifies Palais--Smale, including its strong compactness conclusion.
+
+Finally $I(u)\geq\frac12\|u\|_H^2-C\|u\|_H^{p+1}$ is positive on a
+small sphere, since $p+1>2$. For any nonzero $\phi\in C_c^\infty(U)$,
+\[
+ I(t\phi)\leq\tfrac12t^2\|\phi\|_H^2
+                   -a t^{p+1}\|\phi\|_{p+1}^{p+1}\longrightarrow-\infty.
+\]
+The mountain pass theorem supplies a positive-energy critical point,
+which is nonzero because $I(0)=0$. Its weak equation follows from
+$DI(u)[v]=0$. In dimensions one and two the same proof works for finite
+$p>1$ using the corresponding finite-exponent embeddings.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{严格次临界保证紧性}{$p+1<2^*$ 不仅保证能量可积，更让 $u_k$ 在 $L^{p+1}$ 强收敛。临界指数处连续嵌入仍在，但紧性丢失，不能照搬这个 PS 证明。}

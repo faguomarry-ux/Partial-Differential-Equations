@@ -1,13 +1,263 @@
-% Evans second edition, section 10.4.
-% English source: printed p. 566; PDF page 583 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 10.4: printed pp.566--569; English PDF pp.583--586.
+% Chinese section start: printed p.400 / scan p.418.
 \section{Problems}
 \label{sec:10-4}
+The descriptions below retain the source numbers 1--14. All solutions are
+editorial reconstructions. The viscosity convention is stated whenever the
+time direction or the sign of the equation changes.
 
-\PDEPending
+\subsection*{1. Negating the unknown changes the Hamiltonian}
+\begin{proof}[Solution]
+Let $w=-u$ and $\widehat H(p,x)=-H(-p,x)$. If $w-\phi$ has an
+upper contact, $u-(-\phi)$ has a lower contact. The supersolution
+inequality for $u$ reads
+$-\phi_t+H(-D\phi,x)\geq0$, exactly
+$\phi_t+\widehat H(D\phi,x)\leq0$. Lower contacts reverse the reasoning.
+Boundedness and uniform continuity are preserved, as are initial traces
+with $g$ replaced by $-g$. Negating the unknown interchanges upper and
+lower contacts; multiplying a PDE expression by $-1$ while leaving the
+unknown and the test inequalities unchanged does not do this.
+\end{proof}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection*{2. Uniform stability for a first-order equation}
+\begin{proof}[Solution]
+At a strict upper contact for the limit, maximize $u_k-\phi$ on a small
+closed contact ball. Uniform convergence puts the maxima in its interior
+and makes their points converge to the original contact point. Apply
+$\phi_t+H(D\phi,x)\leq0$ there and use continuity of $H$.
+Strictification and lower contacts give the full PDE. A uniform limit
+on each full closed slab of BUC functions remains BUC and inherits the
+limiting initial trace. If only local uniform convergence is known,
+the local PDE conclusion still holds, but membership in the global BUC
+class must be checked separately. The same contact proof works for
+$H_k\to H$ locally uniformly in $(p,x)$: the test gradients stay in a
+compact set even when the unknown functions have no gradient bounds.
+\end{proof}
+
+\subsection*{3. Anisotropic positive diffusion selects the same notion}
+\begin{proof}[Solution]
+Let the fixed smooth matrix $A=(a_{ij})$ have nonnegative symmetric part
+(the source assumes uniform ellipticity). At a smooth upper contact,
+$D^2u^\varepsilon\leq D^2\phi$, and hence
+\[
+ \phi_t+H(D\phi,x)
+ =\varepsilon\operatorname{tr}(A D^2u^\varepsilon)
+ \leq\varepsilon\operatorname{tr}(A D^2\phi).
+\]
+To see the trace order, for positive semidefinite symmetric $A,B$,
+$\operatorname{tr}(AB)=\operatorname{tr}(A^{1/2}BA^{1/2})\geq0$;
+the antisymmetric part has zero contraction with a symmetric Hessian.
+The contact points converge, $A$ and $D^2\phi$ are bounded locally,
+and the right side tends to zero. Lower contacts yield the reverse
+inequality. Boundary traces and the BUC class are treated as in Problem 2.
+Uniform ellipticity helps construct approximants but is stronger than
+the positivity needed in this limit argument.
+\end{proof}
+
+\subsection*{4. Sup-norm contraction}
+\begin{proof}[Solution]
+Set $m=\sup_x|g_1-g_2|$. Since $H$ contains no zeroth-order value
+variable, $u_2+m$ remains a supersolution and $g_1\leq g_2+m$.
+Comparison gives $u_1\leq u_2+m$. Interchange indices to obtain the
+opposite inequality. Thus $\|u_1(\cdot,t)-u_2(\cdot,t)\|_\infty\leq m$
+on every finite slab. There is no requirement that either supremum
+be attained at a finite spatial point.
+\end{proof}
+
+\subsection*{5. The sign of the eikonal equation matters}
+\begin{proof}[Solution]
+For $u=1-|x|$, every nonzero point has slope $\pm1$, so the equation
+holds classically there. If a smooth $\phi$ touches from above at $0$,
+the right and left one-sided inequalities give
+$-1\leq\phi'(0)\leq1$. Thus $|\phi'(0)|-1\leq0$.
+There is no smooth lower test at $0$: it would require both
+$\phi'(0)\leq-1$ from the right and $\phi'(0)\geq1$ from the left.
+Hence the lower-test condition is vacuous there. This proves (a).
+
+For $\tilde u=|x|-1$, the constant lower test $\phi=-1$ at zero
+violates $|\phi'(0)|-1\geq0$, proving (b).
+For (c), use instead $F(p)=1-|p|$. The lower-test slopes for $\tilde u$
+lie in $[-1,1]$, so $F\geq0$, and it has no upper test at its upward
+corner. Away from zero, $F=0$. Thus $\tilde u$ solves the sign-reversed
+equation in its own viscosity sense. For (d), the two residuals have the
+same classical zero set, but their upper- and lower-test inequalities
+are different. They encode opposite choices at a corner, exactly as
+Diagram T10.1 illustrates.
+\end{proof}
+\Needspace{42mm}
+\PDEAnnotation{方程乘负号会改变选择}{经典方程 $F(Du)=0$ 与 $-F(Du)=0$ 等价，但黏性定义包含残差的方向。若未知函数不变，乘负号会交换应满足的单侧条件，因此尖点解可能不同。}
+
+\subsection*{6. Distance to the boundary is an eikonal solution}
+\begin{proof}[Solution]
+For any nonempty bounded open $U$, $d(x)=\operatorname{dist}(x,\partial U)$
+is $1$-Lipschitz by the triangle inequality; no boundary smoothness is
+required. At an upper smooth contact its gradient has norm at most one
+by the Lipschitz contact estimate proved in \S10.2.
+At a lower contact $x_0\in U$, choose a nearest boundary point $y$,
+possible because $\partial U$ is closed and bounded. Set
+$e=(y-x_0)/d(x_0)$. For $0<h<d(x_0)$ the point $x_0+he$ is inside
+$U$, and
+\[
+ d(x_0+he)=d(x_0)-h.
+\]
+The upper bound uses the same $y$; the lower bound uses the Lipschitz
+estimate. Lower touching gives
+$\phi(x_0+he)-\phi(x_0)\leq-h$, hence $D\phi(x_0)\cdot e\leq-1$.
+Therefore $|D\phi(x_0)|\geq1$, proving the supersolution condition.
+The continuous extension of $d$ vanishes at the boundary.
+\end{proof}
+
+\subsection*{7. Admissible gradient jumps at a smooth interface}
+\begin{proof}[Solution]
+Continuity of $u$ and smoothness of its traces force the tangential
+components of $Du^+$ and $Du^-$ to agree on $\Gamma$.
+At a fixed point use smooth local coordinates $(z,\rho)$, where
+$\rho$ increases into $V^+$ and $\partial_\rho=\nu$ at that point.
+If $u_\nu^-<u_\nu^+$, choose any number $a$ strictly between them.
+For a sufficiently small neighborhood the smooth function
+\[
+ \phi(z,\rho)=u(z,0)+a\rho
+\]
+is a lower test along the interface: on $\rho>0$ the normal derivative
+of $u$ exceeds $a$, while on $\rho<0$ it is less than $a$.
+Integrating those derivative inequalities from zero gives $u\geq\phi$
+on both sides. Its gradient at the point is the common tangential
+gradient plus $a\nu$. The viscosity lower-test condition gives
+$H(\lambda Du^-+(1-\lambda)Du^+)\geq0$ for $0<\lambda<1$.
+The endpoint values of $H$ are zero by the classical equation on each
+side and continuity up to $\Gamma$; thus the closed interval follows.
+If the normal derivatives agree, both full gradients agree and the same
+endpoint argument suffices. For a downward jump the function $\phi$
+is an upper test, giving $H\leq0$ on the segment. This proves both
+source inequalities, including equality cases.
+\end{proof}
+\Needspace{42mm}
+\PDEAnnotation{界面斜率形成一个线段}{连续性固定切向梯度，只有法向分量能跳跃。上凸或下凸尖角的测试斜率填充两侧梯度之间的线段，因此要检查整段上的 $H$，而非只检查两端的 $H=0$。}
+
+\subsection*{8. Shape from shading}
+\begin{proof}[Solution]
+For the graph $(x_1,x_2,u(x))$, the upward unit normal is
+$\nu=(-Du,1)/\sqrt{1+|Du|^2}$. Hence the normalized Lambertian
+intensity is $i=e_3\cdot\nu=(1+|Du|^2)^{-1/2}$.
+For $0<i(x)\leq1$ this gives the eikonal equation
+\[
+ |Du|=n(x):=\sqrt{i(x)^{-2}-1}.
+\]
+If $i=1$ the slope is zero; if $i\downarrow0$ the required finite-graph
+slope diverges. Values outside $(0,1]$ do not fit this normalized graph
+model. The PDE determines a slope magnitude, not a surface without
+boundary data and a solution-selection condition.
+\end{proof}
+
+\subsection*{9. Pure pursuit and an exact interception time}
+\begin{proof}[Solution]
+Use relative coordinates $x_1$ for the target's horizontal displacement
+from the pursuer and $x_2$ for the pursuer's height above the target.
+Writing $r=\sqrt{x_1^2+x_2^2}$, the relative dynamics before interception are
+\[
+ x_1'=b_1-b_2x_1/r,\qquad x_2'=-b_2x_2/r.
+\]
+The remaining-time identity $u(x)=h+u(X(h))$ gives
+\[
+ (b_1-b_2x_1/r)u_{x_1}-(b_2x_2/r)u_{x_2}=-1,\qquad u(0,0)=0.
+\]
+As an editorial check the exact solution is
+\[
+ u(x_1,x_2)={b_2\sqrt{x_1^2+x_2^2}+b_1x_1\over b_2^2-b_1^2}.
+\]
+Indeed $r'=b_1x_1/r-b_2$, so differentiating the numerator along a
+trajectory gives $-(b_2^2-b_1^2)$. Also $r'\leq b_1-b_2<0$ ensures
+finite interception, and the displayed expression tends to zero there.
+Thus its constant rate of decrease $-1$ identifies it as the actual time.
+On $x_2=0$, $x_1>0$ it reduces to $x_1/(b_2-b_1)$, as expected.
+The transport field is singular at interception; the PDE is used only
+away from $r=0$ and the zero-time value is imposed by continuity.
+\end{proof}
+
+\subsection*{10. Discount and regularity on an infinite horizon}
+\begin{proof}[Solution]
+For $\lambda>0$ define
+$V(x)=\inf_\alpha\int_0^\infty e^{-\lambda s}r(X(s),\alpha(s))ds$.
+Since $|r|\leq R$, $|V|\leq R/\lambda$. For the same control at $x,y$,
+the running-cost difference is at most
+$\min\{L_re^{L_fs}|x-y|,2R\}$. If $\lambda>L_f$, integrate its first
+bound to get
+$|V(x)-V(y)|\leq L_r|x-y|/(\lambda-L_f)$.
+If $0<\lambda\leq L_f$, choose any $0<\alpha<\lambda/L_f$
+(and hence $\alpha<1$). For nonnegative $a,b$,
+$\min(a,b)\leq a^\alpha b^{1-\alpha}$, so
+\[
+ |V(x)-V(y)|\leq
+ {L_r^\alpha(2R)^{1-\alpha}\over\lambda-\alpha L_f}|x-y|^\alpha.
+\]
+The estimates are uniform in the control, so passing to infima preserves
+them. The case $R=0$ or $L_r=0$ is immediate. If $L_f=0$, every
+$\lambda>0$ is in the Lipschitz case. At $\lambda=L_f$ the stated
+argument gives every $\alpha<1$, without asserting Lipschitz continuity.
+\end{proof}
+
+\subsection*{11. The discounted stationary Bellman equation}
+\begin{proof}[Solution]
+Restriction and concatenation, with the discount factored out of the
+tail, give
+\[
+ V(x)=\inf_\alpha\left\{\int_0^h e^{-\lambda s}r(X(s),\alpha(s))ds
+                  +e^{-\lambda h}V(X(h))\right\}.
+\]
+At a normalized upper contact $V-\phi$, choose a constant control $a$.
+The expression on the right for this control is at least $V(x)$;
+replace $V(X(h))$ by its upper test and expand to first order:
+$0\leq r(x,a)+f(x,a)\cdot D\phi(x)-\lambda V(x)$.
+This holds for every $a$, so
+\[
+ \lambda V(x)-\min_a\{f(x,a)\cdot D\phi(x)+r(x,a)\}\leq0.
+\]
+At a lower contact choose an $h^2$-optimal prefix, use the lower test,
+and the uniform continuity in $a$ argument of \S10.3. Division by $h$
+now gives the reverse inequality. Thus $V$ is a viscosity solution of
+$\lambda V-H_c(DV,x)=0$ with the usual stationary convention.
+The positive coefficient of $V$ is produced by differentiating the
+discount factor, not by inserting an additional running cost.
+\end{proof}
+
+\subsection*{12. Degenerate ellipticity and extrema of operators}
+\begin{proof}[Solution]
+Write $R\geq S$ when $R-S$ is positive semidefinite.
+Then $-\operatorname{tr}R\leq-\operatorname{tr}S$.
+For symmetric $A\geq0$,
+$\operatorname{tr}(A(R-S))=\operatorname{tr}(A^{1/2}(R-S)A^{1/2})\geq0$,
+so $F(R)=-A:R$ is elliptic in the source's decreasing-matrix convention.
+If every $F_k(R,p,x)\leq F_k(S,p,x)$, taking a finite maximum or a
+finite minimum preserves that inequality. Consequently both Bellman-type
+maxima and minima of such linear operators are degenerate elliptic.
+Strict positive definiteness is not needed for these order statements.
+\end{proof}
+
+\subsection*{13. Classical consistency for second-order equations}
+\begin{proof}[Solution]
+Let $u\in C^2$ solve $F(D^2u,Du,x)=0$ with $F$ elliptic as in
+Problem 12. At an upper smooth contact, $Du=D\phi$ and
+$D^2u\leq D^2\phi$, so
+\[
+ F(D^2\phi,D\phi,x)\leq F(D^2u,Du,x)=0.
+\]
+At a lower contact both the matrix order and the resulting inequality
+reverse. This proves viscosity consistency. The ellipticity sign is
+essential: it is exactly what connects Hessian order at a contact to
+the direction of the PDE inequality.
+\end{proof}
+
+\subsection*{14. Uniform stability for second-order equations}
+\begin{proof}[Solution]
+Assume, as in the preceding problem, that $F$ is continuous and elliptic,
+and that $u_k\to u$ locally uniformly. Strictify an upper contact by
+adding $\delta|x-x_0|^4$ to $\phi$. This preserves both the gradient
+and Hessian at $x_0$. Interior maxima of $u_k-\phi_\delta$ converge
+to $x_0$. At those points use the viscosity subsolution inequality and
+pass to the limit in the continuous $F$, including the derivatives of
+the fixed test. At $x_0$ the quartic perturbation contributes no first
+or second derivative, giving the desired original-test inequality.
+Strictify a lower contact by subtracting the quartic and repeat.
+This is a stability proof; it does not prove existence or comparison
+for general fully nonlinear second-order equations.
+\end{proof}

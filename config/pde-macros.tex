@@ -24,5 +24,7 @@
 \NewDocumentEnvironment{proofdetails}{O{Proof details / 证明展开}}{%
   \begin{notebox}{#1}}{\end{notebox}}
 
-% Editable explanatory diagrams for Chapters 1--6.
+% Wave operator symbol from unicode-math (base LaTeX's Box is unavailable).
+\NewDocumentCommand{\PDEWave}{}{\mathord{\mdlgwhtsquare}}
+% Editable explanatory diagrams for Chapters 1--12.
 \input{config/pde-diagrams}

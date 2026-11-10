@@ -1,13 +1,44 @@
-% Evans second edition, section 7.6.
-% English source: printed p. 423; PDF page 440 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{References}
+% Evans 7.6: printed p.423 / English PDF p.440.
+% Chinese: printed p.299 / scan p.317.
+\Needspace{55mm}
+\Needspace{55mm}
+\section{References and Proof Dependencies}
 \label{sec:7-6}
+The primary mathematical source is Lawrence C. Evans, \emph{Partial
+Differential Equations}, second edition, Chapter 7, printed pp.~349--423
+(local English PDF pp.~366--440). The Chinese scan corresponds to printed
+pp.~248--299 (PDF pp.~266--317). Selected comparisons and the source theorem
+map are recorded in \texttt{docs/CHAPTER-07.md}.
+All English exposition, proof reconstructions, solutions, annotations and
+diagrams in this chapter are editorial writing.
 
-\PDEPending
+Evans points to Ladyzhenskaya, J.-L. Lions, Lions--Magenes and Wloka for
+evolution equations; Davies for Harnack's calculation; Krylov,
+Ladyzhenskaya--Solonnikov--Uraltseva and Lieberman for further regularity;
+John and Treves for the Fourier approach; Friedman and Yosida for semigroups.
+Problem 9 is linked to Brezis--Evans, \emph{Archive for Rational Mechanics
+and Analysis} 71 (1979), 1--13, and Ladyzhenskaya--Uraltseva.
+These source bibliography pointers were not independently consulted.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\paragraph{What is proved and what is assumed.}
+The Galerkin constructions, initial-trace passage, integrated-test wave
+uniqueness, regularity inductions, smooth principal-part Harnack inequality,
+finite propagation under a smooth optical-distance hypothesis, vanishing
+viscosity construction, Fourier multiplier bound, generator properties,
+contraction Hille--Yosida theorem, and both PDE applications have expanded
+proofs. All 16 source exercises have editorial solutions; Problem 9 retains
+and estimates the boundary term explicitly.
+Hilbert weak compactness, Banach contraction, the closed graph theorem,
+Bochner integration, Fourier Plancherel and finite-dimensional Schur
+triangularization are prerequisites. Sobolev approximation, traces,
+extension and embedding come from Chapter 5; the Dirichlet spectral basis,
+Lax--Milgram and elliptic boundary estimates come from Chapter 6.
+The local flow-box construction uses classical smooth ODE theory.
+
+\paragraph{Scope boundaries.}
+General rough-coefficient Harnack theory, global smooth optical distances,
+nonsymmetric $L^2$ well-posedness under real spectrum alone, and analytic
+semigroup smoothing are not proved. Our strong maximum proof additionally
+assumes time-independent principal coefficients. The Fourier uniqueness
+class is specified explicitly; autonomous semigroups require time-independent
+coefficients. This chapter has not received independent mathematical review.

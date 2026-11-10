@@ -1,13 +1,197 @@
-% Evans second edition, section 11.2.
-% English source: printed p. 582; PDF page 599 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 11.2, printed pp.582--595; English PDF pp.599--612.
+% Chinese start: printed p.412 / scan p.430.
 \section{Riemann's Problem}
 \label{sec:11-2}
+The initial data are $u_l$ for $x<0$ and $u_r$ for $x>0$.
+All constructions below take place in a sufficiently small strictly
+hyperbolic neighborhood of a fixed state. Distinguish the state-space
+curves $R_k,S_k$ from their space-time realizations: the former
+parameterize possible states, whereas the latter have slopes $x/t$.
+\PDEAnnotation{标量化的适用范围}{简单波代入使用链式法则。
+连续稀疏波可逐片验证再拼接；若标量 $w$ 跳跃，
+$V(w)$ 未必满足系统 Rankine--Hugoniot 条件，不能直接搬用标量激波。}
 
-\PDEPending
+\subsection{Simple waves and genuine nonlinearity}
+Seek $u=V(w(x,t))$ with $V'=r_k(V)$. Substitution gives
+\[
+ u_t+DF(u)u_x=r_k(V)\{w_t+\lambda_k(V(w))w_x\}.
+\]
+Thus a smooth scalar solution of $w_t+f_k(w)_x=0$, where
+$f_k'(s)=\lambda_k(V(s))$, produces a smooth system solution.
+The integral curve $V$ through $z$ is the $k$-rarefaction curve $R_k(z)$.
+\begin{definition}[Source \S11.2.1]
+The $k$-field is genuinely nonlinear if
+$\gamma_k=D\lambda_k\cdot r_k\ne0$ throughout the neighborhood;
+it is linearly degenerate if $\gamma_k\equiv0$ there.
+\end{definition}
+For a genuinely nonlinear field orient the unit vector so that
+$\gamma_k>0$. Then $f_k''=\gamma_k(V)>0$ locally. Reversing the
+orientation changes the parameter but not the geometric wave.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\begin{theorem}[Centered rarefaction; source \S11.2.2, Theorem 1]
+Suppose the $k$-field is genuinely nonlinear and $u_r=V(s_r)$,
+$u_l=V(s_l)$ with $s_l<s_r$. On this short curve let
+$L(s)=\lambda_k(V(s))$. Then the continuous integral solution is
+\begin{equation}\label{eq:11-fan}
+ u(x,t)=\begin{cases}
+ u_l,&x/t\le L(s_l),\\
+ V(L^{-1}(x/t)),&L(s_l)<x/t<L(s_r),\\
+ u_r,&x/t\ge L(s_r).
+ \end{cases}
+\end{equation}
+\end{theorem}
+\begin{expandedproof}[PDE, interfaces, and the initial trace]
+Since $L'=\gamma_k>0$, its inverse exists and is smooth. In the fan,
+$U(\xi)=V(L^{-1}(\xi))$ satisfies
+$(DF(U)-\xi I)U'=0$, so $u_t+DF(u)u_x=0$ for $t>0$.
+On a strip $t\ge\delta>0$ the profile is piecewise $C^1$ and continuous
+at both fan edges; therefore there is no interface measure in its
+first derivatives. The fan and all differing initial states occupy
+an interval of length at most $Ct$ near the origin. Boundedness gives
+$\|u(\cdot,t)-g\|_{L^1(K)}\le C_Kt$ for each compact $K$.
+Integration by parts above $\delta$ followed by $\delta\downarrow0$
+proves the initial weak identity.
+\end{expandedproof}
+\PDEBodyDiagram{11.1}{Wave patterns in physical space}
+{The left panel is a centered rarefaction: characteristic speeds increase
+from $\lambda_l$ to $\lambda_r$. The middle panel shows a compressive
+shock with $\lambda_r<\sigma<\lambda_l$; forward characteristics terminate
+on it. The right panel is a contact, with equal characteristic and interface
+speed. Only slopes and incidence are represented; these are schematic
+panels for a single characteristic family.}{ch11-wave-patterns}
+
+\subsection{The Hugoniot locus and its second-order contact}
+The shock set at $z$ consists of states $v$ for which
+$F(v)-F(z)=\sigma(v-z)$ for some common speed $\sigma$.
+\begin{theorem}[Local shock curves; source \S11.2.3, Theorem 2]
+For $F\in C^3$ strictly hyperbolic near $z$, the shock set is locally
+the union of $m$ curves $S_k(z)$. In a signed unit-speed parameter
+$a$, choose $S_k(0;z)=z$, $\partial_aS_k(0;z)=r_k(z)$.
+Writing $v=S_k(a;z)$, the shock speed extends smoothly along this
+branch to $\sigma_k(0;z)=\lambda_k(z)$, and
+\begin{equation}\label{eq:11-shock-expansion}
+ \partial_a\sigma_k(0;z)=\tfrac12\gamma_k(z),\qquad
+ \sigma_k(a;z)=\frac{\lambda_k(v)+\lambda_k(z)}2+O(a^2).
+\end{equation}
+The shock and rarefaction curves have equal second derivatives at zero
+when both use oriented arc length.
+\end{theorem}
+\PDEAnnotation{激波速度不是全域函数}{每一条 $S_k$ 上的速度可光滑
+延拓到基点，但不同分支极限是不同的 $\lambda_k(z)$。
+不能在所有分支的交点假定一个共同的光滑 $\sigma(v,z)$。}
+\begin{expandedproof}[construction and all Taylor coefficients]
+Define $\overline A(v,z)=\int_0^1DF(z+\theta(v-z))\,d\theta$.
+The jump equation becomes
+$(\overline A(v,z)-\sigma I)(v-z)=0$.
+Near $v=z$ this averaged matrix is strictly hyperbolic; its real
+simple eigenvalues and dual eigenvectors are smooth. Reality follows
+by continuation of the real simple roots of the characteristic
+polynomial, and the spectral gaps persist after shrinking the ball.
+Let these left vectors be $\overline l_j(v,z)$. The $m-1$ equations
+\[
+ \overline l_j(v,z)\cdot(v-z)=0,\qquad j\ne k,
+\]
+ have derivative at $v=z$ with independent rows $l_j(z)$.
+The implicit function theorem gives a curve tangent to $r_k(z)$.
+Every nearby nontrivial jump vector is an eigenvector of the averaged
+matrix, hence belongs to exactly one of these branches. The speed
+on the branch is its $k$th eigenvalue; at the common base point there
+are $m$ distinct branch limits, not a single joint speed function.
+
+Set $r=r_k(z)$, $A=DF(z)$, $\lambda=\lambda_k(z)$ and
+$H=D^2F(z)[r,r]$. Twice differentiating
+$F(S(a))-F(z)=\sigma(a)(S(a)-z)$ at zero gives
+\[
+ (A-\lambda I)S''(0)=2\sigma'(0)r-H.
+\]
+Differentiate $DF\,r_k=\lambda_k r_k$ in direction $r$:
+\[
+ (A-\lambda I)Dr_k(z)r=\gamma_k(z)r-H.
+\]
+Left multiplication by $l_k$ yields $2\sigma'(0)=\gamma_k$.
+Subtracting the equations shows that $S''(0)-Dr_k r$ is parallel
+to $r$. Both terms are orthogonal to $r$, because both curves have
+unit speed; hence they are equal. Taylor's formula now gives
+$\lambda_k(S(a))=\lambda+\gamma_k a+O(a^2)$ and the stated speed
+estimate. Local equivalence $|S(a)-z|\asymp|a|$ also permits the
+remainder to be written $O(|v-z|^2)$.
+\end{expandedproof}
+
+\begin{theorem}[Contacts; source \S11.2.3, Theorem 3]
+If the $k$-field is linearly degenerate on a neighborhood, its local
+shock and rarefaction curves coincide and their speed is
+$\lambda_k(z)=\lambda_k(v)$. Two such states are joined by a contact
+at that speed.
+\end{theorem}
+\begin{expandedproof}[inclusion and local equality]
+Along $V'=r_k(V)$, $\frac d{ds}\lambda_k(V)=0$.
+Integration gives
+$F(V(s))-F(z)=\int_0^s\lambda_k(z)V'(a)\,da
+=\lambda_k(z)(V(s)-z)$.
+Thus the rarefaction curve lies in the shock set. Its tangent places
+it on branch $k$; the implicit-function construction gives the unique
+local curve on that branch. The two germs coincide, and
+\eqref{eq:11-rh} gives the contact solution. This is a local equality,
+not a statement about arbitrary distant branches of the shock set.
+\end{expandedproof}
+
+\subsection{Admissible shocks and the local solver}
+For a genuinely nonlinear field with $\gamma_k>0$, \eqref{eq:11-shock-expansion}
+gives for small $a<0$
+\[
+ \lambda_k(S_k(a;z))<\sigma_k(a;z)<\lambda_k(z).
+\]
+These are the compressive Lax shocks. For $a>0$ the inequalities
+reverse and give expansion shocks, which are rejected. Spectral
+separation also gives
+$\lambda_{k-1}(z)<\sigma_k<\lambda_{k+1}(S_k(a;z))$
+when the neighboring indices exist. The strict inequalities follow
+because the leading gaps have size $|\gamma_k a|/2$, whereas the
+error has size $O(a^2)$.
+\PDEMarginDiagram{11.M}{平均速度与压缩}
+{本图取 Burgers 通量 $f(u)=u^2/2$、$u_l=1,u_r=0$。
+激波速度恰为 $1/2$，两侧速度为 $1$ 和 $0$；
+一般系统的平均公式只在小振幅下成立到二阶余项。}{ch11-speed-margin}
+
+Define $T_k(a;z)$ as the rarefaction curve for $a\ge0$ and the
+shock curve for $a\le0$, each with compatible oriented parameters.
+For a linearly degenerate field use its contact curve for both signs.
+The common value and tangent, as well as smooth base-state dependence,
+make $T_k$ jointly $C^1$ near $(0,z)$; the second-order contact proved
+above gives additional matching in the wave parameter.
+\begin{theorem}[Local Riemann solver; source \S11.2.4, Theorem 4]
+If each field is genuinely nonlinear or linearly degenerate on a
+neighborhood of $u_l$, every sufficiently close $u_r$ can be joined
+to $u_l$ by at most $m$ elementary waves, ordered by family.
+The resulting integral solution is self-similar. Its small wave-strength
+vector is unique within this construction.
+\end{theorem}
+\begin{expandedproof}[state matching, speed ordering, weak gluing]
+Let $z_0=u_l$ and $z_k=T_k(a_k;z_{k-1})$. The endpoint map
+$\mathcal E(a)=z_m$ is $C^1$, $\mathcal E(0)=u_l$, and
+\[
+ D\mathcal E(0)=(r_1(u_l),\ldots,r_m(u_l)).
+\]
+This is invertible. The inverse function theorem gives a unique small
+$a$ with $\mathcal E(a)=u_r$. Choose disjoint intervals around the
+ordered numbers $\lambda_k(u_l)$. For states and strengths sufficiently
+small, every fan edge, shock speed, and contact speed in family $k$
+remains in its own interval. Consequently the elementary waves do not
+overlap in $\xi=x/t$, and constant intermediate states fill the gaps.
+Integrate on each smooth sector: continuous fan boundaries have no
+jump measure, and each shock or contact satisfies
+\eqref{eq:11-rh}. All interior interface terms cancel. The difference
+from the initial step is bounded and confined to $|x|\le Ct$, giving
+the initial trace as in the rarefaction proof. The inverse theorem
+proves uniqueness of the small parameters; it does not prove uniqueness
+among all bounded weak or entropy solutions of the system.
+\end{expandedproof}
+\PDEAnnotation{波曲线的方向}{本稿始终写右状态 $z_k\in T_k(z_{k-1})$。
+原书 §11.2.4 的式 (43) 与随后 (45) 的左右方向写法不一致；
+这里以构造式 (45) 为准，明确每次从左状态走向右状态。}
+\PDEBodyDiagram{11.2}{Matching states before placing waves}
+{The endpoint map composes the family curves in state space. Its derivative
+at zero consists of the independent eigenvectors. Disjoint speed intervals
+then place those waves in increasing order in $x/t$. The unique small
+strength vector is a local finite-dimensional conclusion; no general
+system uniqueness theorem is inferred.}{ch11-local-solver}

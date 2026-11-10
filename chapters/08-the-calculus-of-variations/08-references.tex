@@ -1,13 +1,55 @@
-% Evans second edition, section 8.8.
-% English source: printed p. 494; PDF page 511 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{References}
+% Evans 8.8: printed p.494 / English PDF p.511.
+% Chinese: printed p.349 / scan p.367.
+\Needspace{55mm}
+\section{References and Proof Dependencies}
 \label{sec:8-8}
+The primary source is Lawrence C. Evans, \emph{Partial Differential
+Equations}, second edition, Chapter 8, printed pp.~427--494 (local English
+PDF pp.~444--511). The Chinese scan covers printed pp.~303--349
+(PDF pp.~321--367). The exposition and all proofs, solutions, Chinese
+mathematical annotations and diagrams here are editorial reconstructions.
+The source theorem numbering is section-local, unlike these notes.
 
-\PDEPending
+Evans points to Giaquinta and Giaquinta--Hildebrandt for variational
+calculus, Struwe and Zeidler for variational methods,
+Ladyzhenskaya--Uraltseva for the lower-semicontinuity proof, and Ball--Murat
+for fields of extremals. Further pointers include Kinderlehrer--Stampacchia
+and Friedman for variational inequalities, H\'elein and Lin--Wang for
+harmonic maps, and Rabinowitz for minimax theory.
+The mountain pass theorem is attributed to Ambrosetti--Rabinowitz
+(\emph{Journal of Functional Analysis} 14 (1973), 349--381).
+Noether and wave applications are linked to Reed--Simon, Strauss,
+Morawetz, Lax--Phillips and Lax; the conformal-square identity is attributed
+to Costa--Strauss. Exercise 17 carries the source's Belloni--Kawohl
+attribution, and exercise 18 its Alessandrini attribution.
+These are reported source pointers, not independently consulted works.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\paragraph{Expanded here.}
+First and second variations; null Lagrangians and Piola cancellation;
+Brouwer via no retraction; convex lower semicontinuity and direct methods;
+Sobolev first variations; weak minors and restricted polyconvexity;
+fields of extremals; interior and boundary $H^2$ estimates; constrained
+minimization and multipliers; obstacle inequalities and harmonic maps;
+pressure recovery conditional on a divergence right inverse;
+deformation and mountain pass; the subcritical Palais--Smale argument;
+Noether currents, scaled-energy monotonicity, conformal multiplier and
+exterior local wave-energy decay. All 20 exercises have editorial solutions.
+
+\paragraph{External inputs and limits.}
+Chapter 5 supplies traces, compactness, extension, difference quotients,
+Morrey and Sobolev embedding; Chapter 6 supplies elliptic and spectral tools.
+Weak compactness, Hahn--Banach separation, Riesz representation,
+Egoroff, dominated convergence, finite-dimensional inverse/implicit
+function theorems and Banach-space Picard iteration are prerequisites.
+The De Giorgi--Nash--Moser and Schauder estimates in the smoothness
+bootstrap are quoted, not proved. The bounded divergence right inverse
+used for pressure is also an explicit external theorem. Obstacle
+$C^{1,1}_{\rm loc}$ regularity is not proved; its pointwise complementarity
+interpretation is conditional on the stated regularity. Problem 5 invokes
+Sard's theorem and the elementary fact that distributions with zero
+derivatives are constant. Problem 20 uses harmonic analyticity from
+Chapter 2. Our polyconvex discussion uses $q>n$ and the source's restricted
+$(P,\det P)$ representation; no full elasticity existence theory,
+self-injectivity, general system smoothness, or critical-exponent
+Palais--Smale theorem is claimed. Problem 17 explicitly requires connectedness.
+This chapter has not received independent mathematical review.

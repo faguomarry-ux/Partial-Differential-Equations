@@ -1,13 +1,125 @@
-% Evans second edition, section 12.5.
-% English source: printed p. 642; PDF page 659 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 12.5, printed pp.642--647; English PDF pp.659--664.
+% Chinese start: printed p.456 / scan p.474.
 \section{Nonexistence of Solutions}
 \label{sec:12-5}
+\subsection{Negative energy and the concavity method}
+Consider a classical solution of \eqref{eq:12-semi} with compactly
+supported smooth data and sufficient regularity for the following
+identities. Finite propagation bounds its support on every finite
+strip. This section allows a negative potential.
+\begin{theorem}[Source \S12.5.1, Theorem 1]
+Suppose $f(0)=0$, $F'=f$, $F(0)=0$, and for some $\lambda>2$,
+\[
+ zf(z)\le\lambda F(z)\quad(z\in\R).
+\]
+If the conserved energy $E(0)<0$, no such solution can persist for
+all $t\ge0$. In particular, the concavity argument forces breakdown
+in a finite time.
+\end{theorem}
+\begin{expandedproof}[obtaining a decreasing concave quantity]
+Put $I(t)=\frac12\int u^2$. Differentiating twice and integrating
+by parts gives
+\[
+ I'=\int uu_t,\qquad I''=\int(u_t^2-|Du|^2-uf(u)).
+\]
+Set $\alpha=(\lambda-2)/4>0$ and $\beta=-\lambda E(0)>0$.
+Energy conservation and the structural assumption yield
+\[
+ I''\ge(2+2\alpha)\int u_t^2+2\alpha\int|Du|^2+\beta,
+ \qquad (I')^2\le2I\int u_t^2.
+\]
+Therefore $II''-(1+\alpha)(I')^2\ge\beta I$.
+The function $I$ never vanishes: if $u=0$ on a time slice, its
+energy there would be $\frac12\int u_t^2\ge0$.
+For $J=I^{-\alpha}>0$,
+\begin{equation}\label{eq:12-concavity}
+ J''=-\alpha I^{-\alpha-2}
+       \{II''-(1+\alpha)(I')^2\}
+       \le-\alpha\beta I^{-\alpha-1}<0.
+\end{equation}
+If a global solution existed, $I''\ge\beta$ would make $I'$ positive
+at some finite $t_0$. Then $J'(t_0)<0$, and concavity implies
+$J(t)\le J(t_0)+(t-t_0)J'(t_0)$ for $t\ge t_0$.
+The right side becomes zero in finite time, contradicting $J>0$.
+No positivity assumption on the initial correlation $\int gh$ is
+needed; $I''\ge\beta$ creates the required sign later.
+\end{expandedproof}
+\PDEAnnotation{负能量不需要初速度向外}{聚焦幂
+$f(z)=-|z|^{p-1}z$ 满足 $zf=(p+1)F$。
+取 $h=0,g=A\psi$，$A$ 足够大就使
+$E=A^2\|D\psi\|_2^2/2-A^{p+1}\|\psi\|_{p+1}^{p+1}/(p+1)<0$。
+证明不依赖 $I'(0)>0$。}
 
-\PDEPending
+\subsection{Small-data blow-up below the three-dimensional threshold}
+Now consider the different focusing equation
+\begin{equation}\label{eq:12-source-power}
+ \PDEWave u=|u|^p\quad\hbox{in }\R^3,
+ \qquad \int g>0,\quad\int h>0,
+ \quad\operatorname{spt}(g,h)\subset B(0,R_0).
+\end{equation}
+The data themselves need not be nonnegative. For a noninteger $p$
+the statement concerns a classical solution with the regularity
+needed for the representation and integrations, not an automatic
+$C^\infty$ solution of a nonsmooth nonlinearity.
+\begin{theorem}[Source \S12.5.2, Theorem 2]
+If $1<p<1+\sqrt2$, the solution in \eqref{eq:12-source-power}
+cannot exist classically for all positive time. The assumptions allow
+arbitrarily small positive multiples of fixed admissible data.
+The endpoint $p=1+\sqrt2$ is not established by this proof.
+\end{theorem}
+\begin{expandedproof}[the shell gain and a divergent time integral]
+Assume a global solution and put $I(t)=\int u(x,t)dx$.
+Finite propagation and integration of the PDE give
+$I''=\int|u|^p$, hence $I,I'>0$. Holder on $B(0,R_0+t)$ gives
+\begin{equation}\label{eq:12-I-diff}
+ I''\ge c(1+t)^{-3(p-1)}I^p.
+\end{equation}
+Let $v$ be the free wave with the same data. Positivity of the
+three-dimensional retarded kernel gives $u\ge v$, despite possible
+sign changes of $v$. Huygens' principle puts $v$ in the shell
+$A_t=\{\max(t-R_0,0)\le|x|\le t+R_0\}$, whose volume is at most
+$C(1+t)^2$. Also $\int v=\int g+t\int h$.
+Consequently
+\[
+ c(1+t)\le\int_{A_t}u
+ \le\left(\int|u|^p\right)^{1/p}|A_t|^{1-1/p},
+ \qquad I''\ge c(1+t)^{2-p}.
+\]
+Since $p<3$, two integrations and the positive initial values yield
+$I(t)\ge c(1+t)^{4-p}$ (after adjusting the constant for small $t$).
+This stronger lower bound comes from shell volume, not ball volume.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+Choose $0<\varepsilon<p-1$ so that
+$\mu=(p-1)^2+\varepsilon(4-p)<2$. Combining the lower bound with
+\eqref{eq:12-I-diff} gives
+$I''\ge c I^{1+\varepsilon}(1+t)^{-\mu}$.
+Multiply by $I'>0$ and integrate. The product rule
+\[
+ (I^{2+\varepsilon}(1+t)^{-\mu})'
+ =(2+\varepsilon)I^{1+\varepsilon}I'(1+t)^{-\mu}
+       -\mu I^{2+\varepsilon}(1+t)^{-\mu-1}
+\]
+shows
+$(I')^2\ge cI^{2+\varepsilon}(1+t)^{-\mu}-C$.
+The positive term tends to infinity: its power lower bound has
+exponent $2(4-p)-(p-1)^2>0$ on the stated range. Thus for large $t$,
+\[
+ I'\ge cI^{1+\varepsilon/2}(1+t)^{-\mu/2},\qquad
+ (I^{-\varepsilon/2})'\le-c(1+t)^{-\mu/2}.
+\]
+Because $\mu/2<1$, the time integral on the right diverges.
+It makes the positive left quantity negative at a finite time,
+a contradiction. Scaling the initial data down changes constants
+and the possible lifetime, but does not remove this contradiction.
+\end{expandedproof}
+\PDEAnnotation{两个临界指数不可混用}{这里 $1+\sqrt2$ 来自
+$(p-1)^2<2$ 和球壳的 $t^2$ 体积增长；
+三维退聚焦的能量临界 $p=5$ 来自缩放。
+本节既没有证明 Strauss 临界端点，也没有讨论阈值以上的小数据全局理论。}
+\PDEBodyDiagram{12.4}{Two different obstructions to a global solution}
+{On the left, a positive concave quantity with negative derivative lies
+below its tangent and must reach zero. The displayed curve
+$J=1-t-t^2/4$ is only an exact concavity model, not a PDE solution.
+On the right, $(p-1)^2<2$ leaves room for the positive $\varepsilon$
+in the shell-based proof; the endpoint is excluded. Neither diagram
+asserts a quantitative lifespan formula for the PDE.}{ch12-blowup}

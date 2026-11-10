@@ -1,10 +1,10 @@
 # 目录与来源对照
 
-前六章新增的 30 幅原生 TikZ 图、整理稿页码与可编辑源码见 [TikZ 图解索引](./TIKZ-DIAGRAMS.md)。下表 EN/PDF 页仍指原书来源页，不是整理稿页。
+前十二章新增的 60 幅原生 TikZ 图、整理稿页码与可编辑源码见 [TikZ 图解索引](./TIKZ-DIAGRAMS.md)。下表 EN/PDF 页仍指原书来源页，不是整理稿页。
 
 按英文原书第二版的章、节建立。EN 页为英文书内页码；PDF 页为从 1 起计的物理页码。
 中文页为扫描中译本目录所列的章起始页，不可套用英文 PDF 页码。第一章已核对逐节中文页码，见 [第一章记录](./CHAPTER-01.md)；第二章据章首页节次表核对节起始，并核对中文均值专题页，见 [第二章记录](./CHAPTER-02.md)。第五章另据中译本章首页节次表核对各节起始页，见 [第五章记录](./CHAPTER-05.md)；尚未逐句核对中文整章。第三章已核对章首页及特征线、Hopf–Lax、激波专题页，见 [第三章记录](./CHAPTER-03.md)；第四章已核对章首页、变换、驻相／均匀化与 CK 专题页，见 [第四章记录](./CHAPTER-04.md)；第六章已核对章首页与差商、边界正则性、最大值及非对称谱专题页，见 [第六章记录](./CHAPTER-06.md)；其余章仍待逐节核对。
-全书目录列到原书“节”；第一至第六章正文已加入三级小节，其余章节随正文整理补建。
+全书目录列到原书“节”；第一至第十二章正文已加入三级小节，其余章节随正文整理补建。
 
 第 1 章位于 Part I 之前；Part I 为第 2–4 章，Part II 为第 5–7 章，Part III 为第 8–12 章。
 
@@ -104,6 +104,8 @@
 
 ## 7. Linear Evolution Equations
 
+本章六节已整理为英文重构学习稿，含 28 条中文边注、21 处证明展开、16 题解答及 5 幅 TikZ 图；未独立数学审阅。独立版 27 页，整书 PDF 204–230 页。中文各节起始依次为书内 248、266、280、289、297、299 页（PDF 均加 18）。详见 [第七章记录](./CHAPTER-07.md)。
+
 | 节 | English heading | EN 页 | PDF 页 | 文件 |
 | --- | --- | ---: | ---: | --- |
 | 7.1 | Second-Order Parabolic Equations | 349 | 366 | [01-second-order-parabolic-equations.tex](../chapters/07-linear-evolution-equations/01-second-order-parabolic-equations.tex) |
@@ -114,6 +116,8 @@
 | 7.6 | References | 423 | 440 | [06-references.tex](../chapters/07-linear-evolution-equations/06-references.tex) |
 
 ## 8. The Calculus of Variations
+
+本章八节已整理为英文重构学习稿，含 23 条中文边注、25 处证明展开、20 题解答和 5 幅 TikZ 图；未独立数学审阅。独立版 31 页，整书 PDF 232–262 页。中文各节起始依次为书内 303、310、320、323、332、339、345、349 页（PDF 均加 18）。详见 [第八章记录](./CHAPTER-08.md)。
 
 | 节 | English heading | EN 页 | PDF 页 | 文件 |
 | --- | --- | ---: | ---: | --- |
@@ -223,3 +227,11 @@
 | E.3 | Convergence theorems for integrals | 686 | 703 | [03-convergence-theorems-for-integrals.tex](../appendices/e-measure-theory/03-convergence-theorems-for-integrals.tex) |
 | E.4 | Differentiation | 687 | 704 | [04-differentiation.tex](../appendices/e-measure-theory/04-differentiation.tex) |
 | E.5 | Banach space-valued functions | 687 | 704 | [05-banach-space-valued-functions.tex](../appendices/e-measure-theory/05-banach-space-valued-functions.tex) |
+
+第九章已形成八节学习稿，19 条中文数学边注、24 处证明展开、14 题解答和 5 幅 TikZ 图；中文节起始已依章首页表核对，专题核对范围、假设与未证明项见 [第九章记录](./CHAPTER-09.md)。
+
+第十章五节学习稿已整理，13 条中文数学边注、16 处证明展开、14 题解答和 5 幅 TikZ 图；中译本节起始按 PDF 402 的章首页表核对。原书参考文献续至 EN 570 / PDF 587。来源、时间方向与证明范围见 [第十章记录](./CHAPTER-10.md)。
+
+第十一章六节学习稿已整理，14 条中文数学边注、15 处证明展开、全部 17 题解答及 5 幅 TikZ 图；中文节起始依据 PDF 422 章首页表。一般小局部黏性剖面依赖外部中心流形定理；来源和边界见 [第十一章记录](./CHAPTER-11.md)。
+
+第十二章七节学习稿已整理，10 条中文数学边注、18 处证明展开、全部 18 题解答和 5 幅 TikZ 图；中文节起始依据 PDF 455 章首页表。临界证明明确依赖齐次 Strichartz；来源、非整数幂与弱解范围见 [第十二章记录](./CHAPTER-12.md)。

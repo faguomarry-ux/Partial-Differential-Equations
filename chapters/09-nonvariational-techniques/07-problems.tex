@@ -1,13 +1,264 @@
-% Evans second edition, section 9.7.
-% English source: printed p. 538; PDF page 555 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 9.7: printed pp.538--541; English PDF pp.555--558.
+% Chinese: printed p.380 / scan p.398.
 \section{Problems}
 \label{sec:9-7}
+The following short problem descriptions preserve the source numbers 1--14.
+All solutions are editorial additions. Domain, decay, and regularity conditions
+needed by a computation are stated explicitly.
 
-\PDEPending
+\subsection*{1. A flow proof of the finite-dimensional zero lemma}
+\begin{proof}[Solution]
+Let $V$ be smooth near $\overline B_r$ and solve $x'=-V(x)$.
+The inequality $V(x)\cdot x\geq0$ on the sphere makes the closed ball
+forward invariant. One justification uses a Lipschitz bound near the ball:
+for $d(x)=\operatorname{dist}(x,\overline B_r)$, projection to the sphere
+gives $(d(x)^2)'\leq C d(x)^2$ outside, so an orbit starting with $d=0$
+cannot leave by Gronwall. Boundedness in the compact ball permits global
+continuation. For every $h>0$ its continuous time-$h$ map has a Brouwer
+fixed point $y_h$. Take $h_j\downarrow0$ and $y_{h_j}\to y$.
+Uniformly for initial points in the ball,
+$x(h,y_h)=y_h-hV(y_h)+O(h^2)$, since $V$ and $DV$ are bounded there.
+The fixed-point identity gives $V(y_h)=O(h)$, hence $V(y)=0$.
+A fixed point of just one time map could be a periodic orbit; the
+small-time limit is necessary to complete this argument.
+\end{proof}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\subsection*{2. Weakly continuous scalar nonlinearities are affine}
+\begin{proof}[Solution]
+Write $G$ for the continuous scalar nonlinearity. Fix $s,t\in\R$,
+$0<\theta<1$. On each interval of length $1/k$ let $f_k$ equal $s$ on
+the first fraction $\theta$ and $t$ on the remainder.
+For continuous test functions, cellwise averaging gives
+$f_k\rightharpoonup m=\theta s+(1-\theta)t$; boundedness and density
+extend this to all $L^2$ tests. The same argument gives
+$G(f_k)\rightharpoonup\theta G(s)+(1-\theta)G(t)$. The assumed weak
+continuity forces
+$G(\theta s+(1-\theta)t)=\theta G(s)+(1-\theta)G(t)$.
+A continuous function satisfying this identity on every segment is
+$G(s)=\alpha s+\beta$: set $\beta=G(0)$, compare first on $[0,1]$,
+then use segments containing $0,1$ and any real $s$. Conversely affine
+maps preserve weak convergence by linearity.
+\end{proof}
+
+\subsection*{3. Penalty approximation of the nonnegative obstacle}
+\begin{proof}[Solution]
+Let $\beta_\varepsilon(s)=\min(s,0)/\varepsilon$ and solve
+$-\Delta u_\varepsilon+\beta_\varepsilon(u_\varepsilon)=f$.
+Existence follows by minimizing the strictly convex functional
+\[
+ \tfrac12\|Dv\|_2^2+{1\over2\varepsilon}\|v_-\|_2^2-\int fv
+ \quad\hbox{on }H^1_0(U).
+\]
+Coercivity and convex lower semicontinuity give a minimizer, and
+its derivative gives the equation. Testing by $u_\varepsilon$ bounds
+$\|Du_\varepsilon\|_2$ and $\varepsilon^{-1}\|(u_\varepsilon)_-\|_2^2$.
+Testing by $-(u_\varepsilon)_-$ gives more precisely
+\[
+ \|D(u_\varepsilon)_-\|_2^2+
+ \varepsilon^{-1}\|(u_\varepsilon)_-\|_2^2
+ \leq\|f_-\|_2\|(u_\varepsilon)_-\|_2,
+\]
+so $\|(u_\varepsilon)_-\|_2\leq\varepsilon\|f_-\|_2$.
+A weakly convergent subsequence has limit $u\geq0$ by compact $L^2$
+convergence. For each $w\geq0$ in $H^1_0$,
+$\beta_\varepsilon(u_\varepsilon)(w-u_\varepsilon)\leq0$, hence
+\[
+ \int Du_\varepsilon\cdot D(w-u_\varepsilon)
+ \geq\int f(w-u_\varepsilon).
+\]
+Rearrange with $\|Du_\varepsilon\|_2^2$ on the left and use weak
+lower semicontinuity to obtain the desired variational inequality for $u$.
+Two such solutions, tested against one another, give equality by strict
+convexity. Thus every subsequential limit is $u$, giving convergence
+of the full family weakly in $H^1_0$. Taking $w=u$ in the last inequality
+also gives a matching upper bound for the gradient norm, so convergence
+is in fact strong in $H^1_0$.
+\end{proof}
+
+\subsection*{4. Periodic forcing selects one periodic initial datum}
+\begin{proof}[Solution]
+For $f(t+\tau)=f(t)$, $f\in L^\infty$, define the period map
+$P(g)=u(\tau;g)$ on $L^2(U)$. The difference of two solutions has zero
+forcing, and its energy estimate gives
+$\|P(g)-P(h)\|_2\leq e^{-\lambda_1\tau}\|g-h\|_2$.
+Banach provides a unique $g_*$. The functions $u(t+\tau;g_*)$ and
+$u(t;g_*)$ solve the same problem with the same initial trace; linear
+uniqueness proves periodicity. Every periodic solution supplies a fixed
+point, proving uniqueness of the initial datum as well.
+\end{proof}
+
+\subsection*{5. A small gradient nonlinearity}
+\begin{proof}[Solution]
+Assume $f\in L^2$ and $b$ is globally Lipschitz with constant $L$.
+Let $Av$ solve $-\Delta Av=f-b(Dv)$, zero trace. Testing the difference
+of two outputs gives
+\[
+ \|D(Av-Aw)\|_2^2\leq LC_P\|D(v-w)\|_2\|D(Av-Aw)\|_2.
+\]
+Thus $LC_P<1$ makes $A$ a contraction on $H^1_0$. Its fixed point
+is unique and belongs to $H^2$ by the linear $L^2$ regularity theorem.
+The value $b(0)$ affects the forcing bound but not the contraction factor.
+\end{proof}
+
+\subsection*{6. A positive solution above the first eigenvalue}
+\begin{proof}[Solution]
+Assume $U$ connected, $f$ bounded and Lipschitz, $f(0)=0$, and
+$f'(0)>\lambda_1$. Normalize $\|\phi_1\|_\infty=1$.
+For small $\varepsilon>0$, differentiability at $0$ gives
+$f(\varepsilon\phi_1)\geq\lambda_1\varepsilon\phi_1$,
+so $\underline u=\varepsilon\phi_1$ is a subsolution.
+Let $-\Delta\psi=1$, $\psi=0$ on the boundary, and take
+$\overline u=M\psi$ with $M\geq\sup|f|$.
+It is a supersolution and dominates $\underline u$ after increasing $M$:
+indeed $-\Delta[(\lambda_1\|\phi_1\|_\infty)\psi-\phi_1]\geq0$,
+so comparison bounds $\phi_1$ by a multiple of $\psi$.
+The ordered theorem yields $u\geq\varepsilon\phi_1>0$ in $U$.
+This pointwise statement uses the continuous representative, supplied by
+elliptic regularity with bounded right side. On a disconnected domain,
+$f'(0)>\lambda_1(U)$ alone need not give positivity on every component;
+connectedness is the needed qualification here.
+\end{proof}
+
+\subsection*{7. Classical comparison for the ordered iterates}
+\begin{proof}[Solution]
+With $h(s)=f(s)+\lambda s$ nondecreasing, each difference satisfies
+$(-\Delta+\lambda)(u_{k+1}-u_k)=h(u_k)-h(u_{k-1})\geq0$
+once $u_k\geq u_{k-1}$. Its boundary data are zero, except at the
+first comparison where they are nonnegative by the subsolution trace.
+The maximum principle starts and propagates the induction.
+Likewise $(-\Delta+\lambda)(\overline u-u_{k+1})\geq
+h(\overline u)-h(u_k)\geq0$. Thus the entire chain lies between the
+barriers. The weak proof in \S9.3 is its positive-part counterpart.
+\end{proof}
+
+\subsection*{8. Critical bubbles and lost compactness}
+\begin{proof}[Solution]
+For $n\geq3$, $U(r)=(1+r^2)^{-(n-2)/2}$ has
+\[
+ \begin{split}
+ U'&=-(n-2)r(1+r^2)^{-n/2},\\
+ -U''-{n-1\over r}U'&=n(n-2)(1+r^2)^{-(n+2)/2}.
+ \end{split}
+\]
+Thus $c=n(n-2)$. Scaling gives
+$U_\lambda(x)=\lambda^{-(n-2)/2}U(x/\lambda)$ and the same equation.
+For $2^*=2n/(n-2)$, changing variables $x=\lambda y$ proves invariance
+of both $\|U_\lambda\|_{2^*}$ and $\|DU_\lambda\|_2$.
+These norms are finite: at infinity the respective integrands have radial
+orders $r^{-n-1}$ and $r^{1-n}$, and they are regular at the origin.
+As $\lambda\downarrow0$, $U_\lambda(x)\to0$ for $x\ne0$.
+Any strongly convergent $L^{2^*}$ subsequence would have limit zero
+(by a further a.e. convergent subsequence), contrary to its constant
+nonzero norm. This proves noncompactness along a specified sequence;
+constant norms alone would not prove it.
+\end{proof}
+\Needspace{42mm}
+\PDEAnnotation{集中需要极限证据}{尺度不变范数只给有界性。还须取 $\lambda\downarrow0$，证明几乎处处极限为零，再用强收敛保持范数得到矛盾。}
+
+\subsection*{9. Energy and a weighted parabolic Pohozaev identity}
+\begin{proof}[Solution]
+Assume sufficient rapid decay for every displayed integral and boundary
+flux, and $F'=f$, $F(0)=0$. Set $E=\int(|Du|^2/2-F(u))$.
+Differentiate, integrate by parts, and use $u_t=\Delta u+f(u)$:
+$E'=-\int u_t^2$. For the second moment $E_2$ of the same density,
+\[
+ E_2'=-\int |x|^2u_t^2-2\int u_t(x\cdot Du).
+\]
+The two cross terms are
+$\int\Delta u(x\cdot Du)=(n-2)\int|Du|^2/2$ and
+$\int f(u)(x\cdot Du)=-n\int F(u)$. Therefore
+\[
+ E_2'=-\int\bigl(|x|^2u_t^2-2nF(u)+(n-2)|Du|^2\bigr).
+\]
+The signs differ because the two densities have different scaling degrees.
+Weighted integrability is essential; finite unweighted energy alone does
+not license differentiating $E_2$.
+\end{proof}
+
+\subsection*{10. The normal cone and metric projection}
+\begin{proof}[Solution]
+For a nonempty closed convex $K\subset\R^n$, its indicator energy has
+\[
+ \partial I(x)=N_K(x)=\{v:v\cdot(y-x)\leq0\ (y\in K)\}
+ \quad(x\in K),
+\]
+and empty subdifferential outside $K$. Minimizing
+$I(x)+|x-z|^2/(2\lambda)$ gives $J_\lambda z=P_Kz$, independent
+of $\lambda$, and $A_\lambda z=(z-P_Kz)/\lambda$.
+The projection condition $z-P_Kz\in N_K(P_Kz)$ follows by varying
+along each segment to $y\in K$. At an interior point the normal cone
+is $\{0\}$; on a smooth boundary it is the outward normal ray.
+\end{proof}
+
+\subsection*{11. An irreversible flow}
+\begin{proof}[Solution]
+Take $H=\R$, $I(s)=|s|$. Then $\partial I(s)=\{\operatorname{sgn}s\}$
+for $s\ne0$ and $\partial I(0)=[-1,1]$. Directly,
+$S(t)s=\operatorname{sgn}(s)(|s|-t)_+$ solves the inclusion a.e.
+For example $S(2)1=S(2)2=0$ although $1\ne2$. This semigroup is
+contractive and continuous but its time maps need not be injective;
+a backward inverse flow cannot be defined on all states.
+\end{proof}
+
+\subsection*{12. A constrained sandpile as a normal-cone flow}
+\begin{proof}[Solution]
+Let $K=\{v\in L^2(\R^2):|Dv|\leq1\text{ a.e.}\}$, with the
+inequality understood in the weak-gradient sense. It is convex and closed
+in $L^2$: distributional limits preserve the gradient bound, by weak-*
+compactness of bounded gradients on compact subsets. Its indicator $I$
+is proper, convex and lower semicontinuous.
+Assume the proposed fields are regular and integrable enough that
+$f-u_t=-\operatorname{div}(aDu)\in L^2$ and integration by parts
+against $v-u$ is justified, for instance by compactly supported flux
+and approximation. For $v\in K$,
+\[
+ (f-u_t,v-u)=\int aDu\cdot(Dv-Du)\leq0.
+\]
+Indeed where $a>0$ one has $|Du|=1$, so
+$Du\cdot Dv-|Du|^2\leq|Dv|-1\leq0$; elsewhere the integrand is zero.
+This is precisely $f-u_t\in N_K(u)=\partial I(u)$.
+The calculation is conditional on the asserted flux and regularity;
+it does not construct $a$ from a solution of the abstract inclusion.
+\end{proof}
+
+\subsection*{13. Exponential decay of the speed}
+\begin{proof}[Solution]
+For a smooth solution with compatible boundary data, put $v=u_t$.
+Differentiating $u_t-\operatorname{div}DL(Du)=0$ gives
+$v_t-\operatorname{div}(D^2L(Du)Dv)=0$, with $v=0$ on the boundary.
+Testing by $v$, uniform convexity and Poincar\'e give
+\[
+ \tfrac12(\|v\|_2^2)'\leq-\theta\|Dv\|_2^2
+ \leq-\theta\lambda_1\|v\|_2^2.
+\]
+Hence $\|u_t(t)\|_2^2\leq\|u_t(0)\|_2^2e^{-2\theta\lambda_1t}$
+when the initial speed is finite. Otherwise the same estimate starts
+at any positive regular time, with a constant depending on that time.
+The uniform coefficient $\theta$ is the source of the decay rate.
+\end{proof}
+
+\subsection*{14. Total variation under nonlinear diffusion}
+\begin{proof}[Solution]
+Write $v=\phi(u)$ with $\phi'>0$. Under the source's nonvanishing-gradient
+assumption and sufficient integrability and vanishing flux at infinity,
+$Du/|Du|=Dv/|Dv|$. Thus
+\[
+ {d\over dt}\int|Du|=\int{Dv\over|Dv|}\cdot D\Delta v.
+\]
+Differentiating $|Dv|$ twice gives the pointwise Bochner identity
+\[
+ \Delta|Dv|={Dv\over|Dv|}\cdot D\Delta v
+ +{|D^2v|^2\over|Dv|}-{|D^2vDv|^2\over|Dv|^3}.
+\]
+Its Laplacian integrates to zero under the stated flux hypothesis, so
+\[
+ {d\over dt}\int|Du|
+ =-\int\left({|D^2v|^2\over|Dv|}
+       -{|D^2vDv|^2\over|Dv|^3}\right)\leq0.
+\]
+The inequality uses $|D^2vDv|\leq|D^2v||Dv|$.
+This is the requested smooth calculation where denominators are defined.
+At critical points one needs a regularization and a limiting argument;
+no general BV contraction theorem is proved here, and nonvanishing and
+whole-space decay should not be silently imposed on arbitrary data.
+\end{proof}

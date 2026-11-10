@@ -1,13 +1,301 @@
-% Evans second edition, section 10.3.
-% English source: printed p. 554; PDF page 571 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
-\section{Control Theory, Dynamic Programming}
+% Evans 10.3: printed pp.554--566; English PDF pp.571--583.
+% Chinese section start: printed p.391 / scan p.409.
+\section[Control Theory, Dynamic Programming]{Control Theory,\texorpdfstring{\\}{ }Dynamic Programming}
 \label{sec:10-3}
+\subsection{Measurable controls and deterministic responses}
+Let $A\subset\R^m$ be nonempty and compact. Suppose
+$f:\R^n\times A\to\R^n$ and $r:\R^n\times A\to\R$ are continuous,
+and uniformly in $a\in A$ satisfy
+\[
+ \begin{aligned}
+ |f(x,a)|&\leq M,& |f(x,a)-f(y,a)|&\leq L_f|x-y|,\\
+ |r(x,a)|&\leq R,& |r(x,a)-r(y,a)|&\leq L_r|x-y|.
+ \end{aligned}
+\]
+Let $g$ be bounded and $G$-Lipschitz. Fix a horizon $T>0$.
+An admissible control $\alpha:[t,T]\to A$ is measurable. Its state is
+an absolutely continuous solution of
+\begin{equation}\label{eq:10-control-ode}
+ X'(s)=f(X(s),\alpha(s))\text{ a.e.},\qquad X(t)=x.
+\end{equation}
+\Needspace{50mm}
+\begin{lemma}[Response estimates; details for source \S10.3.1]
+Every admissible control has a unique response, and
+\[
+ |X(s)-x|\leq M(s-t),\qquad
+ |X^{x,\alpha}(s)-X^{y,\alpha}(s)|\leq e^{L_f(s-t)}|x-y|.
+\]
+\end{lemma}
+\begin{expandedproof}[the integral equation accepts measurable controls]
+For fixed $\alpha$ use the map
+$Z\mapsto x+\int_t^s f(Z(q),\alpha(q))dq$ on continuous paths.
+The integrand is measurable and bounded; the map returns continuous
+paths and is a contraction on intervals with $L_fh<1$.
+Iterating these intervals gives an absolutely continuous solution on
+$[t,T]$. Its displacement bound follows by integrating $|f|\leq M$.
+For two responses with the same control, subtract the integral equations
+and apply Gronwall. This gives the second estimate and uniqueness.
+No differentiability in time of the control is required.
+\end{expandedproof}
+The cost and value are
+\begin{equation}\label{eq:10-value}
+ \begin{split}
+ J_{x,t}(\alpha)&=\int_t^T r(X(s),\alpha(s))ds+g(X(T)),\\
+ V(x,t)&=\inf_\alpha J_{x,t}(\alpha).
+ \end{split}
+\end{equation}
+An infimum does not itself assert existence of an optimal control.
+The following arguments use controls within an arbitrarily prescribed
+positive error of the infimum.
+\Needspace{42mm}
+\PDEAnnotation{紧控制集保证什么}{连续性与紧性保证 Hamiltonian 的逐点最小值能取到。但这并不自动给出整个时间区间的最优控制，也不自动保证反馈场的闭环 ODE 可解；动态规划证明只使用近似最优控制。}
 
-\PDEPending
+\Needspace{70mm}
+\subsection{The dynamic programming principle}
+\Needspace{55mm}
+\begin{theorem}[DPP; source \S10.3.2, Theorem 1]
+For $0<h\leq T-t$,
+\begin{equation}\label{eq:10-dpp}
+ V(x,t)=\inf_{\alpha|_{[t,t+h]}}
+ \left\{\int_t^{t+h}r(X(s),\alpha(s))ds+V(X(t+h),t+h)\right\}.
+\end{equation}
+\end{theorem}
+\begin{expandedproof}[restriction and concatenation give opposite bounds]
+Call the right side $W$. Any full control has a prefix up to $t+h$
+and a continuation thereafter. Its continuation cost is at least the value
+at its reached state. Thus every full cost is at least $W$, giving $V\geq W$.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+Conversely, fix any prefix, with reached state $z$. For $\delta>0$
+choose a continuation whose cost is at most $V(z,t+h)+\delta$.
+Concatenate the two measurable controls. Uniqueness of the state equation
+makes its trajectory exactly the concatenation of their responses.
+Therefore $V(x,t)$ is at most the displayed prefix cost plus $\delta$.
+Take the infimum over prefixes and let $\delta\downarrow0$, obtaining
+$V\leq W$. A continuation is chosen for a single reached state at a time;
+no measurable selection depending simultaneously on every state is needed.
+\end{expandedproof}
+\PDEBodyDiagram{10.3}{A prefix and its continuation form one admissible control.}
+{Restricting a full control gives a continuation cost at least $V(z,t+h)$. Conversely, for a fixed prefix reaching $z$, choose one $\delta$-optimal continuation and concatenate it. The two comparisons prove the equality in DPP. The curves are schematic state trajectories, not a claim of optimality for the drawn paths.}
+{ch10-dpp}
+\Needspace{50mm}
+\begin{lemma}[Regularity of the value; source \S10.3.3 lemma]
+The value is bounded by $RT+\|g\|_\infty$. Uniformly in $t$ it is
+$K_T$-Lipschitz in $x$, where
+\[
+ K_T=Ge^{L_fT}+L_r\int_0^T e^{L_fs}ds.
+\]
+It is $(R+K_TM)$-Lipschitz in time and $V(x,T)=g(x)$.
+\end{lemma}
+\begin{expandedproof}[compare identical controls before taking infima]
+For the same control started at $x,y$, the response estimate bounds the
+cost difference by
+\[
+ \left(G e^{L_f(T-t)}+L_r\int_0^{T-t}e^{L_fs}ds\right)|x-y|.
+\]
+This holds for every control, so taking infima yields the same bound
+for $|V(x,t)-V(y,t)|$. In DPP every reached state satisfies
+$|X(t+h)-x|\leq Mh$ and every running integral has absolute value
+at most $Rh$. The expression inside its infimum is therefore between
+$V(x,t+h)-(R+K_TM)h$ and $V(x,t+h)+(R+K_TM)h$.
+Taking its infimum gives the time estimate without assuming a smooth
+value function or an optimal control. At $t=T$ the running interval is
+empty and $X(T)=x$, so every control gives cost $g(x)$.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{先用同一控制比较}{估计两个初值的价值差时，对它们使用相同控制，先用 Gronwall 控制轨道差，再对代价取下确界。直接把两个未知最优控制相减没有这样的稳定性依据。}
+
+\Needspace{70mm}
+\subsection{The terminal HJB equation and its time orientation}
+Define the control Hamiltonian
+\begin{equation}\label{eq:10-control-H}
+ H_c(p,x)=\min_{a\in A}\{f(x,a)\cdot p+r(x,a)\}.
+\end{equation}
+It is concave in $p$, since it is a minimum of affine functions, and
+\[
+ \begin{split}
+ |H_c(p,x)-H_c(q,x)|&\leq M|p-q|,\\
+ |H_c(p,x)-H_c(p,y)|&\leq(L_f|p|+L_r)|x-y|.
+ \end{split}
+\]
+For a terminal problem written as $V_t+H_c(DV,x)=0$, the source
+uses the following convention: an upper contact has residual
+$\phi_t+H_c(D\phi,x)\geq0$, and a lower contact has residual at most zero.
+Equivalently this is the usual viscosity convention applied to
+$-V_t-H_c(DV,x)=0$.
+\Needspace{50mm}
+\begin{lemma}[Time reversal; source remark after Theorem 2]
+Set $w(x,\tau)=V(x,T-\tau)$. Then the terminal convention for $V$
+is exactly the initial-value convention for
+\[
+ w_\tau+K(Dw,x)=0,\qquad K(p,x)=-H_c(p,x),\qquad w(x,0)=g(x).
+\]
+In particular $K$ is convex in $p$ and satisfies \eqref{eq:10-H-lip}.
+\end{lemma}
+\begin{expandedproof}[transform the test as well as the equation]
+If $w-\psi$ has an upper contact at $(x_0,\tau_0)$, then
+$V-\phi$, $\phi(x,t)=\psi(x,T-t)$, has an upper contact at
+$(x_0,T-\tau_0)$. Now $\phi_t=-\psi_\tau$, $D\phi=D\psi$.
+The terminal inequality $-\psi_\tau+H_c(D\psi,x)\geq0$ is precisely
+$\psi_\tau-H_c(D\psi,x)\leq0$. Lower contacts give the other direction.
+The implication is reversible. Negating the minimum of affine functions
+makes a maximum of affine functions, proving convexity of $K$.
+\end{expandedproof}
+\PDEMarginDiagram{10.M}{时间方向与测试符号}
+{图中残差均按方程所写的时间变量计算。令 $\tau=T-t$ 后，$\partial_t=-\partial_\tau$，Hamiltonian 同时变为 $-H_c$；不能只改变时间端点而保留所有符号。}
+{ch10-time-margin}
+\Needspace{55mm}
+\begin{theorem}[Value function solves HJB; source Theorem 2]
+The value in \eqref{eq:10-value} is the unique BUC solution of
+$V_t+H_c(DV,x)=0$, $V(x,T)=g(x)$, with the terminal convention just
+specified. Equivalently its time reversal solves the corresponding
+initial-value problem with Hamiltonian $K=-H_c$.
+\end{theorem}
+\begin{expandedproof}[all constant controls versus an $h^2$-optimal prefix]
+Normalize an upper test by $V(x_0,t_0)=\phi(x_0,t_0)$.
+For any fixed $a\in A$, use the constant control on $[t_0,t_0+h]$.
+The displacement bound keeps its path in the contact neighborhood when
+$h$ is small, independently of $a$. DPP and upper touching give
+\[
+ \begin{split}
+ 0&\leq\int_{t_0}^{t_0+h}r(X(s),a)ds
+              +V(X(t_0+h),t_0+h)-V(x_0,t_0)\\
+ &\leq\int_{t_0}^{t_0+h}
+       \bigl(\phi_t+f(X(s),a)\cdot D\phi+r(X(s),a)\bigr)ds.
+ \end{split}
+\]
+Divide by $h$ and let $h\downarrow0$. The limit inequality holds for
+every $a$, hence
+$\phi_t(x_0,t_0)+H_c(D\phi(x_0,t_0),x_0)\geq0$.
+
+At a normalized lower contact choose a prefix within $h^2$ of the
+DPP infimum. The lower touching inequality now yields
+\[
+ h^2\geq\int_{t_0}^{t_0+h}
+ \bigl(\phi_t+f(X(s),\alpha(s))\cdot D\phi+r(X(s),\alpha(s))\bigr)ds.
+\]
+Continuity in $(x,t,a)$ on a compact neighborhood times $A$ makes
+replacement of $(X(s),s)$ by $(x_0,t_0)$ have a uniform $o(h)$ error.
+The resulting integrand is bounded below by
+$\phi_t(x_0,t_0)+H_c(D\phi(x_0,t_0),x_0)$ for every control value.
+After division by $h$ and passage to the limit we obtain a residual
+at most zero. The error must be $o(h)$: a fixed $\delta$-optimal control
+would leave the uncontrolled quotient $\delta/h$.
+
+The value is BUC and takes the terminal data by the regularity lemma.
+Time reversal converts it to an initial-value solution for $K$, whose
+structural estimates allow comparison in \S10.2. This proves uniqueness.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{近似最优误差要随步长缩小}{在下接触证明中取 $h^2$-最优前缀，再除以 $h$，误差才趋零。上接触使用每个常值控制；下接触使用近似最优控制，二者的量词不同。}
+
+\Needspace{70mm}
+\subsection{Verification and the limits of feedback synthesis}
+\Needspace{55mm}
+\begin{theorem}[Smooth verification; editorial completion of source discussion]
+Suppose $v\in C^1(\R^n\times[0,T])$ satisfies
+$v_t+H_c(Dv,x)=0$ and $v(x,T)=g(x)$. Then $v(x,t)\leq J_{x,t}(\alpha)$
+for every admissible control. If an admissible $\alpha_*$ with response
+$X_*$ attains the Hamiltonian minimum along its path a.e., then its cost
+equals $v(x,t)$ and it is optimal; in particular $v=V$ at that starting point.
+\end{theorem}
+\begin{expandedproof}[integrate the nonnegative verification residual]
+The chain rule for an absolutely continuous path gives
+\[
+ {d\over ds}v(X(s),s)+r(X(s),\alpha(s))
+ =v_t+f(X(s),\alpha(s))\cdot Dv+r(X(s),\alpha(s))\geq0
+\]
+a.e. Integrate to $T$ and use the terminal value $g$ to obtain
+$J_{x,t}(\alpha)\geq v(x,t)$. If the minimum is attained along $X_*$,
+the residual vanishes a.e. and equality holds. All evaluations are along
+a bounded path on a finite interval, where the derivatives of $v$ are bounded.
+This verifies an admissible path; it does not establish solvability of a
+closed-loop ODE for an arbitrary minimizing feedback field.
+\end{expandedproof}
+The pointwise prescription
+$a_*(x,t)\in\operatorname*{argmin}_{a\in A}\{f(x,a)\cdot DV(x,t)+r(x,a)\}$
+is conditional on the gradient and on an admissible resulting trajectory.
+At nonsmooth points $DV$ may not exist. Even with a pointwise minimizer,
+measurability and closed-loop existence require additional arguments.
+\Needspace{42mm}
+\PDEAnnotation{验证定理与控制构造}{验证定理说：若已有合适的最小化轨道，则它最优。它没有证明任意逐点选出的反馈都可积分成轨道；尤其在价值函数不可微处，直接写 $DV$ 没有定义。}
+
+\Needspace{70mm}
+\subsection{Hopf--Lax: compact minimizers and viscosity inequalities}
+Return now to an initial-value Hamiltonian $H:\R^n\to\R$, finite,
+convex and superlinear, with $g$ bounded and $G$-Lipschitz. Let
+\[
+ L(q)=\sup_p\{p\cdot q-H(p)\},\qquad
+ Q_tg(x)=\min_y\left\{tL\left({x-y\over t}\right)+g(y)\right\}.
+\]
+Convex duality from \S3.3 gives finite continuous convex superlinear $L$
+and $H(p)=\sup_q(p\cdot q-L(q))$. In particular all displayed minima
+exist by coercivity. These assumptions include $H(p)=|p|^2/2$, which
+is outside the global momentum Lipschitz hypothesis of \S10.2.
+\Needspace{55mm}
+\begin{lemma}[Semigroup, speed bound, and regularity; details for source Theorem 3]
+One has $Q_hQ_tg=Q_{h+t}g$. Each $Q_tg$ is $G$-Lipschitz in space.
+All minimizing velocities $q=(x-y)/t$ lie in a ball independent of $x,t$.
+With $Q_0g=g$, the function $U(x,t)=Q_tg(x)$ is BUC on every finite slab
+and is Lipschitz in time.
+\end{lemma}
+\begin{expandedproof}[Jensen and the competitor with zero velocity]
+For a two-stage path from $y$ through $z$ to $x$, Jensen gives
+\[
+ tL\left({z-y\over t}\right)+hL\left({x-z\over h}\right)
+ \geq(t+h)L\left({x-y\over t+h}\right).
+\]
+Equality is obtained by $z=(tx+hy)/(t+h)$, so infimizing proves the
+semigroup identity. Translating $x$ and $y$ by the same increment
+changes only $g(y)$, proving the spatial Lipschitz estimate.
+
+At a minimizer compare with $y=x$. Since $g$ is $G$-Lipschitz,
+$L(q)-G|q|\leq L(0)$. Superlinearity makes this sublevel bounded,
+say $|q|\leq R_G$. The bound is uniform even as $t\downarrow0$.
+For any $G$-Lipschitz $v$, set
+$m_G=\inf_q(L(q)-G|q|)>-\infty$. Then
+\[
+ v(x)+hm_G\leq Q_hv(x)\leq v(x)+hL(0).
+\]
+Together with the semigroup this gives a uniform time Lipschitz constant
+$\max\{|m_G|,|L(0)|\}$ and convergence to $g$ at $t=0$.
+The same estimate with $v=g$ bounds $U$ on finite slabs.
+\end{expandedproof}
+\Needspace{55mm}
+\begin{theorem}[Hopf--Lax viscosity solution; source \S10.3.4, Theorem 3]
+Under the preceding assumptions $U(x,t)=Q_tg(x)$ is the unique BUC
+viscosity solution of $U_t+H(DU)=0$, $U(x,0)=g(x)$.
+\end{theorem}
+\begin{expandedproof}[bounded minimizing velocities close the lower test]
+At an upper contact at $(x,t)$, choose any fixed velocity $q$ and
+$0<h<t$. The semigroup gives
+$U(x,t)\leq hL(q)+U(x-hq,t-h)$.
+Upper touching then gives
+$\phi(x,t)-\phi(x-hq,t-h)\leq hL(q)$.
+Divide by $h$ and let $h\downarrow0$ to get
+$\phi_t+D\phi\cdot q-L(q)\leq0$ for every $q$.
+Taking the supremum in $q$ yields $\phi_t+H(D\phi)\leq0$.
+
+At a lower contact, let $q_h$ minimize the short-step semigroup formula,
+so $U(x,t)=hL(q_h)+U(x-hq_h,t-h)$. The spatial Lipschitz estimate
+for $U(\cdot,t-h)$ bounds $|q_h|\leq R_G$ by the preceding lemma.
+Thus the earlier point stays in the contact neighborhood and Taylor's
+first-order remainder is $o(h)$ uniformly in $q_h$. Lower touching gives
+\[
+ hL(q_h)\leq\phi(x,t)-\phi(x-hq_h,t-h)
+ =h(\phi_t+D\phi\cdot q_h)+o(h).
+\]
+Since $D\phi\cdot q_h-L(q_h)\leq H(D\phi)$,
+$\phi_t+H(D\phi)\geq-o(1)$, which proves the lower-test inequality.
+Initial data and BUC regularity were proved in the lemma.
+
+For uniqueness compare $U$ with any other BUC solution in both directions.
+The extension at the end of \S10.2 applies because $U$ is uniformly
+spatially Lipschitz and $H$ is continuous and independent of $x$.
+This explicitly supplies the comparison step without assuming a global
+Lipschitz bound for the superlinear $H$.
+\end{expandedproof}
+\PDEBodyDiagram{10.4}{Two minimizing origins can create a viscosity corner.}
+{Take $H(p)=p^2/2$, $t=1/2$, and $g(y)=\min\{|y-1|,|y+1|,2\}$. The exact value is $\min\{h_t(|x-1|),h_t(|x+1|),2\}$, where $h_t(d)=d^2/(2t)$ for $d\leq t$ and $d-t/2$ otherwise. At $x=0$ the two minimizing origins are $y=\pm1/2$, both of cost $3/4$. The left panel shows $g$ and its value; the right panel shows the minimized cost at $x=0$.}
+{ch10-hopf-lax}
+\Needspace{42mm}
+\PDEAnnotation{最小化速度为何有界}{由与 $y=x$ 比较得 $L(q)-G|q|\leq L(0)$。超线性把 $q$ 限在固定球内，因此短步最小化点满足 $|x-y|=O(h)$，下接触证明中的 Taylor 余项才一致为 $o(h)$。}

@@ -1,0 +1,17 @@
+% Original editorial TikZ proof diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=1cm,y=1cm]
+ \node[pde box,text width=4.15cm] (a) at (2.3,2.6)
+ {$u_k\in\mathcal A$, $I[u_k]\to\inf I$\\one finite competitor};
+ \node[pde box,text width=4.15cm] (b) at (8.1,2.6)
+ {$\|u_k\|_{W^{1,q}}\leq C$\\coercivity + Poincare};
+ \node[pde box,text width=4.15cm] (c) at (8.1,.05)
+ {$u_k\rightharpoonup u\in\mathcal A$\\reflexivity + weak closure};
+ \node[pde box,text width=4.15cm] (d) at (2.3,.05)
+ {$I[u]\leq\liminf I[u_k]=\inf I$\\lower semicontinuity};
+ \draw[pde axis] (a)--(b);
+ \draw[pde axis] (b)--(c);
+ \draw[pde axis] (c)--(d);
+ \node[pde tiny] at (5.2,3.4) {boundedness};
+ \node[pde tiny] at (9.35,1.35) {weak subsequence};
+ \node[pde tiny] at (5.2,-.8) {energy at the limit};
+\end{tikzpicture}

@@ -1,0 +1,19 @@
+\begin{tikzpicture}[pde diagram]
+\node[pde box,text width=17mm] (a) {$z_0=u_l$};
+\node[pde box,text width=17mm,right=12mm of a] (b) {$z_1$};
+\node[pde box,text width=17mm,right=12mm of b] (c) {$\cdots$};
+\node[pde box,text width=17mm,right=12mm of c] (d) {$z_m=u_r$};
+\draw[pde axis] (a)--node[above,pde tiny] {$T_1(a_1)$}(b);
+\draw[pde axis] (b)--node[above,pde tiny] {$T_2(a_2)$}(c);
+\draw[pde axis] (c)--node[above,pde tiny] {$T_m(a_m)$}(d);
+\node[pde tiny,below=6mm of $(a.south)!.5!(d.south)$] (j)
+ {$D\mathcal E(0)=(r_1,\ldots,r_m)$ invertible};
+\draw[pde axis] (-.5,-2.1)--(11.2,-2.1) node[right] {$x/t$};
+\foreach \x/\label in {1/1,4/2,9/m} {
+ \fill[LumenAccent!15] (\x-.6,-2.3) rectangle (\x+.6,-1.9);
+ \draw[pde curve] (\x-.6,-2.3) rectangle (\x+.6,-1.9);
+ \node[pde tiny,below] at (\x,-2.35) {$\lambda_{\label}(u_l)$};
+}
+\node[pde tiny] at (6.6,-2.1) {$\cdots$};
+\node[pde tiny] at (5.3,-3.1) {small waves stay in disjoint speed intervals};
+\end{tikzpicture}

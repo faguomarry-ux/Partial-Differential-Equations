@@ -1,13 +1,164 @@
-% Evans second edition, section 11.1.
-% English source: printed p. 571; PDF page 588 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 11.1, printed pp.571--582; English PDF pp.588--599.
+% Chinese section start: printed p.404 / scan p.422.
 \section{Introduction}
 \label{sec:11-1}
+\subsection{Conserved variables and the weak formulation}
+Let $\Omega\subset\R^m$ be an open state domain and let
+$F\in C^3(\Omega;\R^m)$. We study
+\begin{equation}\label{eq:11-system}
+ u_t+F(u)_x=0,\qquad u(x,0)=g(x),\quad x\in\R.
+\end{equation}
+For a smooth solution, integration over $[a,b]$ gives
+$\frac d{dt}\int_a^b u\,dx=F(u(a,t))-F(u(b,t))$.
+This is a vector balance: each component is a conserved density.
+In several space dimensions the flux is an $m\times n$ matrix
+and its divergence is taken row by row.
+\PDEAnnotation{守恒变量的选择}{浅水取 $u=(h,q)$、$q=hv$。
+速度 $v$ 是原始变量而不是动量密度。光滑时可作变量替换，
+跨激波时必须回到原守恒律的跳跃条件。}
 
-\PDEPending
+\begin{definition}[Integral solution; source \S11.1.1]
+A bounded measurable $u$ with essential range in a compact subset of
+$\Omega$ is an integral solution if, for every
+$\varphi\in C_c^\infty(\R\times[0,\infty);\R^m)$,
+\begin{equation}\label{eq:11-weak}
+ \int_0^\infty\!\int_{\R}
+ [u\cdot\varphi_t+F(u)\cdot\varphi_x]\,dx\,dt
+ +\int_{\R} g\cdot\varphi(x,0)\,dx=0.
+\end{equation}
+A strong $L^1_{\rm loc}$ initial trace, when required, is an
+additional property beyond this distributional initial condition.
+\end{definition}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\begin{theorem}[Jump condition; source \S11.1.1, equation (20)]
+Suppose $u$ is piecewise $C^1$ across $x=s(t)$, $s\in C^1$, with
+one-sided traces, and solves the PDE on each side. Put
+$[u]=u_r-u_l$, $[F]=F(u_r)-F(u_l)$. The interior weak equation
+holds if and only if
+\begin{equation}\label{eq:11-rh}
+ [F]=s'(t)[u].
+\end{equation}
+Together with the correct initial trace this implies \eqref{eq:11-weak}.
+\end{theorem}
+\begin{expandedproof}[editorial distribution calculation]
+Integrate separately on $x<s(t)$ and $x>s(t)$ on a compact time strip.
+The singular part of $u_t$ is $-s'[u]\delta_{x=s(t)}$; that of
+$F(u)_x$ is $[F]\delta_{x=s(t)}$. All regular terms vanish by the
+classical equations. Arbitrary vector tests on the curve force every
+component of $[F]-s'[u]$ to vanish. Integrating from $t=\delta$
+and sending $\delta\downarrow0$ supplies the initial term if the
+trace converges in $L^1_{\rm loc}$. Values assigned on the curve
+itself do not change any integral.
+\end{expandedproof}
+\PDEAnnotation{同一个激波速度}{若某分量 $[u^i]=0$，则须有
+$[F^i]=0$；不能在该分量中作除法。所有非零分量给出的
+$[F^i]/[u^i]$ 必须相同，故系统中并非任意两状态都能接激波。}
+
+\subsection{Physical models and characteristic speeds}
+For the elastic $p$-system use strain $a$ and velocity $b$:
+\[
+ a_t-b_x=0,\qquad b_t-p(a)_x=0,\qquad
+ A=DF=\begin{pmatrix}0&-1\\-p'(a)&0\end{pmatrix}.
+\]
+This follows from $a=y_x$, $b=y_t$ for
+$y_{tt}-(p(y_x))_x=0$. If $p'>0$, the speeds are
+$\lambda_1=-c$, $\lambda_2=c$, $c=\sqrt{p'}$, with right vectors
+$(1,c)$ and $(1,-c)$.
+\PDEAnnotation{本章的应力符号}{这里 $p(a)$ 随应变增加，故
+$p'>0$。气体的 Lagrange 比容形式常采用另一种符号约定，
+不能把那里的压强导数符号直接搬来。}
+For shallow water with gravity scaled to one,
+\begin{equation}\label{eq:11-sw}
+ h_t+q_x=0,\qquad q_t+(q^2/h+h^2/2)_x=0,\qquad h>0.
+\end{equation}
+The speeds are $v\mp\sqrt h$, $v=q/h$. The strict gap
+$2\sqrt h$ closes at vacuum.
+For Euler, the conserved variables are $(\rho,\rho v,\rho E)$,
+$E=e+v^2/2$, and the flux is
+$(\rho v,\rho v^2+p,(\rho E+p)v)$. On $\rho>0$, smooth solutions obey
+\[
+ \rho_t+v\rho_x+\rho v_x=0,\quad
+ v_t+vv_x+\rho^{-1}p_x=0,\quad
+ e_t+ve_x+(p/\rho)v_x=0.
+\]
+Subtracting the kinetic-energy balance from total energy gives the
+last equation. Their matrix is $vI+C$, where
+\[
+ C=\begin{pmatrix}0&\rho&0\\p_\rho/\rho&0&p_e/\rho\\
+ 0&p/\rho&0\end{pmatrix},\qquad c^2=p_\rho+pp_e/\rho^2.
+\]
+Its characteristic polynomial is $\det(\mu I-C)=\mu(\mu^2-c^2)$.
+Thus $c^2>0$ gives speeds $v-c,v,v+c$. Evans's assumptions
+$p,p_\rho,p_e>0$ are sufficient; division by $\rho$ requires positivity.
+
+\subsection{Strict hyperbolicity and smooth eigenframes}
+\begin{definition}[Source \S11.1.2]
+The system $u_t+B(u)u_x=0$ is strictly hyperbolic if $B(z)$ has
+real distinct eigenvalues $\lambda_1<\cdots<\lambda_m$.
+Write $Br_k=\lambda_k r_k$, $l_kB=\lambda_k l_k$ and choose
+$l_j\cdot r_k=\delta_{jk}$. Right eigenvectors are unit when discussing
+arc length; the dual left eigenvectors need not also be unit.
+\end{definition}
+For $j\ne k$, $(\lambda_j-\lambda_k)l_j\cdot r_k=0$.
+The right eigenvectors form a basis, so $l_k\cdot r_k\ne0$ before
+normalization. A smooth inviscid traveling wave $V(x-\sigma t)$
+satisfies $(B(V)-\sigma I)V'=0$. Where $V'\ne0$, its speed must be
+an eigenvalue along its path. A viscous profile instead uses the
+scaled variable $(x-\sigma t)/\varepsilon$.
+
+\begin{theorem}[Coordinate invariance; source \S11.1.2, Theorem 1]
+Let $H$ be a $C^2$ diffeomorphism of state domains. For smooth $u$,
+$\widetilde u=H(u)$ satisfies a system with matrix
+\[
+ \widetilde B(H(z))=DH(z)B(z)DH(z)^{-1}.
+\]
+Strict hyperbolicity and genuine nonlinearity are preserved.
+Conservation form need not be preserved.
+\end{theorem}
+\begin{expandedproof}[chain rule and similarity]
+Multiply the PDE by $DH(u)$ and use $\widetilde u_x=DH(u)u_x$.
+Similarity preserves eigenvalues. Right vectors become $DH r_k$;
+left vectors become $l_k DH^{-1}$. Moreover
+$D_{\widetilde z}\widetilde\lambda_k\cdot(DH r_k)
+=D_z\lambda_k\cdot r_k$. Rescaling a vector by a nonzero factor
+preserves whether this expression is zero. This proof uses a
+classical chain rule. Through a jump, the corresponding product of
+a discontinuous coefficient and a measure is not justified.
+\end{expandedproof}
+
+\PDEAnnotation{局部与全局特征向量}{隐函数定理先给局部选择。
+一般有孔状态域的特征直线丛可能无法连续定向；本章波曲线和
+Riemann 拼接只需要一个小邻域。}
+\begin{theorem}[Eigenframe dependence; source \S11.1.2, Theorem 2]
+A smooth strictly hyperbolic matrix field has smooth ordered
+ eigenvalues and local smooth eigenframes. On state domain $\R^m$,
+unit eigenvectors can be chosen globally and smoothly. On a general
+open state domain the eigenframe assertion made here is local.
+\end{theorem}
+\begin{expandedproof}[including the global orientation step]
+At a fixed state take $Br_0=\lambda_0r_0$, $|r_0|=1$.
+Apply the implicit function theorem to
+$(B(z)r-\lambda r,(|r|^2-1)/2)$. The kernel of its derivative in
+$(r,\lambda)$ satisfies
+$(B-\lambda_0I)h-\mu r_0=0$, $r_0\cdot h=0$.
+Multiplication by $l_0$ gives $\mu=0$; simplicity gives $h=cr_0$,
+then $h=0$. The square derivative is invertible. Ordered eigenvalues
+agree on overlaps, so they are global.
+
+For global eigenvectors on $\R^m$, form the smooth projection
+\[
+ P_k(z)=\prod_{j\ne k}
+ \frac{B(z)-\lambda_j(z)I}{\lambda_k(z)-\lambda_j(z)}.
+\]
+Put $P(s)=P_k(sz)$ and solve
+$R_s=[P_s,P]R$, $R(0)=r_k(0)$, $0\le s\le1$.
+Differentiating $P^2=P$ gives $PP_sP=0$ and
+$[[P_s,P],P]=P_s$. If $U_s=[P_s,P]U$, $U(0)=I$, then
+$P(s)U(s)=U(s)P(0)$: subtract the two sides, differentiate, and use
+this commutator identity and uniqueness for a homogeneous linear ODE.
+Hence $R$ remains in the range of $P$, and never vanishes since
+$U$ is invertible. Smooth dependence on $z$ and normalization at
+$s=1$ give a global unit vector. Apply the same construction to the
+transpose and rescale the left vectors to be dual. This radial
+construction uses the contractibility of $\R^m$.
+\end{expandedproof}

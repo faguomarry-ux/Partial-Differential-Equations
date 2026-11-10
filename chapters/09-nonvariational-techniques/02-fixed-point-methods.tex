@@ -1,13 +1,145 @@
-% Evans second edition, section 9.2.
-% English source: printed p. 501; PDF page 518 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 9.2: printed pp.501--510; English PDF pp.518--527.
+% Chinese section starts: printed p.354 / scan p.372.
 \section{Fixed Point Methods}
 \label{sec:9-2}
+\Needspace{40mm}
+\subsection{Banach iteration and reaction--diffusion}
+\Needspace{50mm}
+\begin{theorem}[Banach; source \S9.2.1, Theorem 1]
+If $X$ is Banach and $A:X\to X$ satisfies
+$\|Au-Av\|\leq q\|u-v\|$ for $0\leq q<1$, it has a unique fixed point.
+For $u_{k+1}=Au_k$,
+$\|u_k-u\|\leq q^k\|u_1-u_0\|/(1-q)$.
+\end{theorem}
+\begin{expandedproof}[completeness and an error estimate]
+The successive differences are at most $q^k\|u_1-u_0\|$. Summing from
+$k$ to $l-1$ shows that $(u_k)$ is Cauchy with the stated tail bound.
+Completeness gives $u$, continuity gives $Au=u$, and two fixed points
+satisfy $\|u-v\|\leq q\|u-v\|$, hence coincide.
+The same proof works on any nonempty closed invariant subset of $X$.
+\end{expandedproof}
+Let $F:\R^m\to\R^m$ be globally Lipschitz with constant $L$.
+Consider the zero-boundary system $u_t-\Delta u=F(u)$ with initial
+$g\in L^2(U;\R^m)$. A weak solution belongs to
+\[
+ u\in L^2(0,T;H^1_0),\qquad u_t\in L^2(0,T;H^{-1}),
+\]
+obeys $\langle u_t,v\rangle+\int Du:Dv=\int F(u)\cdot v$ a.e.,
+and has $u(0)=g$ in $L^2$. The time-continuity theorem gives
+$u\in C([0,T];L^2)$. The source starts with $g\in H^1_0$;
+the $L^2$ formulation below makes restart times unambiguous.
+\Needspace{50mm}
+\begin{theorem}[Reaction--diffusion; source Theorem 2]
+There is a unique weak solution on every finite time interval. For two
+initial data its $L^2$ distance at time $t$ is at most
+$e^{Lt}\|g-\tilde g\|_2$.
+\end{theorem}
+\begin{expandedproof}[short intervals with a uniform length]
+On $X=C([0,h];L^2)$ let $Av=w$ solve the linear heat equation with
+forcing $F(v)$ and initial $g$. The linear theory of \S7.1 applies since
+$\|F(v)\|_2\leq L\|v\|_2+|F(0)||U|^{1/2}$.
+For $z=Av-A\tilde v$, zero initial data and the weak energy identity give
+\[
+ \tfrac12\frac d{dt}\|z\|_2^2+\|Dz\|_2^2
+ \leq L C_P\|v-\tilde v\|_2\|Dz\|_2
+ \leq\tfrac12\|Dz\|_2^2+\tfrac12 L^2C_P^2\|v-\tilde v\|_2^2.
+\]
+Thus $\|Av-A\tilde v\|_X\leq LC_P\sqrt h\|v-\tilde v\|_X$.
+Choose $h$ so this factor is less than one. It depends on $L,U$, not on
+$g$. Banach gives a solution on $[0,h]$; its endpoint is in $L^2$, so
+repeat the same argument on $[h,2h]$ and finitely many subsequent intervals.
+The matching $L^2$ traces eliminate time-interface jumps in the weak
+formulation. The finite sum of the interval energy norms remains finite.
 
-\PDEPending
+For two solutions the difference satisfies
+$\frac12(\|z\|_2^2)' +\|Dz\|_2^2\leq L\|z\|_2^2$.
+The Hilbert-triple chain rule justifies testing by $z$; Gronwall gives
+continuous dependence and uniqueness.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{全局 Lipschitz 的作用}{短时间长度只依赖统一的 $L$，所以有限次拼接覆盖任意有限 $T$。对 $F(u)=u^2$，局部 Lipschitz 常数随振幅增长，不能用同一论证排除爆破。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{70mm}
+\subsection{Compact maps: Schauder and Schaefer}
+\Needspace{50mm}
+\begin{theorem}[Schauder; source \S9.2.2, Theorem 3]
+If $K\subset X$ is nonempty, compact and convex and $A:K\to K$ is
+continuous, $A$ has a fixed point.
+\end{theorem}
+\begin{expandedproof}[finite-dimensional approximation]
+Cover $K$ by finitely many balls $B(x_i,\varepsilon)$ with $x_i\in K$.
+Set $\rho_i(x)=(\varepsilon-\|x-x_i\|)_+$ and
+\[
+ P_\varepsilon x=\frac{\sum_i\rho_i(x)x_i}{\sum_i\rho_i(x)}.
+\]
+The denominator is positive, $P_\varepsilon$ is continuous, its range
+lies in $K_\varepsilon=\operatorname{conv}\{x_i\}\subset K$, and
+$\|P_\varepsilon x-x\|<\varepsilon$. The finite-dimensional convex-set
+form of Brouwer gives $x_\varepsilon=P_\varepsilon Ax_\varepsilon$.
+Compactness provides a converging subsequence as $\varepsilon\to0$;
+$\|x_\varepsilon-Ax_\varepsilon\|<\varepsilon$ and continuity give $x=Ax$.
+\end{expandedproof}
+A map is called compact here when it sends bounded sets to relatively
+compact sets. Continuity is an additional assumption.
+\Needspace{50mm}
+\begin{lemma}[A compact convex hull; editorial supplement]
+In a Banach space the closed convex hull of a relatively compact set is compact.
+\end{lemma}
+\begin{expandedproof}[total boundedness survives convexification]
+For a bounded set $E$ with finite $\varepsilon$-net $\{x_i\}$, every convex
+combination of points of $E$ is within $\varepsilon$ of
+$\operatorname{conv}\{x_i\}$. The latter is compact, being the continuous
+image of a finite simplex, and has a finite $\varepsilon$-net. Thus the
+closed convex hull is totally bounded; it is complete as a closed subset
+of a Banach space, hence compact.
+\end{expandedproof}
+\Needspace{50mm}
+\begin{theorem}[Schaefer; source Theorem 4]
+Let $A:X\to X$ be continuous and compact. If
+$\mathcal E=\{u:u=\lambda Au,\ 0\leq\lambda\leq1\}$ is bounded,
+then $A$ has a fixed point.
+\end{theorem}
+\begin{expandedproof}[radial truncation and a strict radius]
+Choose $R>\sup_{u\in\mathcal E}\|u\|$ and let
+$T(u)=Au\min\{1,R/\|Au\|\}$, taking $T(u)=0$ if $Au=0$.
+It is continuous and compact and maps $\overline B_R$ into itself.
+The preceding lemma makes $K=\overline{\operatorname{conv}}T(\overline B_R)$
+compact; also $K\subset\overline B_R$ and $T(K)\subset K$.
+Schauder gives $u=T(u)$. If $\|Au\|>R$, then
+$u=\lambda Au$ with $\lambda=R/\|Au\|<1$ and $\|u\|=R$, contradicting
+the strict choice of $R$. Therefore $u=Au$.
+The proof also works on a closed convex invariant set containing $0$;
+closedness ensures its closed convex hull remains in the admissible set.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{先验界必须沿同伦统一}{只证明 $u=Au$ 的解有界还不够。截断固定点可能满足 $u=\lambda Au$；需对所有 $\lambda\in[0,1]$ 使用同一个界，才能排除它落在截断球面。}
+
+\Needspace{40mm}
+\subsection{An elliptic application with gradient dependence}
+Let $b:\R^n\to\R$ be globally Lipschitz, with constant $L$ and
+$B=|b(0)|$. For $\mu>0$ let $Av=w$ solve
+$-\Delta w+\mu w=-b(Dv)$ with zero trace, in $X=H^1_0(U)$.
+\Needspace{50mm}
+\begin{theorem}[Source Theorem 5, with an explicit sufficient bound]
+If $\mu>L^2/2$, the problem
+$-\Delta u+b(Du)+\mu u=0$, $u|_{\partial U}=0$, has a solution
+$u\in H^2(U)\cap H^1_0(U)$.
+\end{theorem}
+\begin{expandedproof}[smoothing and a homotopy estimate]
+Lax--Milgram and the $H^2$ estimate of \S6.3 give
+\[\|Av\|_{H^2}\leq C_\mu(L\|Dv\|_2+B|U|^{1/2}).\]
+The Lipschitz bound on $b$ gives continuity, even into $H^2$.
+Rellich's embedding $H^2(U)\Subset H^1(U)$ gives compactness in $X$.
+If $u=\lambda Au$ for $0<\lambda\leq1$, then
+$-\Delta u+\mu u=-\lambda b(Du)$. Testing with $u$ yields
+\[
+ \tfrac12\|Du\|_2^2+(\mu-L^2/2)\|u\|_2^2
+ \leq B|U|^{1/2}\|u\|_2.
+\]
+Writing $d=\mu-L^2/2>0$, Young bounds the right side by
+$d\|u\|_2^2/2+B^2|U|/(2d)$. This uniformly bounds $u$ in $H^1_0$;
+$\lambda=0$ gives $u=0$. Schaefer applies. The fixed point is in $H^2$
+by its definition, so the PDE holds a.e.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{存在性与迭代收敛}{Schauder、Schaefer 给出固定点存在性，不自动保证 $u_{k+1}=Au_k$ 收敛。要证明这条序列收敛，还须另证压缩性、单调性或其他稳定结构。}

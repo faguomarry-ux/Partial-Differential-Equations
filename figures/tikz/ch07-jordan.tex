@@ -1,0 +1,15 @@
+% Original editorial TikZ diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=1cm,y=1cm]
+ \draw[pde axis] (0,0)--(5.2,0) node[right] {$k$};
+ \draw[pde axis] (0,0)--(0,3.5) node[above,pde tiny] {amplitude};
+ \draw[pde curve] (0,0)--(5,2.5);
+ \foreach \k in {1,...,5}{
+  \fill[LumenWarm] (\k,.5*\k) circle[radius=2pt];
+  \node[below,pde tiny] at (\k,0) {$\k$};
+ }
+ \node[above,pde tiny] at (3,1.8) {$tk=0.5k$};
+ \node[pde box,text width=4.6cm] at (8.3,2.3)
+ {$B^2=0$\\$e^{-itkB}=I-itkB$};
+ \node[align=center,pde tiny] at (8.3,.55)
+ {$g=(0,\sin(kx))$\\$u_1=-0.5k\cos(kx)$ at $t=0.5$};
+\end{tikzpicture}

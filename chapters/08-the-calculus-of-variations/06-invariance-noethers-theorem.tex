@@ -1,13 +1,223 @@
-% Evans second edition, section 8.6.
-% English source: printed p. 481; PDF page 498 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 8.6: printed pp.481--489 / English PDF pp.498--506.
+% Chinese: printed pp.339--345 / scan pp.357--363.
+\Needspace{55mm}
 \section{Invariance, Noether's Theorem}
 \label{sec:8-6}
+\Needspace{45mm}
+\subsection{Domain variations and a sign convention for the current}
+Let $\Phi_s$ be smooth local diffeomorphisms near $\overline U$, with
+$\Phi_0(x)=x$, and $w_s$ smooth functions with $w_0=u$.
+Write $X=\partial_s\Phi_s|_0$ and $m=\partial_sw_s|_0$.
+The source's invariance convention is
+\begin{equation}\label{eq:8-invariance}
+ \int_VL(Dw_s,w_s,x)\,dx
+ =\int_{\Phi_s(V)}L(Du,u,x)\,dx
+\end{equation}
+for every relatively compact subdomain $V$, not just the whole $U$.
+The variations need not preserve a particular prescribed boundary value;
+Noether's conclusion is a local identity for smooth solutions.
+\Needspace{55mm}
+\begin{theorem}[Noether identity; source \S8.6.2, Theorem 1]
+Under \eqref{eq:8-invariance},
+\begin{equation}\label{eq:8-noether}
+ \operatorname{div}(mL_p-LX)
+ =m(\operatorname{div}L_p-L_z).
+\end{equation}
+Thus $J=mL_p-LX$ is divergence free on Euler--Lagrange solutions.
+\end{theorem}
+\begin{expandedproof}[local invariance and the current]
+The derivative of the left side is $\int_V L_p\cdot Dm+L_zm$.
+For the right side, changing variables $y=\Phi_s(x)$ and using
+$\frac d{ds}\det D\Phi_s|_0=\operatorname{div}X$ gives
+$\int_V\operatorname{div}(LX)$; here differentiation of the composed
+$L(Du,u,x)$ is a total spatial derivative.
+Since this holds for every $V$, the smooth integrands coincide pointwise:
+$L_p\cdot Dm+L_zm=\operatorname{div}(LX)$.
+Expanding $\operatorname{div}(mL_p)$ proves \eqref{eq:8-noether}.
+Invariance on only one fixed domain would yield only an integral identity,
+not this pointwise conservation law.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{守恒流的符号约定}{本书用主动变化 $w_s(x)=u(\Phi_s(x))$，对应 $J=mL_p-LX$。若换成逆映射的被动约定，公式会换号；不能混用两种定义。}
 
-\PDEPending
+\Needspace{45mm}
+\subsection{Translations, scaling, and monotonicity}
+If $L=L(p,z)$ is independent of $x$, translations give
+$X=e_k$, $m=u_k$. Therefore the stress tensor
+\[
+ T_{ik}=L_{p_i}u_k-L\delta_{ik}
+ \quad\text{satisfies}\quad\partial_iT_{ik}=0.
+\]
+For $L$ with explicit $x$ dependence, direct differentiation instead gives
+$\partial_iT_{ik}=-L_{x_k}$ on a solution. Explicit inhomogeneity is a
+source term, not a broken algebraic identity.
+For $I[u]=\int|Du|^p$, the scaling
+\[
+ \Phi_s(x)=e^sx,\quad
+ w_s(x)=e^{(n-p)s/p}u(e^sx)
+\]
+obeys \eqref{eq:8-invariance}: the gradient contributes $e^{ns}$,
+which cancels the change-of-variables Jacobian.
+Thus $X=x$ and $m=x\cdot Du+(n-p)u/p$.
+\Needspace{55mm}
+\begin{theorem}[Scaled energy monotonicity; source \S8.6.2, Example 2]
+For a smooth $p$-harmonic critical point for which the preceding calculation
+is classical, or a weak local minimizer of $\int|Du|^p$, $p>1$, set
+$E(r)=\int_{B_r}|Du|^p$ with $B_R\Subset U$. For a.e. $0<r<R$,
+\begin{equation}\label{eq:8-monotonicity}
+ \frac d{dr}\big(r^{p-n}E(r)\big)
+ =p r^{p-n}\int_{\partial B_r}|Du|^{p-2}u_r^2\,dS\geq0.
+\end{equation}
+The integrand is defined as zero where $Du=0$.
+\end{theorem}
+\begin{expandedproof}[from an inner variation to a radial flux]
+For smooth solutions the Noether current above has zero boundary flux
+on $B_r$. The term containing $u$ integrates to zero because
+$\int_{\partial B_r}u|Du|^{p-2}u_r=\int_{B_r}|Du|^p$,
+by the $p$-Laplace equation. Rearrangement gives
+\[
+ (n-p)E(r)=r\int_{\partial B_r}
+       (|Du|^p-p|Du|^{p-2}u_r^2).
+\]
+Since $E'(r)=\int_{\partial B_r}|Du|^p$ a.e., differentiation gives
+\eqref{eq:8-monotonicity} with the displayed power of $r$.
+For a weak local minimizer avoid differentiating $Du$: take compactly
+supported inner variations $u\circ(\operatorname{id}+sY)$.
+After changing variables, only the matrix and Jacobian are differentiated;
+the derivative is dominated by $C|Du|^p$ and yields
+\[
+ \int_U |Du|^p\operatorname{div}Y
+       -p|Du|^{p-2}Du\cdot(DY)Du=0.
+\]
+Use radial cutoffs $Y(x)=\chi(|x|)x$ approaching the indicator of $B_r$.
+Coarea and Lebesgue differentiation give the same radial identity for a.e.
+$r$. This extends the proof without assuming $L$ is $C^2$ at zero gradient
+when $1<p<2$. The scaled energy has its natural nondecreasing representative.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{单调量含有尺度因子}{单调的是 $r^{p-n}\int_{B_r}|Du|^p$。右侧仅含径向导数的非负平方；这个恒等式比“积分区域增大所以能量增大”包含更多信息。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{45mm}
+\subsection{Time translation and wave energy}
+For the action with kinetic minus potential density
+\[
+ \mathcal L(D_xu,u_t,u)=\tfrac12u_t^2-\tfrac12|D_xu|^2-F(u),
+\]
+the Euler--Lagrange equation is $u_{tt}-\Delta u+f(u)=0$, $F'=f$.
+Time translation gives $m=u_t$ and the space--time current
+$(-u_tD_xu,e)$, where
+\[
+ e=\tfrac12(u_t^2+|D_xu|^2)+F(u).
+\]
+Hence $e_t-\operatorname{div}_x(u_tD_xu)=0$.
+For compact spatial support, or zero boundary flux, $\int e$ is constant.
+A signed $F$ still gives conservation; nonnegativity is an additional
+requirement if this energy is to control norms.
+For the linear wave action, simultaneous scaling of $(x,t)$ has multiplier
+$m=tu_t+x\cdot Du+(n-1)u/2$ and gives $P_t-\operatorname{div}Q=0$, with
+\[
+ \begin{split}
+ P&=t e_0+(x\cdot Du)u_t+\tfrac{n-1}{2}uu_t,\\
+ Q&=mDu+\tfrac12(u_t^2-|Du|^2)x,\qquad
+ e_0=\tfrac12(u_t^2+|Du|^2).
+ \end{split}
+\]
+The exponent $(n-1)/2$ comes from the space--time dimension $n+1$.
+
+\Needspace{45mm}
+\subsection{Conformal multiplier and local energy decay}
+The source motivates a further multiplier by hyperbolic inversion
+$(x,t)\mapsto(x,t)/(|x|^2-t^2)$ and the wave Kelvin transform
+\[
+ u\mapsto |\,|x|^2-t^2\,|^{-(n-1)/2}
+ u\left(\frac{x}{|x|^2-t^2},\frac{t}{|x|^2-t^2}\right),
+\]
+away from its singular cone. Conjugating a time translation suggests
+\[
+ M=(r^2+t^2)u_t+2t\,x\cdot Du+(n-1)tu,\qquad r=|x|.
+\]
+We do not assume the action is invariant under this transformation.
+Instead the useful conclusion follows from the direct multiplier identity
+\begin{equation}\label{eq:8-conformal}
+ C_t-\operatorname{div}R=M(u_{tt}-\Delta u),
+\end{equation}
+where
+\[
+ \begin{split}
+ C={}&(r^2+t^2)e_0+2t(x\cdot Du)u_t
+               +(n-1)tuu_t-\tfrac{n-1}{2}u^2,\\
+ R={}&MDu+t(u_t^2-|Du|^2)x.
+ \end{split}
+\]
+\begin{expandedproof}[conformal current and its sign]
+Expand $M(u_{tt}-\Delta u)$, integrating each second derivative once
+by the product rule. The second-derivative terms give $C_t-\operatorname{div}R$.
+The remaining coefficients of $u_t^2$, $|Du|^2$ and $uu_t$ cancel using
+$\partial_t(r^2+t^2)=2t$, $D(r^2+t^2)=2x$ and
+$\operatorname{div}x=n$, proving \eqref{eq:8-conformal} off shell.
+For a more useful sign, put $\alpha=(n-1)/2$ and $u_r=Du\cdot x/r$.
+Direct expansion gives $C=S-\frac\alpha2\operatorname{div}Z$, with
+\[
+ \begin{split}
+ S={}&\frac{(t+r)^2}{4}(u_t+u_r+\alpha u/r)^2\\
+ &+\frac{(t-r)^2}{4}(u_t-u_r-\alpha u/r)^2\\
+ &+\frac{r^2+t^2}{2}\left(|Du|^2-u_r^2+
+                      \frac{(n-3)(n-1)}{4r^2}u^2\right),\\
+ Z={}&\frac{r^2+t^2}{r^2}u^2x.
+ \end{split}
+\]
+Indeed expanding the two squares produces the cross term
+$2\alpha t uu_t$ and an extra $\alpha(r^2+t^2)uu_r/r$.
+The latter and the remaining $u^2$ terms are exactly
+$\frac\alpha2\operatorname{div}Z$, with
+$\operatorname{div}Z=2(r^2+t^2)uu_r/r+
+[n+(n-2)t^2/r^2]u^2$.
+For $n\geq3$, every term of $S$ is nonnegative.
+The pointwise completion is used away from $r=0$; the exterior application
+below has the origin inside the excluded obstacle.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{猜出乘子仍需验证}{Kelvin 变换启发 $M$，但本稿不据此宣称作用量不变。直接核对 $C_t-\operatorname{div}R=M(u_{tt}-\Delta u)$ 才建立守恒律；负项须用散度项与平方和重写。}
+
+\Needspace{55mm}
+\begin{theorem}[Exterior local energy decay; source application, pp.487--489]
+Let $n\geq3$ and let a smooth bounded obstacle $O$ contain a neighborhood
+of the origin and be star-shaped about it. A smooth solution of the wave
+equation on $\Omega=\R^n\setminus\overline O$, with zero Dirichlet
+boundary values and compatible compactly supported initial data, satisfies
+\[
+ \int_{B_R\setminus\overline O}(u_t^2+|Du|^2)\,dx
+ \leq C_R t^{-2}\quad(t\geq2R),\qquad\overline O\subset B_R.
+\]
+\end{theorem}
+\begin{expandedproof}[the obstacle flux and the radial correction]
+Finite propagation keeps all fields compactly supported at each finite time.
+The outer normal $\nu$ to $\Omega$ points into $O$.
+On $\partial O$, $u=u_t=0$ and $Du=(\partial_\nu u)\nu$, so
+$R\cdot\nu=t|Du|^2x\cdot\nu\leq0$ by star-shapedness.
+Integrating \eqref{eq:8-conformal} gives
+$\int_\Omega C(t)\leq\int_\Omega C(0)$.
+The divergence correction has zero total flux, since $u=0$ on the
+obstacle and is compactly supported. Thus $\int_\Omega S(t)\leq C$.
+For $r\leq R$, $t\geq2R$, both $(t\pm r)^2\geq t^2/4$; hence
+\[
+ \int_{B_R\setminus\overline O}
+ u_t^2+(u_r+\alpha u/r)^2+(|Du|^2-u_r^2)
+                 +(n-3)u^2/r^2\leq C_Rt^{-2}.
+\]
+To extract $u_r^2$, integrate the radial cross term on this bounded region:
+\[
+ \begin{split}
+ \int(u_r+\alpha u/r)^2
+ ={}&\int u_r^2+\alpha\int_{\partial B_R}u^2/R\\
+ &+\frac{(n-1)(3-n)}4\int u^2/r^2.
+ \end{split}
+\]
+There is no inner boundary contribution because $u=0$ there.
+For $n=3$ the last coefficient vanishes; for $n>3$ its absolute value
+is controlled by the already bounded $(n-3)u^2/r^2$ term.
+The outer boundary term is nonnegative. This gives the claimed bound
+on $u_r^2$, and combining with the tangential part controls $|Du|^2$.
+Total wave energy is conserved; the estimate concerns energy remaining
+in a fixed bounded spatial region.
+\end{expandedproof}

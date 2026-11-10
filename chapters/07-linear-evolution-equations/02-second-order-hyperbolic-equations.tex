@@ -1,13 +1,264 @@
-% Evans second edition, section 7.2.
-% English source: printed p. 375; PDF page 392 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 7.2: printed pp.375--396 / English PDF pp.392--413.
+% Chinese: printed pp.266--279 / scan pp.284--297.
+\Needspace{55mm}
 \section{Second-Order Hyperbolic Equations}
 \label{sec:7-2}
+\Needspace{55mm}
+\subsection{Two initial data and the natural energy}
+Keep $V=H^1_0(U)$, $H=L^2(U)$ and the divergence-form $L(t)$ from
+\S\ref{sec:7-1}. Here assume $a^{ij},b^i,c\in C^1(\overline Q_T)$,
+$a^{ij}=a^{ji}$, with the same uniform ellipticity bound. Study
+\begin{equation}\label{eq:7-wave}
+ u''+L(t)u=f,\quad u|_{\partial U}=0,\quad u(0)=g,\ u'(0)=h,
+\end{equation}
+where $g\in V$, $h\in H$, $f\in L^2(0,T;H)$.
+A weak solution has
+\[
+ u\in L^2V,\quad u'\in L^2H,\quad u''\in L^2V',\qquad
+ \langle u'',v\rangle+B_t[u,v]=(f,v).
+\]
+The initial values are meaningful in $H$ and $V'$, respectively:
+$u\in H^1(0,T;H)\subset C([0,T];H)$ and
+$u'\in H^1(0,T;V')\subset C([0,T];V')$.
+The estimates below in fact put $u,u'$ in $L^\infty V,L^\infty H$.
+\Needspace{55mm}
+\PDEAnnotation{位移和速度的不同空间}{能量包含 $\|Du\|_2^2+\|u_t\|_2^2$，故自然数据为 $g\in H^1_0$、$h\in L^2$。基本弱解定义中速度初值先在 $H^{-1}$ 识别，不能无证明地宣称 $u_t$ 在 $L^2$ 连续。}
 
-\PDEPending
+\Needspace{55mm}
+\begin{theorem}[Energy bound and existence; source \S7.2.2, Theorems 1--3]
+\label{thm:7-wave-existence}
+There exists a weak solution satisfying
+\begin{equation}\label{eq:7-wave-energy}
+ \begin{split}
+ &\mathop{\rm ess\,sup}_{0<t<T}
+ (\|u(t)\|_V^2+\|u'(t)\|_H^2)+\|u''\|_{L^2V'}^2\\
+ &\hspace{15mm}\leq C(\|g\|_V^2+\|h\|_H^2+\|f\|_{L^2H}^2).
+ \end{split}
+\end{equation}
+\end{theorem}
+\begin{expandedproof}[the second-order finite system]
+Use the same $V_m$ and solve
+\[
+ (u_m'',w_k)+B_t[u_m,w_k]=(f,w_k),\quad
+ u_m(0)=P_mg,\quad u_m'(0)=P_mh.
+\]
+This finite second-order system becomes a linear first-order ODE in
+$(d,d')$, so has a unique solution. Test with $u_m'$ and put
+\[
+ E_m=\tfrac12\big(\|u_m'\|_H^2+
+          \int_Ua^{ij}(u_m)_i(u_m)_j+\|u_m\|_H^2\big).
+\]
+A direct calculation gives
+\[
+ E_m'=(f,u_m')-\int_U(b^i(u_m)_i+cu_m)u_m'
+      +\tfrac12\int_Ua_t^{ij}(u_m)_i(u_m)_j+(u_m,u_m').
+\]
+Thus $E_m'\leq CE_m+C\|f\|_H^2$. Gronwall gives the uniform energy
+bound; $E_m$ is equivalent to $\|u_m\|_V^2+\|u_m'\|_H^2$.
+Using $P_m$ in an arbitrary test gives
+$\|u_m''\|_{V'}\leq C\|u_m\|_V+C\|f\|_H$.
+Weak compactness yields the equation and identifies successive weak
+derivatives by scalar time tests, exactly as in the parabolic construction.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+For $v\in V_N$, $m\geq N$, and $\phi(T)=\phi'(T)=0$, twice integrating
+in time gives
+\[
+ \begin{split}
+ \int_0^T\{(u_m,v)\phi''+B_t[u_m,v]\phi\}\,dt
+ ={}&\int_0^T(f,v)\phi\,dt\\
+ &+(P_mh,v)\phi(0)-(P_mg,v)\phi'(0).
+ \end{split}
+\]
+Both endpoint coefficients survive the weak limit. Comparing with the
+trace formula for $u,u'$ identifies $u(0)=g$, $u'(0)=h$. Lower
+semicontinuity, including the time-set argument of Problem 6, gives
+\eqref{eq:7-wave-energy}.
+\end{expandedproof}
+
+\Needspace{55mm}
+\subsection{Uniqueness without testing by an unavailable derivative}
+A weak solution need not have $u'\in V$, so the formal test $v=u'$ is
+not legitimate. The source's integrated test repairs this gap.
+\Needspace{55mm}
+\begin{theorem}[Weak uniqueness; source Theorem 4]
+\label{thm:7-wave-unique}
+The weak solution of \eqref{eq:7-wave} is unique in the class just defined.
+\end{theorem}
+\begin{expandedproof}[the integrated test]
+Subtract two solutions, so $f=g=h=0$. Fix $s$ and use
+$v(t)=\int_t^s u(r)\,dr$ for $0\leq t\leq s$. Then $v'=-u$ in $V$,
+$v(s)=0$, and $v$ is a legal time-dependent $V$ test by approximation
+with finite sums of scalar time tests.
+Write $B_t=S_t+K_t$, with $S_t$ symmetric and $K_t$ skew-symmetric.
+Integration by parts in space gives
+\[
+ \begin{split}
+ S_t[z,z]&=\int_U a^{ij}z_i z_j+(c-\tfrac12\operatorname{div}b)z^2,\\
+ K_t[u,v]&=-\int_Uu\,b\cdot Dv-\tfrac12(\operatorname{div}b)uv.
+ \end{split}
+\]
+In particular $|K_t[u,v]|\leq C\|u\|_H\|v\|_V$,
+$|\dot S_t[v,v]|\leq C\|v\|_V^2$ (one may use the original symmetric
+formula, avoiding mixed coefficient derivatives).
+Also $S_t[v,v]\geq\alpha\|v\|_V^2-\gamma\|v\|_H^2$.
+Time integration by parts, with $u'(0)=0$ in $V'$, gives
+\[
+ \tfrac12\|u(s)\|_H^2+\tfrac12 S_0[v(0),v(0)]
+ =-\int_0^s\big(\tfrac12\dot S_t[v,v]+K_t[u,v]\big)\,dt.
+\]
+Here $\int(u',u)=\frac12\|u(s)\|_H^2$ is valid since $u\in H^1(0,T;H)$;
+all other pairings involve $V',V$.
+Thus
+\[
+ \|u(s)\|_H^2+\alpha\|v(0)\|_V^2
+ \leq C\int_0^s(\|u\|_H^2+\|v\|_V^2)\,dt+\gamma\|v(0)\|_H^2.
+\]
+Put $W(t)=\int_0^t u$, so $v(t)=W(s)-W(t)$.
+The last term is bounded by $\gamma s\int_0^s\|u\|_H^2$.
+Consequently, for a fixed sufficiently short interval,
+\[
+ \|u(s)\|_H^2+\tfrac\alpha2\|W(s)\|_V^2
+ \leq C\int_0^s(\|u(t)\|_H^2+\|W(t)\|_V^2)\,dt.
+\]
+Gronwall forces $u=0$ there. Restart at its right endpoint: the $H$ and
+$V'$ traces are zero, and all constants are uniform on $[0,T]$.
+Finitely many repetitions give $u=0$ throughout.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{积分测试恢复合法性}{$v(t)=\int_t^s u$ 属于 $H^1_0$，而 $v'=-u$。它将不可用的 $u_t$ 测试转成合法的时间分部积分；短时间吸收后再拼接，覆盖整个时间区间。}
+
+\Needspace{55mm}
+\subsection{Higher regularity and the absence of smoothing}
+For the remainder of the bounded-domain regularity discussion, coefficients
+are smooth and time independent.
+\Needspace{55mm}
+\begin{theorem}[Improved wave regularity; source \S7.2.3, Theorem 5]
+If $g\in H^2(U)\cap V$, $h\in V$, and $f\in H^1(0,T;H)$, then
+\[
+ u\in L^\infty H^2,\quad u'\in L^\infty V,\quad
+ u''\in L^\infty H,\quad u'''\in L^2V',
+\]
+with norm bound $C(\|g\|_{H^2}+\|h\|_V+\|f\|_{H^1(0,T;H)})$.
+\end{theorem}
+\begin{expandedproof}[reconstruction instead of formal differentiation]
+Construct $v$ solving $v''+Lv=f'$ with initial data
+$v(0)=h$, $v'(0)=f(0)-Lg\in H$. Set $U=g+\int_0^t v$.
+In distributions,
+$(U''+LU-f)'=v''+Lv-f'=0$, while the residual at $0$ is zero in $V'$.
+Hence $U$ solves the original equation and has data $g,h$.
+Uniqueness gives $U=u$, $u'=v$. Estimate $v$ by
+\eqref{eq:7-wave-energy} and recover $u\in L^\infty H^2$ from
+$Lu=f-u''$ and the elliptic estimate. This proves every stated norm bound.
+\end{expandedproof}
+\Needspace{55mm}
+\begin{theorem}[Higher wave regularity; source Theorems 6--7]
+Let $m\geq0$, $g\in H^{m+1}(U)$, $h\in H^m(U)$, and
+$\partial_t^kf\in L^2H^{m-k}(U)$ for $0\leq k\leq m$.
+Set $q_0=g$, $q_1=h$, and
+\[
+ q_{j+2}=\partial_t^j f(0)-Lq_j\quad(0\leq j\leq m-2).
+\]
+Require $q_j\in V$ for $0\leq j\leq m$ (for $m=0$ only $g\in V$).
+Then
+\[
+ \begin{split}
+ &\mathop{\rm ess\,sup}_{0<t<T}\sum_{k=0}^{m+1}
+ \|\partial_t^ku(t)\|_{H^{m+1-k}}\\
+ &\qquad\leq C\left(\|g\|_{H^{m+1}}+\|h\|_{H^m}
+ +\sum_{k=0}^{m}\|\partial_t^kf\|_{L^2H^{m-k}}\right).
+ \end{split}
+\]
+Smooth data compatible to every order give a smooth solution on the closed cylinder.
+\end{theorem}
+\begin{expandedproof}[one time derivative at each induction step]
+The case $m=0$ is the basic wave bound. In passing to $m+1$, the preceding
+reconstruction gives $v=u'$ with data $h,f(0)-Lg$ and forcing $f'$.
+Its compatibility sequence is shifted by one place. Apply induction to $v$.
+The trace inequality
+$\|F(0)\|_{H^r}\leq C(\|F\|_{L^2H^r}+\|F'\|_{L^2H^r})$
+controls the forcing traces required at this step.
+Then $Lu=f-u''$ and elliptic regularity recover the missing highest spatial
+norm of $u$. This proves the estimate and the induction. Arbitrarily high
+mixed Sobolev regularity and embedding prove the smooth conclusion.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{波动不会自动磨光}{$\sin(kx)$ 模态的位移为 $\cos(kt)\sin(kx)$；高频振幅没有热方程的 $e^{-k^2t}$ 衰减。提高解的正则性需要提高初值正则性，不能从能量估计推导任意正时刻光滑。}
+
+\Needspace{55mm}
+\subsection{Finite propagation and the geometry of the cone}
+On $\R^n$ now take the source's nondivergence model
+$u_{tt}-a^{ij}(x)u_{ij}=0$ with smooth symmetric positive $A$.
+Assume on the region under consideration that an optical distance $q$ is
+smooth away from $x_0$, positive there, $q(x_0)=0$, and
+\[
+ A Dq\cdot Dq=1.
+\]
+Assume its relevant sublevel sets are bounded and shrink to $x_0$.
+Set $K_t=\{q<t_0-t\}$ for $0\leq t<t_0$ and
+$K=\{(x,t):0\leq t<t_0,\ x\in K_t\}$.
+\Needspace{55mm}
+\begin{theorem}[Finite propagation; source \S7.2.4, Theorem 8]
+If a smooth solution has $u=u_t=0$ on $K_0$, it vanishes throughout $K$,
+and at its vertex by continuity.
+\end{theorem}
+\begin{expandedproof}[coarea, normal speed, and the energy flux]
+The outward normal is $\nu=Dq/|Dq|$ and the moving boundary has outward
+normal velocity $-1/|Dq|$. Hence for
+$E(t)=\frac12\int_{K_t}(u_t^2+A Du\cdot Du)$, differentiation gives
+\[
+ \begin{split}
+ E'(t)={}&-\int_{K_t}u_t(\partial_j a^{ij})u_i
+ +\int_{\partial K_t}u_t A Du\cdot\nu\\
+ &-\frac12\int_{\partial K_t}
+       \frac{u_t^2+A Du\cdot Du}{|Dq|}.
+ \end{split}
+\]
+The volume error is at most $CE(t)$ by ellipticity and bounded first
+coefficient derivatives. Also
+\[
+ |A Du\cdot\nu|\leq(A Du\cdot Du)^{1/2}(A\nu\cdot\nu)^{1/2}
+ =\frac{(A Du\cdot Du)^{1/2}}{|Dq|}.
+\]
+Young's inequality makes the boundary flux no larger than the negative
+moving-boundary term. Thus $E'\leq CE$ and $E(0)=0$, giving $E=0$.
+For fixed $x\in K_t$, that same $x$ belongs to every earlier $K_s$;
+integrating $u_t=0$ from its zero initial value proves $u(x,t)=0$.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{光学距离的局部限制}{度量是 $A^{-1}$，不是 $A$。变系数的距离函数可能有割迹，不能默认全空间光滑；此处光滑 $q$ 是明确假设。常系数时 $q=\sqrt{(x-x_0)^TA^{-1}(x-x_0)}$，波前为椭球。}
+
+\PDEBodyDiagram{7.3}{Anisotropy changes the cross-section of a wave cone.}
+{For $A=\operatorname{diag}(4,1)$, $q(x)=\sqrt{x_1^2/4+x_2^2}$. At time $t$, the dependency cross-section is an ellipse with semiaxes $2(t_0-t)$ and $t_0-t$. The cone sketch and the spatial slice use separate coordinate scales.}
+{ch07-anisotropic-cone}
+
+\Needspace{55mm}
+\subsection{Characteristic coordinates in two variables}
+For $a u_{xx}+2b u_{xy}+d u_{yy}+\text{lower terms}=0$, assume smooth
+coefficients and $ad-b^2<0$. A coordinate function $\xi$ must solve
+\[
+ a\xi_x^2+2b\xi_x\xi_y+d\xi_y^2=0.
+\]
+After a fixed linear coordinate change one can arrange $a\ne0$ near the
+point: an indefinite quadratic form cannot vanish on every direction.
+Writing $D=b^2-ad>0$ factors this equation into the two distinct fields
+\[
+ a\xi_x+(b+\sqrt D)\xi_y=0,\qquad
+ a\eta_x+(b-\sqrt D)\eta_y=0.
+\]
+\begin{expandedproof}[local invertibility and both canonical forms]
+The two smooth nonzero vector fields are transverse, since their determinant
+is $-2a\sqrt D\ne0$. The local flow-box construction (solving the
+characteristic ODE from a transverse curve) gives first integrals $\xi,\eta$
+with nonzero independent gradients. Thus $\Phi=(\xi,\eta)$ is locally
+invertible. By the chain rule the transformed principal matrix is
+$\widetilde A=D\Phi\,A\,D\Phi^T$, whose two diagonal entries vanish.
+Its determinant is $(\det D\Phi)^2\det A<0$, so the off-diagonal entry
+is nonzero. Division yields $v_{\xi\eta}+\text{lower terms}=0$.
+For $z_1=\xi+\eta$, $z_2=\xi-\eta$, this becomes
+$v_{z_1z_1}-v_{z_2z_2}+\text{lower terms}=0$.
+For example $u_{tt}-c^2u_{xx}$, $c>0$, becomes
+$-4c^2v_{\xi\eta}$ with $\xi=x-ct$, $\eta=x+ct$.
+All these coordinates are local; no global characteristic chart is asserted.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{双曲标准形是局部结论}{判别式给出两个横截特征方向；逆函数定理还需要 $\det D\Phi\ne0$。先处理 $a\ne0$ 的局部坐标，避免在 $a=0$ 处直接除法。}

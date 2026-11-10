@@ -1,13 +1,42 @@
-% Evans second edition, section 10.5.
-% English source: printed p. 569; PDF page 586 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 10.5: printed pp.569--570; English PDF pp.586--587.
+% Chinese section start: printed p.403 / scan p.421.
+\clearpage
 \section{References}
 \label{sec:10-5}
+\subsection*{Source attributions}
+Evans's \S10.5 attributes the test-function formulation to Crandall,
+Evans and Lions, Trans.~AMS 282 (1984), 487--502, following the
+foundational Crandall--Lions paper, Trans.~AMS 277 (1983), 1--42.
+The uniqueness argument follows the first paper, with improvements
+acknowledged there to M.~Crandall. The control connection is attributed
+to P.-L.~Lions [Li]. Further directions in the source are Tran [Tn],
+Fleming--Soner [F-S], and Bardi--Capuzzo Dolcetta [B-CD]. These are
+source attributions and bibliography keys. The source credits D.~Ostrov
+with Problem 8 and directs readers to Cabr\'e--Caffarelli [C-C] and
+Gilbarg--Trudinger [G-T] for the fully nonlinear elliptic exercises.
+The present reconstruction
+does not claim separate consultation of all those works.
 
-\PDEPending
+\subsection*{Dependencies and proof boundaries}
+The proofs use compactness on contact balls, mollification, elementary
+convex duality from Chapter 3, Rademacher's theorem, the integral form
+of the ODE and Gronwall. The comparison proof is first-order: freezing
+the other variables produces smooth tests directly. No second-order
+matrix jet lemma is being assumed or proved. The source's uniqueness
+theorem is expanded to comparison of BUC sub- and supersolutions.
+An additional comparison theorem with one spatially Lipschitz competitor
+explicitly supplies the superlinear Hopf--Lax uniqueness step.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+The vanishing-viscosity argument is conditional on smooth approximants
+and locally uniform convergence; existence and uniform estimates for a
+general nonconvex Hamiltonian are not proved here. Value-function existence
+is proved for the stated bounded continuous coefficients and compact
+control set; its terminal Hamiltonian is concave, and the time-reversed
+initial Hamiltonian is convex. Smooth verification is conditional on an
+admissible minimizing trajectory. General nonsmooth feedback synthesis,
+existence of an optimal ordinary control under additional hypotheses,
+second-order comparison, Perron's method, and nonlocal or state-constrained
+boundary theories are outside this chapter's completed proofs.
+The 14 problem solutions and all diagrams are editorial additions.
+Source checking, symbolic model checking, compilation, and visual QA are
+recorded separately; none is an independent mathematical review.

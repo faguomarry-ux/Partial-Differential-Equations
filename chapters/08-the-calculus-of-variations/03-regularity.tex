@@ -1,13 +1,135 @@
-% Evans second edition, section 8.3.
-% English source: printed p. 454; PDF page 471 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 8.3: printed pp.454--458 / English PDF pp.471--475.
+% Chinese: printed pp.320--323 / scan pp.338--341.
+\Needspace{55mm}
 \section{Regularity}
 \label{sec:8-3}
+\Needspace{45mm}
+\subsection{Nonlinear difference quotients}
+Consider a scalar weak solution $u\in H^1(U)$ of
+\begin{equation}\label{eq:8-nonlinear-elliptic}
+ -\operatorname{div}DL(Du)=f,\qquad f\in L^2(U),
+\end{equation}
+where $L\in C^2(\R^n)$ and
+\begin{equation}\label{eq:8-uniform-hessian}
+ \theta|\xi|^2\leq D^2L(p)\xi\cdot\xi\leq\Lambda|\xi|^2
+ \quad(p,\xi\in\R^n),\qquad0<\theta\leq\Lambda.
+\end{equation}
+Subtracting the affine function $DL(0)\cdot p$ from $L$ leaves the weak
+equation unchanged, because $\int_U DL(0)\cdot D\phi=0$ for
+$\phi\in H^1_0$. We may therefore assume $DL(0)=0$, giving
+$|DL(p)|\leq\Lambda|p|$.
+\Needspace{55mm}
+\begin{theorem}[Second derivatives; source \S8.3.1, Theorem 1]
+\label{thm:8-H2}
+For $V\Subset U$, $u\in H^2(V)$ and
+\[
+ \|D^2u\|_{L^2(V)}\leq C(\|f\|_{L^2(U)}+\|Du\|_{L^2(U)}).
+\]
+If $u\in H^1_0(U)$ and $\partial U$ is $C^2$, then
+$u\in H^2(U)$ and $\|u\|_{H^2(U)}\leq C\|f\|_2$.
+Constants depend on $\theta,\Lambda$, the domains and their indicated geometry.
+\end{theorem}
+\begin{expandedproof}[uniformly elliptic averaged Hessians]
+Choose $V\Subset W\Subset U$ and a cutoff $\zeta$ supported in $W$,
+equal to one on $V$. For a small step in direction $e_k$ let
+$\delta_hv=(v(x+he_k)-v(x))/h$ and use the legal test
+$\phi=-\delta_{-h}(\zeta^2\delta_hu)$.
+It belongs to $H^1_0(U)$ because its support stays away from the boundary.
+Discrete integration by parts gives
+\[
+ \int_U\delta_hDL(Du)\cdot D(\zeta^2\delta_hu)
+ =-\int_U f\,\delta_{-h}(\zeta^2\delta_hu).
+\]
+The exact nonlinear linearization is
+\[
+ \delta_hDL(Du)=A_h\delta_hDu,\quad
+ A_h=\int_0^1D^2L(Du+s(Du(x+he_k)-Du))\,ds.
+\]
+Hence $\theta I\leq A_h\leq\Lambda I$ independently of $h$.
+Expanding the cutoff derivative, the principal integral bounds
+$\theta\|\zeta\delta_hDu\|_2^2$. Its cross term costs
+$\varepsilon\|\zeta\delta_hDu\|_2^2+C_\varepsilon\|\delta_hu\|_2^2$.
+The forcing is controlled without differentiating $f$:
+\[
+ \begin{split}
+ \left|\int f\,\delta_{-h}(\zeta^2\delta_hu)\right|
+ &\leq C\|f\|_2\|D(\zeta^2\delta_hu)\|_2\\
+ &\leq\varepsilon\|\zeta\delta_hDu\|_2^2+
+ C_\varepsilon(\|f\|_2^2+\|Du\|_2^2).
+ \end{split}
+\]
+Use $\|\delta_hu\|_2\leq\|Du\|_2$ on a slightly larger set and absorb
+with $2\varepsilon<\theta$. The difference-quotient criterion from
+\S5.8 then gives the interior estimate.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{平均 Hessian 保留椭圆性}{$A_h$ 是沿两点梯度连线的 Hessian 平均；一致上下界在平均后不变。不能只在某个未经控制的中间点套用局部凸性。}
 
-\PDEPending
+\begin{expandedproof}[boundary and normal estimates]
+This expands the boundary argument left to the reader in the source.
+In a boundary chart write $x=\Phi(y)=(y',y_n+\gamma(y'))$, $v=u\circ\Phi$.
+Its Jacobian is one and $v=0$ on $y_n=0$.
+The transformed flux is
+\[
+ a(y,p)=D\Phi^{-1}\,DL(D\Phi^{-T}p),\qquad
+ -\partial_{y_i}a_i(y,Dv)=\widetilde f.
+\]
+Bounded $D\Phi,D\Phi^{-1}$ preserve uniform monotonicity in $p$;
+bounded $D^2\Phi$ gives $|D_ya(y,p)|\leq C|p|$, since $DL(0)=0$.
+Tangential difference quotients now work on the half-chart. Their tests
+have zero trace because $v$ and its tangential translates have zero trace.
+Besides the averaged Hessian term, differencing $a$ produces a coefficient
+error bounded by $C|Dv|$, which is absorbed as above. Thus all $v_{i\alpha}$,
+$\alpha<n$, are in $L^2$, with bounds by $\|\widetilde f\|_2+\|Dv\|_2$.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+To recover $v_{nn}$ without assuming it exists, let $w=a_n(y,Dv)$.
+The known tangential derivatives and the flux chain rule give
+$\partial_\alpha a_i(y,Dv)\in L^2$. The equation gives
+$\partial_n w=-\widetilde f-\sum_{\alpha<n}\partial_\alpha a_\alpha\in L^2$.
+For fixed $(y,p')$, $p_n\mapsto a_n(y,p',p_n)$ is strictly increasing
+with derivative at least $c>0$ and at most $C$; it maps $\R$ onto $\R$.
+Its inverse $p_n=\Psi(y,p',w)$ satisfies
+\[
+ |\Psi_w|+|\Psi_{p'}|\leq C,\qquad
+ |\Psi_y|\leq C(|p'|+|\Psi|).
+\]
+Apply normal difference quotients to
+$v_n=\Psi(y,D'v,w)$. The $L^2$ bounds for the normal derivatives of
+$D'v$ and $w$ give an $L^2$ bound for the normal difference quotients
+of $v_n$. The criterion proves $v_{nn}\in L^2$; this step avoids a circular
+classical expansion of an equation before $H^2$ has been established.
+Cutoffs, a finite chart cover and the interior estimate yield
+$\|u\|_{H^2}\leq C(\|f\|_2+\|u\|_{H^1})$.
+Finally testing the original equation by $u$, monotonicity and Poincar\'e give
+\[
+ \theta\|Du\|_2^2\leq\int_U DL(Du)\cdot Du=(f,u)
+ \leq C\|f\|_2\|Du\|_2.
+\]
+This removes the lower-order norm and proves the global estimate.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{法向导数的非循环恢复}{先证明切向二阶导数，再由方程得到法向通量的弱导数，最后利用 $p_n\mapsto a_n$ 的一致单调可逆性恢复 $u_{nn}$。不能在已知 $u\in H^1$ 时直接展开二阶链式法则。}
+
+\Needspace{45mm}
+\subsection{Why further smoothness needs a new theorem}
+For $f=0$, interior $H^2$ and the Lipschitz chain rule imply that
+$v_k=u_{x_k}$ weakly solves
+\[
+ -\partial_i(A^{ij}(x)\partial_jv_k)=0,\qquad
+ A^{ij}(x)=L_{p_ip_j}(Du(x)).
+\]
+These coefficients are only bounded measurable at this stage. The smooth
+coefficient estimates of Chapter 6 cannot be applied to them.
+The scalar De Giorgi--Nash--Moser theorem, used here as an external
+regularity result, states that $H^1_{\rm loc}$ solutions of a uniformly
+elliptic divergence equation with bounded measurable coefficients are
+locally H\"older continuous. It gives $Du\in C^{0,\alpha}_{\rm loc}$.
+For smooth $L$, $A$ is then H\"older. The external Schauder estimates
+for linear divergence equations improve $v_k$ to $C^{1,\alpha}_{\rm loc}$;
+iteration improves coefficient and solution regularity together, yielding
+$u\in C^\infty(U)$.
+This is a conditional bootstrap using those two named theorems, not a
+proof of either deep estimate. For systems the scalar H\"older theorem
+is unavailable in general; smoothness cannot be asserted by the same argument.
+\Needspace{55mm}
+\PDEAnnotation{线性化不意味着光滑系数}{$A(x)=D^2L(Du(x))$ 的正则性由未知梯度决定。先得到梯度的 H\"older 连续性，才能启动 Schauder 提升；多次形式求导不能绕过这一步。}

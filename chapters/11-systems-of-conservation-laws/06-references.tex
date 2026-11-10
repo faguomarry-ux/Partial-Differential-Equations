@@ -1,13 +1,46 @@
-% Evans second edition, section 11.6.
-% English source: printed p. 616; PDF page 633 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 11.6, printed p.616; English PDF p.633.
+% Chinese start: printed p.435 / scan p.453.
+\clearpage
 \section{References}
 \label{sec:11-6}
+\subsection*{Source attributions}
+Evans states that T.-P.~Liu wrote the initial chapter draft and cites
+Liu [Lu] as a major reference. The local Riemann construction is
+attributed to Lax, Comm.~Pure Appl.~Math.~10 (1957), 537--566.
+The scalar entropy uniqueness theorem is attributed to S.~Kruzhkov,
+Mat.~Sbornik 123 (1970), 228--255, using the source's bibliographic
+numbering. Further sources listed there include Bressan [Bs],
+Courant--Friedrichs [C-F], Dafermos [D], Majda [Mj], Xiao--Zhang [X-Z],
+Zheng [Zh], Logan [Lo], Neu [Ne1], and Smoller [S].
+The source acknowledges P.~Colella for calculations and W.~Han for
+the eigenvector-dependence proof. Problem 3 is credited to Kato [K];
+Problems 4--6 to Holden--Risebro [H-R]; Problems 10--11 to Smoller;
+Problem 13 to Dafermos. These are attributions read in Evans, not a
+claim of separate consultation of all the cited works.
 
-\PDEPending
+\subsection*{Proof dependencies and boundaries}
+The proofs use inverse/implicit function theorems, smooth ODE theory,
+spectral algebra, dominated convergence, $L^1$ translation continuity,
+and cutoff approximation. Global eigenframes are constructed on $\R^m$;
+on other state domains the wave geometry is local. The Riemann solver
+has local amplitude and small-strength uniqueness. The blow-up proof
+requires a chart covering the entire compact invariant rectangle,
+a uniform spectral gap, and positive uniform nonlinearity coefficients.
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+The source refers general viscous-profile sufficiency to Majda--Pego,
+J.~Diff.~Eq.~56 (1985), 229--262. Our local proof supplies the scalar
+reduction but invokes an external center-manifold theorem, which is
+not proved here. It does not cover distant excursions. The general
+non-genuinely nonlinear Liu/profile result, referred to Conlon,
+Adv.~Math.~35 (1980), 1--18, remains unproved here. The partially
+viscous elastic model is proved directly by a scalar ODE.
+
+The viscous limit assumes bounded smooth approximants and a.e.
+convergence; general-system compactness is not proved. Scalar
+contraction includes strong initial traces and a local version for
+Riemann data. General system existence/uniqueness, Glimm/front-tracking
+theory, compensated compactness, vacuum, multidimensional systems,
+and nonsmooth system-entropy approximation remain outside the proofs.
+The 17 solutions and five diagrams are editorial additions. Source
+comparison, self-check, compilation, and visual QA are distinct from
+independent mathematical review, which has not been performed.

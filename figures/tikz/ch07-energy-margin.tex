@@ -1,0 +1,11 @@
+% Original editorial TikZ margin diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,pde tiny,x=1cm,y=1cm]
+ \draw[pde axis] (0,0)--(2.8,0) node[right] {$t$};
+ \draw[pde axis] (0,0)--(0,2.4);
+ \node[above right] at (0,2.35) {$E(t)/E(0)$};
+ \draw[pde blue] (0,2)--(2.55,2);
+ \node[below] at (1.8,2) {wave};
+ \draw[pde warm,domain=0:2.5,samples=50] plot (\x,{2*exp(-2*\x)});
+ \node[above] at (1.35,.55) {heat, $k=1$};
+ \node[left] at (0,2) {$1$};
+\end{tikzpicture}

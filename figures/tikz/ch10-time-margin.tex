@@ -1,0 +1,5 @@
+\begin{tikzpicture}[pde diagram]
+\node[pde box,text width=27mm,pde tiny] (i) {initial time $\tau$\\$w_\tau+K(Dw)=0$\\upper: $\leq0$\\lower: $\geq0$};
+\node[pde box,text width=27mm,pde tiny,below=11mm of i] (t) {terminal time $t$\\$V_t+H_c(DV)=0$\\upper: $\geq0$\\lower: $\leq0$};
+\draw[pde axis] (i)--node[right,pde tiny] {$\tau=T-t$} (t);
+\end{tikzpicture}

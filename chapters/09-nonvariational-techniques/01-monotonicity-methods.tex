@@ -1,13 +1,134 @@
-% Evans second edition, section 9.1.
-% English source: printed p. 495; PDF page 512 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 9.1: printed pp.495--501; English PDF pp.512--518.
+% Chinese chapter list: printed p.350 / scan p.368.
 \section{Monotonicity Methods}
 \label{sec:9-1}
+\Needspace{40mm}
+\subsection{Structure without a potential}
+Consider $-\operatorname{div}a(Du)=f$, $u\in H^1_0(U)$, where
+$f\in L^2(U)$ and $a:\R^n\to\R^n$ is continuous. The source assumes
+smoothness; existence needs only continuity and
+\begin{equation}\label{eq:9-monotone}
+ \begin{split}
+ (a(p)-a(q))\cdot(p-q)&\geq0,\\
+ |a(p)|&\leq C(1+|p|),\\
+ a(p)\cdot p&\geq\alpha|p|^2-\beta,
+ \end{split}
+\end{equation}
+with $\alpha>0$, $\beta\geq0$. A weak solution satisfies
+$\int_U a(Du)\cdot Dv=\int_Ufv$ for every $v\in H^1_0(U)$.
+For $a=DF$ with $F$ convex, monotonicity follows by adding its two
+supporting-plane inequalities. The converse fails: $a(p)=(I+K)p$ with
+$K^T=-K\ne0$ is strongly monotone but has no scalar potential, since its
+Jacobian is not symmetric. For constant $K$ its skew part cancels from the
+scalar second-order operator; this example tests the vector-field structure.
+\Needspace{42mm}
+\PDEAnnotation{单调不等于梯度}{对 $a(p)=(I+K)p$，单调性二次型为 $|p-q|^2$。反对称部分不影响它，却阻止 $Da$ 成为 Hessian。}
 
-\PDEPending
+\Needspace{40mm}
+\subsection{Finite-dimensional solvability and energy bounds}
+\Needspace{50mm}
+\begin{lemma}[Zeros of a vector field; source \S9.1 lemma]
+If $V:\overline B_r\to\R^m$ is continuous and $V(d)\cdot d\geq0$
+on $|d|=r>0$, it has a zero in the closed ball.
+\end{lemma}
+\begin{expandedproof}[the closed ball matters]
+If $V$ never vanishes, $T(d)=-rV(d)/|V(d)|$ is a continuous self-map
+of the closed ball. Brouwer gives $d=T(d)$, hence $|d|=r$ and
+$r^2=-rV(d)\cdot d/|V(d)|\leq0$, a contradiction. Brouwer is the
+finite-dimensional input from \S8.1; an interior zero is not asserted.
+\end{expandedproof}
+Choose an orthonormal basis $(w_j)$ of $H^1_0(U)$, with dense finite spans
+$X_m$. Seek $u_m=\sum_{j=1}^m d_jw_j$ with
+\begin{equation}\label{eq:9-galerkin}
+ \int_U a(Du_m)\cdot Dv=\int_Ufv\qquad(v\in X_m).
+\end{equation}
+\Needspace{50mm}
+\begin{theorem}[Approximation and bounds; source Theorems 1--2]
+For every $m$ there is such a $u_m$, and
+$\|Du_m\|_2\leq C_0(1+\|f\|_2)$, where $C_0$ depends only on
+$\alpha,\beta,|U|,C_P$, not on $m$.
+\end{theorem}
+\begin{expandedproof}[one coercive estimate does both jobs]
+Set $V_j(d)=\int a(\sum d_iDw_i)\cdot Dw_j-\int fw_j$.
+Continuity follows by dominated convergence on bounded coefficient sets:
+the growth bound dominates the integrand by an $L^1$ function built from
+the finitely many $Dw_i$. Orthonormality and Young's inequality give
+\[
+ V(d)\cdot d\geq\alpha|d|^2-\beta|U|-C_P\|f\|_2|d|
+ \geq\tfrac\alpha2|d|^2-\beta|U|-\frac{C_P^2}{2\alpha}\|f\|_2^2.
+\]
+A sufficiently large sphere satisfies the lemma, giving a zero and hence
+\eqref{eq:9-galerkin}. Test with $u_m$ and repeat the estimate:
+$\frac\alpha2\|Du_m\|_2^2\leq\beta|U|+C_P^2\|f\|_2^2/(2\alpha)$.
+This also bounds $a(Du_m)$ in $L^2(U;\R^n)$.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{强制性与单调性分工}{强制性先给有限维零点和一致范数界；单调性随后识别极限。弱紧性本身不能推出非线性通量的收敛。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{70mm}
+\subsection{Minty's limit argument}
+\Needspace{50mm}
+\begin{theorem}[Weak existence; source Theorem 3]
+Under \eqref{eq:9-monotone}, the Dirichlet problem has a weak solution.
+\end{theorem}
+\begin{expandedproof}[eliminate the product of two weak limits]
+Extract $u_m\rightharpoonup u$ in $H^1_0$ and
+$a(Du_m)\rightharpoonup\xi$ in $L^2$. For each fixed $w_j$, the Galerkin
+identity holds for all sufficiently large $m$. Passing to the limit and then
+using density yields $\int\xi\cdot Dv=\int fv$ for all $v\in H^1_0$.
+Moreover $\int a(Du_m)\cdot Du_m=\int fu_m\to\int fu=\int\xi\cdot Du$.
+This is an energy identity, not a general rule for products of weak limits.
+
+For fixed $w\in H^1_0$, integrate monotonicity and expand the product.
+Use the energy identity for its only problematic term to obtain
+\[
+ \int_U(\xi-a(Dw))\cdot(Du-Dw)\geq0.
+\]
+Set $w=u-tv$ with $t>0$ and divide by $t$. As $t\downarrow0$,
+$a(Du-tDv)\to a(Du)$ strongly in $L^2$: continuity gives pointwise
+convergence, and for $t\leq1$ its square is dominated by
+$C(1+|Du|^2+|Dv|^2)$. Thus
+$\int(\xi-a(Du))\cdot Dv\geq0$. Replace $v$ by $-v$ for equality.
+Together with the identity for $\xi$ this proves the weak equation.
+Only equality on gradients is required; testing solely with gradients
+has not shown pointwise $\xi=a(Du)$.
+\end{expandedproof}
+\PDEBodyDiagram{9.1}{Energy closes the weak-limit argument.}
+{The flux limit is initially named $\xi$. The Galerkin energy identity removes the weak--weak product; monotonicity with arbitrary $w$, followed by $w=u-tv$, identifies the weak equation. Each arrow requires its own justified limit.}
+{ch09-minty}
+\Needspace{42mm}
+\PDEAnnotation{只需识别散度}{测试梯度只能确定两通量的散度相同。相差无散度场仍给相同弱方程，不应直接写成逐点通量相等。}
+
+\Needspace{40mm}
+\subsection{Uniqueness and the regularity hypothesis}
+\Needspace{50mm}
+\begin{theorem}[Strong monotonicity; source Theorem 4 and regularity remark]
+If $(a(p)-a(q))\cdot(p-q)\geq\theta|p-q|^2$ with $\theta>0$,
+the weak solution is unique. If also $a\in C^1$, $|Da|\leq M$, and
+$\partial U$ is $C^2$, then $u\in H^2(U)$.
+\end{theorem}
+\begin{expandedproof}[uniqueness and difference quotients]
+Subtract the equations for $u,\tilde u$ and test by $u-\tilde u$.
+Then $\theta\|D(u-\tilde u)\|_2^2\leq0$, and Poincar\'e gives equality.
+For regularity, difference quotients of $a(Du)$ have the form
+\[
+ D_h a(Du)=B_hD_hDu,\quad
+ B_h=\int_0^1Da(Du+s(Du(\cdot+he)-Du))\,ds.
+\]
+Here $B_h\eta\cdot\eta\geq\theta|\eta|^2$ and $|B_h|\leq M$.
+Testing by $-D_{-h}(\zeta^2D_hu)$ gives, after Cauchy--Young,
+\[
+ \int\zeta^2|D_hDu|^2\leq C\bigl(\|f\|_2^2+\|Du\|_2^2\bigr).
+\]
+The forcing term is bounded by $\|f\|_2\|D(\zeta^2D_hu)\|_2$;
+no derivative of $f$ is taken. The difference-quotient criterion gives
+interior second derivatives. In a $C^2$ boundary chart the tangential
+estimate is the boundary argument of \S6.3 (or \S8.3 with nonsymmetric
+$B_h$). The transformed equation recovers the normal second derivative
+by division by its coefficient, bounded below by ellipticity. Bounded
+chart derivatives produce lower-order terms controlled by $\|Du\|_2$.
+A finite covering proves global $H^2$. This last step explicitly uses
+the boundary difference-quotient result developed in those chapters.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{增长界不是导数界}{线性增长不能单独给出 $|Da|\leq M$。本稿在 $H^2$ 命题中补明导数上界，以控制差商系数和误差项；存在性不需要它。}

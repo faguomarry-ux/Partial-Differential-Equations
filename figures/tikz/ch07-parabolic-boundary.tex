@@ -1,0 +1,19 @@
+% Original editorial TikZ diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=1cm,y=1cm]
+ \fill[LumenAccent!5] (1,0) rectangle (8.8,3.8);
+ \draw[pde axis] (.3,-.25)--(.3,4.3) node[above] {$t$};
+ \draw[pde axis] (.1,-.4)--(10,-.4) node[right] {space};
+ \draw[LumenAccent,line width=2pt] (1,3.8)--(1,0)--(8.8,0)--(8.8,3.8);
+ \draw[LumenMuted,dashed] (1,3.8)--(8.8,3.8);
+ \node[above] at (5,3.8) {$U\times\{T\}$};
+ \node[below] at (5,0) {initial data};
+ \node[rotate=90,above] at (1,1.9) {lateral data};
+ \draw[pde warm] (2.7,1.1)--(7.5,1.1);
+ \draw[pde blue] (2.7,2.65)--(7.5,2.65);
+ \node[left] at (2.7,1.1) {$t_1$};
+ \node[left] at (2.7,2.65) {$t_2$};
+ \draw[pde axis,draw=LumenWarm] (5.7,1.25)--(5.7,2.5);
+ \node[align=left,pde tiny,anchor=west] at (6,1.85)
+ {positivity\\forward};
+ \node[align=left,pde tiny] at (4,1.85) {$\sup_Vu(t_1)$\\$\leq C\inf_Vu(t_2)$};
+\end{tikzpicture}

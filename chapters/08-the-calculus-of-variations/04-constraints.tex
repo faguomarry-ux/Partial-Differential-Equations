@@ -1,13 +1,217 @@
-% Evans second edition, section 8.4.
-% English source: printed p. 458; PDF page 475 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 8.4: printed pp.458--471 / English PDF pp.475--488.
+% Chinese: printed pp.323--332 / scan pp.341--350.
+\Needspace{55mm}
 \section{Constraints}
 \label{sec:8-4}
+\Needspace{45mm}
+\subsection{Integral constraints and a scalar multiplier}
+On connected $U$, minimize $I[u]=\frac12\int_U|Du|^2$ over
+\[
+\mathcal A=\{u\in H^1_0(U):J[u]=0\},\qquad J[u]=\int_U G(u).
+\]
+Assume $g=G'$ satisfies $|g(z)|\leq C(1+|z|)$.
+Then $|G(z)|\leq C(1+z^2)$, so the constraint is well defined.
+\Needspace{55mm}
+\begin{theorem}[Constrained existence; source \S8.4.1, Theorem 1]
+If $\mathcal A\ne\varnothing$, it contains an energy minimizer.
+\end{theorem}
+\begin{expandedproof}[compactness preserves the nonlinear integral]
+An energy-bounded minimizing sequence is bounded in $H^1_0$.
+After extraction $u_k\rightharpoonup u$ in $H^1_0$ and $u_k\to u$ in $L^2$.
+The mean value theorem and Cauchy--Schwarz give
+\[
+ |J[u_k]-J[u]|\leq C\|u_k-u\|_2
+ (|U|^{1/2}+\|u_k\|_2+\|u\|_2)\longrightarrow0.
+\]
+Thus $u$ is feasible, and weak lower semicontinuity of the Dirichlet norm
+makes it minimizing. Every member of this particular class has finite energy.
+\end{expandedproof}
+\Needspace{55mm}
+\begin{theorem}[Lagrange multiplier; source Theorem 2]
+For a minimizer $u$ there is $\lambda\in\R$ such that
+\begin{equation}\label{eq:8-multiplier}
+ \int_U Du\cdot D\phi=\lambda\int_Ug(u)\phi
+ \quad(\phi\in H^1_0(U)).
+\end{equation}
+\end{theorem}
+\begin{expandedproof}[an admissible curve and the degenerate case]
+First suppose $g(u)\not\equiv0$. By density choose $\psi\in H^1_0$ with
+$b=\int_Ug(u)\psi\ne0$. For any $\phi\in H^1_0$, set
+$j(s,t)=J[u+s\phi+t\psi]$. Its derivatives are continuous by the
+linear growth bound on $g$ and dominated convergence on this finite
+parameter plane. Since $j_t(0,0)=b$, the ordinary implicit function
+theorem supplies $t=\eta(s)$ with $j(s,\eta(s))=0$,
+$\eta(0)=0$, and $\eta'(0)=-\int g(u)\phi/b$.
+Minimality on this curve gives
+$\int Du\cdot D\phi+\eta'(0)\int Du\cdot D\psi=0$.
+Thus \eqref{eq:8-multiplier} holds with
+$\lambda=(\int Du\cdot D\psi)/b$, independent of $\phi$.
 
-\PDEPending
+If $g(u)=0$ a.e., the chain rule with truncation gives
+$G(u)\in W^{1,1}$ and $D(G(u))=g(u)Du=0$.
+The product is integrable by Cauchy--Schwarz. Connectedness makes $G(u)$
+constant, and $J[u]=0$ makes it zero. To identify its boundary value,
+approximate $u$ in $H^1_0$ by compactly supported smooth functions:
+the linear growth of $g$ implies convergence of their compositions in
+$W^{1,1}$, so $G(u)-G(0)$ has zero trace. Hence $G(0)=0$ and zero is
+feasible. Minimality gives $I[u]=0$, whence $u=0$. Both sides of
+\eqref{eq:8-multiplier} vanish for every $\lambda$.
+This final conclusion is special to this energy and constraint, not a
+universal multiplier theorem without a constraint qualification.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{退化约束不能直接除法}{只有 $J'[u]\ne0$ 时才能用隐函数定理并除以 $\int g(u)\psi$。本例退化时另证 $u=0$；一般约束问题不保证退化点存在普通 Lagrange 乘子。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{45mm}
+\subsection{The obstacle problem and a variational inequality}
+Let $f\in L^2(U)$, let $h$ be a smooth obstacle, and assume
+$K=\{w\in H^1_0(U):w\geq h\text{ a.e.}\}\ne\varnothing$.
+Minimize $I[w]=\frac12\|Dw\|_2^2-(f,w)$.
+\Needspace{55mm}
+\begin{theorem}[Obstacle minimizer; source \S8.4.2, Theorems 3--4]
+There is a unique minimizer $u\in K$, characterized equivalently by
+\begin{equation}\label{eq:8-VI}
+ \int_U Du\cdot D(w-u)\geq\int_Uf(w-u)\qquad(w\in K).
+\end{equation}
+\end{theorem}
+\begin{expandedproof}[one-sided variations and the converse]
+Young and Poincar\'e imply
+$I[w]\geq\frac14\|Dw\|_2^2-C\|f\|_2^2$.
+Weak limits of minimizing sequences stay in $K$: strong $L^2$ convergence
+has an a.e. convergent subsequence preserving $w\geq h$.
+The direct method gives existence. The midpoint identity gives strict
+convexity on $H^1_0$, hence uniqueness.
+For $w\in K$, the segment $u+s(w-u)\in K$ for $0\leq s\leq1$.
+Its right energy derivative at zero is nonnegative, giving \eqref{eq:8-VI}.
+Conversely, expand the quadratic energy exactly:
+\[
+ I[w]-I[u]=\int_U Du\cdot D(w-u)-f(w-u)
+                    +\tfrac12\|D(w-u)\|_2^2\geq0.
+\]
+This proves equivalence, including sufficiency of the inequality.
+\end{expandedproof}
+For every nonnegative $\phi\in C_c^\infty(U)$, $u+\phi\in K$ gives
+$\mu=-\Delta u-f\geq0$ in distributions. If $u$ is continuous, then
+$O=\{u>h\}$ is open; on a compact subset of $O$ both signs of a small
+variation are allowed, so $-\Delta u=f$ there. If also $u\in H^2_{\rm loc}$,
+then $\mu$ is a function and
+\[
+ u-h\geq0,\quad\mu\geq0,\quad (u-h)\mu=0\quad\text{a.e.}
+\]
+Interior continuity and $C^{1,1}_{\rm loc}$ regularity for smooth obstacle
+and forcing require external obstacle regularity theory; they are not
+proved by the direct method above. No global $W^{2,\infty}$ estimate
+is claimed without specifying its boundary compatibility hypotheses.
+The free boundary is $\partial\{u>h\}\cap U$.
+\Needspace{55mm}
+\PDEAnnotation{接触集与反力}{约束只允许向上变化，故反力 $\mu=-\Delta u-f$ 非负。在非接触区可双向变化，反力为零。可行集、反力和互补条件要使用同一符号约定。}
+
+\PDEBodyDiagram{8.3}{An exact obstacle solution with two free-boundary points.}
+{On $(-1,1)$ take $f=0$ and $h(x)=1-4x^2/3$. The minimizer is $u=h$ on $|x|\leq1/2$, and $u=4(1-|x|)/3$ outside. Values and first derivatives match at $\pm1/2$, so $-u''=8/3$ on the contact interval and zero elsewhere, with no point masses.}
+{ch08-obstacle}
+
+\Needspace{45mm}
+\subsection{Pointwise constraints: harmonic maps}
+Consider
+$\mathcal A=\{u\in H^1(U;\R^m):u-g\in H^1_0,\ |u|=1\text{ a.e.}\}$,
+and $I[u]=\frac12\int_U|Du|^2$.
+A minimizing sequence is bounded in $H^1$ ($|u|=1$ fixes its $L^2$ norm).
+A strong $L^2$ subsequence preserves the sphere constraint a.e.; the trace
+condition is weakly closed, so a minimizer exists if the class is nonempty.
+\Needspace{55mm}
+\begin{theorem}[Harmonic map equation; source \S8.4.3, Theorem 5]
+A minimizer satisfies
+\begin{equation}\label{eq:8-harmonic-map}
+ \int_U Du:D\phi=\int_U|Du|^2u\cdot\phi
+ \quad(\phi\in H^1_0(U;\R^m)\cap L^\infty(U;\R^m)).
+\end{equation}
+\end{theorem}
+\begin{expandedproof}[normalization generates tangent variations]
+For bounded $\phi$, $u_s=(u+s\phi)/|u+s\phi|$ is well defined for
+$|s|\|\phi\|_\infty<1/2$. Sobolev composition and traces show
+$u_s\in\mathcal A$. Its derivative at zero in $H^1$ is
+$\dot u_0=\phi-(u\cdot\phi)u$.
+To justify this derivative, derivatives of the normalization map are
+uniformly bounded on $|u+s\phi|\geq1/2$; its spatial derivative and
+parameter derivative are dominated in $L^2$ by
+$C(|D\phi|+|Du|\,\|\phi\|_\infty)$.
+Thus differentiating the energy is legitimate.
+Since $u\cdot\partial_i u=0$ a.e.,
+\[
+ Du:D((u\cdot\phi)u)=|Du|^2(u\cdot\phi).
+\]
+The vanishing derivative is precisely \eqref{eq:8-harmonic-map}.
+The multiplier is the function $|Du|^2\in L^1$, explaining why bounded
+variations appear in the weak formulation.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{约束曲率进入方程}{球面约束的切向投影是 $\phi-(u\cdot\phi)u$。对 $|u|^2=1$ 求导给 $u\cdot u_i=0$；再次求导产生 $|Du|^2u$，这里乘子是函数而非一个常数。}
+
+\Needspace{45mm}
+\subsection{Divergence constraints and pressure}
+For $f\in L^2(U;\R^n)$ minimize
+$I[v]=\frac12\int|Dv|^2-\int f\cdot v$ on the closed linear space
+$V_\sigma=\{v\in H^1_0(U;\R^n):\operatorname{div}v=0\}$.
+Coercivity and strict convexity give a unique $u$, with
+$\ell(v)=\int Du:Dv-f\cdot v=0$ for $v\in V_\sigma$.
+To recover pressure we use the following external divergence theorem:
+on a bounded connected smooth domain there is a bounded right inverse
+\[
+ \mathcal B:L^2_0(U)\to H^1_0(U;\R^n),\quad
+ \operatorname{div}\mathcal Bq=q,\quad\|\mathcal Bq\|_{H^1}\leq C\|q\|_2.
+\]
+Here $L^2_0$ denotes zero mean. This is the divergence-solving estimate
+also invoked without proof in the source, often realized by a Bogovskii
+operator. Its construction is not proved here.
+\Needspace{55mm}
+\begin{theorem}[Pressure multiplier; source \S8.4.4, Theorem 6]
+There is a unique mean-zero $p\in L^2(U)$ satisfying
+\[
+ \int_U Du:Dv=\int_U f\cdot v+p\operatorname{div}v
+ \quad(v\in H^1_0(U;\R^n)).
+\]
+Thus $-\Delta u+Dp=f$, $\operatorname{div}u=0$ in distributions.
+The global conclusion uses the external right inverse just stated; the
+source proves a local pressure statement.
+\end{theorem}
+\begin{expandedproof}[factoring a functional through divergence]
+The functional $q\mapsto\ell(\mathcal Bq)$ is bounded on $L^2_0$.
+Riesz representation gives mean-zero $p$ with
+$\ell(\mathcal Bq)=\int pq$. For any $v\in H^1_0$,
+$q=\operatorname{div}v$ has zero mean and
+$v-\mathcal Bq\in V_\sigma$. Hence
+$\ell(v)=\ell(\mathcal Bq)=\int p\operatorname{div}v$.
+Surjectivity of divergence gives uniqueness in $L^2_0$ and
+$\|p\|_2\leq C(\|Du\|_2+\|f\|_2)$.
+Without mean normalization constants are undetermined, since
+$\int\operatorname{div}v=0$. This argument needs connectedness and the
+right inverse, not a claim that every curl-free field is globally a gradient.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{压力只确定到常数}{测试速度具有零边界，故散度积分为零；压力加常数不改变弱式。右逆估计将消失在无散度空间上的泛函表示为 $p\operatorname{div}v$，并给出压力范数控制。}
+
+\Needspace{45mm}
+\subsection{Nonlinear incompressibility}
+In three-dimensional elasticity, $u$ is the deformation map (the new
+position), not the displacement $u-x$. Local incompressibility is
+$\det Du=1$. For an actual displacement $v=u-x$ it is
+$\det(I+Dv)=1$, whose first-order linearization is $\operatorname{div}v=0$.
+\Needspace{55mm}
+\begin{theorem}[Determinant constraint; source Theorem 7]
+For $q>3$, let $L(P,x)$ be smooth, convex in $P$, and satisfy
+\eqref{eq:8-coercivity}. If
+\[
+ \mathcal A=\{u\in g+W^{1,q}_0(U;\R^3):\det Du=1\text{ a.e.}\}
+\]
+has a finite-energy member, then it has an energy minimizer.
+\end{theorem}
+\begin{expandedproof}[weak closure of the determinant condition]
+Coercivity bounds a minimizing sequence in $W^{1,q}$.
+Its weak limit keeps the trace, and Lemma~\ref{lem:8-det-weak} gives
+$\det Du_k\rightharpoonup\det Du$ in $L^{q/3}$.
+Since every determinant equals one, the limit does too. Convex lower
+semicontinuity completes existence. The feasible set is not convex,
+so convexity of $L$ alone supplies no uniqueness assertion here.
+The determinant condition is local and does not by itself prove global
+injectivity or prevent self-interpenetration.
+\end{expandedproof}

@@ -1,13 +1,243 @@
-% Evans second edition, section 9.6.
-% English source: printed p. 526; PDF page 543 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 9.6: printed pp.526--538; English PDF pp.543--555.
+% Chinese: printed p.371 / scan p.389.
 \section{Gradient Flows}
 \label{sec:9-6}
+\Needspace{40mm}
+\subsection{Extended energies and subgradients}
+Let $H$ be a real Hilbert space and $I:H\to(-\infty,+\infty]$ be
+proper, convex and lower semicontinuous in the norm topology.
+Its effective domain is $D(I)=\{u:I(u)<\infty\}$. For $u\in D(I)$ set
+\[
+ \partial I(u)=\{a\in H:I(w)\geq I(u)+(a,w-u)\text{ for every }w\in H\};
+\]
+outside $D(I)$ the set is empty. Write $A=\partial I$ and
+$D(A)=\{u:A(u)\ne\varnothing\}$. Adding the subgradient inequalities
+shows $(a-b,u-v)\geq0$ for $a\in A(u)$, $b\in A(v)$.
+Also $0\in A(u)$ exactly when $u$ minimizes $I$.
+\Needspace{42mm}
+\PDEAnnotation{允许无穷能量}{把不满足边界或约束的函数赋值 $+\infty$，能把限制条件写进定义域。$\partial I(u)$ 是 Hilbert 空间中的向量集合，依赖所选内积，不能只看形式变分。}
+\Needspace{50mm}
+\begin{theorem}[Resolvent; source \S9.6.1, Theorem 1]
+For each $\lambda>0$ and $w\in H$ there is exactly one $u$ with
+$u+\lambda A(u)\ni w$. It uniquely minimizes
+\[
+ I(z)+{1\over2\lambda}\|z-w\|^2.
+\]
+\end{theorem}
+\begin{expandedproof}[coercivity and the actual subgradient inequality]
+The closed convex epigraph of $I$ can be strictly separated from a point
+$(u_0,I(u_0)-1)$ below it, where $I(u_0)<\infty$.
+The separating functional has a nonzero vertical component: otherwise
+its values at these two points with the same first coordinate could not
+be strictly ordered. Its sign follows from upward closure of the epigraph.
+Dividing gives an affine minorant $I(z)\geq(b,z)+d$.
+This uses the geometric Hahn--Banach theorem as an explicit functional
+analysis input. Therefore the quadratic functional above is coercive
+and bounded below. Norm-closed convex sublevel sets are weakly closed
+by the same separation theorem, so $I$ is weakly lower semicontinuous.
+A bounded minimizing sequence has a weakly convergent subsequence in $H$;
+the limit minimizes. The quadratic term makes the minimizer unique.
 
-\PDEPending
+Let that minimizer be $u$. Compare it with $u+t(z-u)$ for $0<t<1$.
+Convexity bounds its energy above by $(1-t)I(u)+tI(z)$. Expansion of
+the quadratic, division by $t$, and $t\downarrow0$ give
+$I(z)-I(u)\geq((w-u)/\lambda,z-u)$.
+Thus $(w-u)/\lambda\in A(u)$. Conversely this inequality, together
+with expansion of the square, proves minimality, with a strict excess
+$\|z-u\|^2/(2\lambda)$ if $z\ne u$.
+\end{expandedproof}
+Define the resolvent $J_\lambda=(\operatorname{Id}+\lambda A)^{-1}$
+and the Yosida approximation $A_\lambda=(\operatorname{Id}-J_\lambda)/\lambda$.
+\Needspace{50mm}
+\begin{theorem}[Source Theorem 2, with sharpened Lipschitz bound]
+For $u,v\in H$, writing $j=J_\lambda u-J_\lambda v$ and
+$a=A_\lambda u-A_\lambda v$, one has
+\[
+ \|j\|^2+\lambda^2\|a\|^2\leq\|u-v\|^2,\qquad (a,u-v)\geq0.
+\]
+In particular $J_\lambda$ is nonexpansive, $A_\lambda$ is $1/\lambda$-
+Lipschitz, and $A_\lambda u\in A(J_\lambda u)$.
+For $u\in D(A)$ and $a_0\in A(u)$,
+$\|A_\lambda u\|\leq\|a_0\|$ and
+$\|J_\lambda u-u\|\leq\lambda\|a_0\|$.
+The last convergence extends to $u\in\overline{D(A)}$.
+\end{theorem}
+\begin{expandedproof}[firm nonexpansiveness]
+The resolvent identity gives $u-v=j+\lambda a$, with $(a,j)\geq0$.
+Squaring proves the first inequality; taking inner product with $a$
+proves monotonicity of $A_\lambda$. The inclusion is the defining
+resolvent equation. Comparing $(J_\lambda u,A_\lambda u)$ with
+$(u,a_0)$ by monotonicity gives
+$\lambda\|A_\lambda u\|^2\leq\lambda(a_0,A_\lambda u)$,
+which gives the bound and convergence on $D(A)$. Approximate any point
+of its closure by $v\in D(A)$ and use
+$\|J_\lambda u-u\|\leq2\|u-v\|+\|J_\lambda v-v\|$.
+The source states the weaker $2/\lambda$ Lipschitz estimate; the squared
+identity supplies the sharper bound used here.
+\end{expandedproof}
+\Needspace{50mm}
+\begin{lemma}[Maximality and graph closure; editorial supplement]
+If $(u,a)$ satisfies $(a-b,u-v)\geq0$ for every $b\in A(v)$,
+then $a\in A(u)$. Consequently the graph is closed for strong convergence
+of $u$ and weak convergence of bounded $a$.
+\end{lemma}
+\begin{expandedproof}[one resolvent test]
+Take $v=J_1(u+a)$ and $b=u+a-v\in A(v)$. The inequality becomes
+$-\|u-v\|^2\geq0$, so $u=v$, $a=b$. For a strong--weak limit of
+graph pairs, monotonicity passes to the limit against every fixed pair
+$(v,b)$, and the first assertion applies.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{图闭性不是弱连续性}{这里用“输入强收敛、输出弱收敛”和单调图的最大性。并没有假设多值算子 $A$ 连续，也不能把 $A(u_k)$ 直接取极限写为 $A(u)$。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{40mm}
+\subsection{Constructing the nonlinear flow}
+\Needspace{50mm}
+\begin{theorem}[Gradient flow; source \S9.6.2, Theorem 3]
+For $g\in D(A)$ there is a unique
+$u\in C([0,\infty);H)$, $u'\in L^\infty(0,\infty;H)$ such that
+$u(0)=g$, $u(t)\in D(A)$ for every $t\geq0$, and
+$-u'(t)\in A(u(t))$ a.e. For any $a_0\in A(g)$,
+$\|u'\|_{L^\infty}\leq\|a_0\|$.
+If $\overline{D(A)}=H$, these solutions extend uniquely by contraction
+to a strongly continuous nonlinear semigroup $S(t)$ on $H$.
+For general $g\in H$ this extension initially asserts a continuous
+semigroup solution, without the global derivative bound above.
+\end{theorem}
+\begin{expandedproof}[Yosida approximation and a common graph test]
+For $\lambda>0$ solve the globally Lipschitz Hilbert-space ODE
+$u_\lambda'=-A_\lambda u_\lambda$, $u_\lambda(0)=g$.
+Picard iteration gives a global solution (linear growth prevents finite-time
+escape). Monotonicity gives contraction between two such trajectories.
+Compare one trajectory with its time translate, divide by the shift and
+let the shift vanish to obtain
+\[
+ \|u_\lambda'(t)\|\leq\|A_\lambda g\|\leq M:=\|a_0\|.
+\]
+Write $a_\lambda=A_\lambda u_\lambda$, $z_\lambda=J_\lambda u_\lambda$
+so $u_\lambda=z_\lambda+\lambda a_\lambda$ and
+$a_\lambda\in A(z_\lambda)$. For two parameters, monotonicity gives
+\[
+ \tfrac12(\|u_\lambda-u_\mu\|^2)'
+ \leq- (a_\lambda-a_\mu,\lambda a_\lambda-\mu a_\mu)
+ \leq2(\lambda+\mu)M^2.
+\]
+Thus the trajectories are Cauchy uniformly on every $[0,T]$, with
+$\|u_\lambda-u_\mu\|_{C([0,T];H)}^2\leq4T(\lambda+\mu)M^2$.
+They converge strongly to a Lipschitz $u$; after extracting on finite
+intervals, $a_\lambda\rightharpoonup a=-u'$ in $L^2(0,T;H)$.
+Also $z_\lambda\to u$ uniformly and $\|a\|_{L^\infty}\leq M$.
+
+To identify the graph without exceptional sets depending on arbitrary
+test vectors, define the measurable pair
+\[
+ v(t)=J_1(u(t)+a(t)),\qquad b(t)=u(t)+a(t)-v(t)\in A(v(t)).
+\]
+Both functions are in $L^2(0,T;H)$ since the resolvent is Lipschitz.
+Integrate $(a_\lambda-b,z_\lambda-v)\geq0$ and pass to the limit using
+strong convergence of $z_\lambda$ and weak convergence of $a_\lambda$.
+The result is
+$\int(a-b,u-v)=-\int\|u-v\|^2\geq0$.
+Hence $u=v$ a.e., and $a=b\in A(u)$ a.e. This is the essential limit
+identification; pointwise convergence of $a_\lambda$ was not assumed.
+
+For any fixed $t$, choose times $t_j\to t$ outside the null set so
+$(u(t_j),a(t_j))$ are graph pairs and $\|a(t_j)\|\leq M$.
+A weakly convergent subsequence of the second components and the
+strong--weak graph closure give $u(t)\in D(A)$. Two solutions satisfy
+$\frac12(\|u-v\|^2)'\leq0$ by monotonicity, proving uniqueness and
+contraction. Uniqueness also gives $S(t+s)=S(t)S(s)$ on $D(A)$.
+
+For $g\in\overline{D(A)}$, approximate by $g_j\in D(A)$.
+Contraction makes $S(t)g_j$ Cauchy uniformly even on all $t\geq0$.
+The limit is independent of the approximating sequence, continuous at
+$t=0$, and retains contraction and the semigroup law. It need not have
+a derivative uniformly bounded down to $t=0$. This distinguishes the
+strong solution theorem from its continuous extension.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{收缩不代表严格收缩}{这里 $\|S(t)g-S(t)h\|\leq\|g-h\|$，因子是 $1$，不是 Banach 定理所需的小于 $1$。半群还可能把不同初值合并，见习题 11。}
+\PDEBodyDiagram{9.4}{A nonsmooth energy can merge trajectories.}
+{For $H=\R$ and $I(s)=|s|$, $J_\lambda(s)=\operatorname{sgn}(s)(|s|-\lambda)_+$ and $S(t)s=\operatorname{sgn}(s)(|s|-t)_+$. The supporting slopes at zero form $[-1,1]$; different positive initial values reach zero at different times and thereafter coincide. These are exact graphs, not a discretization of another model.}
+{ch09-subgradient}
+
+\Needspace{40mm}
+\subsection{Dissipation and a quasilinear parabolic equation}
+\Needspace{50mm}
+\begin{lemma}[Convex chain rule; editorial supplement]
+If $u\in W^{1,2}(0,T;H)$ and $a\in L^2(0,T;H)$ with
+$a(t)\in\partial I(u(t))$ a.e., then $I(u(t))$ has an absolutely
+continuous representative and $(I(u))'=(a,u')$ a.e. For the flow,
+\[
+ I(u(t))+\int_s^t\|u'(r)\|^2dr=I(u(s)).
+\]
+For the solution above with $g\in D(A)$ the identity holds for all
+$0\leq s\leq t$.
+\end{lemma}
+\begin{expandedproof}[two subgradient inequalities squeeze the derivative]
+At times where the inclusions hold, for $h>0$ the increment of $I$
+between $u(t)$ and $u(t+h)$ lies between
+$(a(t),u(t+h)-u(t))$ and $(a(t+h),u(t+h)-u(t))$.
+On compact subintervals these bounds also make $I(u)$ integrable:
+use one fixed graph point as an affine lower bound, and test the
+subgradient at $u(t)$ against a fixed finite-energy point for an upper
+bound in $L^1$. Multiply the increment inequalities by a nonnegative
+smooth test in time and integrate. Difference quotients of $u$ converge
+to $u'$ in $L^2$ and translations of $a$ converge to $a$ in $L^2$.
+Both bounds therefore converge to $(a,u')$ in distributions. This
+$L^1$ derivative gives the asserted absolutely continuous representative.
+For our flow $a$ is bounded. The subgradient inequalities and continuity
+of $u$ then identify this representative with the actual $I(u(t))$
+at every time, including $0$, by graph closure and lower semicontinuity.
+Finally $a=-u'$ gives dissipation.
+\end{expandedproof}
+Let $L\in C^2(\R^n)$ satisfy
+$\theta|\xi|^2\leq D^2L(p)\xi\cdot\xi$ and $|D^2L(p)|\leq M$.
+On $H=L^2(U)$ define $I(u)=\int_U L(Du)$ for $u\in H^1_0(U)$,
+and $I(u)=+\infty$ otherwise.
+\Needspace{50mm}
+\begin{theorem}[PDE realization; source \S9.6.3, Theorem 4]
+This energy is proper, convex and lower semicontinuous in $L^2$.
+Its subdifferential is single-valued with
+\[
+ D(\partial I)=H^2(U)\cap H^1_0(U),\qquad
+ \partial I(u)=-\operatorname{div}DL(Du).
+\]
+For $g$ in this domain the flow solves
+$u_t-\operatorname{div}DL(Du)=0$, with zero boundary data, and
+$u\in L^\infty(0,\infty;H^2\cap H^1_0)$,
+$u_t\in L^\infty(0,\infty;L^2)$. For $g\in L^2$ its continuous
+semigroup extension is defined by approximation.
+\end{theorem}
+\begin{expandedproof}[the topology of the energy matters]
+Taylor's inequality and $\int_U Du=0$ for $u\in H^1_0$ give
+$I(u)\geq L(0)|U|+\theta\|Du\|_2^2/2$; the affine term integrates
+to zero by density of $C_c^\infty$. A sequence converging in $L^2$ with
+bounded energy is thus bounded in $H^1_0$; a subsequence converges weakly
+there to the same limit. Convex integral lower semicontinuity from
+\S8.2 gives the $L^2$ lower semicontinuity, including the case of infinite
+limit energy. Properness follows from $I(0)<\infty$.
+
+If $u\in H^2\cap H^1_0$, the Lipschitz bound on $DL$ makes
+$-\operatorname{div}DL(Du)\in L^2$. The convex supporting inequality,
+integrated and integrated by parts against $w-u\in H^1_0$, shows it
+belongs to $\partial I(u)$; tests outside $H^1_0$ have infinite energy.
+Conversely, if $a\in\partial I(u)$, use $w=u\pm t\varphi$ for
+$\varphi\in H^1_0$. The linear growth of $DL$ justifies differentiation
+under the integral, giving
+$\int a\varphi=\int DL(Du)\cdot D\varphi$.
+The $H^2$ result of \S9.1 applies to $DL$, whose derivative is bounded
+and uniformly elliptic. Therefore $u\in H^2\cap H^1_0$, and density of
+test functions identifies $a$ uniquely. The same estimates, testing
+first by $u$, give $\|u\|_{H^2}\leq C\|a\|_2$; the constant vector
+$DL(0)$ has zero pairing with zero-trace gradients.
+
+The domain is dense in $L^2$ because it contains $C_c^\infty(U)$.
+Apply the flow theorem; its speed bound and this elliptic estimate give
+the claimed uniform $H^2$ bound. In weak form the spatial divergence
+is exactly the $L^2$ subgradient identified above. The statement for
+rough $g$ uses contraction extension, not the uniform-in-time $H^2$
+claim made for domain data.
+\end{expandedproof}
+\Needspace{42mm}
+\PDEAnnotation{Hilbert 梯度依赖度量}{这里取 $H=L^2$，所以梯度为 $-\operatorname{div}DL(Du)$。若在 $H^1_0$ 的梯度内积中取 Riesz 代表，还需再作用逆 Laplace 算子；所得流不同。}

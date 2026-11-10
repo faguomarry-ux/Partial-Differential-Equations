@@ -1,0 +1,17 @@
+% Original editorial TikZ diagram, 2026-11-10.
+\begin{tikzpicture}[pde diagram,x=1cm,y=1cm]
+ \node[pde box,text width=4.1cm] (a) at (2.4,2.6)
+ {$V_m=\operatorname{span}(w_1,\ldots,w_m)$\\finite ODE + projected data};
+ \node[pde box,text width=4.1cm] (b) at (8.1,2.6)
+ {$\sup_t\|u_m\|_H^2+\int\|u_m\|_V^2\leq C$\\$\|u_m'\|_{L^2V'}\leq C$};
+ \node[pde box,text width=4.1cm] (c) at (8.1,.1)
+ {$u_m\rightharpoonup u$, $u_m'\rightharpoonup u'$\\integrated weak equation};
+ \node[pde box,text width=4.1cm] (d) at (2.4,.1)
+ {$u(0)=g$ in $H$\\uniqueness by energy};
+ \draw[pde axis] (a)--(b);
+ \node[pde tiny] at (5.25,3.45) {energy test};
+ \draw[pde axis] (b)--node[right,pde tiny]{weak limits}(c);
+ \draw[pde axis] (c)--(d);
+ \node[pde tiny] at (5.25,-.85) {$\phi(T)=0$};
+ \draw[pde warm,dashed] (a.south)--node[left,pde tiny]{$P_mg\to g$}(d.north);
+\end{tikzpicture}

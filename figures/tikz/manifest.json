@@ -298,5 +298,305 @@
     "drawing": "figures/tikz/ch06-boundary-ratio-margin.tex",
     "source": "chapters/06-second-order-elliptic-equations/05-nonsymmetric-spectrum.tex",
     "section": "6.5"
+  },
+  {
+    "id": "T7.1",
+    "chapter": 7,
+    "placement": "body",
+    "title": "Galerkin approximation preserves the energy estimate.",
+    "caption": "The Dirichlet spectral projection is stable in $H^1_0$, controlling the time derivative in $H^{-1}$. Integrated tests retain the initial value in the limit. Arrows describe proof steps, not numerical error bounds.",
+    "drawing": "figures/tikz/ch07-galerkin.tex",
+    "source": "chapters/07-linear-evolution-equations/01-second-order-parabolic-equations.tex",
+    "section": "7.1"
+  },
+  {
+    "id": "T7.2",
+    "chapter": 7,
+    "placement": "body",
+    "title": "The parabolic boundary and Harnack comparison.",
+    "caption": "The thick bottom and side edges form $\\Gamma_T$. The top interior belongs to the evolution region. Harnack compares an earlier interior slice to a later one; the arrow indicates forward propagation of positivity.",
+    "drawing": "figures/tikz/ch07-parabolic-boundary.tex",
+    "source": "chapters/07-linear-evolution-equations/01-second-order-parabolic-equations.tex",
+    "section": "7.1"
+  },
+  {
+    "id": "T7.3",
+    "chapter": 7,
+    "placement": "body",
+    "title": "Anisotropy changes the cross-section of a wave cone.",
+    "caption": "For $A=\\operatorname{diag}(4,1)$, $q(x)=\\sqrt{x_1^2/4+x_2^2}$. At time $t$, the dependency cross-section is an ellipse with semiaxes $2(t_0-t)$ and $t_0-t$. The cone sketch and the spatial slice use separate coordinate scales.",
+    "drawing": "figures/tikz/ch07-anisotropic-cone.tex",
+    "source": "chapters/07-linear-evolution-equations/02-second-order-hyperbolic-equations.tex",
+    "section": "7.2"
+  },
+  {
+    "id": "T7.4",
+    "chapter": 7,
+    "placement": "body",
+    "title": "A Jordan block amplifies high frequencies.",
+    "caption": "For $B=\\left(\\begin{smallmatrix}0&1\\\\0&0\\end{smallmatrix}\\right)$ and input $g=(0,\\sin(kx))$ on a periodic line, $u=(-tk\\cos(kx),\\sin(kx))$. At $t=0.5$ the first component has amplitude $0.5k$. This exact periodic model illustrates the Fourier multiplier mechanism; the whole-space theorem above uses Sobolev data on $\\R^n$.",
+    "drawing": "figures/tikz/ch07-jordan.tex",
+    "source": "chapters/07-linear-evolution-equations/03-systems-of-hyperbolic-first-order-equations.tex",
+    "section": "7.3"
+  },
+  {
+    "id": "T7.M",
+    "chapter": 7,
+    "placement": "margin",
+    "title": "同一模态的两种衰减",
+    "caption": "热方程取 $E=\\frac12\\|u\\|_2^2$，图示 $k=1$ 模态。波动方程取 $E=\\frac12(\\|u_t\\|_2^2+\\|u_x\\|_2^2)$，同一模态总能量守恒。",
+    "drawing": "figures/tikz/ch07-energy-margin.tex",
+    "source": "chapters/07-linear-evolution-equations/04-semigroup-theory.tex",
+    "section": "7.4"
+  },
+  {
+    "id": "T8.1",
+    "chapter": 8,
+    "placement": "body",
+    "title": "The direct method keeps feasibility and energy in the limit.",
+    "caption": "The arrows represent separate arguments. A finite-energy competitor makes the infimum meaningful; coercivity and Poincare give boundedness. Weak closure preserves constraints, while lower semicontinuity supplies the minimizing inequality.",
+    "drawing": "figures/tikz/ch08-direct-method.tex",
+    "source": "chapters/08-the-calculus-of-variations/02-existence-of-minimizers.tex",
+    "section": "8.2"
+  },
+  {
+    "id": "T8.2",
+    "chapter": 8,
+    "placement": "body",
+    "title": "Gradient oscillations test the need for convexity.",
+    "caption": "The left graph is $W(p)=(p^2-1)^2$. A zero-trace triangular profile on $(0,1)$ can have slopes $+1,-1$ while its amplitude tends to zero. Its energy is zero, whereas the limit profile has energy $W(0)=1$. The right profile is one exact period, before multiplying its horizontal and vertical scales by $1/k$.",
+    "drawing": "figures/tikz/ch08-oscillation.tex",
+    "source": "chapters/08-the-calculus-of-variations/02-existence-of-minimizers.tex",
+    "section": "8.2"
+  },
+  {
+    "id": "T8.M",
+    "chapter": 8,
+    "placement": "margin",
+    "title": "秩一方向与全矩阵方向",
+    "caption": "对 $2\\times2$ 矩阵，$t\\mapsto\\det(P+t\\,a\\otimes b)$ 是仿射函数，但 $t\\mapsto\\det(tI)=t^2$。秩一方向上的条件不等于整个矩阵空间中的凸性。",
+    "drawing": "figures/tikz/ch08-rank-one-margin.tex",
+    "source": "chapters/08-the-calculus-of-variations/02-existence-of-minimizers.tex",
+    "section": "8.2"
+  },
+  {
+    "id": "T8.3",
+    "chapter": 8,
+    "placement": "body",
+    "title": "An exact obstacle solution with two free-boundary points.",
+    "caption": "On $(-1,1)$ take $f=0$ and $h(x)=1-4x^2/3$. The minimizer is $u=h$ on $|x|\\leq1/2$, and $u=4(1-|x|)/3$ outside. Values and first derivatives match at $\\pm1/2$, so $-u''=8/3$ on the contact interval and zero elsewhere, with no point masses.",
+    "drawing": "figures/tikz/ch08-obstacle.tex",
+    "source": "chapters/08-the-calculus-of-variations/04-constraints.tex",
+    "section": "8.4"
+  },
+  {
+    "id": "T8.4",
+    "chapter": 8,
+    "placement": "body",
+    "title": "A minimax path must cross an energy barrier.",
+    "caption": "This is an exact two-dimensional model, $I(x,y)=(x^2-1)^2+y^2-1$, connecting $(1,0)$ to $(-1,0)$. Both endpoints have energy $-1$ and every path crosses $x=0$, where $I\\geq0$. The horizontal path attains maximum zero at the saddle $(0,0)$. Translation and addition of a constant put the first endpoint at the theorem's $0$ with energy zero.",
+    "drawing": "figures/tikz/ch08-mountain-pass.tex",
+    "source": "chapters/08-the-calculus-of-variations/05-critical-points.tex",
+    "section": "8.5"
+  },
+  {
+    "id": "T9.1",
+    "chapter": 9,
+    "placement": "body",
+    "title": "Energy closes the weak-limit argument.",
+    "caption": "The flux limit is initially named $\\xi$. The Galerkin energy identity removes the weak--weak product; monotonicity with arbitrary $w$, followed by $w=u-tv$, identifies the weak equation. Each arrow requires its own justified limit.",
+    "drawing": "figures/tikz/ch09-minty.tex",
+    "source": "chapters/09-nonvariational-techniques/01-monotonicity-methods.tex",
+    "section": "9.1"
+  },
+  {
+    "id": "T9.2",
+    "chapter": 9,
+    "placement": "body",
+    "title": "Two ordered iterations trap the solution.",
+    "caption": "For $-u''=1$ on $(0,1)$ with zero endpoint data, take $u_0=0$, $\\overline u_0=x(1-x)$ and shift $\\lambda=4$. The curves show the exact first lower and upper iterates and the solution $u=x(1-x)/2$. Later lower iterates increase and upper iterates decrease in the pointwise order.",
+    "drawing": "figures/tikz/ch09-order.tex",
+    "source": "chapters/09-nonvariational-techniques/03-method-of-subsolutions-and-supersolutions.tex",
+    "section": "9.3"
+  },
+  {
+    "id": "T9.M",
+    "chapter": 9,
+    "placement": "margin",
+    "title": "反应与扩散的阈值",
+    "caption": "归一化为 $\\lambda_1=1$ 后，比较 ODE 为 $y'=y(y-1)$。箭头只表示这个 ODE 的相线；$y_0\\leq1$ 时不能据此断言 PDE 全局存在。",
+    "drawing": "figures/tikz/ch09-blowup-margin.tex",
+    "source": "chapters/09-nonvariational-techniques/04-nonexistence-of-solutions.tex",
+    "section": "9.4"
+  },
+  {
+    "id": "T9.3",
+    "chapter": 9,
+    "placement": "body",
+    "title": "Reflection and the region available for continuation.",
+    "caption": "The cap $\\Sigma_\\lambda$ reflects inside the unit ball. At a proposed positive stopping position, comparison is uniformly strict on a compact core $K$. Any negative part for a nearby plane must lie in the thin remainder, where the small-support estimate excludes it. Geometry is schematic; the equation is scalar and $u>0$ is essential.",
+    "drawing": "figures/tikz/ch09-moving-plane.tex",
+    "source": "chapters/09-nonvariational-techniques/05-geometric-properties-of-solutions.tex",
+    "section": "9.5"
+  },
+  {
+    "id": "T9.4",
+    "chapter": 9,
+    "placement": "body",
+    "title": "A nonsmooth energy can merge trajectories.",
+    "caption": "For $H=\\R$ and $I(s)=|s|$, $J_\\lambda(s)=\\operatorname{sgn}(s)(|s|-\\lambda)_+$ and $S(t)s=\\operatorname{sgn}(s)(|s|-t)_+$. The supporting slopes at zero form $[-1,1]$; different positive initial values reach zero at different times and thereafter coincide. These are exact graphs, not a discretization of another model.",
+    "drawing": "figures/tikz/ch09-subgradient.tex",
+    "source": "chapters/09-nonvariational-techniques/06-gradient-flows.tex",
+    "section": "9.6"
+  },
+  {
+    "id": "T10.1",
+    "chapter": 10,
+    "placement": "body",
+    "title": "A corner distinguishes a.e. and viscosity solutions.",
+    "caption": "On $(-1,1)$ both $1-|x|$ and $|x|-1$ solve $|u'|=1$ away from zero and vanish at the endpoints. The upper test $1-x^2/2$ is allowed for the downward corner, with slope zero and residual $-1\\leq0$. For the upward corner, the lower test $-1+x^2/2$ has the same residual and violates the required supersolution inequality. No smooth lower test exists at the downward corner.",
+    "drawing": "figures/tikz/ch10-contact.tex",
+    "source": "chapters/10-hamilton-jacobi-equations/01-introduction-viscosity-solutions.tex",
+    "section": "10.1"
+  },
+  {
+    "id": "T10.2",
+    "chapter": 10,
+    "placement": "body",
+    "title": "Doubling variables produces two independent smooth tests.",
+    "caption": "The common vector $(x-y)/\\varepsilon$ need not be bounded. Global Lipschitz control in momentum handles the small difference $p_u-p_v$, while $|x-y|^2/\\varepsilon\\to0$ handles the spatial dependence of $H$. The opposite strict time shifts leave the positive gap $2\\eta$ after subtraction.",
+    "drawing": "figures/tikz/ch10-doubling.tex",
+    "source": "chapters/10-hamilton-jacobi-equations/02-uniqueness.tex",
+    "section": "10.2"
+  },
+  {
+    "id": "T10.3",
+    "chapter": 10,
+    "placement": "body",
+    "title": "A prefix and its continuation form one admissible control.",
+    "caption": "Restricting a full control gives a continuation cost at least $V(z,t+h)$. Conversely, for a fixed prefix reaching $z$, choose one $\\delta$-optimal continuation and concatenate it. The two comparisons prove the equality in DPP. The curves are schematic state trajectories, not a claim of optimality for the drawn paths.",
+    "drawing": "figures/tikz/ch10-dpp.tex",
+    "source": "chapters/10-hamilton-jacobi-equations/03-control-theory-dynamic-programming.tex",
+    "section": "10.3"
+  },
+  {
+    "id": "T10.M",
+    "chapter": 10,
+    "placement": "margin",
+    "title": "时间方向与测试符号",
+    "caption": "图中残差均按方程所写的时间变量计算。令 $\\tau=T-t$ 后，$\\partial_t=-\\partial_\\tau$，Hamiltonian 同时变为 $-H_c$；不能只改变时间端点而保留所有符号。",
+    "drawing": "figures/tikz/ch10-time-margin.tex",
+    "source": "chapters/10-hamilton-jacobi-equations/03-control-theory-dynamic-programming.tex",
+    "section": "10.3"
+  },
+  {
+    "id": "T10.4",
+    "chapter": 10,
+    "placement": "body",
+    "title": "Two minimizing origins can create a viscosity corner.",
+    "caption": "Take $H(p)=p^2/2$, $t=1/2$, and $g(y)=\\min\\{|y-1|,|y+1|,2\\}$. The exact value is $\\min\\{h_t(|x-1|),h_t(|x+1|),2\\}$, where $h_t(d)=d^2/(2t)$ for $d\\leq t$ and $d-t/2$ otherwise. At $x=0$ the two minimizing origins are $y=\\pm1/2$, both of cost $3/4$. The left panel shows $g$ and its value; the right panel shows the minimized cost at $x=0$.",
+    "drawing": "figures/tikz/ch10-hopf-lax.tex",
+    "source": "chapters/10-hamilton-jacobi-equations/03-control-theory-dynamic-programming.tex",
+    "section": "10.3"
+  },
+  {
+    "id": "T11.1",
+    "chapter": 11,
+    "placement": "body",
+    "title": "Wave patterns in physical space",
+    "caption": "The left panel is a centered rarefaction: characteristic speeds increase\nfrom $\\lambda_l$ to $\\lambda_r$. The middle panel shows a compressive\nshock with $\\lambda_r<\\sigma<\\lambda_l$; forward characteristics terminate\non it. The right panel is a contact, with equal characteristic and interface\nspeed. Only slopes and incidence are represented; these are schematic\npanels for a single characteristic family.",
+    "drawing": "figures/tikz/ch11-wave-patterns.tex",
+    "source": "chapters/11-systems-of-conservation-laws/02-riemanns-problem.tex",
+    "section": "11.2"
+  },
+  {
+    "id": "T11.M",
+    "chapter": 11,
+    "placement": "margin",
+    "title": "平均速度与压缩",
+    "caption": "本图取 Burgers 通量 $f(u)=u^2/2$、$u_l=1,u_r=0$。\n激波速度恰为 $1/2$，两侧速度为 $1$ 和 $0$；\n一般系统的平均公式只在小振幅下成立到二阶余项。",
+    "drawing": "figures/tikz/ch11-speed-margin.tex",
+    "source": "chapters/11-systems-of-conservation-laws/02-riemanns-problem.tex",
+    "section": "11.2"
+  },
+  {
+    "id": "T11.2",
+    "chapter": 11,
+    "placement": "body",
+    "title": "Matching states before placing waves",
+    "caption": "The endpoint map composes the family curves in state space. Its derivative\nat zero consists of the independent eigenvectors. Disjoint speed intervals\nthen place those waves in increasing order in $x/t$. The unique small\nstrength vector is a local finite-dimensional conclusion; no general\nsystem uniqueness theorem is inferred.",
+    "drawing": "figures/tikz/ch11-local-solver.tex",
+    "source": "chapters/11-systems-of-conservation-laws/02-riemanns-problem.tex",
+    "section": "11.2"
+  },
+  {
+    "id": "T11.3",
+    "chapter": 11,
+    "placement": "body",
+    "title": "Compression reaches a vertical slope",
+    "caption": "An exact simple-wave example is the scalar Burgers characteristic map\n$x=\\alpha+t\\,g(\\alpha)$ for $g(\\alpha)=-\\alpha$ on a local interval.\nIts Jacobian is $1-t$, and $u_x=-1/(1-t)$ until $t=1$.\nThe second panel plots this derivative. For two-field systems, the\nweight in \\eqref{eq:11-riccati} removes the mixed interaction and\nrecovers the same Riccati mechanism; the drawn map is the scalar model.",
+    "drawing": "figures/tikz/ch11-compression.tex",
+    "source": "chapters/11-systems-of-conservation-laws/03-systems-of-two-conservation-laws.tex",
+    "section": "11.3"
+  },
+  {
+    "id": "T11.4",
+    "chapter": 11,
+    "placement": "body",
+    "title": "The entropy chord for a nonconvex flux",
+    "caption": "For $f(u)=u^3-u$, the chord from $u_l=-1$ to $u_*=1/2$ has slope\n$-1/4=f'(1/2)$ and lies below $f$ on that interval. The entropy\nsolution for right state $1$ joins this shock to a rarefaction\n$u=\\sqrt{(x/t+1)/3}$ for $-1/4<x/t<2$.\nA single jump from $-1$ to $1$ violates the chord criterion.\nThe exact states and speeds are derived in Problems 14--15.",
+    "drawing": "figures/tikz/ch11-entropy-chord.tex",
+    "source": "chapters/11-systems-of-conservation-laws/04-entropy-criteria.tex",
+    "section": "11.4"
+  },
+  {
+    "id": "T12.1",
+    "chapter": 12,
+    "placement": "body",
+    "title": "The shrinking sections and the null flux",
+    "caption": "A spatial section of the backward unit-speed cone has radius $T-t$.\nEnergy leaves through the mantle with density\n$\\frac12|u_t\\nu-Du|^2+F(u)$, measured using $dS/\\sqrt2$.\nThe top section at $\\tau<T$ is retained. The drawing is a one-space-dimensional\nsection of the $n$-dimensional cone, not a reduction of the PDE.",
+    "drawing": "figures/tikz/ch12-cone-flux.tex",
+    "source": "chapters/12-nonlinear-wave-equations/01-introduction.tex",
+    "section": "12.1"
+  },
+  {
+    "id": "T12.2",
+    "chapter": 12,
+    "placement": "body",
+    "title": "A complete ball for the weak-metric iteration",
+    "caption": "Every iterate stays in a bounded high Sobolev ball. Contraction is measured\nin the lower energy norm; weak-star compactness identifies its limit with\nthe low-norm limit, preserving the high bound. The final linear equation\nrestores strong time continuity. The arrows describe a proof, not a\nnumerical convergence rate in the high norm.",
+    "drawing": "figures/tikz/ch12-two-norms.tex",
+    "source": "chapters/12-nonlinear-wave-equations/02-existence-of-solutions.tex",
+    "section": "12.2"
+  },
+  {
+    "id": "T12.M",
+    "chapter": 12,
+    "placement": "margin",
+    "title": "能量临界的缩放指数",
+    "caption": "图中 $a(p)=4/(p-1)-1$，且 $E[u_\\lambda]=\\lambda^{a(p)}E[u]$。\n$p=5$ 是三维退聚焦波方程的能量临界指数；\n它与后面聚焦小数据爆破的 $1+\\sqrt2$ 阈值属于不同问题。",
+    "drawing": "figures/tikz/ch12-scaling-margin.tex",
+    "source": "chapters/12-nonlinear-wave-equations/04-critical-power-nonlinearity.tex",
+    "section": "12.4"
+  },
+  {
+    "id": "T12.3",
+    "chapter": 12,
+    "placement": "body",
+    "title": "Why the cone must be enlarged",
+    "caption": "The flux tail first makes the potential energy small on shrinking cones.\nLocalized Strichartz and a linear Duhamel limit then exclude concentration\nof the kinetic and gradient energy. At a fixed time $s$, the small-energy\nball can be enlarged by $\\delta>0$. The enlarged sections retain a ball\nof radius $\\delta$ near $T$, allowing a finite cover of the fixed possible\nsupport. A cone with zero terminal radius alone would not provide that cover.",
+    "drawing": "figures/tikz/ch12-nonconcentration.tex",
+    "source": "chapters/12-nonlinear-wave-equations/04-critical-power-nonlinearity.tex",
+    "section": "12.4"
+  },
+  {
+    "id": "T12.4",
+    "chapter": 12,
+    "placement": "body",
+    "title": "Two different obstructions to a global solution",
+    "caption": "On the left, a positive concave quantity with negative derivative lies\nbelow its tangent and must reach zero. The displayed curve\n$J=1-t-t^2/4$ is only an exact concavity model, not a PDE solution.\nOn the right, $(p-1)^2<2$ leaves room for the positive $\\varepsilon$\nin the shell-based proof; the endpoint is excluded. Neither diagram\nasserts a quantitative lifespan formula for the PDE.",
+    "drawing": "figures/tikz/ch12-blowup.tex",
+    "source": "chapters/12-nonlinear-wave-equations/05-nonexistence-of-solutions.tex",
+    "section": "12.5"
   }
 ]

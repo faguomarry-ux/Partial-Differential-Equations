@@ -1,13 +1,377 @@
-% Evans second edition, section 7.1.
-% English source: printed p. 349; PDF page 366 (1-based).
-% Chinese subsection/page correspondence: pending verification against the scan.
-% Status: outline-only; no source text or proof has been transcribed/reviewed.
+% Evans 7.1: printed pp.349--374 / English PDF pp.366--391.
+% Chinese: printed pp.248--265 / scan pp.266--283.
+% Editorial reconstruction; source theorem numbering is section-local.
+\Needspace{55mm}
 \section{Second-Order Parabolic Equations}
 \label{sec:7-1}
+\Needspace{55mm}
+\subsection{The evolution space and the initial trace}
+Let $U\subset\R^n$ be bounded with smooth boundary, $T>0$, and set
+$Q_T=U\times(0,T)$, $V=H^1_0(U)$, $H=L^2(U)$, $V'=H^{-1}(U)$.
+Identify $H\subset V'$ by $\langle h,v\rangle=(h,v)_H$. Consider
+\begin{equation}\label{eq:7-parabolic}
+ u_t+L(t)u=f,\qquad u|_{\partial U}=0,\qquad u(0)=g,
+\end{equation}
+where repeated spatial indices are summed and
+\[
+ L(t)u=-\partial_j(a^{ij}(x,t)\partial_i u)+b^i(x,t)\partial_i u+c(x,t)u.
+\]
+Initially assume real bounded measurable coefficients, $a^{ij}=a^{ji}$, and
+$a^{ij}\xi_i\xi_j\geq\theta|\xi|^2$ almost everywhere, uniformly in time.
+The bilinear form $B_t[u,v]=\int_U(a^{ij}u_i v_j+b^iu_i v+cuv)\,dx$ satisfies
+\begin{equation}\label{eq:7-form-bounds}
+ \begin{split}
+ |B_t[u,v]|&\leq M\|u\|_V\|v\|_V,\\
+ B_t[v,v]&\geq\alpha\|v\|_V^2-\gamma\|v\|_H^2
+ \end{split}
+\end{equation}
+with $M,\alpha>0$, $\gamma\geq0$, uniform in $t$.
+Indeed $|\int b^iu_i u|\leq\varepsilon\|Du\|_2^2+
+C_\varepsilon\|u\|_2^2$; a negative potential is absorbed into $\gamma$.
 
-\PDEPending
+\Needspace{55mm}
+\PDEAnnotation{时间导数的对偶空间}{散度项把 $H^1_0$ 函数送入 $H^{-1}$。弱解通常只有 $u_t\in L^2(0,T;H^{-1})$，不能先把 $u_t$ 当成 $L^2(U)$ 函数。}
+\begin{lemma}[Time trace and energy identity; cf. source \S5.9.2, Theorem 3]
+\label{lem:7-trace}
+If $u\in L^2(0,T;V)$ and $u'\in L^2(0,T;V')$, then $u$ has a unique
+representative in $C([0,T];H)$, and
+\begin{equation}\label{eq:7-chain}
+ \|u(t)\|_H^2-\|u(s)\|_H^2
+ =2\int_s^t\langle u',u\rangle\,dr.
+\end{equation}
+The analogous product rule holds for two such functions.
+\end{lemma}
+\begin{expandedproof}[editorial reminder of time regularization]
+For smooth $V$-valued curves this is differentiation of an inner product.
+Such curves are dense in $\|u\|_{L^2V}+\|u'\|_{L^2V'}$ by the time
+approximation theorem in \S5.9: extend by reflection at the
+endpoints in $V'$, then mollify in time. For a smooth curve $z$, choose $s$
+with $\|z(s)\|_H^2\leq T^{-1}\|z\|_{L^2H}^2$ and integrate its derivative:
+\[
+ \sup_t\|z(t)\|_H^2\leq T^{-1}\|z\|_{L^2H}^2
+       +2\|z'\|_{L^2V'}\|z\|_{L^2V}.
+\]
+Applied to differences, this gives uniform convergence in $H$.
+The products converge in $L^1$, so the identity passes to every pair of
+endpoints. Polarization gives the product rule. Equality almost everywhere
+makes the continuous representative unique.
+\end{expandedproof}
+\begin{definition}[Weak parabolic solution; source \S7.1.1]
+For $f\in L^2(0,T;V')$, $g\in H$, a weak solution belongs to $L^2(0,T;V)$,
+has $u'\in L^2(0,T;V')$, satisfies $u(0)=g$ in $H$, and obeys
+\[
+ \langle u'(t),v\rangle+B_t[u(t),v]=\langle f(t),v\rangle
+ \quad(v\in V)\quad\text{for a.e. }t.
+\]
+\end{definition}
+Allowing $V'$-valued forcing is an editorial extension of the source's
+$L^2(Q_T)$ forcing. Regularity statements below specify stronger data.
+\Needspace{55mm}
+\PDEAnnotation{初值不要求零迹}{$g\in L^2(U)$ 无须有边界迹。零边界在正时间的 $L^2(0,T;H^1_0)$ 意义下成立；若要在角点 $\partial U\times\{0\}$ 光滑，才需要相容条件。}
 
-% TODO: English exposition with source theorem/equation identifiers.
-% TODO: Add necessary \PDEVocab, \PDEIdea, or \PDEChinese notes.
-% TODO: Expand abbreviated arguments in expandedproof/proofdetails.
-% TODO: Verify hypotheses, endpoints, constants, limits, and cross-references.
+\Needspace{55mm}
+\subsection{Galerkin construction, estimates, and uniqueness}
+Let $w_k$ be the $H$-orthonormal Dirichlet eigenfunctions of $-\Delta$.
+They are orthogonal for $(u,v)_V=\int_U(Du\cdot Dv+uv)$.
+The $H$-projection $P_m$ onto $V_m=\operatorname{span}(w_1,\ldots,w_m)$
+satisfies $\|P_m v\|_V\leq\|v\|_V$ and $P_m v\to v$ in $V$.
+Seek $u_m=\sum_{k\leq m}d_k(t)w_k$ with
+\begin{equation}\label{eq:7-galerkin}
+ \begin{split}
+ d_k'+\sum_{\ell\leq m}B_t[w_\ell,w_k]d_\ell&=\langle f,w_k\rangle,\\
+ d_k(0)&=(g,w_k).
+ \end{split}
+\end{equation}
+This linear system with measurable bounded coefficients has a unique
+absolutely continuous solution: solve the integral equation by contraction
+on short intervals where $\int\|E(t)\|dt<1$, then concatenate them.
+
+\Needspace{55mm}
+\begin{theorem}[Weak well-posedness; source \S7.1.2, Theorems 1--4]
+\label{thm:7-parabolic-existence}
+There is exactly one weak solution, and
+\begin{equation}\label{eq:7-parabolic-energy}
+ \sup_{0\leq t\leq T}\|u(t)\|_H^2+
+ \|u\|_{L^2V}^2+\|u'\|_{L^2V'}^2
+ \leq C\big(\|g\|_H^2+\|f\|_{L^2V'}^2\big).
+\end{equation}
+The same estimate holds for differences of solutions and their data.
+\end{theorem}
+\begin{expandedproof}[uniform bounds and recovery of the initial value]
+Multiply the finite equations by $d_k$ and sum. Using
+\eqref{eq:7-form-bounds} and Young's inequality gives
+\[
+ \frac12\frac d{dt}\|u_m\|_H^2+
+ \frac\alpha2\|u_m\|_V^2
+ \leq\gamma\|u_m\|_H^2+C\|f\|_{V'}^2.
+\]
+Gronwall and integration bound $u_m$ in $L^\infty H\cap L^2V$.
+For arbitrary $v\in V$, since $u_m'\in V_m$,
+\[
+ \langle u_m',v\rangle=(u_m',P_m v)
+ =\langle f,P_m v\rangle-B_t[u_m,P_m v].
+\]
+Thus $\|u_m'\|_{V'}\leq\|f\|_{V'}+M\|u_m\|_V$, uniformly in $m$.
+Stability of $P_m$ in $V$ is essential here.
+
+Extract weak limits $u_m\rightharpoonup u$ in $L^2V$ and
+$u_m'\rightharpoonup z$ in $L^2V'$. For $\phi\in C_c^\infty(0,T)$,
+$v\in V$, integration by parts identifies
+$\int\langle z,v\rangle\phi=-\int(u,v)\phi'$, hence $z=u'$.
+For each fixed $k$, the equation tested with $\phi(t)w_k$ passes to the
+limit. Bounded measurable coefficients act as bounded linear maps on
+these spaces; weak convergence suffices. Density extends the identity
+to $V$. Separability permits one common full-measure set of times.
+
+To recover the initial value take $\phi\in C^1([0,T])$, $\phi(T)=0$,
+and first $v\in V_N$, $m\geq N$. Then
+\[
+ \begin{split}
+ \int_0^T\{- (u_m,v)\phi'+B_t[u_m,v]\phi\}\,dt
+ =\int_0^T\langle f,v\rangle\phi\,dt+(P_mg,v)\phi(0).
+ \end{split}
+\]
+Pass to the limit and compare with the integration-by-parts identity for
+$u$, whose $H$ trace exists by Lemma~\ref{lem:7-trace}. Thus
+$(u(0),v)=(g,v)$ on a dense set, and $u(0)=g$.
+Lower semicontinuity gives the integral estimates. The uniform-in-time
+bound follows by testing on measurable time sets (Problem 6), followed
+by $H$ continuity. Finally apply \eqref{eq:7-chain} to a difference of
+solutions and repeat the estimate. Zero data force zero difference.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{弱极限与初值}{$L^2$ 时间弱收敛不控制 $t=0$。时间分部积分保留 $(g,v)\phi(0)$，再与极限方程比较，才恢复初值；不能直接把 $u_m(0)$ 换成 $u(0)$。}
+
+\PDEBodyDiagram{7.1}{Galerkin approximation preserves the energy estimate.}
+{The Dirichlet spectral projection is stable in $H^1_0$, controlling the time derivative in $H^{-1}$. Integrated tests retain the initial value in the limit. Arrows describe proof steps, not numerical error bounds.}
+{ch07-galerkin}
+
+\Needspace{55mm}
+\subsection{Improved regularity and compatibility at the corner}
+Here assume $A,b,c$ are smooth on $\overline U$ and independent of time.
+Write $B_0[u,v]=\int_Ua^{ij}u_i v_j$ and $B=B_0+B_1$;
+then $|B_1[u,v]|\leq C\|u\|_V\|v\|_H$.
+\Needspace{55mm}
+\begin{theorem}[Improved regularity; source \S7.1.3, Theorem 5]
+\label{thm:7-parabolic-regularity}
+If $g\in V$ and $f\in L^2(0,T;H)$, then
+\[
+ u\in L^\infty V\cap L^2H^2(U),\qquad u'\in L^2H,
+\]
+with norm bound $C(\|g\|_V+\|f\|_{L^2H})$.
+If also $g\in H^2(U)$ and $f\in H^1(0,T;H)$, then
+\[
+ u\in L^\infty H^2,\quad
+ u'\in L^\infty H\cap L^2V,\quad u''\in L^2V',
+\]
+with bound $C(\|g\|_{H^2}+\|f\|_{H^1(0,T;H)})$.
+All unlabeled time spaces here and below use the interval $(0,T)$.
+\end{theorem}
+\begin{expandedproof}[legal tests and reconstruction of a time derivative]
+Test the finite system with $u_m'\in V_m$. Symmetry and time independence
+give
+\[
+ \begin{split}
+ \|u_m'\|_H^2+\tfrac12\tfrac d{dt}B_0[u_m,u_m]
+ &=(f,u_m')-B_1[u_m,u_m']\\
+ &\leq\tfrac12\|u_m'\|_H^2+C(\|f\|_H^2+\|u_m\|_V^2).
+ \end{split}
+\]
+The initial projections are bounded in $V$; the basic energy estimate
+bounds $\int\|u_m\|_V^2$. Weak limits yield $u'\in L^2H$ and
+$u\in L^\infty V$. For a.e. $t$, $Lu=f-u'\in H$; the elliptic boundary
+estimate of \S6.3 yields
+\[
+ \|u(t)\|_{H^2}\leq C(\|f(t)\|_H+\|u'(t)\|_H+\|u(t)\|_H).
+\]
+Integrate to prove the first assertion.
+For the second, construct $v$ from $v'+Lv=f'$, $v(0)=g_1=f(0)-Lg\in H$.
+Set $U(t)=g+\int_0^t v(s)\,ds$ in $V$. The integrated equation in $V'$
+gives $v(t)+LU(t)-f(t)=g_1+Lg-f(0)=0$.
+Thus $U=u$ by uniqueness and $u'=v$.
+The weak estimate bounds $v$ in $L^\infty H\cap L^2V$, $v'$ in $L^2V'$.
+Since $f\in C([0,T];H)$, the elliptic estimate gives $u\in L^\infty H^2$.
+This argument avoids differentiating a weak solution prematurely.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{系数的时间独立性}{若 $A=A(x,t)$，主部能量求导多出 $\frac12\int a_t^{ij}u_i u_j$。仅有可测时间依赖时不能使用此计算；基本存在性仍允许时间依赖。}
+
+\Needspace{55mm}
+\begin{theorem}[Higher regularity; source Theorems 6--7]
+\label{thm:7-parabolic-higher}
+For an integer $m\geq0$, suppose
+\[
+ g\in H^{2m+1}(U),\quad
+ \partial_t^kf\in L^2H^{2m-2k}(U)\quad(0\leq k\leq m).
+\]
+Define $g_0=g$, $g_j=\partial_t^{j-1}f(0)-Lg_{j-1}$ for $1\leq j\leq m$.
+If $g_j\in V$ for $0\leq j\leq m$, then
+\begin{equation}\label{eq:7-parabolic-higher}
+ \sum_{k=0}^{m+1}\|\partial_t^ku\|_{L^2H^{2m+2-2k}}
+ \leq C\left(\|g\|_{H^{2m+1}}+
+ \sum_{k=0}^{m}\|\partial_t^kf\|_{L^2H^{2m-2k}}\right).
+\end{equation}
+Smooth data satisfying every compatibility condition give
+$u\in C^\infty(\overline U\times[0,T])$.
+\end{theorem}
+\begin{expandedproof}[the two-derivative induction]
+The case $m=0$ is the preceding theorem. In the step from $m$ to $m+1$,
+reconstruct $v=u'$ as above. Its compatibility sequence is
+$g_1,\ldots,g_{m+1}$, so induction controls every positive time derivative
+of $u$. Recover the missing term from $Lu=f-u'$ and
+\[
+ \|u\|_{H^{2m+4}}\leq C(\|f-u'\|_{H^{2m+2}}+\|u\|_H).
+\]
+The Sobolev time trace estimate from \S5.9, using spatial
+extension, reads
+\[
+ \|F(0)\|_{H^{r+1}}\leq
+ C(\|F\|_{L^2H^{r+2}}+\|F'\|_{L^2H^r})\quad(r\geq0).
+\]
+It controls the initial data at each induction step. Combining estimates
+proves the assertion. For smooth data apply the result for every $m$;
+all mixed derivatives then have arbitrarily high Sobolev order on the
+cylinder. Extension and embedding give continuous derivatives up to its
+boundary, including the initial corner.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{相容条件是角点条件}{$u=0$ 在侧边界上迫使 $u_t=0$，而方程给出 $u_t(0)=f(0)-Lg$。热方程 $g=0,f=1$ 的一阶相容失败，不能在整个闭柱上声称光滑。}
+
+\Needspace{55mm}
+\subsection{Weak maximum principles and comparison}
+Use the nondivergence operator
+$Pu=u_t-a^{ij}u_{ij}+b^iu_i+cu$, with continuous coefficients on the
+closed cylinder, symmetric uniformly positive $A$, and classical
+$u\in C^{2,1}(U\times(0,T])\cap C(\overline U\times[0,T])$.
+The parabolic boundary is
+\[
+ \Gamma_T=(\overline U\times\{0\})\cup(\partial U\times[0,T]).
+\]
+The top interior $U\times\{T\}$ is not part of $\Gamma_T$.
+\Needspace{55mm}
+\begin{theorem}[Weak maximum principle; source Theorems 8--9]
+If $Pu\leq0$ and $c\geq0$, then
+$\max_{\overline Q_T}u\leq\max_{\Gamma_T}u^+$.
+When $c=0$ the positive part may be removed. Changing signs gives the
+minimum principle. Hence $Pu\leq Pv$, $u\leq v$ on $\Gamma_T$ imply
+$u\leq v$ when $c\geq0$.
+\end{theorem}
+\begin{expandedproof}[including a maximum on the final slice]
+Set $M=\max_{\Gamma_T}u^+$ and $w=u-M-\varepsilon t$.
+Then $Pw\leq-cM-\varepsilon-c\varepsilon t<0$.
+At a positive maximum outside $\Gamma_T$, one would have $Dw=0$,
+$D^2w\leq0$, and $w_t\geq0$ (the left derivative at $t=T$), giving
+$Pw\geq0$, a contradiction. Let $\varepsilon\downarrow0$.
+When $c=0$ any constant $M$ may be subtracted. Apply the result to
+$u-v$ for comparison. If $c$ is only bounded below, write
+$u=e^{\lambda t}z$; the new potential is $c+\lambda\geq0$ for large
+$\lambda$. Sign preservation and uniqueness therefore still hold.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{时间方向决定边界}{末时刻的内点仍受最大值原理约束。指数代换 $u=e^{\lambda t}z$ 把零阶系数改为 $c+\lambda$，符号不可写反。}
+
+\Needspace{55mm}
+\subsection{Harnack's inequality and positivity in earlier times}
+We prove the smooth principal-part case of the source's Harnack theorem:
+$Pu=u_t-a^{ij}(x,t)u_{ij}$ with smooth symmetric uniformly positive $A$.
+A general measurable-coefficient theorem is not proved here.
+\Needspace{55mm}
+\begin{theorem}[Harnack inequality; source Theorem 10, smooth principal case]
+\label{thm:7-harnack}
+Let smooth $u\geq0$ solve $Pu=0$. If $V\Subset U$ is open and connected and
+$0<t_1<t_2\leq T$, then
+\[
+ \sup_Vu(\cdot,t_1)\leq C\inf_Vu(\cdot,t_2).
+\]
+The constant depends on the interior sets and connecting paths, times,
+ellipticity, and local coefficient derivative bounds, not on $u$.
+\end{theorem}
+\begin{expandedproof}[logarithmic estimate, including cutoff remainders]
+First use $u+\varepsilon$ and set $v=\log(u+\varepsilon)$, $p=Dv$,
+$H_v=D^2v$, $z=a^{ij}p_i p_j$. Then $v_t=a^{ij}v_{ij}+z$.
+Put $\mathcal D=\partial_t-a^{kl}\partial_{kl}-2a^{kl}p_l\partial_k$.
+Differentiating the equation in time gives
+\[
+ \mathcal Dv_t=a_t^{ij}(v_{ij}+p_ip_j).
+\]
+Differentiation of $z$ gives the explicit identity
+\begin{align*}
+ \mathcal Dz={}&(a_t^{ij}-a^{kl}a_{kl}^{ij})p_ip_j
+ +2a^{ij}p_i a_j^{kl}v_{kl}\\
+ &-4a^{kl}a_k^{ij}v_{il}p_j
+ -2a^{ij}a^{kl}v_{ik}v_{jl}.
+\end{align*}
+Here $a_k^{ij}=\partial_k a^{ij}$. The cubic terms in $p$ cancel by
+symmetry and relabeling the dummy indices. Thus all remaining errors are
+bounded by $C(|H_v|+|p|^2+|p||H_v|)$.
+Choose, for example, $\kappa=1/2$, and set
+$F=v_t-(1-\kappa)z=a^{ij}v_{ij}+\kappa z$.
+Ellipticity and Young's inequality now give
+\[
+ \mathcal DF\geq c_0|H_v|^2-C|p|^2-C\qquad(c_0>0).
+\]
+Choose a smooth cutoff $0\leq\zeta\leq1$, vanishing near $t=0$ and the
+spatial boundary, equal to one on a fixed interior ball during $[t_1,t_2]$.
+At a negative minimum of $\zeta^4F+\mu t$, $F<0$ and
+$DF=-4F D\zeta/\zeta$. Also $F<0$ implies
+$|p|^2\leq C|H_v|$, $|F|\leq C|H_v|$. Applying $\mathcal D$ at that
+minimum produces cutoff errors at most
+\[
+ C\zeta^2|F|+C\zeta^3|p||F|
+ \leq\delta\zeta^4|H_v|^2+C_\delta.
+\]
+The term $C\zeta^4|p|^2$ is absorbed likewise. A small $\delta$ and then
+large $\mu$ contradict $\mathcal D(\zeta^4F+\mu t)\leq0$.
+Consequently $F\geq-C$ on the smaller cylinder, and
+\begin{equation}\label{eq:7-log-harnack}
+ v_t\geq a_0|Dv|^2-C_0\qquad(a_0>0).
+\end{equation}
+Along a path $\eta:[t_1,t_2]\to U$ in that cylinder,
+\[
+ \frac d{dt}v(\eta(t),t)\geq
+ a_0|Dv|^2+Dv\cdot\eta'-C_0
+ \geq-\frac{|\eta'|^2}{4a_0}-C_0.
+\]
+Integrate along the straight path in a ball and exponentiate.
+For general $V$, connect a finite ball covering of its compact closure by
+finitely many interior paths, divide the time gap into positive increments,
+and concatenate the estimates. Let $\varepsilon\downarrow0$; the constants
+are independent of it.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{Harnack 的时间方向}{早时刻的上界受晚时刻的下界控制。时间差趋零时常数通常发散，不能把它读成同一时间切片上的椭圆 Harnack 估计。}
+
+\PDEBodyDiagram{7.2}{The parabolic boundary and Harnack comparison.}
+{The thick bottom and side edges form $\Gamma_T$. The top interior belongs to the evolution region. Harnack compares an earlier interior slice to a later one; the arrow indicates forward propagation of positivity.}
+{ch07-parabolic-boundary}
+
+\Needspace{55mm}
+\begin{theorem}[Strong maximum principle; source Theorems 11--12, smooth case]
+Assume additionally that $A$ is time independent. For
+$P=\partial_t-a^{ij}\partial_{ij}$ as above on connected $U$, if
+$Pu\leq0$ and $u$ attains its global maximum $M$ at
+$(x_0,t_0)\in U\times(0,T]$, then $u=M$ on $U\times[0,t_0]$.
+The minimum version follows by changing sign. For $P+c$, $c\geq0$,
+the conclusion holds at a nonnegative maximum.
+\end{theorem}
+\begin{expandedproof}[a local comparison argument]
+Set $w=M-u\geq0$. For the principal case $Pw\geq0$; in the case
+$c\geq0$, $M\geq0$, one has $(P+c)w\geq cM\geq0$.
+Suppose $w(y,s)>0$ for some $s<t_0$. Choose a smooth connected
+$W\Subset U$ containing $y,x_0$, and a nonzero smooth
+$0\leq\psi\leq w(\cdot,s)$ compactly supported near $y$.
+Solve $Ph=0$ on $W\times(s,t_0]$, with zero lateral data and
+$h(s)=\psi$. This solution is supplied by the preceding existence and
+regularity theory; compact support ensures corner compatibility.
+Let $C\geq\sup c$ (take $C=0$ in the principal case).
+Then $\widetilde h=e^{-C(t-s)}h$ satisfies
+$(P+c)\widetilde h=(c-C)\widetilde h\leq0$.
+Comparison gives $w\geq\widetilde h\geq0$.
+By continuity $h$ is positive somewhere at a time just after $s$;
+Harnack then gives $h(x_0,t_0)>0$, contradicting $w(x_0,t_0)=0$.
+Thus $w=0$ at all earlier interior times; continuity supplies the endpoints.
+This proof covers the smooth principal coefficients just treated, with
+an additional smooth nonnegative potential, not the full rough theory.
+\end{expandedproof}
+\Needspace{55mm}
+\PDEAnnotation{强原理只追溯过去}{在 $t_0$ 取内点极值只能推出直到 $t_0$ 的常值性。之后的边界输入或外力可能变化，不能据此断言整个未来为常值。}

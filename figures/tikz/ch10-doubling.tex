@@ -1,0 +1,10 @@
+\begin{tikzpicture}[pde diagram,node distance=10mm]
+\node[pde box,text width=43mm] (u) {upper test for $u(x,t)$\\$b_u=\eta+(t-s)/\varepsilon$\\$p_u=p+2\varepsilon x$};
+\node[pde box,text width=43mm,right=10mm of u] (v) {lower test for $v(y,s)$\\$b_v=-\eta+(t-s)/\varepsilon$\\$p_v=p-2\varepsilon y$};
+\node[pde tiny,above=5mm of $(u.north)!.5!(v.north)$] {$p=(x-y)/\varepsilon$};
+\node[pde box,text width=100mm,below=12mm of $(u.south)!.5!(v.south)$] (c) {$b_u+H(p_u,x)\leq0$,\quad $b_v+H(p_v,y)\geq0$};
+\node[pde box,text width=100mm,below=10mm of c] (d) {$0<2\eta\leq H(p_v,y)-H(p_u,x)\longrightarrow0$};
+\draw[pde axis] (u.south)--(c.north -| u.south);
+\draw[pde axis] (v.south)--(c.north -| v.south);
+\draw[pde axis] (c)--(d);
+\end{tikzpicture}

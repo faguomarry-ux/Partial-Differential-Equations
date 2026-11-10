@@ -1,0 +1,19 @@
+\begin{tikzpicture}[pde diagram]
+\begin{scope}[x=.95cm,y=.8cm]
+\draw[pde axis] (-2.15,0)--(2.2,0) node[right] {$s$};
+\draw[pde axis] (0,-.25)--(0,2.5) node[above] {$I$};
+\draw[pde curve] (-2,2)--(0,0)--(2,2);
+\draw[pde warm,dashed] (-1.4,-.7)--(1.4,.7);
+\node[pde tiny,align=center] at (0,2.1) {$I(s)=|s|$\\$\partial I(0)=[-1,1]$};
+\end{scope}
+\begin{scope}[shift={(5.4,0)},x=1.05cm,y=.8cm]
+\draw[pde axis] (-.15,0)--(3.1,0) node[right] {$t$};
+\draw[pde axis] (0,-.25)--(0,2.5) node[above] {$S(t)s$};
+\draw[pde warm] (0,2)--(2,0)--(2.9,0);
+\draw[pde blue] (0,1)--(1,0)--(2.9,0);
+\node[left] at (0,2) {$2$};
+\node[left] at (0,1) {$1$};
+\draw (1,.05)--(1,-.05) node[below] {$1$};
+\draw (2,.05)--(2,-.05) node[below] {$2$};
+\end{scope}
+\end{tikzpicture}
